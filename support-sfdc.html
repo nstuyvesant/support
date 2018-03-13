@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>Submit a request</title>
+    <title>Perfecto Support Portal</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Perfecto Suppport Portal - Knowledge Base, Online University, Chat, Case Submission, and more.">
@@ -10,7 +10,6 @@
 
     <style>
         .cover {
-            /* background: #2b2d34 url(https://support.apple.com/content/dam/edam/applecare/images/en_US/homepage/homepage-hero.image.large_2x.jpg) center; */
             background: #2b2d34 url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
             background-size: cover;
             min-height: 50rem;
@@ -265,16 +264,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         // Setup relationship between tabs and Salesforce Case.Type and Case.Case Reason (topic below)
-        // We don't have to display every subtopic (less popular are in hiddenTopics). List should be most common items but still leave "Other". Support Engineer can flip "Other" to correct value later.
-        // The type property will supercede caseType once EranV is finished with Salesforce updates
         var caseTree = {
             device: {
                 type: 'Issue',
                 topic: 'Device Issue',
-                // Ordered by % of cases in last 6 months for Case Reason = "Device Issue" except Image Mode which was moved to Performance (since it's a network issue)
-                // Merged many Widget Issues here as they are perceived by customer to be device-related
-                subtopics: ['Cradle Error', 'Cradle Disconnected', 'Device Unresponsive', 'Device Locked', 'Network Connectivity Issue', 'Device Disconnected', 'Device Busy', 'App Install Failed', 'Other'],
-                hiddenSubtopics: ['App Crash', 'App Start/Stop Failed', 'Call/SMS Me', 'Cannot Rotate', 'Charging Failed', 'Cleanup Failed', 'Details Wrong', 'DevTunnel Problem', 'File Transfer Problem', 'GPS Location', 'Image Injection Failed', 'HSS Connect Failed', 'Key/Touch Failed', 'Network Virtualization Issue', 'Power Cycle Failed', 'Type Text Failed', 'Video Impaired', 'Vitals Missing'],
+                subtopics: ['Cradle Error', 'Device Unresponsive', 'Device Locked', 'Network Connectivity Issue', 'Device Disconnected', 'Device Busy', 'App Install Failed', 'Other'],
                 articles: [
                     {
                         title: 'Device and cradle operations',
@@ -327,7 +321,6 @@
                 type: 'Issue',
                 topic: 'Web',
                 subtopics: ['First', 'Second', 'Third'],
-                hiddenSubtopics: [],
                 articles: [
                     {
                         title: 'Desktop web testing',
@@ -340,6 +333,21 @@
                         synopsis: 'How to deal with responsive web design using JavaScript.'
                     },
                     {
+                        title: 'Implementing customization for desktop web',
+                        url: 'http://developers.perfectomobile.com/display/PD/Desktop-Web+Customization+Service',
+                        synopsis: 'When selecting a Desktop-Web device to use for automation testing of a web application, there is sometimes the need to create the proper environment for the device.'
+                    },
+                    {
+                        title: 'Desktop web environments',
+                        url: 'http://developers.perfectomobile.com/display/PD/Desktop+Web+Devices',
+                        synopsis: 'Perfecto provides, in addition to the large set of mobile and wearable devices, a set of desktop web environments.'
+                    },
+                    {
+                        title: 'Visual Analysis for Desktop Web',
+                        url: 'http://developers.perfectomobile.com/display/PD/Visual+Analysis+for+Desktop+Web',
+                        synopsis: 'The FastWeb Desktop Web devices of the Perfecto Lab support visual analysis of the browser screen to identify Text.'
+                    },
+                    {
                         title: 'Uploading files to Perfecto desktop web instances',
                         url: 'http://developers.perfectomobile.com/display/TT/Upload+File+to+Perfecto+web',
                         synopsis: 'Some desktop web tests require file upload as part of the flow. Here is how to do it on Perfecto.'
@@ -348,9 +356,8 @@
             },
             automation: {
                 type: 'Issue',
-                topic: 'Automation', // -> 'Automation Issue'
+                topic: 'Automation Issue',
                 subtopics: ['Appium', 'Selenium', 'Espresso', 'XCTest', 'JavaScript', 'Object Spy', 'UFT', 'Framework', 'Perfecto Native', 'Other'],
-                hiddenSubtopics: ['Jenkins', '.NET Framework'],
                 articles: [
                     {
                         title: 'Getting started with Appium',
@@ -401,9 +408,8 @@
             },
             performance: {
                 type: 'Issue',
-                topic: 'Performance Issue', // New Case Reason (elevated from Problem Type)
-                subtopics: ['Image Mode', 'Interactive Latency', 'Frame Rate Poor', 'Scripts Execute Slowly', 'App install Slow', 'App Launch Slow', 'Other'],
-                hiddenSubtopics: [],
+                topic: 'Performance Issue',
+                subtopics: ['Image Mode', 'Interactive Latency', 'Execution Slow', 'App install Slow', 'App Launch Slow', 'Login Slow', 'Other'],
                 articles: [
                     {
                         title: 'Image Mode: What is it and how do I fix it?',
@@ -447,19 +453,10 @@
                     }
                 ]
             },
-            // functionality: { // Hidden from end-users (these would appear in Salesforce for our Support Team)
-            //     type: 'Issue',
-            //     topic: 'Infrastructure',
-            //     // Network Issue below could encompass: Network, Firewall, Network Issue. Note: DNS Requesst should be Request/Network Change.
-            //     subtopics: ['Hardware Issue', 'Network Issue', 'Outage', 'Security Issue', 'Service Impairment', 'Software Issue', 'Storage Issue']
-            //     articles: []
-            // },
             request: {
                 type: 'Request',
-                topic: 'System Admin', // --> 'Request' or ['Device Request', 'Cloud Request', 'Information Request', 'Infrastructure Request', 'Offboarding Request', 'Onboarding Request', 'Public Cloud Request', 'Shipping Request'] (most are internal)
-                // Ordered by % of cases in last 6 months for Case Reason = "System Admin"
-                subtopics: [ 'New Device', 'Device Swap', 'Device Upgrade', 'Configuration Change', 'New Cloud User', 'Reg iOS', 'Cloud Upgrade', 'Device Template', 'Product Info', 'Documentation', 'Other'],
-                hiddenSubtopics: ['Add licenses', 'Cancel Subscription', 'Free Trial', 'Network Change', 'Order Information', 'Roles/Tokens', 'Support Portal Login', 'Usage Information', 'VPN Setup'],
+                topic: 'Request',
+                subtopics: [ 'New Device Request', 'Device Swap', 'Device Upgrade', 'Configuration Change', 'New Cloud User', 'Reg iOS', 'Cloud Upgrade', 'Device Template', 'Product Info', 'Documentation', 'Other'],
                 articles: [
                     {
                         title: 'Requesting a device swap',
@@ -495,7 +492,6 @@
                 type: 'Suggestion',
                 topic: '', // Intentionally blank
                 subtopics: [], // Intentionally blank
-                hiddenSubtopics: [], // Intentionally blank
                 articles: []
             }
         };
