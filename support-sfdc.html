@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <title>Submit a request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Perfecto Suppport Portal - Knowledge Base, Online University, Chat, Case Submission, and more.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <style>
+        .cover {
+            /* background: #2b2d34 url(https://support.apple.com/content/dam/edam/applecare/images/en_US/homepage/homepage-hero.image.large_2x.jpg) center; */
+            background: #2b2d34 url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
+            background-size: cover;
+            min-height: 50rem;
+            height: auto;
+            border-radius: 0;
+            width: 100%;
+            color: #fff;
+            padding-top: 2rem;
+        }
+        .navbar {
+            opacity: 0.7;
+        }
+        .navbar-brand {
+            font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .navbar a.nav-link {
+            color: white!important;
+        }
+        .navbar a.nav-link-good {
+            color:lightgreen!important;
+        }
+        .navbar a.nav-link-bad {
+            color: red!important;
+        }
+        .navbar a.nav-link:hover {
+            color: lightgreen!important;
+        }
+        h1 {
+            font-size:4vw;
+            padding-bottom:5px;
+        }
+        .container h1 {
+            margin-top: 30px;
+            padding-top:40px;
+        }
+        .container h3 {
+            font-size:3vw;
+        }
+        .nav-pills a {
+            color: black;
+        }
+        .nav-pills a:hover {
+            color: darkgray;
+        }
+        .nav-pills .nav-link.active {
+            background-color:black;
+        }
+        .nav-pills .svg-inline--fa {
+            font-size: 4rem;
+            margin-bottom: 5px;
+        }
+        article a {
+            font-size: 1.1rem;
+            color:green;
+        }
+    </style>
+
+    <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        liveagent.init('https://d.la1-c1-lon.salesforceliveagent.com/chat', '572D000000001yp', '00D200000001UUG');
+        if (!window._laq) {
+          window._laq = [];
+        }
+        window._laq.push(function(){
+          var fqdn = document.getElementById('fqdn').value;
+          //var chatEnabledSites = ['demo.perfectomobile.com', 'ps.perfectomobile.com'];
+          //if(chatEnabledSites.includes(fqdn)) {
+            liveagent.showWhenOnline('573D0000000028q', document.getElementById('liveagent_button_online_573D0000000028q'));
+            liveagent.showWhenOffline('573D0000000028q', document.getElementById('liveagent_button_offline_573D0000000028q'));
+          //} else console.log('CHAT NOT ENABLED');
+        });
+    </script>
+</head>
+
+<body>
+    <section class="cover text-center">
+        <!--Semi-transparent navbar over background image-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <span class="navbar-brand">Support</span>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-1">
+                    <ul class="navbar-nav mt-2 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-good disabled" href="#">All clouds operating normally</a>
+                            <!--<a class="nav-link nav-link-bad disabled" href="#">Service degraded for some clouds</a>-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">University</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://developer.perfectomobile.com" target="_blank">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><i class="fa fa-user"></i> Customer Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--container-->
+        </nav>
+        <!--Middle of the background image-->
+        <div class="container">
+            <h1 class="text-center">Welcome to Perfecto Support</h1>
+            <h3 class="text-center d-none d-sm-block">Resources at your fingertips.</h3> 
+            <div class="row justify-content-around">
+                <div class="col-lg-8 col-md-10" style="padding-top:45px;">
+                    <form action="http://developers.perfectomobile.com/dosearchsite.action" method="get" target="_blank" name="search" id="search">
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
+                                </div>
+                                <input class="form-control" name="queryString" id="queryString" type="text" required autofocus placeholder="Search Support" aria-label="Search Support">
+                            </div>
+                        </div>
+                    </form>
+                </div><!--col-6-->
+            </div><!--row-->
+        </div><!--cover-container-->
+    </section>
+    <!--Choose a Topic pills-->
+    <div class="container">
+        <h1 class="text-muted text-center" style="margin-bottom:10px;"><!--Placeholder for chat-->Choose a Topic</h1>
+        <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
+            <li class="nav-item">
+                <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+            </li>
+            <li class="nav-item">
+                <a id="webTab" data-toggle="tab" role="tab" aria-controls="web" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Web</a>
+            </li>
+            <li class="nav-item">
+                <a id="automationTab" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
+            </li>
+            <li class="nav-item">
+                <a id="performanceTab" data-toggle="tab" role="tab" aria-controls="performance" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+            </li>
+            <li class="nav-item">
+                <a id="requestTab" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Request</a>
+            </li>
+            <li class="nav-item">
+                <a id="suggestionTab" data-toggle="tab" role="tab" aria-controls="suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
+            </li>
+        </ul>
+        <div class="row">&nbsp;</div>
+        <div class="row justify-content-around">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Top articles on <b id="searchTerm" class="text-capitalize">Devices</b></div>
+                    <div id="articles" class="card-body">
+                        <!--Confluence REST API results go here-->
+                        <article>
+                            <a href="http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170123" target="_blank">Device/Application Vitals</a>
+                            <p class="text-muted">Device Vitals The vitals feature collects useful performance data directly from the device in real time. Performance data includes network, CPU, and memory usage (model specific)...</p>
+                        </article>
+                        <article>
+                            <a href="http://developers.perfectomobile.com/display/PD/Device+Dashboard" target="_blank">Device Dashboard</a>
+                            <p class="text-muted">View devices currently being tested View and Monitor Multiple Devices The Device Dashboard allows designated users to view multiple open dedicated devices, within their organization...</p>
+                        </article>
+                    </div>
+                </div><br/>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header align-middle"><a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" class="btn btn-success" style="display: none;"><i class="far fa-comment-alt"></i> Chat with Support Engineer</a><a class="btn btn-light disabled" id="liveagent_button_offline_573D0000000028q" style="display: none;"><i class="far fa-comment-alt"></i> Chat Offline</a><a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request</a></div>
+                    <div class="card-body">
+                        <form action="https://www.tfaforms.com/responses/processor" method="post" name="request" id="request" enctype="multipart/form-data">
+                            <!--<input type="hidden" id="caseType" name="tfa_1" value="Malfunction">
+                            <input type="hidden" id="caseTopic" name="tfa_2" value="Device Issue">-->
+                            <!--Required fields for FormAssembly-->
+                            <input type="hidden" value="4663612" name="tfa_dbFormId" id="tfa_dbFormId">
+                            <input type="hidden" value="" name="tfa_dbResponseId" id="tfa_dbResponseId">
+                            <input type="hidden" value="26b8c7c2a9a501c6f13704918c759855" name="tfa_dbControl" id="tfa_dbControl">
+                            <input type="hidden" value="4" name="tfa_dbVersionId" id="tfa_dbVersionId">
+                            <input type="hidden" value="" name="tfa_switchedoff" id="tfa_switchedoff">
+
+                            <div class="form-group">
+                                <label for="caseType">Case type (visible for debugging only)</label>
+                                <input class="form-control" type="text" id="caseType" name="tfa_1" placeholder="Normally hidden" value="Malfunction" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="topc">Topic (AKA Case Reason - visible for debugging only)</label>
+                                <input class="form-control" type="text" id="topic" name="tfa_2" placeholder="Normally hidden" value="Device Issue" />
+                            </div>
+                            <div class="form-group">
+                                <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
+                                <input class="form-control" type="text" id="fqdn" name="tfa_3" placeholder="Cloud FQDN like name.perfectomobile.com" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="sr-only">Your first name</label>
+                                <input type="text" class="form-control" placeholder="First name" id="firstName" name="tfa_4">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="sr-only">Your last name</label>
+                                <input type="text" class="form-control" placeholder="Last name" id="lastName" name="tfa_5">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="sr-only">Your work email address</label>
+                                <input class="form-control" type="email" id="fqdn" name="tfa_7" placeholder="Work email address" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="sr-only">Best phone number to reach you</label>
+                                <input class="form-control" type="phone" id="phone" name="tfa_8" placeholder="Phone number with country code" />
+                            </div>
+                            <div class="form-group">
+                                <label for="severity" class="sr-only">Severity of this request</label>
+                                <select id="severity" name="tfa_10" class="form-control">
+                                    <option selected disabled>Select a severity...</option>
+                                    <option value="tfa_11" id="tfa_11">Low/Minor</option>
+                                    <option value="tfa_12" id="tfa_12">Medium</option>
+                                    <option value="tfa_13" id="tfa_13">Major</option>
+                                    <option value="tfa_14" id="tfa_14">Critical</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subtopic" class="sr-only">Topic</label>
+                                <select id="subtopic" name="subtopic" class="form-control">
+                                    <option selected disabled>Select a subtopic...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="sr-only">Subject</label>
+                                <input class="form-control" type="text" id="subject" name="tfa_15" placeholder="Brief description of your request" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="sr-only">Description of your issue</label>
+                                <textarea class="form-control" rows="4" id="description" name="tfa_16" placeholder="More details will help us resolve your request faster." required></textarea>
+                                <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="fileUpload" class="sr-only">Files to upload</label>
+                                <input type="file" class="form-control" id="fileUpload" name="tfa_17" />
+                                <small id="fileUploadHelp" class="form-text text-muted">Screenshots, logs, IPAs, APKs, etc.</small>
+                            </div>
+                            <!--<div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>-->
+                            <input type="submit" class="btn btn-success" id="submit">
+                        </form>
+                    </div><!--card-body-->
+                </div><!--card-->
+            </div><!--col-6-->
+        </div><!--row-->
+    </div><!--container-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        // Setup relationship between tabs and Salesforce Case.Type and Case.Case Reason (topic below)
+        // We don't have to display every subtopic (less popular are in hiddenTopics). List should be most common items but still leave "Other". Support Engineer can flip "Other" to correct value later.
+        // The type property will supercede caseType once EranV is finished with Salesforce updates
+        var caseTree = {
+            device: {
+                type: 'Issue',
+                topic: 'Device Issue',
+                // Ordered by % of cases in last 6 months for Case Reason = "Device Issue" except Image Mode which was moved to Performance (since it's a network issue)
+                // Merged many Widget Issues here as they are perceived by customer to be device-related
+                subtopics: ['Cradle Error', 'Cradle Disconnected', 'Device Unresponsive', 'Device Locked', 'Network Connectivity Issue', 'Device Disconnected', 'Device Busy', 'App Install Failed', 'Other'],
+                hiddenSubtopics: ['App Crash', 'App Start/Stop Failed', 'Call/SMS Me', 'Cannot Rotate', 'Charging Failed', 'Cleanup Failed', 'Details Wrong', 'DevTunnel Problem', 'File Transfer Problem', 'GPS Location', 'Image Injection Failed', 'HSS Connect Failed', 'Key/Touch Failed', 'Network Virtualization Issue', 'Power Cycle Failed', 'Type Text Failed', 'Video Impaired', 'Vitals Missing'],
+                articles: [
+                    {
+                        title: 'Device and cradle operations',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=11174912',
+                        synopsis: 'The device and cradle operations are used to retrieve information about the devices and cradles, associated with a specific Perfecto CQ Lab, at the data center...'
+                    },
+                    {
+                        title: 'Recover a device',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=13893782',
+                        synopsis: 'Recovers a connected device that is unresponsive. For example, a device with an interrupted video, black screen or touch failure...'
+                    },
+                    {
+                        title: 'Device operations',
+                        url: 'http://developers.perfectomobile.com/display/PD/Device+operations',
+                        synopsis: 'Broad range of mobile device operations such as touch, scroll, swipe, gestures, GPS location, text entry, and recovery.'
+                    },
+                    {
+                        title: 'How to handle device locking',
+                        url: 'http://developers.perfectomobile.com/display/TT/Device+Screen+Locking',
+                        synopsis: 'How to handle the device screen locking to ensure successful script executions.'
+                    },
+                    {
+                        title: 'What to check to ensure device network connectivity',
+                        url: 'http://developers.perfectomobile.com/display/TT/What+to+Check+when+a+Mobile+Website+will+not+Load',
+                        synopsis: 'Sometimes your website will not load on the mobile device. Here are some practices to follow to fix the issue.'
+                    },
+                    {
+                        title: 'Solving device connection issues',
+                        url: 'http://developers.perfectomobile.com/display/TT/Solving+Device+Connection+Issues',
+                        synopsis: 'A list of errors and solutions to help connect devices.'
+                    },
+                    {
+                        title: 'Release a busy device via the REST API',
+                        url: 'http://developers.perfectomobile.com/display/PD/Release+Device',
+                        synopsis: 'Forcefully releases the device specified by <deviceId>, the device is either allocated to the user or the user is an administrator.'
+                    },
+                    {
+                        title: 'Troubleshooting app install failed on iOS',
+                        url: 'http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures',
+                        synopsis: 'What you need to look for when your app fails to Install or launch.'
+                    },
+                    {
+                        title: 'Troubleshooting app install failed on Android',
+                        url: 'http://developers.perfectomobile.com/display/TT/Android+App%3A+Install+Failed+UID+Changed+message',
+                        synopsis: 'How to resolve a Install_Failed_UID_Changed message.'
+                    }
+                ]
+            },
+            web: {
+                type: 'Issue',
+                topic: 'Web',
+                subtopics: ['First', 'Second', 'Third'],
+                hiddenSubtopics: [],
+                articles: [
+                    {
+                        title: 'Desktop web testing',
+                        url: 'http://developers.perfectomobile.com/display/TT/Desktop+Web+Testing',
+                        synopsis: 'Tips and tricks for desktop web testing.'
+                    },
+                    {
+                        title: 'Using JavaScript to improve testing for responsive web design',
+                        url: 'http://developers.perfectomobile.com/display/TT/Additional+Tests+for+Responsive+Web+Design',
+                        synopsis: 'How to deal with responsive web design using JavaScript.'
+                    },
+                    {
+                        title: 'Uploading files to Perfecto desktop web instances',
+                        url: 'http://developers.perfectomobile.com/display/TT/Upload+File+to+Perfecto+web',
+                        synopsis: 'Some desktop web tests require file upload as part of the flow. Here is how to do it on Perfecto.'
+                    }
+                ]
+            },
+            automation: {
+                type: 'Issue',
+                topic: 'Automation', // -> 'Automation Issue'
+                subtopics: ['Appium', 'Selenium', 'Espresso', 'XCTest', 'JavaScript', 'Object Spy', 'UFT', 'Framework', 'Perfecto Native', 'Other'],
+                hiddenSubtopics: ['Jenkins', '.NET Framework'],
+                articles: [
+                    {
+                        title: 'Getting started with Appium',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170304',
+                        synopsis: 'Everything you need to know about using Appium with Perfecto.'
+                    },
+                    {
+                        title: 'Getting started with Selenium',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170304',
+                        synopsis: 'Everything you need to know about using Selenium with Perfecto.'
+                    },
+                    {
+                        title: 'Work with Espresso or XCTest',
+                        url: 'http://developers.perfectomobile.com/display/PD/Development',
+                        synopsis: 'The Perfecto CQ Lab now makes a variety of devices and desktop browsers available for the application development community.'
+                    },
+                    {
+                        title: 'Migrating iOS test scripts to XCUITest-based automation infrastructure',
+                        url: 'http://developers.perfectomobile.com/display/TT/Migrating+iOS+test+scripts+to+XCUITest-based+automation+infrastructure',
+                        synopsis: 'With the introduction of iOS 10, Apple has deprecated its legacy UI Automation framework and instructed all developers to start using the XCUITest framework, introduced in iOS 9.'
+                    },
+                    {
+                        title: 'Quantum Framework: Is your current test framework slowing you down?',
+                        url: 'http://developers.perfectomobile.com/display/TT/Introducing+Quantum+Framework',
+                        synopsis: 'New open source framework enabling testers of all skills to build a robust test framework.'
+                    },
+                    {
+                        title: 'Testing with Protractor',
+                        url: 'http://developers.perfectomobile.com/display/PD/Protractor',
+                        synopsis: 'Test your AngularJS web apps using Protractor and Perfecto.'
+                    },
+                    {
+                        title: 'Object Spy overview',
+                        url: 'http://developers.perfectomobile.com/display/PD/Object+Spy',
+                        synopsis: 'The Object Spy is an Automation tool used to view detected objects retrieved from the device screen in webpage, native, and hybrid applications; and displays their associated functions.'
+                    },
+                    {
+                        title: 'Automation with UFT',
+                        url: 'http://developers.perfectomobile.com/display/PD/UFT+Integration',
+                        synopsis: 'Still using Micro Focus UFT? This is the reference for using it with Perfecto.'
+                    },
+                    {
+                        title: 'Perfecto Native Automation',
+                        url: 'http://developers.perfectomobile.com/display/PD/Perfecto+Native+Automation',
+                        synopsis: 'Perfecto provides an IDE that includes an interface not only for Interactive (Manual) Testing, but also an interface for creating Automation scripts.'
+                    }
+                ]
+            },
+            performance: {
+                type: 'Issue',
+                topic: 'Performance Issue', // New Case Reason (elevated from Problem Type)
+                subtopics: ['Image Mode', 'Interactive Latency', 'Frame Rate Poor', 'Scripts Execute Slowly', 'App install Slow', 'App Launch Slow', 'Other'],
+                hiddenSubtopics: [],
+                articles: [
+                    {
+                        title: 'Image Mode: What is it and how do I fix it?',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526',
+                        synopsis: 'If interacting with your device is slow, your streaming server may be blocked by your IT department.'
+                    },
+                    {
+                        title: 'How do I troubleshoot interactive latency?',
+                        url: 'http://developers.perfectomobile.com/display/TT/Networking+Best+Practices+and+Performance+Troubleshooting',
+                        synopsis: 'Optimize performance and prevent disconnections in your network. Understand the protocols used, effects of proxy servers and VPNs.'
+                    },
+                    {
+                        title: 'Troubleshooting iOS App Install and Launch Failures',
+                        url: 'http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures',
+                        synopsis: 'What you need to look for when your iOS app fails to install or launch.'
+                    },
+                    {
+                        title: 'Faster script execution',
+                        url: 'http://developers.perfectomobile.com/display/TT/Faster+Script+Execution',
+                        synopsis: 'In this article, we provide suggestions how to improve your script execution time.'
+                    },
+                    {
+                        title: 'Parallel execution with TestNG',
+                        url: 'http://developers.perfectomobile.com/display/TT/Parallel+Execution+with+TestNG',
+                        synopsis: 'Save time by running scripts in parallel. Remember not to try to use the same device from multiple scripts.'
+                    },
+                    {
+                        title: 'Find elements faster with Appium and XCUITest',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=21436560',
+                        synopsis: 'In this article, we suggest another way to locate (find) an element which significantly improves the performance and shortens the execution time.'
+                    },
+                    {
+                        title: 'How can I launch an iOS app faster?',
+                        url: 'http://developers.perfectomobile.com/display/TT/iOS+Troubleshooting%3A+Slow+iOS+app+launch',
+                        synopsis: 'Learn why your iOS app is taking a long time to launch.'
+                    },
+                    {
+                        title: 'Installing an Application using the Install Widget',
+                        url: 'http://developers.perfectomobile.com/display/TT/Installing+an+Application+using+the+Install+Widget',
+                        synopsis: 'Here is how you use the install widget of the Perfecto Lab, to install your application.'
+                    }
+                ]
+            },
+            // functionality: { // Hidden from end-users (these would appear in Salesforce for our Support Team)
+            //     type: 'Issue',
+            //     topic: 'Infrastructure',
+            //     // Network Issue below could encompass: Network, Firewall, Network Issue. Note: DNS Requesst should be Request/Network Change.
+            //     subtopics: ['Hardware Issue', 'Network Issue', 'Outage', 'Security Issue', 'Service Impairment', 'Software Issue', 'Storage Issue']
+            //     articles: []
+            // },
+            request: {
+                type: 'Request',
+                topic: 'System Admin', // --> 'Request' or ['Device Request', 'Cloud Request', 'Information Request', 'Infrastructure Request', 'Offboarding Request', 'Onboarding Request', 'Public Cloud Request', 'Shipping Request'] (most are internal)
+                // Ordered by % of cases in last 6 months for Case Reason = "System Admin"
+                subtopics: [ 'New Device', 'Device Swap', 'Device Upgrade', 'Configuration Change', 'New Cloud User', 'Reg iOS', 'Cloud Upgrade', 'Device Template', 'Product Info', 'Documentation', 'Other'],
+                hiddenSubtopics: ['Add licenses', 'Cancel Subscription', 'Free Trial', 'Network Change', 'Order Information', 'Roles/Tokens', 'Support Portal Login', 'Usage Information', 'VPN Setup'],
+                articles: [
+                    {
+                        title: 'Requesting a device swap',
+                        url: 'http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap'
+                    },
+                    {
+                        title: 'Installing Mobile Provisioning Profiles (regiOS)',
+                        url: 'http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module'
+                    },
+                    {
+                        title: 'User management - adding users, roles, tokens',
+                        url: 'http://developers.perfectomobile.com/display/PD/User+Management'
+                    },
+                    {
+                        title: 'Create user via REST API',
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=12419106'
+                    },
+                    {
+                        title: 'Cloud updates',
+                        url: 'http://developers.perfectomobile.com/display/PD/Product+Updates'
+                    },
+                    {
+                        title: 'Adding templates',
+                        url: 'http://developers.perfectomobile.com/display/TT/Adding+Templates+to+the+User+Directory'
+                    },
+                    {
+                        title: 'Product documementation',
+                        url: 'http://developers.perfectomobile.com/display/PD/Documentation'
+                    }
+                ]
+            },
+            suggestion: {
+                type: 'Suggestion',
+                topic: '', // Intentionally blank
+                subtopics: [], // Intentionally blank
+                hiddenSubtopics: [], // Intentionally blank
+                articles: []
+            }
+        };
+
+        // Load articles in card lower-left from array
+        var loadArticles = function(tabName) {
+            if(tabName != 'request' && tabName != 'suggestion') {
+                $('#searchTerm').text(tabName);
+                $('#articles').empty(); // Clear the card of past articles
+                $.each(caseTree[tabName].articles, function(index, value) {
+                    var currentNode = caseTree[tabName].articles[index];
+                    var url = currentNode.url;
+                    var title = currentNode.title;
+                    var synopsis = currentNode.synopsis;
+                    // Next line will break on super-old browsers
+                    var article = `<article><a href="${url}" target="_blank">${title}</a></article><p class="text-muted">${synopsis}</p>`;
+                    $('#articles').append(article);
+                });
+            }
+        };
+
+        // Sets case type, topic, and subtopics
+        var loadSubtopics = function(tabName) {
+            // Set Case Type and Reason
+            $('#caseType').val(caseTree[tabName].type);
+            $('#topic').val(caseTree[tabName].topic);
+            // Get reference to subtopic select object
+            var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
+            subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
+            // Add the subtopics for the tab
+            $.each(caseTree[tabName].subtopics, function(index, value) {
+                subtopicsList.append($('<option />').attr('value', value).text(value)); 
+            });
+        };
+
+        // Load subtopics for default tab selected (Devices)
+        $(document).ready(function() {
+            loadSubtopics('device');
+            loadArticles('device');
+            // $('#request').validate({ // initialize the plugin
+            //     rules: {
+            //         email: {
+            //             required: true,
+            //             email: true
+            //         },
+            //         fqdn: {
+            //             required: true,
+            //             minlength: 13
+            //         },
+            //         severity: {
+            //             required: true
+            //         }
+            //     }
+            // });
+        });
+
+        // Handle click on tabs
+        $('#topicTabs').on('shown.bs.tab', function(e) {
+            var selectedTabName = $(e.target).attr('aria-controls');
+            loadSubtopics(selectedTabName);
+            loadArticles(selectedTabName);
+        });
+
+        // Disabled as we are not searching the KB based on subtopic selection
+        // $('#subtopic').change(function() {
+        //     loadArticles($('#subtopic option:selected').text());
+        // });
+    </script>
+</body>
+
+</html>

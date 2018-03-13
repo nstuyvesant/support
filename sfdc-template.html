@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500);
+    </script>
+</head>
+
+<body>
+     
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+     
+        <input type=hidden name='captcha_settings' value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+        <input type=hidden name="orgid" value="00D200000001UUG">
+        <input type=hidden name="retURL" value="https://perfecto.io/thankyou">
+     
+        <!--  ----------------------------------------------------------------------  -->
+        <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+        <!--  these lines if you wish to test in debug mode.                          -->
+        <!--  <input type="hidden" name="debug" value=1>                              -->
+        <!--  <input type="hidden" name="debugEmail"                                  -->
+        <!--  value="eranv@perfectomobile.com">                                       -->
+        <!--  ----------------------------------------------------------------------  -->
+     
+        <label for="type">Type</label>
+        <select  id="type" name="type">
+            <option value="">--None--</option>
+            <option value="Defect">Defect</option>
+            <option value="Information Request">Information Request</option>
+            <option value="Issue">Issue</option>
+            <option value="Monitoring">Monitoring</option>
+            <option value="Non-issue">Non-issue</option>
+            <option value="Request">Request</option>
+            <option value="Suggestion">Suggestion</option>
+        </select><br>
+     
+        Case Reason:
+        <select  id="00ND0000006MZHc" name="00ND0000006MZHc" title="Case Reason">
+            <option value="">--None--</option><option value="Accounting and Purchasing">Accounting and Purchasing</option>
+            <option value="Automation">Automation</option>
+            <option value="CQ Lab Issues">CQ Lab Issues</option>
+            <option value="Device Issue">Device Issue</option>
+            <option value="Duplicate Case">Duplicate Case</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Local Link">Local Link</option>
+            <option value="MCE">MCE</option>
+            <option value="Monitoring">Monitoring</option>
+            <option value="Other">Other</option>
+            <option value="Performance">Performance</option>
+            <option value="Request for Information">Request for Information</option>
+            <option value="Self Service Portal">Self Service Portal</option>
+            <option value="System Admin">System Admin</option>
+            <option value="Widget Issue">Widget Issue</option>
+        </select><br>
+     
+        Cloud URL:<input  id="00ND0000002w9Lj" maxlength="255" name="00ND0000002w9Lj" size="20" type="text" /><br>
+     
+        <label for="name">Contact Name</label>
+        <input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
+     
+        <label for="email">Email</label>
+        <input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+     
+        <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+     
+        Severity:
+        <select  id="00ND0000005cKFJ" name="00ND0000005cKFJ" title="Severity">
+            <option value="">--None--</option><option value="Low/Minor">Low/Minor</option>
+            <option value="Medium">Medium</option>
+            <option value="Major">Major</option>
+            <option value="Critical">Critical</option>
+        </select><br>
+        
+        <label for="subject">Subject</label>
+        <input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+        
+        <label for="description">Description</label>
+        <textarea name="description"></textarea><br>
+        
+        <input type="hidden"  id="external" name="external" value="1" /><br>
+        
+        <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br>
+
+        <input type="submit" name="submit">
+     
+    </form>
+
+</body>
+
+</html>
