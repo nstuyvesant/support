@@ -176,7 +176,7 @@
                 <div class="card">
                     <div class="card-header align-middle"><a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" class="btn btn-success" style="display: none;"><i class="far fa-comment-alt"></i> Chat with Support Engineer</a><a class="btn btn-light disabled" id="liveagent_button_offline_573D0000000028q" style="display: none;"><i class="far fa-comment-alt"></i> Chat Offline</a><a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request</a></div>
                     <div class="card-body">
-                        <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post">
+                        <form id="theForm" name="theForm">
                             <input type=hidden name='captcha_settings' value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type=hidden name="orgid" value="00D200000001UUG">
                             <input type=hidden name="retURL" value="https://perfecto.io/support">
@@ -533,6 +533,21 @@
             // TODO: Hide Subtopics If Type = Suggestion
             loadSubtopics(selectedTabName);
             loadArticles(selectedTabName);
+        });
+
+        // Handle form submit via AJAX
+        $("#theForm").submit(function(e) {
+            var url = 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#theForm").serialize(), // serializes the form's elements.
+                success: function(data) {
+                    console.log('From Salesforce', data); // show response from Salesforce (perhaps Case Number?)
+                    // TODO: display an alert-success and clear the form but stay on this page.
+                }
+            });
+            e.preventDefault(); // avoid to execute the actual submit of the form.
         });
 
         // Disabled as we are not searching the KB based on subtopic selection
