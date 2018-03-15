@@ -224,7 +224,7 @@
                                 <textarea class="form-control" rows="4" id="description" name="description" placeholder="More details will help us resolve your request faster." required></textarea>
                                 <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                             </div>
-                            <p>If you need to attach a screenshot or file, preply to our email confirmation of your new case or <a href="https://perfectomobile.force.com/customers/">login to the Support Portal</a>.</p>
+                            <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/">login to the Support Portal</a> and open your case there.</p>
                             <!-- <div class="form-group">
                                 <label for="fileUpload" class="sr-only">Files to upload</label>
                                 <input type="file" class="form-control" id="fileUpload" name="tfa_17" />
@@ -248,6 +248,7 @@
                 type: 'Issue',
                 topic: 'Device Issue',
                 subtopics: ['Cradle Error', 'Device Unresponsive', 'Device Locked', 'Network Connectivity Issue', 'Device Disconnected', 'Device Busy', 'App Install Failed', 'Other'],
+                description: 'Device (model, ID, OS, version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n',
                 articles: [
                     {
                         title: 'Device and cradle operations',
@@ -300,6 +301,7 @@
                 type: 'Issue',
                 topic: 'Web Issue',
                 subtopics: ['Web Browser Availability', 'Web Video Issue', 'Web Functionality Issue', 'Other'],
+                description: 'Browser (version, OS): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n',
                 articles: [
                     {
                         title: 'Desktop web testing',
@@ -337,6 +339,7 @@
                 type: 'Issue',
                 topic: 'Automation Issue',
                 subtopics: ['Appium Issue', 'Selenium Issue', 'Espresso Issue', 'XCTest Issue', 'JavaScript Issue', 'Object Spy Issue', 'UFT Issue', 'Framework Issue', 'Perfecto Native Issue', 'Other'],
+                description: 'Development Tool (version): TOOL\n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n',
                 articles: [
                     {
                         title: 'Getting started with Appium',
@@ -389,6 +392,7 @@
                 type: 'Issue',
                 topic: 'Performance Issue',
                 subtopics: ['Image Mode', 'Interactive Latency', 'Execution Slow', 'App install Slow', 'App Launch Slow', 'Login Slow', 'Other'],
+                description: 'Did you try it from home without using a VPN? N|Y\n\nDoes it happen at certain times of day? N|Y\n\nSteps to reproduce:\n',
                 articles: [
                     {
                         title: 'Image Mode: What is it and how do I fix it?',
@@ -436,6 +440,7 @@
                 type: 'Request',
                 topic: 'Request',
                 subtopics: [ 'New Device Request', 'Device Swap', 'Device Upgrade', 'Configuration Change', 'New Cloud User', 'Reg iOS Request', 'Cloud Upgrade', 'Device Template', 'Product Info', 'Documentation', 'Other'],
+                description: 'If requesting a device swap, please let us know what device to remove (Device ID) as well as what device to add (be specific to save time).',
                 articles: [
                     {
                         title: 'Requesting a device swap',
@@ -471,6 +476,7 @@
                 type: 'Suggestion',
                 topic: '', // Intentionally blank
                 subtopics: [], // Intentionally blank
+                description: 'Please let us know how your feature request would improve your workflow and why it might benefit other customers.\n',
                 articles: []
             }
         };
@@ -497,6 +503,7 @@
             // Set Case Type and Topic
             $('#type').val(caseTree[tabName].type);
             $('#topic').val(caseTree[tabName].topic);
+            $('#description').val(caseTree[tabName].description);
             // Get reference to subtopic select object
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
@@ -506,8 +513,41 @@
             });
         };
 
+        // Parse URL Queries Method
+        (function($){
+            $.getQuery = function( query ) {
+                query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var expr = "[\\?&]"+query+"=([^&#]*)";
+                var regex = new RegExp( expr );
+                var results = regex.exec( window.location.href );
+                if( results !== null ) {
+                    return results[1];
+                    return decodeURIComponent(results[1].replace(/\+/g, " "));
+                } else {
+                    return false;
+                }
+            };
+        })(jQuery);
+
+        // Sample querystring from MCM...
+        //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom
+
         // Load subtopics for default tab selected (Devices)
         $(document).ready(function() {
+            var email = $.getQuery('username');
+            var timezone = $.getQuery('timezone');
+            var fqdn = $.getQuery('appUrl');
+            var cloudVersion = $.getQuery('mcmVersion');
+            var deviceID = $.getQuery('deviceId');
+            var manufacturer = $.getQuery('manufacturer');
+            var model = $.getQuery('model');
+            var os = $.getQuery('os');
+            var location = $.getQuery('location');
+            var environment = `${manufacturer} ${model} ${os} (${deviceID}, ${location})`;
+            var description = `User Timezone: ${timezone}\nCloud Version: ${cloudVersion}\nEnvironment: ${environment}`;
+            $('#email').text(email);
+            $('#fqdn').text(fqdn);
+            $('#description').text(description);
             loadSubtopics('device');
             loadArticles('device');
             // $('#request').validate({ // initialize the plugin
@@ -530,9 +570,14 @@
         // Handle click on tabs
         $('#topicTabs').on('shown.bs.tab', function(e) {
             var selectedTabName = $(e.target).attr('aria-controls');
-            // TODO: Hide Subtopics If Type = Suggestion
             loadSubtopics(selectedTabName);
-            loadArticles(selectedTabName);
+            if(selectedTabName != 'suggestion') {
+                loadSubtopics(selectedTabName);
+                loadArticles(selectedTabName);
+            } else {
+                $('#subtopic').hide();
+                $('#severity').hide();
+            };
         });
 
         // Handle form submit via AJAX
