@@ -572,6 +572,8 @@
             var selectedTabName = $(e.target).attr('aria-controls');
             loadSubtopics(selectedTabName);
             if(selectedTabName != 'suggestion') {
+                $('#subtopic').show();
+                $('#severity').show();
                 loadSubtopics(selectedTabName);
                 loadArticles(selectedTabName);
             } else {
