@@ -68,15 +68,15 @@
             color:green;
         }
     </style>
-    <script src="https://www.google.com/recaptcha/api.js"></script><!--async defer?-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         // From Salesforce - not sure I need this.
         function timestamp() {
             var response = document.getElementById('g-recaptcha-response');
             if(response == null || response.value.trim() == '') {
-                var elems = JSON.parse(document.getElementsByName('captcha_settings')[0].value);
+                var elems = JSON.parse(document.getElementById('captcha_settings').value);
                 elems['ts'] = JSON.stringify(new Date().getTime());
-                document.getElementsByName('captcha_settings')[0].value = JSON.stringify(elems);
+                document.getElementById('captcha_settings').value = JSON.stringify(elems);
             }
         }
         setInterval(timestamp, 500);
@@ -185,7 +185,7 @@
                     <div class="card-header align-middle"><a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" class="btn btn-success" style="display: none;"><i class="far fa-comment-alt"></i> Chat with Support Engineer</a><a class="btn btn-light disabled" id="liveagent_button_offline_573D0000000028q" style="display: none;"><i class="far fa-comment-alt"></i> Chat Offline</a><a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request</a></div>
                     <div class="card-body">
                         <form id="theForm" name="theForm">
-                            <input type=hidden name='captcha_settings' value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                            <input type=hidden id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type=hidden name="orgid" value="00D200000001UUG">
                             <input type=hidden name="retURL" value="https://perfecto.io/support">
                             <input type="hidden" id="type" name="type" value="Issue">
@@ -229,7 +229,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description" class="sr-only">Description of your issue</label>
-                                <textarea class="form-control" rows="4" id="description" name="description" placeholder="More details will help us resolve your request faster." required></textarea>
+                                <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster." required></textarea>
                                 <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                             </div>
                             <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/">login to the Support Portal</a> and open your case there.</p>
@@ -334,7 +334,7 @@
                     {
                         title: 'Visual Analysis for Desktop Web',
                         url: 'http://developers.perfectomobile.com/display/PD/Visual+Analysis+for+Desktop+Web',
-                        synopsis: 'The FastWeb Desktop Web devices of the Perfecto Lab support visual analysis of the browser screen to identify Text.'
+                        synopsis: 'Perfecto Fast Web supports visual analysis of browser content to identify text.'
                     },
                     {
                         title: 'Uploading files to Perfecto desktop web instances',
@@ -452,31 +452,38 @@
                 articles: [
                     {
                         title: 'Requesting a device swap',
-                        url: 'http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap'
+                        url: 'http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap',
+                        synopsis: 'Everything you ever wanted to know about swapping devices.'
                     },
                     {
                         title: 'Installing Mobile Provisioning Profiles (regiOS)',
-                        url: 'http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module'
+                        url: 'http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module',
+                        synopsis: 'Apple iOS devices require Mobile Provisioning Profiles in order to work with Perfecto.'
                     },
                     {
                         title: 'User management - adding users, roles, tokens',
-                        url: 'http://developers.perfectomobile.com/display/PD/User+Management'
+                        url: 'http://developers.perfectomobile.com/display/PD/User+Management',
+                        synopsis: 'How to add users, roles, and tokens from the System Administration area of your cloud.'
                     },
                     {
                         title: 'Create user via REST API',
-                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=12419106'
+                        url: 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=12419106',
+                        synopsis: 'Perfecto provides a REST API for administrative functions.'
                     },
                     {
                         title: 'Cloud updates',
-                        url: 'http://developers.perfectomobile.com/display/PD/Product+Updates'
+                        url: 'http://developers.perfectomobile.com/display/PD/Product+Updates',
+                        synopsis: 'Check out all the changes in the latest Release Notes.'
                     },
                     {
                         title: 'Adding templates',
-                        url: 'http://developers.perfectomobile.com/display/TT/Adding+Templates+to+the+User+Directory'
+                        url: 'http://developers.perfectomobile.com/display/TT/Adding+Templates+to+the+User+Directory',
+                        synopsis: 'How to add device templates to your cloud.'
                     },
                     {
                         title: 'Product documementation',
-                        url: 'http://developers.perfectomobile.com/display/PD/Documentation'
+                        url: 'http://developers.perfectomobile.com/display/PD/Documentation',
+                        synopsis: 'Documentation for your Perfecto platform.'
                     }
                 ]
             },
@@ -507,11 +514,11 @@
         };
 
         // Sets Case Type, Topic, and Subtopics
-        var loadSubtopics = function(tabName) {
+        var loadSubtopics = function(tabName, appendix) {
             // Set Case Type and Topic
             $('#type').val(caseTree[tabName].type);
             $('#topic').val(caseTree[tabName].topic);
-            $('#description').val(caseTree[tabName].description);
+            $('#description').val(`${caseTree[tabName].description}======================${appendix}`);
             // Get reference to subtopic select object
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
@@ -521,44 +528,49 @@
             });
         };
 
-        // Parse URL Queries Method
-        (function($){
-            $.getQuery = function( query ) {
-                query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-                var expr = "[\\?&]"+query+"=([^&#]*)";
-                var regex = new RegExp( expr );
-                var results = regex.exec( window.location.href );
-                if( results !== null ) {
-                    return results[1];
-                    return decodeURIComponent(results[1].replace(/\+/g, " "));
-                } else {
-                    return false;
-                }
-            };
-        })(jQuery);
+        // Extract querystring values
+        var qs = function(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        };
+
+        // Grab inbound querystring params into a string to append to description
+        var getDescriptionSuffix = function() {
+            // Cleanup style later
+            var suffix = '';
+            var timezone = qs('timezone');
+            if(timezone) suffix += `\nUser GMT Offset: ${timezone}`;
+            var mcmVersion = qs('mcmVersion');
+            if(mcmVersion) suffix += `\nCloud Version: ${mcmVersion}`;
+            var manufacturer = qs('manufacturer');
+            if(manufacturer) suffix += `\nManufacturer: ${manufacturer}`;
+            var model = qs('model');
+            if(model) suffix += `\nModel: ${model}`;
+            var os = qs('os');
+            if(os) suffix += `\nOS Version: ${os}`;
+            var deviceId = qs('deviceId');
+            if(deviceId) suffix += `\nDevice ID: ${deviceId}`;
+            var location = qs('location');
+            if(location) suffix += `\nLocation: ${location}`;
+            var executionReport = qs('desc');
+            if(executionReport) suffix += executionReport;
+            return suffix;
+        };
 
         // Sample querystring from MCM...
-        //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom
-        //?username=danielt%40perfectomobile.com&email=danielt%40perfectomobile.com&cname=salesforce&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
+        //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
 
         // Load subtopics for default tab selected (Devices)
         $(document).ready(function() {
-            var email = $.getQuery('username');
-            var timezone = $.getQuery('timezone');
-            var fqdn = $.getQuery('appUrl');
-            var cloudVersion = $.getQuery('mcmVersion');
-            var deviceID = $.getQuery('deviceId');
-            var manufacturer = $.getQuery('manufacturer');
-            var model = $.getQuery('model');
-            var os = $.getQuery('os');
-            var location = $.getQuery('location');
-            var environment = `${manufacturer} ${model} ${os} (${deviceID}, ${location})`;
-            var description = `User Timezone: ${timezone}\nCloud Version: ${cloudVersion}\nEnvironment: ${environment}`;
+            var email = qs('username');
+            var fqdn = qs('appUrl');
+            var descriptionSuffix = getDescriptionSuffix(); // Only need to do this once.
             $('#email').text(email);
             $('#fqdn').text(fqdn);
-            $('#description').text(description);
-            loadSubtopics('device');
+            loadSubtopics('device', descriptionSuffix);
             loadArticles('device');
+
             // $('#request').validate({ // initialize the plugin
             //     rules: {
             //         email: {
