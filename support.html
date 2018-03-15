@@ -71,7 +71,15 @@
     <script src="https://www.google.com/recaptcha/api.js"></script><!--async defer?-->
     <script>
         // From Salesforce - not sure I need this.
-        function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500);
+        function timestamp() {
+            var response = document.getElementById('g-recaptcha-response');
+            if(response == null || response.value.trim() == '') {
+                var elems = JSON.parse(document.getElementsByName('captcha_settings')[0].value);
+                elems['ts'] = JSON.stringify(new Date().getTime());
+                document.getElementsByName('captcha_settings')[0].value = JSON.stringify(elems);
+            }
+        }
+        setInterval(timestamp, 500);
     </script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -586,9 +594,9 @@
         $("#theForm").submit(function(e) {
             var url = 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8';
             $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: url,
-                data: $("#theForm").serialize(), // serializes the form's elements.
+                data: $('#theForm').serialize(), // serializes the form's elements.
                 success: function(data) {
                     console.log('From Salesforce', data); // show response from Salesforce (perhaps Case Number?)
                     // TODO: display an alert-success and clear the form but stay on this page.
