@@ -102,7 +102,7 @@
                     <ul class="navbar-nav mt-2 mt-md-0">
                         <li class="nav-item">
                             <a class="nav-link nav-link-good disabled" href="#">All clouds operating normally</a>
-                            <!--<a class="nav-link nav-link-bad disabled" href="#">Service degraded for some clouds</a>-->
+                            <!-- <a class="nav-link nav-link-bad disabled" href="#">Service degraded for some clouds</a> -->
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">University</a>
@@ -175,23 +175,22 @@
                     <div class="card-header align-middle"><a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" class="btn btn-success" style="display: none;"><i class="far fa-comment-alt"></i> Chat with Support Engineer</a><a class="btn btn-light disabled" id="liveagent_button_offline_573D0000000028q" style="display: none;"><i class="far fa-comment-alt"></i> Chat Offline</a><a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request</a></div>
                     <div class="card-body">
                         <form action="https://www.tfaforms.com/responses/processor" method="post" name="request" id="request" enctype="multipart/form-data">
-                            <!--<input type="hidden" id="caseType" name="tfa_1" value="Malfunction">
-                            <input type="hidden" id="caseTopic" name="tfa_2" value="Device Issue">-->
+                            <input type="hidden" id="caseType" name="tfa_1" value="Malfunction">
+                            <input type="hidden" id="topic" name="tfa_2" value="Device Issue">
                             <!--Required fields for FormAssembly-->
                             <input type="hidden" value="4663612" name="tfa_dbFormId" id="tfa_dbFormId">
                             <input type="hidden" value="" name="tfa_dbResponseId" id="tfa_dbResponseId">
                             <input type="hidden" value="26b8c7c2a9a501c6f13704918c759855" name="tfa_dbControl" id="tfa_dbControl">
                             <input type="hidden" value="4" name="tfa_dbVersionId" id="tfa_dbVersionId">
                             <input type="hidden" value="" name="tfa_switchedoff" id="tfa_switchedoff">
-
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="caseType">Case type (visible for debugging only)</label>
                                 <input class="form-control" type="text" id="caseType" name="tfa_1" placeholder="Normally hidden" value="Malfunction" required />
                             </div>
                             <div class="form-group">
                                 <label for="topc">Topic (AKA Case Reason - visible for debugging only)</label>
                                 <input class="form-control" type="text" id="topic" name="tfa_2" placeholder="Normally hidden" value="Device Issue" />
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
                                 <input class="form-control" type="text" id="fqdn" name="tfa_3" placeholder="Cloud FQDN like name.perfectomobile.com" required />
@@ -310,8 +309,8 @@
             },
             web: {
                 type: 'Issue',
-                topic: 'Web',
-                subtopics: ['First', 'Second', 'Third'],
+                topic: 'Web Issue',
+                subtopics: ['Web Browser Availability', 'Web Video Issue', 'Web Functionality Issue', 'Other'],
                 articles: [
                     {
                         title: 'Desktop web testing',
@@ -348,7 +347,7 @@
             automation: {
                 type: 'Issue',
                 topic: 'Automation Issue',
-                subtopics: ['Appium', 'Selenium', 'Espresso', 'XCTest', 'JavaScript', 'Object Spy', 'UFT', 'Framework', 'Perfecto Native', 'Other'],
+                subtopics: ['Appium Issue', 'Selenium Issue', 'Espresso Issue', 'XCTest Issue', 'JavaScript Issue', 'Object Spy Issue', 'UFT Issue', 'Framework Issue', 'Perfecto Native Issue', 'Other'],
                 articles: [
                     {
                         title: 'Getting started with Appium',
