@@ -67,19 +67,12 @@
             font-size: 1.1rem;
             color:green;
         }
+        .error {
+            font-size: 0.8rem;
+            color: red;
+        }
     </style>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        // From Salesforce
-        function timestamp() {
-            var response = document.getElementById("g-recaptcha-response");
-            if (response == null || response.value.trim() == "") {
-                var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());
-                document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
-            }
-        }
-        setInterval(timestamp, 500);
-    </script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script>
@@ -187,11 +180,11 @@
                         <a class="btn btn-light disabled float-right" style="display: none;" id="liveagent_button_offline_573D0000000028q"><i class="far fa-comment-alt"></i> Chat Offline</a>
                     </div>
                     <div class="card-body">
-                        <form id="theForm" name="theForm" form="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8">
-                            <input type="hidden" name="debug" value="1">
-                            <input type=hidden name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
-                            <input type=hidden name="orgid" value="00D200000001UUG">
-                            <input type=hidden name="retURL" value="https://localhost?email=nates@perfectomobile.com&submitted=true">
+                        <form id="theForm" form="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post">
+                            <input type="hidden" name="debug" value=1><input type="hidden" name="debugEmail" value="nates@perfectomobile.com">
+                            <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                            <input type="hidden" name="orgid" value="00D200000001UUG">
+                            <input type="hidden" name="retURL" value="https://localhost?email=nates@perfectomobile.com&submitted=true">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <input type="hidden" id="external" name="external" value="1" />
@@ -213,8 +206,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="severity" class="sr-only">Severity of this request</label>
-                                <select id="severity" name="00ND0000005cKFJ" class="form-control" required>
-                                    <option selected disabled>Select a severity...</option>
+                                <select id="severity" name="00ND0000005cKFJ" class="form-control">
+                                    <option selected value="" disabled>Select a severity...</option>
                                     <option value="Low/Minor">Low/Minor</option>
                                     <option value="Medium">Medium</option>
                                     <option value="Major">Major</option>
@@ -223,8 +216,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="subtopic" class="sr-only">Subtopic</label>
-                                <select id="subtopic" name="00ND0000004nqq" class="form-control" required>
-                                    <option selected disabled>Select a subtopic...</option>
+                                <select id="subtopic" name="00ND0000004nqq" class="form-control">
+                                    <option selected value="" disabled>Select a subtopic...</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -257,6 +250,7 @@
         </div><!--row-->
     </div><!--container-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
@@ -573,8 +567,21 @@
         // Test querystring params
         //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
 
-        // Load subtopics for default tab selected (Devices)
+        // Set timestamp for reCAPTCHA settings submitted to Salesforce
+        var refreshCaptchaTimestamp = function() {
+            var response = document.getElementById('g-recaptcha-response');
+            if (response == null || response.value.trim() == "") {
+                var elems = JSON.parse($('#captcha_settings').val());
+                elems.ts = JSON.stringify(new Date().getTime());
+                $('#captcha_settings').val(JSON.stringify(elems));
+            }
+        }
+
+        // DOM loaded
         $(document).ready(function() {
+            setInterval(refreshCaptchaTimestamp, 500); // every half-second
+            $('#retURL').val(`${window.location.href}&submitted=true`);
+            console.log($('#retURL').val());
             var email = qs('username');
             var fqdn = qs('appUrl');
             var descriptionSuffix = getDescriptionSuffix(); // Only need to do this once.
@@ -583,21 +590,30 @@
             loadSubtopics('device', descriptionSuffix);
             loadArticles('device');
 
-            // $('#request').validate({ // initialize the plugin
-            //     rules: {
-            //         email: {
-            //             required: true,
-            //             email: true
-            //         },
-            //         fqdn: {
-            //             required: true,
-            //             minlength: 13
-            //         },
-            //         severity: {
-            //             required: true
-            //         }
-            //     }
-            // });
+            $('#theForm').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    fqdn: {
+                        required: true,
+                        minlength: 13
+                    },
+                    subject: {
+                        required: true
+                    },
+                    description: {
+                        required: true
+                    },
+                    severity: {
+                        required: true
+                    },
+                    subtopic: {
+                        required: true
+                    }
+                }
+            });
         });
 
         // Handle click on tabs
@@ -615,20 +631,10 @@
             };
         });
 
-        // Handle form submit via AJAX
-        $("#theForm").submit(function(e) {
-            var url = 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8';
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: $('#theForm').serialize(), // serializes the form's elements.
-                success: function(data) {
-                    console.log('From Salesforce', data); // show response from Salesforce (perhaps Case Number?)
-                    // TODO: display an alert-success and clear the form but stay on this page.
-                }
-            });
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-        });
+        // Handle form submit
+        // $("#theForm").submit(function(e) {
+        //     $('#retURL').val(`${window.location.href}&submitted=true`);
+        // });
     </script>
 </body>
 
