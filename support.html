@@ -184,7 +184,7 @@
                             <input type="hidden" name="debug" value=1><input type="hidden" name="debugEmail" value="nates@perfectomobile.com">
                             <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type="hidden" name="orgid" value="00D200000001UUG">
-                            <input type="hidden" name="retURL" value="https://localhost?email=nates@perfectomobile.com&submitted=true">
+                            <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <input type="hidden" id="external" name="external" value="1" />
@@ -580,8 +580,8 @@
         // DOM loaded
         $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
-            $('#retURL').val(`${window.location.href}&submitted=true`);
-            console.log($('#retURL').val());
+            var returnURL = `${window.location.href}&submitted=true`;
+            $('#retURL').val(returnURL);
             var email = qs('username');
             var fqdn = qs('appUrl');
             var descriptionSuffix = getDescriptionSuffix(); // Only need to do this once.
