@@ -216,7 +216,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="subtopic" class="sr-only">Subtopic</label>
-                                <select id="subtopic" name="00ND0000004nqq" class="form-control">
+                                <select id="subtopic" name="00ND0000004nqq2" class="form-control">
                                     <option selected value="">Select a subtopic...</option>
                                 </select>
                             </div>
@@ -599,8 +599,8 @@
         $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
             var returnURL = `${window.location.href}&submitted=true`;
-            //$('#retURL').val(returnURL);
-            $('#retURL').val('http://localhost/thanks.html');
+            $('#retURL').val(returnURL);
+
             // Show confirmation if submitted
             if(qs('submitted')) {
                 alert('Submitted');
@@ -633,7 +633,7 @@
                     "00ND0000005cKFJ": { // severity
                         required: true
                     },
-                    "00ND0000004nqq": { // subtopic
+                    "00ND0000004nqq2": { // subtopic
                         required: true
                     }
                 }
