@@ -180,8 +180,8 @@
                         <a class="btn btn-light disabled float-right" style="display: none;" id="liveagent_button_offline_573D0000000028q"><i class="far fa-comment-alt"></i> Chat Offline</a>
                     </div>
                     <div class="card-body">
-                        <form id="requestForm" form="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post">
-                            <input type="hidden" name="debug" value="1"><input type="hidden" name="debugEmail" value="nates@perfectomobile.com">
+                        <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post">
+                            <!-- <input type="hidden" name="debug" value="1"><input type="hidden" name="debugEmail" value="nates@perfectomobile.com"> -->
                             <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type="hidden" name="orgid" value="00D200000001UUG">
                             <input type="hidden" id="retURL" name="retURL" value="">
@@ -592,15 +592,6 @@
             };
         });
 
-        // Interferes with validation
-        // $("#theForm").submit(function(e) {
-        //     //alert('Submit');
-        //     alert('Submitting');
-        //     var foo = ('#retURL').val();
-        //     alert(foo);
-        //     //$('#retURL').val(`${window.location.href}&submitted=true`);
-        // });
-        
         // Used by loadSubtopics()
         var descriptionSuffix = getDescriptionSuffix(); // Global scope
 
