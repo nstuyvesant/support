@@ -71,15 +71,15 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         // From Salesforce - not sure I need this.
-        function timestamp() {
-            var response = document.getElementById('g-recaptcha-response');
-            if(response == null || response.value.trim() == '') {
-                var elems = JSON.parse(document.getElementById('captcha_settings').value);
-                elems['ts'] = JSON.stringify(new Date().getTime());
-                document.getElementById('captcha_settings').value = JSON.stringify(elems);
-            }
-        }
-        setInterval(timestamp, 500);
+        // function timestamp() {
+        //     var response = document.getElementById('g-recaptcha-response');
+        //     if(response == null || response.value.trim() == '') {
+        //         var elems = JSON.parse(document.getElementById('captcha_settings').value);
+        //         elems['ts'] = JSON.stringify(new Date().getTime());
+        //         document.getElementById('captcha_settings').value = JSON.stringify(elems);
+        //     }
+        // }
+        // setInterval(timestamp, 500);
     </script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -201,7 +201,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email" class="sr-only">Your work email address</label>
-                                <input class="form-control" type="email" id="fqdn" name="email" placeholder="Work email address" required maxlength="80" />
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Work email address" required maxlength="80" />
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="sr-only">Best phone number to reach you</label>
@@ -566,8 +566,8 @@
             var email = qs('username');
             var fqdn = qs('appUrl');
             var descriptionSuffix = getDescriptionSuffix(); // Only need to do this once.
-            $('#email').text(email);
-            $('#fqdn').text(fqdn);
+            $('#email').val(email);
+            $('#fqdn').val(fqdn);
             loadSubtopics('device', descriptionSuffix);
             loadArticles('device');
 
