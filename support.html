@@ -68,7 +68,7 @@
             color:green;
         }
     </style>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
     <script>
         // From Salesforce - not sure I need this.
         // function timestamp() {
@@ -185,9 +185,10 @@
                     <div class="card-header align-middle"><a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" class="btn btn-success" style="display: none;"><i class="far fa-comment-alt"></i> Chat with Support Engineer</a><a class="btn btn-light disabled" id="liveagent_button_offline_573D0000000028q" style="display: none;"><i class="far fa-comment-alt"></i> Chat Offline</a><a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request</a></div>
                     <div class="card-body">
                         <form id="theForm" name="theForm">
-                            <input type=hidden id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                            <input type="hidden" name="debug" value="1">
+                            <!-- <input type=hidden id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'> -->
                             <input type=hidden name="orgid" value="00D200000001UUG">
-                            <input type=hidden name="retURL" value="https://perfecto.io/support">
+                            <input type=hidden name="retURL" value="https://localhost?email=nates@perfectomobile.com&case-number=0330033">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <input type="hidden" id="external" name="external" value="1" />
@@ -197,19 +198,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="name" class="sr-only">Your name</label>
-                                <input type="text" class="form-control" placeholder="First and last name" id="name" name="name" maxlength="80" />
+                                <input type="text" class="form-control" placeholder="First and last name" id="name" name="name" autocomplete="name" maxlength="80" />
                             </div>
                             <div class="form-group">
                                 <label for="email" class="sr-only">Your work email address</label>
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Work email address" required maxlength="80" />
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Work email address" autocomplete="email" required maxlength="80" />
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="sr-only">Best phone number to reach you</label>
-                                <input class="form-control" type="phone" id="phone" name="phone" placeholder="Phone number with country code" maxlength="40" />
+                                <input class="form-control" type="phone" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel" maxlength="40" />
                             </div>
                             <div class="form-group">
                                 <label for="severity" class="sr-only">Severity of this request</label>
-                                <select id="severity" name="00ND0000005cKFJ" class="form-control">
+                                <select id="severity" name="00ND0000005cKFJ" class="form-control" required>
                                     <option selected disabled>Select a severity...</option>
                                     <option value="Low/Minor">Low/Minor</option>
                                     <option value="Medium">Medium</option>
@@ -219,7 +220,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="subtopic" class="sr-only">Subtopic</label>
-                                <select id="subtopic" name="00ND0000004nqq" class="form-control">
+                                <select id="subtopic" name="00ND0000004nqq" class="form-control" required>
                                     <option selected disabled>Select a subtopic...</option>
                                 </select>
                             </div>
@@ -238,7 +239,13 @@
                                 <input type="file" class="form-control" id="fileUpload" name="tfa_17" />
                                 <small id="fileUploadHelp" class="form-text text-muted">Screenshots, logs, IPAs, APKs, etc.</small>
                             </div> -->
-                            <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>
+                            <!-- <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/> -->
+                            <div id="submitStatus" class="alert alert-success alert-dismissible fade d-none" role="alert">
+                                Case <strong>303039494</strong> created successfully. An email confirmation is on the way.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
                             <input type="submit" class="btn btn-success" id="submit">
                         </form>
                     </div><!--card-body-->
@@ -518,7 +525,7 @@
             // Set Case Type and Topic
             $('#type').val(caseTree[tabName].type);
             $('#topic').val(caseTree[tabName].topic);
-            $('#description').val(`${caseTree[tabName].description}======================${appendix}`);
+            $('#description').val(`${caseTree[tabName].description}\n======================${appendix}`);
             // Get reference to subtopic select object
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
@@ -554,7 +561,7 @@
             var location = qs('location');
             if(location) suffix += `\nLocation: ${location}`;
             var executionReport = qs('desc');
-            if(executionReport) suffix += executionReport;
+            if(executionReport) suffix += `\n${executionReport}`;
             return suffix;
         };
 
