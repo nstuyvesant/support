@@ -167,7 +167,7 @@
         <div class="row justify-content-around">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Top articles on <b id="searchTerm" class="text-capitalize">Devices</b></div>
+                    <div class="card-header"><a class="btn btn-light disabled">Top articles on <b id="searchTerm" class="text-capitalize">Devices</b></a></div>
                     <div id="articles" class="card-body">
                     </div>
                 </div><br/>
@@ -180,13 +180,20 @@
                         <a class="btn btn-light disabled float-right" style="display: none;" id="liveagent_button_offline_573D0000000028q"><i class="far fa-comment-alt"></i> Chat Offline</a>
                     </div>
                     <div class="card-body">
-                        <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post">
+                        <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
                             <!-- <input type="hidden" name="debug" value="1"><input type="hidden" name="debugEmail" value="nates@perfectomobile.com"> -->
                             <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type="hidden" name="orgid" value="00D200000001UUG">
+                            <input type=hidden name="recordType" id="recordType" value="01220000000HQCE">
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
+                            <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
+                                Your case was received by Support. An email confirmation is on the way.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="form-group">
                                 <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
                                 <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" />
@@ -236,12 +243,6 @@
                             </div> -->
                             <input type="hidden" id="external" name="external" value="1" />
                             <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>
-                            <div id="submitStatus" class="alert alert-success fade in alert-dismissible d-none" role="alert">
-                                Your case was received by Support. An email confirmation is on the way.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
                             <input type="submit" class="btn btn-success" id="submit">
                         </form>
                     </div><!--card-body-->
@@ -598,7 +599,6 @@
 
             // Show confirmation if submitted
             if(qs('submitted')) {
-                alert('Submitted');
                 $('#submitStatus').show();
             }
 
@@ -615,6 +615,9 @@
             // Setup form validate. jQuery Validation bug for selects - must use name not ID
             $('#requestForm').validate({
                 rules: {
+                    name: {
+                        required: true                        
+                    },
                     email: {
                         required: true,
                         email: true
