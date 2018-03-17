@@ -187,7 +187,6 @@
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
-                            <input type="hidden" id="external" name="external" value="1" />
                             <div class="form-group">
                                 <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
                                 <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" />
@@ -235,6 +234,7 @@
                                 <input type="file" class="form-control" id="fileUpload" name="tfa_17" />
                                 <small id="fileUploadHelp" class="form-text text-muted">Screenshots, logs, IPAs, APKs, etc.</small>
                             </div> -->
+                            <input type="hidden" id="external" name="external" value="1" />
                             <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>
                             <div id="submitStatus" class="alert alert-success fade in alert-dismissible d-none" role="alert">
                                 Your case was received by Support. An email confirmation is on the way.
@@ -517,7 +517,7 @@
             }
         };
 
-        // Sets Case Type, Topic, and Subtopics
+        // Sets Case Type, Topic, and Subtopic
         var loadSubtopics = function(tabName) {
             // Set Case Type and Topic
             $('#type').val(caseTree[tabName].type);
@@ -562,12 +562,7 @@
             return suffix;
         };
 
-        // Test URL
-        //http://localhost/?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
-        // Test querystring params
-        //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
-
-        // Set timestamp for reCAPTCHA settings submitted to Salesforce
+       // Set timestamp for reCAPTCHA settings submitted to Salesforce
         var refreshCaptchaTimestamp = function() {
             var response = document.getElementById('g-recaptcha-response');
             if (response == null || response.value.trim() == "") {
@@ -592,7 +587,7 @@
             };
         });
 
-        // Used by loadSubtopics()
+        // Set global variable by loadSubtopics() - just do it once
         var descriptionSuffix = getDescriptionSuffix(); // Global scope
 
         // DOM loaded
@@ -606,14 +601,18 @@
                 alert('Submitted');
                 $('#submitStatus').show();
             }
+
+            // Load required fields from querystring if provided
             var email = qs('username');
-            var fqdn = qs('appUrl');
-            
             $('#email').val(email);
+            var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
+
+            // Setup articles and subtopics for default selected tab (Device)
             loadSubtopics('device');
             loadArticles('device');
 
+            // Setup form validate. jQuery Validation bug for selects - must use name not ID
             $('#requestForm').validate({
                 rules: {
                     email: {
@@ -639,6 +638,11 @@
                 }
             });
         });
+
+        // Test URL
+        // http://localhost/?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
+        // Test querystring params
+        //?os=iOS&mcmVersion=18%2E3&deviceId=2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6&company=Perfecto%20Mobile&cradleId=BOS%2DE8%2D4%2D1%2FVIRTUAL%2F02&hssVersion=18%2E3%2E1&email=nates%40perfectomobile%2Ecom&model=iPhone%2D6&salesforceCustomerId=&location=NA%2DUS%2DBOS&version=10%2E3%2E2&appUrl=demo%2Eperfectomobile%2Ecom&timezone=%2D5&phoneNumber=%2B1%20%28781%29%20697%2D5344&mcmDevVersion=18%2E3%2E0%2E3&manufacturer=Apple&username=nates%40perfectomobile%2Ecom&desc=Execution%20ID%3A%20acirstea%40salesforce.com_AndroidPerfectoCommunityTest_18-03-15_13_00_00_1823%0ATest%20Name%3A%20Android%20Perfecto%20Community%20Test%0AStart%20Time%3A%20Thu%20Mar%2015%202018%2009%3A00%3A12%20GMT-0400%20(EDT)%0AReport%20Link%3A%20https%3A%2F%2Fsalesforce.reporting.perfectomobile.com%2Ftest%2F5aaa6ea7cff47e000b5a7d50%0A
     </script>
 </body>
 
