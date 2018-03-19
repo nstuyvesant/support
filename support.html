@@ -255,7 +255,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.1/umd/popper.min.js" integrity="sha256-AoNQZpaRmemSTxMy9xcqXX5VLwI6IMPYugO7bFHOW+U=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha256-5+02zu5UULQkO7w1GIr6vftCgMfFdZcAHeDtFnKZsBs=" crossorigin="anonymous"></script>
     <script>
-        // Setup relationship between tabs and Salesforce Case.Type and Case.Case Reason (topic below)
+        // Map relationship between tabs and Salesforce Case.Type and Case.Topic and Case.Subtopic
         var caseTree = {
             device: {
                 type: 'Issue',
@@ -501,9 +501,9 @@
             }
         };
 
-        // Load articles in card lower-left from array
+        // Load articles in card lower-left from array (except for Suggestions)
         var loadArticles = function(tabName) {
-            if(tabName != 'request' && tabName != 'suggestion') {
+            if(tabName != 'suggestion') {
                 $('#searchTerm').text(tabName);
                 $('#articles').empty(); // Clear the card of past articles
                 $.each(caseTree[tabName].articles, function(index, value) {
