@@ -33,6 +33,33 @@
         body {
             -webkit-font-smoothing: antialiased;
         }
+        a {
+            color: #82bc41;
+        }
+        a:hover {
+            filter: brightness(75%);
+            text-decoration: none;
+        }
+        .alert-success {
+            color: #5c733e;
+            background-color:#c4f082;
+            border-color: #82bc41;
+            /* color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb; */
+            /* rgb(130, 188, 65); */
+        }
+        .btn-success {
+            color: #fff;
+            background-color: #82bc41;
+            border-color: #82bc41;
+        }
+        .btn-success:hover {
+            color: #fff;
+            background-color: #82bc41;
+            border-color: #82bc41;
+            filter: brightness(85%);
+        }
         .cover {
             background: #2b2d34 url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
             background-size: cover;
@@ -44,7 +71,7 @@
             padding-top: 2rem;
         }
         .navbar {
-            opacity: 0.7;
+            opacity: 0.9;
         }
         .navbar-brand {
             font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -53,24 +80,23 @@
             margin-top: 0;
         }
         .navbar a.nav-link {
-            color: white!important;
+            color: #82bc41!important;
+            text-decoration: none;
         }
-        .navbar a.nav-link-good {
-            color:lightgreen!important;
-        }
-        .navbar a.nav-link-bad {
-            color: red!important;
-        }
-        .navbar a.nav-link:hover {
-            color: lightgreen!important;
-        }
+        /* .navbar a.nav-link:hover {
+            filter: brightness(75%);
+        } */
         h1 {
             font-size: 4vw;
             padding-bottom: 5px;
-        }
-        .container h1 {
             margin-top: 30px;
             padding-top: 40px;
+            filter: drop-shadow(4px 4px 10px black);
+        }
+        h1.topic {
+            margin-bottom: 20px;
+            color: #82bc41;
+            filter: none;
         }
         .container h3 {
             font-size: 3vw;
@@ -90,7 +116,11 @@
         }
         article a {
             font-size: 1.1rem;
-            color:green;
+            color: #82bc41;
+        }
+        article a:hover {
+            color: #82bc41;
+            filter: brightness(75%);
         }
         .error {
             font-size: 0.8rem;
@@ -122,20 +152,16 @@
 <body>
     <section class="cover text-center">
         <!--Semi-transparent navbar over background image-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
             <div class="container">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <span class="navbar-brand">Support</span>
+                <span class="navbar-brand"><a href="/"><img src="http://www.perfecto.io/wp-content/uploads/2018/01/perfecto-logo.png" /></a></span><!--replace with perfecto.svg-->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-1">
                     <ul class="navbar-nav mt-2 mt-md-0">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-good disabled" href="#">All clouds operating normally</a>
-                            <!-- <a class="nav-link nav-link-bad disabled" href="#">Service degraded for some clouds</a> -->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">University</a>
+                            <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">Online Training</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://developer.perfectomobile.com" target="_blank">Community</a>
@@ -170,7 +196,7 @@
     </section>
     <!--Choose a Topic pills-->
     <div class="container">
-        <h1 class="text-muted text-center" style="margin-bottom:10px;">Choose a Topic</h1>
+        <h1 class="text-center topic">Choose a Topic</h1>
         <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
                 <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
@@ -217,6 +243,18 @@
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
                                 Your case was received by Support. An email confirmation is on the way.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div id="submitStatus" class="alert alert-success alert-dismissible" role="alert">
+                                All clouds operating normally.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div id="submitStatus" class="alert alert-danger alert-dismissible collapse" role="alert">
+                                21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -278,7 +316,6 @@
         </div><!--row-->
     </div><!--container-->
     <style>
-        /* For footer */
         footer {
             border-color: #e9eaee;
             font-size: 12px!important;
@@ -300,10 +337,10 @@
             color: #aaaaaa!important;
         }
         footer a.active {
-            color: lightgray!important;
+            filter: brightness(150%);
         }
         footer a:hover {
-            color: white!important;
+            filter: brightness(150%);
         }
         nav .nav-link {
            padding-right: 0;
@@ -378,7 +415,7 @@
                         <a class="nav-link active" href="https://www.linkedin.com/company/perfecto-mobile" title="LinkedIn" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
                    </nav>
                    <br/><br/>
-                   <a title="Norton Secured" class="nav-link" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=www.perfectomobile.com&amp;lang=en"><img src="http://perfecto.io/wp-content/uploads/2018/02/logo-norton.png" pagespeed_url_hash="915213344" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
+                   <a title="Norton Secured" class="nav-link" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=www.perfectomobile.com&amp;lang=en"><img src="http://perfecto.io/wp-content/uploads/2018/02/logo-norton.png" pagespeed_url_hash="915213344" xonload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
                 </div><!--col-md-2-->
             </div><!--row-->
         </div><!--container-->
