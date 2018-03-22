@@ -50,11 +50,9 @@
         }
         .navbar-toggler {
             border-color: #82bc41!important;
-
         }
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#82bc41' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;
-
         }
         .btn-success {
             color: #fff;
@@ -68,7 +66,7 @@
             filter: brightness(85%);
         }
         .cover {
-            background: #2b2d34 url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
+            background: black url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
             background-size: cover;
             min-height: 50rem;
             height: auto;
@@ -79,12 +77,6 @@
         }
         .navbar {
             opacity: 0.9;
-        }
-        .navbar-brand {
-            font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 0;
         }
         .navbar a.nav-link {
             color: #82bc41!important;
@@ -161,7 +153,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <span class="navbar-brand"><a href="http://www.perfecto.io"><img src="http://www.perfecto.io/wp-content/uploads/2018/03/perfecto-logo.svg" style="height:70px; width:220px" /></a></span><!--replace with perfecto.svg-->
+                <span class="navbar-brand"><a href="http://www.perfecto.io"><img src="http://www.perfecto.io/wp-content/uploads/2018/03/perfecto-logo.svg" style="height:70px; width:220px" /></a></span>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-1">
                     <ul class="navbar-nav mt-2 mt-md-0">
                         <li class="nav-item">
@@ -305,11 +297,6 @@
                                 <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                             </div>
                             <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/">login to the Support Portal</a> and open your case there.</p>
-                            <!-- <div class="form-group">
-                                <label for="fileUpload" class="sr-only">Files to upload</label>
-                                <input type="file" class="form-control" id="fileUpload" name="tfa_17" />
-                                <small id="fileUploadHelp" class="form-text text-muted">Screenshots, logs, IPAs, APKs, etc.</small>
-                            </div> -->
                             <input type="hidden" id="external" name="external" value="1" />
                             <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>
                             <input type="submit" class="btn btn-success" id="submit">
@@ -340,10 +327,7 @@
         footer a {
             color: #aaaaaa!important;
         }
-        footer a.active {
-            filter: brightness(150%);
-        }
-        footer a:hover {
+        footer a.active, a:hover {
             filter: brightness(150%);
         }
         nav .nav-link {
@@ -419,7 +403,7 @@
                         <a class="nav-link active" href="https://www.linkedin.com/company/perfecto-mobile" title="LinkedIn" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
                    </nav>
                    <br/><br/>
-                   <a title="Norton Secured" class="nav-link" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=www.perfectomobile.com&amp;lang=en"><img src="http://perfecto.io/wp-content/uploads/2018/02/logo-norton.png" pagespeed_url_hash="915213344" xonload="pagespeed.CriticalImages.checkImageForCriticality(this);"></a>
+                   <a title="Norton Secured" class="nav-link" target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.perfectomobile.com&lang=en"><img src="http://perfecto.io/wp-content/uploads/2018/02/logo-norton.png"></a>
                 </div><!--col-md-2-->
             </div><!--row-->
         </div><!--container-->
@@ -428,7 +412,7 @@
         <div class="container">
             <div class="row">
                 <nav class="nav">
-                    <a class="nav-link">Copyright 2018 Perfecto Mobile, Inc. All Rights Reserved</a>
+                    <a class="nav-link">Copyright 2018 Perfecto Mobile, Inc. All Rights Reserved.</a>
                     <a class="nav-link active" href="/terms-conditions/">Terms &amp; Conditions</a>
                     <a class="nav-link active" href="/privacy-statement/">Privacy Statement</a>
                 </nav>
