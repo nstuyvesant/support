@@ -791,11 +791,8 @@
             // Load required fields from querystring if provided
             var email = qs('username');
             $('#email').val(email);
-            //$('#email').focus();
             var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
-            //$('#fqdn').focus();
-            $('#queryString').focus();
 
             // Setup articles and subtopics for default selected tab (Device)
             loadSubtopics('device');
