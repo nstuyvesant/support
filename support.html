@@ -80,7 +80,6 @@
         }
         .navbar a.nav-link {
             color: #82bc41!important;
-            text-decoration: none;
         }
         h1 {
             font-size: 4vw;
@@ -100,8 +99,14 @@
         .nav-pills a {
             color: black;
         }
-        .nav-pills a:hover {
-            color: darkgray;
+        a, a:hover {
+            color: #82bc41;
+        }
+        a:hover {
+            filter: brightness(75%);
+        }
+        article a {
+            font-size: 1.1rem;
         }
         .nav-pills .nav-link.active {
             background-color:black;
@@ -109,14 +114,6 @@
         .nav-pills .svg-inline--fa {
             font-size: 4rem;
             margin-bottom: 5px;
-        }
-        article a {
-            font-size: 1.1rem;
-            color: #82bc41;
-        }
-        article a:hover {
-            color: #82bc41;
-            filter: brightness(75%);
         }
         .error {
             font-size: 0.8rem;
@@ -327,7 +324,7 @@
         footer a {
             color: #aaaaaa!important;
         }
-        footer a.active, a:hover {
+        footer a.active, footer a:hover {
             filter: brightness(150%);
         }
         nav .nav-link {
