@@ -41,12 +41,17 @@
             text-decoration: none;
         }
         .alert-success {
-            color: #5c733e;
-            background-color:#c4f082;
-            border-color: #82bc41;
-            /* color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb; */
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d7e3cc;
+
+/*
+$state-success-text:             #3c763d !default;
+$state-success-bg:               #dff0d8 !default;
+$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
+*/
+
+
         }
         .navbar-toggler {
             border-color: #82bc41!important;
@@ -78,8 +83,11 @@
         .navbar {
             opacity: 0.9;
         }
-        .navbar a.nav-link {
+        .navbar a.nav-link, a.social:hover {
             color: #82bc41!important;
+        }
+        a.social:hover {
+            filter: brightness(100%);
         }
         h1 {
             font-size: 4vw;
@@ -392,12 +400,12 @@
                         </li>
                     </ul>
                     <nav class="nav">
-                        <a class="nav-link active" href="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254" title="Facebook" target="_blank"><i class="fab fa-facebook fa-3x"></i></a>&nbsp;
-                        <a class="nav-link active" href="https://www.twitter.com/perfectomobile" title="Twitter" target="_blank"><i class="fab fa-twitter-square fa-3x"></i></a>&nbsp;
-                        <a class="nav-link active" href="https://vimeo.com/user28035758" title="Vimeo" target="_blank"><i class="fab fa-vimeo-square fa-3x"></i></a>&nbsp;
-                        <a class="nav-link active" href="https://www.youtube.com/user/PerfectoMobile" title="YouTube" target="_blank"><i class="fab fa-youtube-square fa-3x"></i></a>&nbsp;
-                        <a class="nav-link active" href="https://plus.google.com/100849287473108318524" title="Google+" target="_blank"><i class="fab fa-google-plus-square fa-3x"></i></a>&nbsp;
-                        <a class="nav-link active" href="https://www.linkedin.com/company/perfecto-mobile" title="LinkedIn" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+                        <a class="nav-link active social" href="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254" title="Facebook" target="_blank"><i class="fab fa-facebook fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.twitter.com/perfectomobile" title="Twitter" target="_blank"><i class="fab fa-twitter-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://vimeo.com/user28035758" title="Vimeo" target="_blank"><i class="fab fa-vimeo-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.youtube.com/user/PerfectoMobile" title="YouTube" target="_blank"><i class="fab fa-youtube-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://plus.google.com/100849287473108318524" title="Google+" target="_blank"><i class="fab fa-google-plus-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.linkedin.com/company/perfecto-mobile" title="LinkedIn" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
                    </nav>
                    <br/><br/>
                    <a title="Norton Secured" class="nav-link" target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.perfectomobile.com&lang=en"><img src="http://perfecto.io/wp-content/uploads/2018/02/logo-norton.png"></a>
