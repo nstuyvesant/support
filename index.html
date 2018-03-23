@@ -798,6 +798,10 @@
             var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
             $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
+            var cname = qs('cname');
+            if(!fqdn && cname) {
+                $('#fqdn').val(`${cname}.perfectomobile.com`);
+            }
 
             // Setup articles and subtopics for default selected tab (Device)
             loadSubtopics('device');
