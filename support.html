@@ -771,8 +771,10 @@
             // Load required fields from querystring if provided
             var email = qs('username');
             $('#email').val(email);
+            $('#email').val(email); // Overcomes Safari bug where placeholder doesn't disappear
             var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
+            $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
             // Setup articles and subtopics for default selected tab (Device)
             loadSubtopics('device');
