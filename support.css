@@ -31,9 +31,9 @@ a:hover {
     filter: brightness(85%);
 }
 .cover {
-    background: black url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
+    background: black url(forest.jpg) center;
     background-size: cover;
-    min-height: 50rem;
+    min-height: 33rem;
     height: auto;
     border-radius: 0;
     width: 100%;
