@@ -118,6 +118,33 @@
             font-size: 0.8rem;
             color: red;
         }
+        /* Footer styling */
+        footer {
+            border-color: #e9eaee;
+            font-size: 12px!important;
+            letter-spacing: 0;
+            line-height: 1.3em;
+            font: 13px/20px 'Open Sans', Arial, Helvetica, sans-serif;
+        }
+        footer.site-tree {
+            background-color: #363839;
+            border-top-width: 12px;
+            padding-top: 43px;
+            padding-bottom: 40px;
+            margin-top: 30px;
+        }
+        footer.copyright {
+            background: #282a2b;
+        }
+        footer a {
+            color: #aaaaaa!important;
+        }
+        footer a.active, footer a:hover {
+            filter: brightness(150%);
+        }
+        nav .nav-link {
+            padding-right: 0;
+        }
     </style>
     <script async defer src="https://www.google.com/recaptcha/api.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-3"></script>
@@ -125,6 +152,12 @@
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <script>
+        // Object triggers display of alert when FQDN is entered.
+        var cloudStatus = {
+            outages: ['demo.perfectomobile.com'], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
+            message: '21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
+        };
+
         // Salesforce Live Agent
         liveagent.init('https://d.la1-c1-lon.salesforceliveagent.com/chat', '572D000000001yp', '00D200000001UUG');
         if (!window._laq) {
@@ -265,15 +298,8 @@
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <input type="hidden" id="priority" name="priority" value="Low">
                             <input type="hidden" id="caseSystemType" name="00ND0000005eFGw" value="N/A">
-
-                            <div id="submitStatus" class="alert alert-success alert-dismissible" role="alert">
-                                All clouds operating normally.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div id="submitStatus" class="alert alert-danger alert-dismissible collapse" role="alert">
-                                21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.
+                            <div id="cloudStatusAlert" class="alert alert-danger alert-dismissible collapse" role="alert">
+                                <span id="message"></span>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -329,34 +355,6 @@
             </div><!--col-6-->
         </div><!--row-->
     </div><!--container-->
-    <style>
-        footer {
-            border-color: #e9eaee;
-            font-size: 12px!important;
-            letter-spacing: 0;
-            line-height: 1.3em;
-            font: 13px/20px 'Open Sans', Arial, Helvetica, sans-serif;
-        }
-        footer.site-tree {
-            background-color: #363839;
-            border-top-width: 12px;
-            padding-top: 43px;
-            padding-bottom: 40px;
-            margin-top: 30px;
-        }
-        footer.copyright {
-            background: #282a2b;
-        }
-        footer a {
-            color: #aaaaaa!important;
-        }
-        footer a.active, footer a:hover {
-            filter: brightness(150%);
-        }
-        nav .nav-link {
-           padding-right: 0;
-        }
-    </style>
     <footer class="site-tree">
         <div class="container">
             <div class="row">
@@ -789,6 +787,20 @@
             };
         });
 
+        // Conditionally display outage alerts based on cloudStatus object
+        var displayOutageAlerts = function(cloudFQDN) {
+            if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
+                $('#cloudStatusAlert').show();
+                $('#message').text(cloudStatus.message);
+            }
+        };
+
+        // Handle change to FQDN
+        $('#fqdn').on('change', function(e) {
+            var newFQDN = $(e.target).val();
+            displayOutageAlerts(newFQDN);
+        });
+
         // Set global variable by loadSubtopics() - just do it once
         var descriptionSuffix = getDescriptionSuffix(); // Global scope
 
@@ -807,14 +819,18 @@
             var email = qs('username');
             $('#email').val(email);
             $('#email').val(email); // Overcomes Safari bug where placeholder doesn't disappear
+
             var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
             $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
+
             var cname = qs('cname');
             if(!fqdn && cname) {
                 $('#fqdn').val(`${cname}.perfectomobile.com`);
                 $('#fqdn').val(`${cname}.perfectomobile.com`); // Overcomes Safari bug where placeholder doesn't disappear
             }
+
+            displayOutageAlerts($('#fqdn').val());
 
             // Setup articles and subtopics for default selected tab (Device)
             loadSubtopics('device');
