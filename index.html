@@ -229,7 +229,8 @@
                             </div>
                             <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
                             <input type="hidden" id="external" name="external" value="1" />
-                            <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E"></div><br/>
+                            <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
+                            <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha"><br/>
                             <input type="submit" class="btn btn-success" id="submit">
                         </form>
                     </div><!--card-body-->
@@ -687,6 +688,11 @@
         // Set global variable by loadSubtopics() - just do it once
         var descriptionSuffix = getDescriptionSuffix(); // Global scope
 
+        // Remove error message on hidden field
+        var recaptchaCallback = function() {
+            $('#hiddenRecaptcha').valid();
+        };
+
         // DOM loaded
         $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
@@ -727,6 +733,7 @@
 
             // Setup form validate. jQuery Validation bug for selects - must use name not ID
             $('#requestForm').validate({
+                ignore: ".ignore",
                 rules: {
                     name: {
                         required: true                        
@@ -735,7 +742,7 @@
                         required: true,
                         email: true
                     },
-                    "00ND0000002w9Lj": { // fqdn
+                    '00ND0000002w9Lj': { // fqdn
                         required: true,
                         minlength: 13
                     },
@@ -745,11 +752,20 @@
                     description: {
                         required: true
                     },
-                    "00ND0000005cKFJ": { // severity
+                    '00ND0000005cKFJ': { // severity
                         required: true
                     },
-                    "00ND0000004nqq2": { // subtopic
+                    '00ND0000004nqq2': { // subtopic
                         required: true
+                    },
+                    hiddenRecaptcha: {
+                        required: function() {
+                            if (grecaptcha.getResponse() == '') {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
                     }
                 }
             });
