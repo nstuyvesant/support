@@ -724,7 +724,7 @@
                     $('#caseSystemType').val('N/A');
             }
             if(descriptionSuffix) { // attach execution report and other parameters (if supplied)
-                $('#description').val(`${caseTree[tabName].description}\n=========Auto-attached by Perfecto==========${descriptionSuffix}`);
+                $('#description').val(`${caseTree[tabName].description}\n==== Auto-attached by Perfecto =====${descriptionSuffix}`);
             } else $('#description').val(caseTree[tabName].description);
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
