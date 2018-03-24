@@ -84,7 +84,7 @@ article a {
     font-size: 4rem;
     margin-bottom: 5px;
 }
-.error {
+label.error {
     font-size: 0.8rem;
     color: red;
 }
