@@ -26,126 +26,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="https://www.perfecto.io/wp-content/uploads/2018/03/xfavicon-72px.png.pagespeed.ic.TbgkG-DjCG.png">
     <link rel="apple-touch-icon" sizes="144x144" href="https://www.perfecto.io/wp-content/uploads/2018/03/xfavicon-144px.png.pagespeed.ic.nHnctNtEoT.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="support.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-    <style>
-        body {
-            -webkit-font-smoothing: antialiased;
-        }
-        a {
-            color: #82bc41;
-        }
-        a:hover {
-            filter: brightness(75%);
-            text-decoration: none;
-        }
-        .alert-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d7e3cc;
-        }
-        .navbar-toggler {
-            border-color: #82bc41!important;
-        }
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#82bc41' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;
-        }
-        .btn-success {
-            color: #fff;
-            background-color: #82bc41;
-            border-color: #82bc41;
-        }
-        .btn-success:hover {
-            color: #fff;
-            background-color: #82bc41;
-            border-color: #82bc41;
-            filter: brightness(85%);
-        }
-        .cover {
-            background: black url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
-            background-size: cover;
-            min-height: 50rem;
-            height: auto;
-            border-radius: 0;
-            width: 100%;
-            color: #fff;
-            padding-top: 2rem;
-        }
-        .navbar {
-            opacity: 0.9;
-        }
-        .navbar a.nav-link, a.social:hover {
-            color: #82bc41!important;
-        }
-        a.social:hover {
-            filter: brightness(100%);
-        }
-        h1 {
-            font-size: 4vw;
-            padding-bottom: 5px;
-            margin-top: 30px;
-            padding-top: 40px;
-            filter: drop-shadow(4px 4px 10px black);
-        }
-        h1.topic {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #82bc41;
-            filter: none;
-        }
-        .container h3 {
-            font-size: 3vw;
-        }
-        .nav-pills a {
-            color: black;
-        }
-        a, a:hover {
-            color: #82bc41;
-        }
-        a:hover {
-            filter: brightness(75%);
-        }
-        article a {
-            font-size: 1.1rem;
-        }
-        .nav-pills .nav-link.active {
-            background-color:black;
-        }
-        .nav-pills .svg-inline--fa {
-            font-size: 4rem;
-            margin-bottom: 5px;
-        }
-        .error {
-            font-size: 0.8rem;
-            color: red;
-        }
-        /* Footer styling */
-        footer {
-            border-color: #e9eaee;
-            font-size: 12px!important;
-            letter-spacing: 0;
-            line-height: 1.3em;
-            font: 13px/20px 'Open Sans', Arial, Helvetica, sans-serif;
-        }
-        footer.site-tree {
-            background-color: #363839;
-            border-top-width: 12px;
-            padding-top: 43px;
-            padding-bottom: 40px;
-            margin-top: 30px;
-        }
-        footer.copyright {
-            background: #282a2b;
-        }
-        footer a {
-            color: #aaaaaa!important;
-        }
-        footer a.active, footer a:hover {
-            filter: brightness(150%);
-        }
-        nav .nav-link {
-            padding-right: 0;
-        }
-    </style>
     <script async defer src="https://www.google.com/recaptcha/api.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-3"></script>
     <script async src="//script.crazyegg.com/pages/scripts/0058/5510.js"></script>
@@ -154,7 +36,7 @@
     <script>
         // Object triggers display of alert when FQDN is entered.
         var cloudStatus = {
-            outages: ['demo.perfectomobile.com'], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
+            outages: [], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
             message: '21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
         };
 

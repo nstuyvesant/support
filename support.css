@@ -1,0 +1,118 @@
+body {
+    -webkit-font-smoothing: antialiased;
+}
+a {
+    color: #82bc41;
+}
+a:hover {
+    filter: brightness(75%);
+    text-decoration: none;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d7e3cc;
+}
+.navbar-toggler {
+    border-color: #82bc41!important;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#82bc41' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;
+}
+.btn-success {
+    color: #fff;
+    background-color: #82bc41;
+    border-color: #82bc41;
+}
+.btn-success:hover {
+    color: #fff;
+    background-color: #82bc41;
+    border-color: #82bc41;
+    filter: brightness(85%);
+}
+.cover {
+    background: black url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_jõgi_Lahemaal.jpg/1200px-Altja_jõgi_Lahemaal.jpg) center;
+    background-size: cover;
+    min-height: 50rem;
+    height: auto;
+    border-radius: 0;
+    width: 100%;
+    color: #fff;
+    padding-top: 2rem;
+}
+.navbar {
+    opacity: 0.9;
+}
+.navbar a.nav-link, a.social:hover {
+    color: #82bc41!important;
+}
+a.social:hover {
+    filter: brightness(100%);
+}
+h1 {
+    font-size: 4vw;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    padding-top: 40px;
+    filter: drop-shadow(4px 4px 10px black);
+}
+h1.topic {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #82bc41;
+    filter: none;
+}
+.container h3 {
+    font-size: 3vw;
+}
+.nav-pills a {
+    color: black;
+}
+a, a:hover {
+    color: #82bc41;
+}
+a:hover {
+    filter: brightness(75%);
+}
+article a {
+    font-size: 1.1rem;
+}
+.nav-pills .nav-link.active {
+    background-color:black;
+}
+.nav-pills .svg-inline--fa {
+    font-size: 4rem;
+    margin-bottom: 5px;
+}
+.error {
+    font-size: 0.8rem;
+    color: red;
+}
+
+/* Footer styling */
+footer {
+    border-color: #e9eaee;
+    font-size: 12px!important;
+    letter-spacing: 0;
+    line-height: 1.3em;
+    font: 13px/20px 'Open Sans', Arial, Helvetica, sans-serif;
+}
+footer.site-tree {
+    background-color: #363839;
+    border-top-width: 12px;
+    padding-top: 43px;
+    padding-bottom: 40px;
+    margin-top: 30px;
+}
+footer.copyright {
+    background: #282a2b;
+}
+footer a {
+    color: #aaaaaa!important;
+}
+footer a.active, footer a:hover {
+    filter: brightness(150%);
+}
+nav .nav-link {
+    padding-right: 0;
+}
