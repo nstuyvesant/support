@@ -192,6 +192,12 @@
         </nav>
         <!--Middle of the background image-->
         <div class="container">
+            <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
+                Your case was received by Support. An email confirmation is on the way.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <h1 class="text-center">Welcome to Perfecto Support</h1>
             <h3 class="text-center d-none d-sm-block">Resources at your fingertips.</h3> 
             <div class="row justify-content-around">
@@ -237,7 +243,7 @@
         <div class="row justify-content-around">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header"><a class="btn btn-light disabled">Top articles on <b id="searchTerm" class="text-capitalize">Devices</b></a></div>
+                    <div class="card-header"><a class="btn btn-light disabled">Maybe an article below will help...</a></div>
                     <div id="articles" class="card-body">
                     </div>
                 </div><br/>
@@ -257,12 +263,9 @@
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
-                            <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
-                                Your case was received by Support. An email confirmation is on the way.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                            <input type="hidden" id="priority" name="priority" value="Low">
+                            <input type="hidden" id="caseSystemType" name="00ND0000005eFGw" value="N/A">
+
                             <div id="submitStatus" class="alert alert-success alert-dismissible" role="alert">
                                 All clouds operating normally.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -309,7 +312,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="subject" class="sr-only">Subject</label>
-                                <input class="form-control" type="text" id="subject" name="subject" placeholder="Brief description of your request" maxlength="80" />
+                                <input class="form-control" type="text" id="subject" name="subject" placeholder="Subject of your request" maxlength="80" />
                             </div>
                             <div class="form-group">
                                 <label for="description" class="sr-only">Description of your issue</label>
@@ -693,14 +696,12 @@
         // Load articles in card lower-left from array (except for Suggestions)
         var loadArticles = function(tabName) {
             if(tabName != 'suggestion') {
-                $('#searchTerm').text(tabName);
                 $('#articles').empty(); // Clear the card of past articles
                 $.each(caseTree[tabName].articles, function(index, value) {
                     var currentNode = caseTree[tabName].articles[index];
                     var url = currentNode.url;
                     var title = currentNode.title;
                     var synopsis = currentNode.synopsis;
-                    // Next line will break on super-old browsers
                     var article = `<article><a href="${url}" target="_blank">${title}</a></article><p class="text-muted">${synopsis}</p>`;
                     $('#articles').append(article);
                 });
@@ -712,8 +713,19 @@
             // Set Case Type and Topic
             $('#type').val(caseTree[tabName].type);
             $('#topic').val(caseTree[tabName].topic);
-            $('#description').val(`${caseTree[tabName].description}\n======================${descriptionSuffix}`);
-            // Get reference to subtopic select object
+            switch(tabName) {
+                case 'device':
+                    $('#caseSystemType').val('Hosted - Mobile');
+                    break;
+                case 'web':
+                    $('#caseSystemType').val('Hosted - Web');
+                    break;
+                default:
+                    $('#caseSystemType').val('N/A');
+            }
+            if(descriptionSuffix) { // attach execution report and other parameters (if supplied)
+                $('#description').val(`${thisDescription}\n=========Auto-attached by Perfecto==========${descriptionSuffix}`);
+            } else $('#description').val(caseTree[tabName].description);
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
             // Add the subtopics for the tab
