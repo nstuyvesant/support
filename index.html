@@ -123,7 +123,7 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
                                 </div>
-                                <input class="form-control" name="queryString" id="queryString" type="text" required autofocus placeholder="Search Support" aria-label="Search Support">
+                                <input class="form-control typeahead" name="queryString" id="search" type="text" required autofocus placeholder="Search Support" aria-label="Search Support">
                             </div>
                         </div>
                     </form>
@@ -326,6 +326,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.1/umd/popper.min.js" integrity="sha256-AoNQZpaRmemSTxMy9xcqXX5VLwI6IMPYugO7bFHOW+U=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha256-5+02zu5UULQkO7w1GIr6vftCgMfFdZcAHeDtFnKZsBs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha256-LOnFraxKlOhESwdU/dX+K0GArwymUDups0czPWLEg4E=" crossorigin="anonymous"></script>
     <script>
         // Map relationship between tabs and Salesforce Case.Type and Case.Topic and Case.Subtopic
         var caseTree = {
@@ -696,6 +697,12 @@
             if(qs('submitted')) {
                 $('#submitStatus').show();
             }
+
+            var availableTags = ['Appium','Device Recovery','Device Swap','Espresso','Image Injection','Performance','Selenium','XCTest'];
+
+            $('.typeahead').typeahead({
+                source: availableTags
+            });
 
             // Load required fields from querystring if provided
             var email = qs('username');
