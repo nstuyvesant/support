@@ -88,7 +88,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <span class="navbar-brand"><a href="https://www.perfecto.io"><img src="perfecto.svg" style="height:70px; width:220px" /></a></span>
+                <span class="navbar-brand"><a href="https://www.perfecto.io"><img src="https://support.perfecto.io/perfecto.svg" style="height:70px; width:220px" /></a></span>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-1">
                     <ul class="navbar-nav mt-2 mt-md-0">
                         <li class="nav-item">
@@ -718,6 +718,12 @@
             var fqdn = qs('appUrl');
             $('#fqdn').val(fqdn);
             $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
+
+            var phone = qs('phone');
+            if(phone.length > 10) { // Often +123 is entered as a phone number on the MCM
+                $('#phone').val(phone);
+                $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
+            }
 
             var cname = qs('cname');
             if(!fqdn && cname) {
