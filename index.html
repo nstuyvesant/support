@@ -725,6 +725,12 @@
                 $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
             }
 
+            var name = qs('name');
+            if(name) {
+                $('#name').val(name);
+                $('#name').val(name); // Overcomes Safari bug where placeholder doesn't disappear                
+            }
+
             var cname = qs('cname');
             if(!fqdn && cname) {
                 $('#fqdn').val(`${cname}.perfectomobile.com`);
