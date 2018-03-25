@@ -31,7 +31,7 @@ a:hover {
     filter: brightness(85%);
 }
 .cover {
-    background: black url(https://support.perfecto.io/forest.jpg) center;
+    background: black url('https://support.perfecto.io/forest.jpg') center;
     background-size: cover;
     min-height: 33rem;
     height: auto;
