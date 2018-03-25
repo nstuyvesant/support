@@ -659,7 +659,6 @@
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
             const pageSize = 10;
-            console.log(searchText);
             var encodedSearchText = encodeURI(searchText)
             const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodedSearchText}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
@@ -684,7 +683,9 @@
         };
         // Handle click
         $('#submitButton').on('click', function(e) {
-            searchConfluence($('#search').val(), 0);
+            var searchText = $('#search').val();
+            console.log(searchText);
+            searchConfluence(searchText, 0);
         });
 
         // Handle click on tabs
