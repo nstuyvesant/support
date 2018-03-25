@@ -720,7 +720,7 @@
             $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
             var phone = qs('phone');
-            if(phone.length > 10) { // Often +123 is entered as a phone number on the MCM
+            if(phone && phone.length > 10) { // Often +123 is entered as a phone number on the MCM
                 $('#phone').val(phone);
                 $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
             }
