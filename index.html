@@ -658,7 +658,6 @@
 
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
-            console.log(searchText);
             const pageSize = 10;
             const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
@@ -668,6 +667,8 @@
                 dataType: 'json',
                 success: function(data, status, xhr) {
                     console.log(data);
+                    
+                    //
                 }
                 // var items = [];
                 // $.each(data, function(key, val) {
@@ -681,7 +682,7 @@
         };
         // Handle click
         $('#submitButton').on('click', function(e) {
-            searchConfluence($('search').val(), 0);
+            searchConfluence($('#search').val(), 0);
         });
 
         // Handle click on tabs
