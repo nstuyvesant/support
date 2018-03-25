@@ -123,7 +123,7 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
                                 </div>
-                                <input class="form-control typeahead" name="queryString" id="search" type="text" required autofocus placeholder="Search Support" aria-label="Search Support">
+                                <input class="form-control typeahead" name="queryString" id="search" type="text" required autofocus placeholder="Search Support" aria-label="Search Support" autocomplete="off">
                             </div>
                         </div>
                     </form>
@@ -664,7 +664,8 @@
             console.log(url);
             $.ajax({
                 url: url,
-                dataType: 'jsonp',
+                crossDomain: true,
+                dataType: 'json',
                 success: function(data, status, xhr) {
                     console.log(data);
                 }
