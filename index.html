@@ -662,8 +662,12 @@
             const pageSize = 10;
             const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
-            $.getJSON(url, function(data, status, xhr) {
-                console.log(data);
+            $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                success: function(data, status, xhr) {
+                    console.log(data);
+                }
                 // var items = [];
                 // $.each(data, function(key, val) {
                 //     items.push("<li id='" + key + "'>" + val + "</li>");
