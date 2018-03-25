@@ -659,7 +659,9 @@
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
             const pageSize = 10;
-            const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
+            console.log(searchText);
+            var encodedSearchText = encodeURI(searchText)
+            const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodedSearchText}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
             $.ajax({
                 url: url,
