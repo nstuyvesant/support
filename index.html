@@ -660,7 +660,7 @@
         var searchConfluence = function(searchText, index) {
             const pageSize = 10;
             var encodedSearchText = encodeURI(searchText)
-            const url = `http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodedSearchText}&startIndex=${index}&pageSize=${pageSize}`;
+            const url = `https://crossorigin.me/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodedSearchText}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
             $.ajax({
                 url: url,
