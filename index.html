@@ -667,10 +667,10 @@
                 success: function(data, status, xhr) {
                     console.log('Number of articles', data.total);
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
-                    console.log('Array of articles', data.results);
                     $.each(data.results, function(index, value) {
-                        console.log('Title:', value.title.replace(/@@@e?n?d?hl@@@/, ''));
+                        value.title = value.title.replace(/@@@e?n?d?hl@@@/, ''); // strip out formatting
                     });
+                    console.log('Array of articles', data.results);
                     // TODO: strip '@@@h1@@@' and '@@@endh1@@@' from data.results[].title and .bodyTextHighlights - str.replace(/@@@[end]?h1@@@/g, '');
                     // TODO: suppress form post and write AJAX query results with paging control
                     // var items = [];
