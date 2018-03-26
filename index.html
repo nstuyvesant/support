@@ -229,6 +229,7 @@
                             <div class="form-group">
                                 <label for="description" class="sr-only">Description of your issue</label>
                                 <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster."></textarea>
+                                <input type="hidden" id="parameters" value="== end ==">
                                 <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                             </div>
                             <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
@@ -690,12 +691,18 @@
             });
         };
 
-        // Handle submit
+        // Handle submit on search form
         $('#searchForm').on('submit', function(e) {
             e.preventDefault();  //prevent form from submitting
             $('body').css('cursor','progress');
             $('#searchStatus').show();
             searchConfluence($('#queryString').val(), 0);
+        });
+
+        // Handle submit on request form
+        $('#requestForm').on('submit', function(e) {
+            // Append parameters to description field
+            $('#description').val(`${$('#parameters').val()}${$('#parameters').val()}`);
         });
 
         // Handle click on tabs
@@ -746,7 +753,7 @@
                 $('#submitStatus').show();
             }
 
-            var availableTags = ['Android','App crashed','App install failed','Appium','Browsers Supported','Cradle Error','Device Busy','Device Recovery','Device connection issues','Device Swap','DevTunnel','Digitalzoom','Espresso','Image Injection','iOS','Java','JavaScript','Jenkins','Location - How to set for a device','Object Spy','Perfecto Native Automation','Performance Problems','Protractor','Quantum Framework','Responsive web design','REST API','Selenium','TestNG','UFT','Uploading files to your cloud','Visual Analysis','XCTest'];
+            var availableTags = ['Android','App crashed','App install failed','Appium','Black Screen','Browsers Supported','Cradle Error','Device Busy','Device Recovery','Device connection issue','Device Swap','DevTunnel','Digitalzoom','Espresso','Image Injection','iOS','Java','JavaScript','Jenkins','Location - How to set for a device','Object Spy','Perfecto Native Automation','Performance Problem','Protractor','Quantum Framework','Responsive Web Design','REST API','Selenium','TestNG','UFT','Uploading files to your cloud','Visual Analysis','XCTest'];
 
             $('.typeahead').typeahead({
                 source: availableTags
