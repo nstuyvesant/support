@@ -668,11 +668,15 @@
                     console.log('Number of articles', data.total);
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
                     var searchResults = [];
+                    var article = '';
+                    $('#articles').empty(); // Clear the card of past articles
                     $.each(data.results, function(index, value) {
                         value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
-                        searchResults.push(`<a href="${value.url}" target="_blank">${value.title}</a><p>${value.bodyHighlights}<br/>${value.friendlyDate}</p>`);
+                        article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyHighlights}<br/>${value.friendlyDate}</p></article>`;
+                        $('#articles').append(article);
+                        searchResults.push(article);
                     });
                     console.log('Array of articles', data.results);
                     console.log('HTML articles list', searchResults);
