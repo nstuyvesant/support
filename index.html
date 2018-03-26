@@ -662,6 +662,7 @@
             const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             $.ajax({
                 url: url,
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
                 //crossDomain: true,
                 dataType: 'json',
                 success: function(data, status, xhr) {
