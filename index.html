@@ -669,7 +669,7 @@
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
                     console.log('Array of articles', data.results);
                     $.each(data.results, function(index, value) {
-                        console.log('Title:', value.title.replace(/@@@[end]?h1@@@/g, ''));
+                        console.log('Title:', value.title.replace(/@@@e?n?d?hl@@@/, ''));
                     });
                     // TODO: strip '@@@h1@@@' and '@@@endh1@@@' from data.results[].title and .bodyTextHighlights - str.replace(/@@@[end]?h1@@@/g, '');
                     // TODO: suppress form post and write AJAX query results with paging control
