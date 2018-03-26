@@ -648,7 +648,7 @@
             if(location) parameters += `\nLocation: ${location}`;
             var executionReport = qs('desc');
             if(executionReport) parameters += `\n${executionReport}`;
-            ('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
+            $('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
         };
 
        // Set timestamp for reCAPTCHA settings submitted to Salesforce
