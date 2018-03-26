@@ -668,9 +668,7 @@
                     console.log('Number of articles', data.total);
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
                     $.each(data.results, function(index, value) {
-                        var thisTitle = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
-                        console.log(thisTitle);
-                        //value.title = value.title.replace(/@@@e?n?d?hl@@@/, ''); // strip out formatting
+                        value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                     });
                     console.log('Array of articles', data.results);
                     // TODO: strip '@@@h1@@@' and '@@@endh1@@@' from data.results[].title and .bodyTextHighlights - str.replace(/@@@[end]?h1@@@/g, '');
