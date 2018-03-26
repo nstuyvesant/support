@@ -610,9 +610,9 @@
                 default:
                     $('#caseSystemType').val('N/A');
             }
-            if(descriptionSuffix) { // attach execution report and other parameters (if supplied)
-                $('#description').val(`${caseTree[tabName].description}\n==== Auto-attached by Perfecto =====${descriptionSuffix}`);
-            } else $('#description').val(caseTree[tabName].description);
+            // if(descriptionSuffix) { // attach execution report and other parameters (if supplied)
+            //     $('#description').val(`${caseTree[tabName].description}\n==== Auto-attached by Perfecto =====${descriptionSuffix}`);
+            // } else $('#description').val(caseTree[tabName].description);
             var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
             subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
             // Add the subtopics for the tab
@@ -629,26 +629,26 @@
         };
 
         // Grab inbound querystring params into a string to append to description
-        var getDescriptionSuffix = function() {
+        var setHiddenParametersField = function() {
             // Cleanup style later
-            var suffix = '';
+            var parameters = '';
             var timezone = qs('timezone');
-            if(timezone) suffix += `\nUser GMT Offset: ${timezone}`;
+            if(timezone) parameters += `\nUser GMT Offset: ${timezone}`;
             var mcmVersion = qs('mcmVersion');
-            if(mcmVersion) suffix += `\nCloud Version: ${mcmVersion}`;
+            if(mcmVersion) parameters += `\nCloud Version: ${mcmVersion}`;
             var manufacturer = qs('manufacturer');
-            if(manufacturer) suffix += `\nManufacturer: ${manufacturer}`;
+            if(manufacturer) parameters += `\nManufacturer: ${manufacturer}`;
             var model = qs('model');
-            if(model) suffix += `\nModel: ${model}`;
+            if(model) parameters += `\nModel: ${model}`;
             var os = qs('os');
-            if(os) suffix += `\nOS Version: ${os}`;
+            if(os) parameters += `\nOS Version: ${os}`;
             var deviceId = qs('deviceId');
-            if(deviceId) suffix += `\nDevice ID: ${deviceId}`;
+            if(deviceId) parameters += `\nDevice ID: ${deviceId}`;
             var location = qs('location');
-            if(location) suffix += `\nLocation: ${location}`;
+            if(location) parameters += `\nLocation: ${location}`;
             var executionReport = qs('desc');
-            if(executionReport) suffix += `\n${executionReport}`;
-            return suffix;
+            if(executionReport) parameters += `\n${executionReport}`;
+            ('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
         };
 
        // Set timestamp for reCAPTCHA settings submitted to Salesforce
@@ -734,9 +734,6 @@
             displayOutageAlerts(newFQDN);
         });
 
-        // Set global variable by loadSubtopics() - just do it once
-        var descriptionSuffix = getDescriptionSuffix(); // Global scope
-
         // Remove error message on hidden field
         var recaptchaCallback = function() {
             $('#hiddenRecaptcha').valid();
@@ -745,6 +742,7 @@
         // DOM loaded
         $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
+            setHiddenParametersField();
             var returnURL = `${window.location.href}&submitted=true`;
             $('#retURL').val(returnURL);
 
