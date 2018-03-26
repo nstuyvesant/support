@@ -88,6 +88,9 @@ label.error {
     font-size: 0.8rem;
     color: red;
 }
+.article-date {
+    font-size: 0.8rem;
+}
 
 /* Footer styling */
 footer {
