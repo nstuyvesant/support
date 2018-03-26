@@ -663,10 +663,12 @@
             $.ajax({
                 url: url,
                 headers: {'X-Requested-With': 'XMLHttpRequest'},
-                //crossDomain: true,
                 dataType: 'json',
                 success: function(data, status, xhr) {
-                    console.log(data);
+                    console.log('Number of articles', data.total);
+                    console.log('Number of pages', Math.floor(data.total/pageSize));
+                    console.log('Array of articles', data.results);
+                    // TODO: suppress form post and write AJAX query results with paging control
                     // var items = [];
                     // $.each(data, function(key, val) {
                     //     items.push("<li id='" + key + "'>" + val + "</li>");
