@@ -117,7 +117,7 @@
             <h3 class="text-center d-none d-sm-block">Resources at your fingertips.</h3> 
             <div class="row justify-content-around">
                 <div class="col-lg-8 col-md-10" style="padding-top:45px;">
-                    <form action="http://developers.perfectomobile.com/dosearchsite.action" method="get" target="_blank" name="searchForm" id="searchForm">
+                    <form id="searchForm" name="searchForm" action="http://developers.perfectomobile.com/dosearchsite.action" method="GET">
                         <div class="form-group">
                             <div class="input-group input-group-lg">
                                 <div class="input-group-prepend">
@@ -127,12 +127,16 @@
                             </div>
                         </div>
                     </form>
+                    <div id="searchStatus" class="alert alert-warning collapse" role="alert">
+                        Searching the Knowledge Base. Please wait...
+                    </div>
                 </div><!--col-6-->
             </div><!--row-->
         </div><!--cover-container-->
     </section>
     <!--Choose a Topic pills-->
     <div class="container">
+        <div id="searchResults"></div>
         <h1 class="text-center topic">Choose a Topic</h1>
         <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
@@ -658,7 +662,7 @@
 
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
-            const pageSize = 10;
+            const pageSize = 8;
             const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             $.ajax({
                 url: url,
@@ -669,27 +673,28 @@
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
                     var searchResults = [];
                     var article = '';
-                    $('#articles').empty(); // Clear the card of past articles
+                    $('#searchResults').empty(); // Clear the card of past articles
+                    $('#searchResults').append('<br/><h2>Search Results</h2');
                     $.each(data.results, function(index, value) {
                         value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
                         article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyTextHighlights}<br/><span class="article-date">${value.friendlyDate}</span></p></article>`;
-                        $('#articles').append(article);
+                        $('#searchResults').append(article);
                         searchResults.push(article);
                     });
-                    console.log('Array of articles', data.results);
-                    console.log('HTML articles list', searchResults);
-                    // TODO: suppress form post and write AJAX query results with paging control
+                    $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
+                    $('#searchStatus').hide();
                 }
-
             });
         };
 
-        // Handle click
-        // $('#submitButton').on('click', function(e) {
-        //     searchConfluence($('#queryString').val(), 0);
-        // });
+        // Handle submit
+        $('#searchForm').on('submit', function(e) {
+            e.preventDefault();  //prevent form from submitting
+            $('#searchStatus').show();
+            searchConfluence($('#queryString').val(), 0);
+        });
 
         // Handle click on tabs
         $('#topicTabs').on('shown.bs.tab', function(e) {
