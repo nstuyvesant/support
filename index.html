@@ -668,7 +668,7 @@
                     console.log('Number of articles', data.total);
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
                     $.each(data.results, function(index, value) {
-                        var thisTitle = value.title.replace(/@@@e?n?d?hl@@@/, ''); // strip out formatting
+                        var thisTitle = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         console.log(thisTitle);
                         //value.title = value.title.replace(/@@@e?n?d?hl@@@/, ''); // strip out formatting
                     });
