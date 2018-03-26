@@ -685,6 +685,7 @@
                     });
                     $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
                     $('#searchStatus').hide();
+                    $('body').css('cursor','default');
                 }
             });
         };
@@ -692,6 +693,7 @@
         // Handle submit
         $('#searchForm').on('submit', function(e) {
             e.preventDefault();  //prevent form from submitting
+            $('body').css('cursor','progress');
             $('#searchStatus').show();
             searchConfluence($('#queryString').val(), 0);
         });
