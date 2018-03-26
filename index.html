@@ -659,25 +659,23 @@
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
             const pageSize = 10;
-            const url = `https://cors-anywhere.herokuapp.com//http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
-            console.log(url);
+            const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             $.ajax({
                 url: url,
                 crossDomain: true,
                 dataType: 'json',
                 success: function(data, status, xhr) {
                     console.log(data);
-                    
-                    //
+                    // var items = [];
+                    // $.each(data, function(key, val) {
+                    //     items.push("<li id='" + key + "'>" + val + "</li>");
+                    // });
+                    // $('<ul/>', {
+                    //     'class': 'my-new-list',
+                    //     html: items.join('')
+                    // }).appendTo('body');
                 }
-                // var items = [];
-                // $.each(data, function(key, val) {
-                //     items.push("<li id='" + key + "'>" + val + "</li>");
-                // });
-                // $('<ul/>', {
-                //     'class': 'my-new-list',
-                //     html: items.join('')
-                // }).appendTo('body');
+
             });
         };
         // Handle click
