@@ -667,18 +667,17 @@
                 success: function(data, status, xhr) {
                     console.log('Number of articles', data.total);
                     console.log('Number of pages', Math.ceil(data.total/pageSize));
+                    var searchResults = [];
                     $.each(data.results, function(index, value) {
                         value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                         value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
+                        searchResults.push(`<a href="${value.url}" target="_blank">${value.title}</a><p>${value.bodyHighlights}<br/>${value.friendlyDate}</p>`);
                     });
                     console.log('Array of articles', data.results);
-                    // TODO: strip '@@@h1@@@' and '@@@endh1@@@' from data.results[].title and .bodyTextHighlights - str.replace(/@@@[end]?h1@@@/g, '');
+                    console.log('HTML articles list', searchResults);
                     // TODO: suppress form post and write AJAX query results with paging control
-                    // var items = [];
-                    // $.each(data, function(key, val) {
-                    //     items.push("<li id='" + key + "'>" + val + "</li>");
-                    // });
+                    // TODO: write results to appropriate spot in DOM
                     // $('<ul/>', {
                     //     'class': 'my-new-list',
                     //     html: items.join('')
