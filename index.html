@@ -117,13 +117,13 @@
             <h3 class="text-center d-none d-sm-block">Resources at your fingertips.</h3> 
             <div class="row justify-content-around">
                 <div class="col-lg-8 col-md-10" style="padding-top:45px;">
-                    <form action="http://developers.perfectomobile.com/dosearchsite.action" method="get" target="_blank" name="search" id="search">
+                    <form action="http://developers.perfectomobile.com/dosearchsite.action" method="get" target="_blank" name="searchForm" id="searchForm">
                         <div class="form-group">
                             <div class="input-group input-group-lg">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
                                 </div>
-                                <input class="form-control typeahead" name="queryString" id="search" type="text" required autofocus placeholder="Search Support" aria-label="Search Support" autocomplete="off">
+                                <input class="form-control typeahead" name="queryString" id="queryString" type="text" required autofocus placeholder="Search Support" aria-label="Search Support" autocomplete="off">
                             </div>
                         </div>
                     </form>
@@ -659,8 +659,7 @@
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
             const pageSize = 10;
-            var encodedSearchText = encodeURI(searchText)
-            const url = `https://crossorigin.me/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodedSearchText}&startIndex=${index}&pageSize=${pageSize}`;
+            const url = `https://crossorigin.me/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
             console.log(url);
             $.ajax({
                 url: url,
@@ -683,9 +682,7 @@
         };
         // Handle click
         $('#submitButton').on('click', function(e) {
-            var searchText = $('#search').val();
-            console.log(searchText);
-            searchConfluence(searchText, 0);
+            searchConfluence($('#queryString').val(), 0);
         });
 
         // Handle click on tabs
