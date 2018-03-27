@@ -229,7 +229,7 @@
                             <div class="form-group">
                                 <label for="description" class="sr-only">Description of your issue</label>
                                 <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster."></textarea>
-                                <input type="hidden" id="parameters" value="== end ==">
+                                <input type="hidden" id="parameters">
                                 <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                             </div>
                             <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
@@ -741,7 +741,7 @@
         $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
             setHiddenParametersField();
-            var returnURL = `${window.location.href}&submitted=true`;
+            var returnURL = 'https://support.perfecto.io/?submitted=true';
             $('#retURL').val(returnURL);
 
             // Show confirmation if submitted
