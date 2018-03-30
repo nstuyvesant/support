@@ -37,7 +37,7 @@
         // Object triggers display of alert when FQDN is entered.
         var cloudStatus = {
             outages: ['test.perfectomobile.com'], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
-            message: '21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
+            message: '30-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
         };
 
         // Salesforce Live Agent
@@ -651,7 +651,7 @@
             if(location) parameters += `\nLocation: ${location}`;
             var executionReport = qs('desc');
             if(executionReport) parameters += `\n${executionReport}`;
-            $('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
+            if(parameters != '') $('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
         };
 
        // Set timestamp for reCAPTCHA settings submitted to Salesforce
@@ -666,32 +666,35 @@
 
         // Search Confluence via undocumented REST API (searchv3)
         var searchConfluence = function(searchText, index) {
-            const pageSize = 8;
-            const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
-            $.ajax({
-                url: url,
-                headers: {'X-Requested-With': 'XMLHttpRequest'},
-                dataType: 'json',
-                success: function(data, status, xhr) {
-                    console.log('Number of articles', data.total);
-                    console.log('Number of pages', Math.ceil(data.total/pageSize));
-                    var searchResults = [];
-                    var article = '';
-                    $('#searchResults').empty(); // Clear the card of past articles
-                    $('#searchResults').append('<br/><h2>Search Results</h2');
-                    $.each(data.results, function(index, value) {
-                        value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
-                        value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
-                        value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
-                        article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyTextHighlights}<br/><span class="article-date">${value.friendlyDate}</span></p></article>`;
-                        $('#searchResults').append(article);
-                        searchResults.push(article);
-                    });
-                    $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
-                    $('#searchStatus').hide();
-                    $('body').css('cursor','default');
-                }
-            });
+            if(searchText != '') {
+                const pageSize = 8;
+                const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
+                $.ajax({
+                    url: url,
+                    headers: {'X-Requested-With': 'XMLHttpRequest'},
+                    dataType: 'json',
+                    success: function(data, status, xhr) {
+                        console.log('Number of articles', data.total);
+                        console.log('Number of pages', Math.ceil(data.total/pageSize));
+                        var searchResults = [];
+                        var article = '';
+                        $('#searchResults').empty(); // Clear the card of past articles
+                        $('#searchResults').append('<br/><h2>Search Results</h2');
+                        $.each(data.results, function(index, value) {
+                            value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
+                            value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
+                            value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
+                            article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyTextHighlights}<br/><span class="article-date">${value.friendlyDate}</span></p></article>`;
+                            $('#searchResults').append(article);
+                            searchResults.push(article);
+                        });
+                        $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
+                        $('#searchStatus').hide();
+                        $('body').css('cursor','default');
+                    }
+                });
+                $('#subject').val(searchText);
+            }
         };
 
         // Handle submit on search form
@@ -754,7 +757,7 @@
                 $('#submitStatus').show();
             }
 
-            var availableTags = ['Android','App crashed','App install failed','Appium','Black Screen','Browsers Supported','Cradle Error','Device Busy','Device Recovery','Device connection issue','Device Swap','DevTunnel','Digitalzoom','Espresso','Image Injection','iOS','Java','JavaScript','Jenkins','Location - How to set for a device','Object Spy','Perfecto Native Automation','Performance Problem','Protractor','Quantum Framework','Responsive Web Design','REST API','Selenium','TestNG','UFT','Uploading files to your cloud','Visual Analysis','XCTest'];
+            var availableTags = ['Android','App crashed','App install failed','Appium','Device audio issue', 'Device black screen / video impaired','Device upgrade','Browsers Supported','Charging failed', 'Cradle Error','Device Busy','Device Recovery','Device connection issue','Device network/Internet connectivity','Device locked', 'Device offline/disconnected', 'Device Swap','Device unresponsive', 'DevTunnel','Digitalzoom/Reporting issue','Espresso','Image Injection','Image Injection','Interactive latency','iOS','Java','JavaScript','Jenkins','New cloud user','Location - How to set for a device','Object Spy','Perfecto Native Automation','Slow test execution','Slow app launch','Slow login to cloud','Protractor','Quantum Framework','Responsive Web Design','REST API','Security issue','Selenium','TestNG','UFT','Uploading files to your cloud','Visual Analysis','XCTest'];
 
             $('.typeahead').typeahead({
                 source: availableTags
