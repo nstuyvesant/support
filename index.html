@@ -503,6 +503,7 @@
             // Load status of clouds to display alert if one or more clouds are having an outage
             $.getJSON('https://support.perfecto.io/health.json', function(data) {
                 cloudStatus = data;
+                displayOutageAlerts($('#fqdn').val());
             });
 
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
@@ -542,7 +543,7 @@
                 $('#fqdn').val(`${cname}.perfectomobile.com`); // Overcomes Safari bug where placeholder doesn't disappear
             }
 
-            displayOutageAlerts($('#fqdn').val());
+
 
             // Setup articles and subtopics for default selected tab (Device)
             $.getJSON('https://support.perfecto.io/hierarchy.json', function(data) {
