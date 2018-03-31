@@ -491,18 +491,20 @@
         var cloudStatus = {};
         var caseTree = {};
 
-        var loadJSONComponents = function() {
+        // DOM loaded
+        $(document).ready(function() {
+            // Load typeahead for search field
+            $.getJSON('https://support.perfecto.io/typeahead.json', function(data) {
+                $('.typeahead').typeahead({
+                    source: data
+                });
+            });
+
+            // Load status of clouds to display alert if one or more clouds are having an outage
             $.getJSON('https://support.perfecto.io/health.json', function(data) {
                 cloudStatus = data;
             });
 
-
-        };
-
-        loadJSONComponents();
-
-        // DOM loaded
-        $(document).ready(function() {
             setInterval(refreshCaptchaTimestamp, 500); // every half-second
             setHiddenParametersField();
             var returnURL = 'https://support.perfecto.io/?submitted=true';
@@ -512,12 +514,6 @@
             if(qs('submitted')) {
                 $('#submitStatus').show();
             }
-
-            $.getJSON('https://support.perfecto.io/typeahead.json', function(data) {
-                $('.typeahead').typeahead({
-                    source: data
-                });
-            });
 
             // Load required fields from querystring if provided
             var email = qs('username');
