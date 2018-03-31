@@ -726,11 +726,11 @@
             };
         });
 
-        var cloudStatus = [];
+        var cloudStatus = {};
 
         var checkCloudHealth = function() {
             $.getJSON('https://support.perfecto.io/health.json', function(data) {
-                cloudStatus = data.getJSON;
+                cloudStatus = data;
                 console.log('Loaded', cloudStatus);
             });
         };
