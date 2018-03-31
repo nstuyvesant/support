@@ -495,9 +495,7 @@
             $.getJSON('https://support.perfecto.io/health.json', function(data) {
                 cloudStatus = data;
             });
-            $.getJSON('https://support.perfecto.io/hierarchy.json', function(data) {
-                caseTree = data;
-            });
+
 
         };
 
@@ -551,8 +549,11 @@
             displayOutageAlerts($('#fqdn').val());
 
             // Setup articles and subtopics for default selected tab (Device)
-            loadSubtopics('device');
-            loadArticles('device');
+            $.getJSON('https://support.perfecto.io/hierarchy.json', function(data) {
+                caseTree = data;
+                loadSubtopics('device');
+                loadArticles('device');
+            });
 
             // Setup form validate. jQuery Validation bug for selects - must use name not ID
             $('#requestForm').validate({
