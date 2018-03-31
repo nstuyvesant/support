@@ -1,0 +1,8 @@
+{
+    "comment": "Use all (in quotes) if all clouds affected.",
+    "outages": [
+      "test.perfectomobile.com",
+      "another.perfectomobile.com"
+    ],
+    "message": "21-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers."
+  }

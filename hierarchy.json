@@ -1,0 +1,289 @@
+{
+    "device": {
+      "type": "Issue",
+      "topic": "Device Issue",
+      "subtopics": [
+        "Cradle Error",
+        "Device Unresponsive",
+        "Device Locked",
+        "Network Connectivity Issue",
+        "Device Disconnected",
+        "Device Busy",
+        "App Install Failed",
+        "Other"
+      ],
+      "description": "Device (model, ID, OS, version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "articles": [
+        {
+          "title": "Device and cradle operations",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=11174912",
+          "synopsis": "The device and cradle operations are used to retrieve information about the devices and cradles, associated with a specific Perfecto CQ Lab, at the data center..."
+        },
+        {
+          "title": "Recover a device",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=13893782",
+          "synopsis": "Recovers a connected device that is unresponsive. For example, a device with an interrupted video, black screen or touch failure..."
+        },
+        {
+          "title": "Device operations",
+          "url": "http://developers.perfectomobile.com/display/PD/Device+operations",
+          "synopsis": "Broad range of mobile device operations such as touch, scroll, swipe, gestures, GPS location, text entry, and recovery."
+        },
+        {
+          "title": "How to handle device locking",
+          "url": "http://developers.perfectomobile.com/display/TT/Device+Screen+Locking",
+          "synopsis": "How to handle the device screen locking to ensure successful script executions."
+        },
+        {
+          "title": "What to check to ensure device network connectivity",
+          "url": "http://developers.perfectomobile.com/display/TT/What+to+Check+when+a+Mobile+Website+will+not+Load",
+          "synopsis": "Sometimes your website will not load on the mobile device. Here are some practices to follow to fix the issue."
+        },
+        {
+          "title": "Solving device connection issues",
+          "url": "http://developers.perfectomobile.com/display/TT/Solving+Device+Connection+Issues",
+          "synopsis": "A list of errors and solutions to help connect devices."
+        },
+        {
+          "title": "Release a busy device via the REST API",
+          "url": "http://developers.perfectomobile.com/display/PD/Release+Device",
+          "synopsis": "Forcefully releases the device specified by device ID when the device is either allocated to the user or the user is an administrator."
+        },
+        {
+          "title": "Troubleshooting app install failed on iOS",
+          "url": "http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures",
+          "synopsis": "What you need to look for when your app fails to Install or launch."
+        },
+        {
+          "title": "Troubleshooting app install failed on Android",
+          "url": "http://developers.perfectomobile.com/display/TT/Android+App%3A+Install+Failed+UID+Changed+message",
+          "synopsis": "How to resolve a Install_Failed_UID_Changed message."
+        }
+      ]
+    },
+    "web": {
+      "type": "Issue",
+      "topic": "Web Issue",
+      "subtopics": [
+        "Web Browser Availability",
+        "Web Video Issue",
+        "Web Functionality Issue",
+        "Other"
+      ],
+      "description": "Browser (version, OS): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "articles": [
+        {
+          "title": "Desktop web testing",
+          "url": "http://developers.perfectomobile.com/display/TT/Desktop+Web+Testing",
+          "synopsis": "Tips and tricks for desktop web testing."
+        },
+        {
+          "title": "Using JavaScript to improve testing for responsive web design",
+          "url": "http://developers.perfectomobile.com/display/TT/Additional+Tests+for+Responsive+Web+Design",
+          "synopsis": "How to deal with responsive web design using JavaScript."
+        },
+        {
+          "title": "Implementing customization for desktop web",
+          "url": "http://developers.perfectomobile.com/display/PD/Desktop-Web+Customization+Service",
+          "synopsis": "When selecting a Desktop-Web device to use for automation testing of a web application, there is sometimes the need to create the proper environment for the device."
+        },
+        {
+          "title": "Desktop web environments",
+          "url": "http://developers.perfectomobile.com/display/PD/Desktop+Web+Devices",
+          "synopsis": "Perfecto provides, in addition to the large set of mobile and wearable devices, a set of desktop web environments."
+        },
+        {
+          "title": "Visual Analysis for Desktop Web",
+          "url": "http://developers.perfectomobile.com/display/PD/Visual+Analysis+for+Desktop+Web",
+          "synopsis": "Perfecto Fast Web supports visual analysis of browser content to identify text."
+        },
+        {
+          "title": "Uploading files to Perfecto desktop web instances",
+          "url": "http://developers.perfectomobile.com/display/TT/Upload+File+to+Perfecto+web",
+          "synopsis": "Some desktop web tests require file upload as part of the flow. Here is how to do it on Perfecto."
+        }
+      ]
+    },
+    "automation": {
+      "type": "Issue",
+      "topic": "Automation Issue",
+      "subtopics": [
+        "Appium Issue",
+        "Selenium Issue",
+        "Espresso Issue",
+        "XCTest Issue",
+        "JavaScript Issue",
+        "Object Spy Issue",
+        "UFT Issue",
+        "Framework Issue",
+        "Perfecto Native Issue",
+        "Other"
+      ],
+      "description": "Development Tool (version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "articles": [
+        {
+          "title": "Getting started with Appium",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170304",
+          "synopsis": "Everything you need to know about using Appium with Perfecto."
+        },
+        {
+          "title": "Getting started with Selenium",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170304",
+          "synopsis": "Everything you need to know about using Selenium with Perfecto."
+        },
+        {
+          "title": "Work with Espresso or XCTest",
+          "url": "http://developers.perfectomobile.com/display/PD/Development",
+          "synopsis": "The Perfecto CQ Lab now makes a variety of devices and desktop browsers available for the application development community."
+        },
+        {
+          "title": "Migrating iOS test scripts to XCUITest-based automation infrastructure",
+          "url": "http://developers.perfectomobile.com/display/TT/Migrating+iOS+test+scripts+to+XCUITest-based+automation+infrastructure",
+          "synopsis": "With the introduction of iOS 10, Apple has deprecated its legacy UI Automation framework and instructed all developers to start using the XCUITest framework, introduced in iOS 9."
+        },
+        {
+          "title": "Quantum Framework: Is your current test framework slowing you down?",
+          "url": "http://developers.perfectomobile.com/display/TT/Introducing+Quantum+Framework",
+          "synopsis": "New open source framework enabling testers of all skills to build a robust test framework."
+        },
+        {
+          "title": "Testing with Protractor",
+          "url": "http://developers.perfectomobile.com/display/PD/Protractor",
+          "synopsis": "Test your AngularJS web apps using Protractor and Perfecto."
+        },
+        {
+          "title": "Object Spy overview",
+          "url": "http://developers.perfectomobile.com/display/PD/Object+Spy",
+          "synopsis": "The Object Spy is an Automation tool used to view detected objects retrieved from the device screen in webpage, native, and hybrid applications; and displays their associated functions."
+        },
+        {
+          "title": "Automation with UFT",
+          "url": "http://developers.perfectomobile.com/display/PD/UFT+Integration",
+          "synopsis": "Still using Micro Focus UFT? This is the reference for using it with Perfecto."
+        },
+        {
+          "title": "Perfecto Native Automation",
+          "url": "http://developers.perfectomobile.com/display/PD/Perfecto+Native+Automation",
+          "synopsis": "Perfecto provides an IDE that includes an interface not only for Interactive (Manual) Testing, but also an interface for creating Automation scripts."
+        }
+      ]
+    },
+    "performance": {
+      "type": "Issue",
+      "topic": "Performance Issue",
+      "subtopics": [
+        "Image Mode",
+        "Interactive Latency",
+        "Execution Slow",
+        "App install Slow",
+        "App Launch Slow",
+        "Login Slow",
+        "Other"
+      ],
+      "description": "Did you try it from home without using a VPN? N|Y\n\nDoes it happen at certain times of day? N|Y\n\nSteps to reproduce:\n",
+      "articles": [
+        {
+          "title": "Image Mode: What is it and how do I fix it?",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526",
+          "synopsis": "If interacting with your device is slow, your streaming server may be blocked by your IT department."
+        },
+        {
+          "title": "How do I troubleshoot interactive latency?",
+          "url": "http://developers.perfectomobile.com/display/TT/Networking+Best+Practices+and+Performance+Troubleshooting",
+          "synopsis": "Optimize performance and prevent disconnections in your network. Understand the protocols used, effects of proxy servers and VPNs."
+        },
+        {
+          "title": "Troubleshooting iOS App Install and Launch Failures",
+          "url": "http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures",
+          "synopsis": "What you need to look for when your iOS app fails to install or launch."
+        },
+        {
+          "title": "Faster script execution",
+          "url": "http://developers.perfectomobile.com/display/TT/Faster+Script+Execution",
+          "synopsis": "In this article, we provide suggestions how to improve your script execution time."
+        },
+        {
+          "title": "Parallel execution with TestNG",
+          "url": "http://developers.perfectomobile.com/display/TT/Parallel+Execution+with+TestNG",
+          "synopsis": "Save time by running scripts in parallel. Remember not to try to use the same device from multiple scripts."
+        },
+        {
+          "title": "Find elements faster with Appium and XCUITest",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21436560",
+          "synopsis": "In this article, we suggest another way to locate (find) an element which significantly improves the performance and shortens the execution time."
+        },
+        {
+          "title": "How can I launch an iOS app faster?",
+          "url": "http://developers.perfectomobile.com/display/TT/iOS+Troubleshooting%3A+Slow+iOS+app+launch",
+          "synopsis": "Learn why your iOS app is taking a long time to launch."
+        },
+        {
+          "title": "Installing an Application using the Install Widget",
+          "url": "http://developers.perfectomobile.com/display/TT/Installing+an+Application+using+the+Install+Widget",
+          "synopsis": "Here is how you use the install widget of the Perfecto Lab, to install your application."
+        }
+      ]
+    },
+    "request": {
+      "type": "Request",
+      "topic": "Request",
+      "subtopics": [
+        "New Device Request",
+        "Device Swap",
+        "Device Upgrade",
+        "Configuration Change",
+        "New Cloud User",
+        "Reg iOS Request",
+        "Cloud Upgrade",
+        "Device Template",
+        "Product Info",
+        "Documentation",
+        "Other"
+      ],
+      "description": "If requesting a device swap, please let us know what device to remove (Device ID) as well as what device to add (be specific to save time).",
+      "articles": [
+        {
+          "title": "Requesting a device swap",
+          "url": "http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap",
+          "synopsis": "Everything you ever wanted to know about swapping devices."
+        },
+        {
+          "title": "Installing Mobile Provisioning Profiles (regiOS)",
+          "url": "http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module",
+          "synopsis": "Apple iOS devices require Mobile Provisioning Profiles in order to work with Perfecto."
+        },
+        {
+          "title": "User management - adding users, roles, tokens",
+          "url": "http://developers.perfectomobile.com/display/PD/User+Management",
+          "synopsis": "How to add users, roles, and tokens from the System Administration area of your cloud."
+        },
+        {
+          "title": "Create user via REST API",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=12419106",
+          "synopsis": "Perfecto provides a REST API for administrative functions."
+        },
+        {
+          "title": "Cloud updates",
+          "url": "http://developers.perfectomobile.com/display/PD/Product+Updates",
+          "synopsis": "Check out all the changes in the latest Release Notes."
+        },
+        {
+          "title": "Adding templates",
+          "url": "http://developers.perfectomobile.com/display/TT/Adding+Templates+to+the+User+Directory",
+          "synopsis": "How to add device templates to your cloud."
+        },
+        {
+          "title": "Product documementation",
+          "url": "http://developers.perfectomobile.com/display/PD/Documentation",
+          "synopsis": "Documentation for your Perfecto platform."
+        }
+      ]
+    },
+    "suggestion": {
+      "type": "Suggestion",
+      "topic": "",
+      "subtopics": [],
+      "description": "Customers are our best source of ideas and we value your ideas!\nWhat feature do you want to see in the product?\n\nHow would this help you get more value from Perfecto?\n\nHow do you workaround the product not having this feature?\n",
+      "articles": []
+    }
+}

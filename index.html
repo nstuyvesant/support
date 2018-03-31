@@ -35,10 +35,10 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <script>
         // Object triggers display of alert when FQDN is entered.
-        var cloudStatus = {
-            outages: ['test.perfectomobile.com'], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
-            message: '30-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
-        };
+        // var cloudStatus = {
+        //     outages: ['test.perfectomobile.com'], // Add 'all' or specific clouds like 'demo.perfectomobile.com' separated by commas
+        //     message: '30-Mar-2018 13:30 US/Eastern: Engineering is investigating a service degradation affecting clouds hosted in the US data centers.'
+        // };
 
         // Salesforce Live Agent
         liveagent.init('https://d.la1-c1-lon.salesforceliveagent.com/chat', '572D000000001yp', '00D200000001UUG');
@@ -725,6 +725,17 @@
                 $('#severity').hide();
             };
         });
+
+        var cloudStatus = [];
+
+        var checkCloudHealth = function() {
+            $.getJSON('https://support.perfecto.io/health.json', function(data) {
+                cloudStatus = data.getJSON;
+                console.log('Loaded', cloudStatus);
+            });
+        };
+
+        checkCloudHealth();
 
         // Conditionally display outage alerts based on cloudStatus object
         var displayOutageAlerts = function(cloudFQDN) {
