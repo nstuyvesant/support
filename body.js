@@ -164,14 +164,14 @@ var caseTree = {};
 // DOM loaded
 $(document).ready(function() {
     // Load typeahead for search field
-    $.getJSON('https://support.perfecto.io/typeahead.json', function(data) {
+    $.getJSON('typeahead.json', function(data) {
         $('.typeahead').typeahead({
             source: data
         });
     });
 
     // Load status of clouds to display alert if one or more clouds are having an outage
-    $.getJSON('https://support.perfecto.io/health.json', function(data) {
+    $.getJSON('health.json', function(data) {
         cloudStatus = data;
         displayOutageAlerts($('#fqdn').val());
     });
@@ -216,7 +216,7 @@ $(document).ready(function() {
 
 
     // Setup articles and subtopics for default selected tab (Device)
-    $.getJSON('https://support.perfecto.io/hierarchy.json', function(data) {
+    $.getJSON('hierarchy.json', function(data) {
         caseTree = data;
         loadSubtopics('device');
         loadArticles('device');
