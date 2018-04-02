@@ -172,8 +172,7 @@
         <div id="didNotHelp" class="collapse">
             <h2>Didn't help?</h2>
             <a href="#openCase" data-toggle="collapse" class="btn btn-success nav-pills"><span class="fas fa-briefcase"></span><br/>Open Case</a>
-            <div id="openCase" class="collapse">
-                <br/>
+            <div id="openCase" class="collapse" style="margin-top:20px;margin-bottom:20px">
                 <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
                     <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                     <input type="hidden" name="orgid" value="00D200000001UUG">
@@ -237,7 +236,6 @@
                     <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha"><br/>
                     <input type="submit" class="btn btn-success" id="submit">
                 </form>
-                <br/>
             </div>
             <a href="#" id="openCase" class="btn btn-success nav-pills"><span class="far fa-comment-alt"></span><br/>Chat</a>
         </div>
