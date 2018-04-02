@@ -22,6 +22,7 @@ $('#issueTypes').on('shown.bs.tab', function(e) {
         $('#searchResults').append(article);
         searchResults.push(article);
     });
+    $('#didNotHelp').show();
     $('body').css('cursor','default');
 });
 
