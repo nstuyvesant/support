@@ -13,7 +13,7 @@ $('#issueTypes').on('shown.bs.tab', function(e) {
         source: caseTree.types[0].topics[0].subtopics
     });
     $('#searchResults').empty(); // Clear the card of past articles
-    $('#searchResults').append('<br/><h2>Perhaps one of these can help?</h2');
+    $('#searchResults').append('<br/><h2>Maybe one of these articles can help...</h2');
     var searchResults = [];
     var article = '';
     $.each(caseTree.types[0].topics[0].articles, function(index, value) {
@@ -22,7 +22,6 @@ $('#issueTypes').on('shown.bs.tab', function(e) {
         $('#searchResults').append(article);
         searchResults.push(article);
     });
-    $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
     $('body').css('cursor','default');
 });
 
