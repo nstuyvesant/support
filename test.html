@@ -44,17 +44,17 @@
             padding-top: 0;
             font-size: 42px;
         }
-        /* .topic {
-
-        } */
+        .topic {
+            padding-top: 20px;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-    <script async defer src="https://www.google.com/recaptcha/api.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <!-- <script async defer src="https://www.google.com/recaptcha/api.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-3"></script>
     <script async src="https://script.crazyegg.com/pages/scripts/0058/5510.js"></script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
-    <script src="head.js"></script>
+    <script src="head.js"></script> -->
 </head>
 
 <body>
@@ -127,67 +127,74 @@
                 <a id="typeSuggestion" data-toggle="tab" role="tab" aria-controls="suggestion" class="nav-link" href="#suggestions"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
             </li>
         </ul>
-        <div id="issues" class="collapse">
-            <h1 class="text-center topic">Issue with...</h1>
-            <ul id="issueTypes" class="nav nav-pills nav-justified" role="tablist">
-                <li class="nav-item">
-                    <a id="issueDevice" data-toggle="tab" role="tab" aria-controls="device" class="nav-link" href="#issueSelected"><span class="fas fa-mobile-alt"></span><br/>Device</a>
-                </li>
-                <li class="nav-item">
-                    <a id="issueBrowser" data-toggle="tab" role="tab" aria-controls="web" class="nav-link" href="#issueSelected"><span class="fas fa-globe"></span><br/>Browser</a>
-                </li>
-                <li class="nav-item">
-                    <a id="issueAutomation" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#issueSelected"><span class="fas fa-code-branch"></span><br/>Automation</a>
-                </li>
-                <li class="nav-item">
-                    <a id="issuePerformance" data-toggle="tab" role="tab" aria-controls="performance" class="nav-link" href="#issueSelected"><span class="fas fa-stopwatch"></span><br/>Performance</a>
-                </li>
-                <li class="nav-item">
-                    <a id="issueCloud" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#issueSelected"><span class="fas fa-cloud"></span><br/>Cloud</a>
-                </li>
-            </ul>
-        </div>
-        <div id="issueSelected" class="collapse">
-            <div class="form-group">
-                <label for="description">Briefly, tell us about your TYPE-SELECTED issue</label>
-                <input type="text" class="form-control" id="issueDescription" name="issueDescription" placeholder="Your issue">
+        <div class="tab-content">
+            <div id="issues" class="tab-pane fade" role="tabpanel">
+                <h1 class="text-center topic">Issue with...</h1>
+                <ul id="issueTypes" class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a id="issueDevice" data-toggle="tab" role="tab" aria-controls="device" class="nav-link" href="#issueSelected"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="issueBrowser" data-toggle="tab" role="tab" aria-controls="browser" class="nav-link" href="#issueSelected"><span class="fas fa-globe"></span><br/>Browser</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="issueAutomation" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#issueSelected"><span class="fas fa-code-branch"></span><br/>Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="issuePerformance" data-toggle="tab" role="tab" aria-controls="performance" class="nav-link" href="#issueSelected"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="issueCloud" data-toggle="tab" role="tab" aria-controls="cloud" class="nav-link" href="#issueSelected"><span class="fas fa-cloud"></span><br/>Cloud</a>
+                    </li>
+                </ul>
+                <div id="issueSelected" class="tab-content collapse" style="padding-top:20px;">
+                    <div class="form-group">
+                        <label for="issueDescription">Briefly, tell us about your <strong><span id="issueTypeSelected"></span></strong> issue</label>
+                        <input type="text" class="form-control typeahead" id="issueDescription" name="issueDescription" placeholder="Your issue">
+                    </div>
+                </div>
+            </div>
+            <div id="questions" class="tab-pane fade" role="tabpanel">
+                <h1 class="text-center topic">Question about...</h1>
+                <ul id="questionTypes" class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="device" class="nav-link" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="browser" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="requests" class="tab-pane fade" role="tabpanel">
+                <h1 class="text-center topic">Request concerning...</h1>
+                <ul id="requestTypes" class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="device" class="nav-link" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="suggestions" class="tab-content collapse">
+                <h2>Customers are our best source of ideas and we value your input!</h2>
+                <div class="form-group">
+                    <label for="description">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
+                    <textarea class="form-control" rows="7" id="description" name="description" placeholder="Provide your suggestion here"></textarea>
+                </div>
             </div>
         </div>
-        <div id="questions" class="collapse">
-            <h1 class="text-center topic">Question about...</h1>
-            <ul id="issueTypes" class="nav nav-pills nav-justified" role="tablist">
-                <li class="nav-item">
-                    <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
-                </li>
-                <li class="nav-item">
-                    <a id="webTab" data-toggle="tab" role="tab" aria-controls="web" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
-                </li>
-                <li class="nav-item">
-                    <a id="automationTab" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
-                </li>
-                <li class="nav-item">
-                    <a id="requestTab" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud</a>
-                </li>
-            </ul>
-        </div>
-        <div id="requests" class="collapse">
-            <h1 class="text-center topic">Request concerning...</h1>
-            <ul id="issueTypes" class="nav nav-pills nav-justified" role="tablist">
-                <li class="nav-item">
-                    <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
-                </li>
-                <li class="nav-item">
-                    <a id="requestTab" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud</a>
-                </li>
-            </ul>
-        </div>
-        <div id="suggestions" class="collapse">
-            <h2>Customers are our best source of ideas and we value your input!</h2>
-            <div class="form-group">
-                <label for="description">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
-                <textarea class="form-control" rows="7" id="description" name="description" placeholder="Provide your suggestion here"></textarea>
-            </div>
-        </div>
+
+
+
+
+
         <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary active">
                 <input type="radio" name="options" id="option1" autocomplete="off" checked> <span class="fas fa-user-md"></span> Issue
@@ -402,7 +409,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.1/umd/popper.min.js" integrity="sha256-AoNQZpaRmemSTxMy9xcqXX5VLwI6IMPYugO7bFHOW+U=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha256-5+02zu5UULQkO7w1GIr6vftCgMfFdZcAHeDtFnKZsBs=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha256-LOnFraxKlOhESwdU/dX+K0GArwymUDups0czPWLEg4E=" crossorigin="anonymous"></script>
-    <script src="body.js"></script>
+    <script src="test-body.js"></script>
 </body>
 
 </html>

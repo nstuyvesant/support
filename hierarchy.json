@@ -119,7 +119,7 @@
         "Perfecto Native Issue",
         "Other"
       ],
-      "description": "Development Tool (version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "description": "Development Tool (name and version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
       "articles": [
         {
           "title": "Getting started with Appium",
@@ -175,7 +175,7 @@
         "Image Mode",
         "Interactive Latency",
         "Execution Slow",
-        "App install Slow",
+        "App Install Slow",
         "App Launch Slow",
         "Login Slow",
         "Other"
