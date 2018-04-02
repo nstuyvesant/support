@@ -1,14 +1,19 @@
+var caseTree = {};
+
+$.getJSON('test-hierarchy.json', function(data) {
+    caseTree = data;
+});
+
 // Handle click on tabs
 $('#issueTypes').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
     $('#issueTypeSelected').text(selectedTabName);
-    $.getJSON('test-hierarchy.json', function(data) {
-        $('.typeahead').typeahead({
-            source: data.types[0].topics[0].subtopics
-        });
+    $('.typeahead').typeahead({
+        source: caseTree.types[0].topics[0].subtopics
     });
 });
 
 // DOM loaded
 $(document).ready(function() {
+
 });
