@@ -1,5 +1,6 @@
 // If website isn't https://support.perfecto.io, redirect
 if(location.protocol != 'https' || window.location.hostname != 'support.perfecto.io') {
+    alert('redirect');
     window.location.replace(`https://support.perfecto.io/${location.search}`);
 }
 
@@ -19,24 +20,24 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-2078617-3');
 
-// Marketo Munchkin
-(function() {
-    var didInit = false;
-    function initMunchkin() {
-        if(didInit === false) {
-            didInit = true;
-            Munchkin.init('482-YUQ-296');
-        }
-    }
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.async = true;
-    s.src = 'https://munchkin.marketo.net/munchkin-beta.js';
-    s.onreadystatechange = function() {
-        if (this.readyState == 'complete' || this.readyState == 'loaded') {
-            initMunchkin();
-        }
-    };
-    s.onload = initMunchkin;
-    document.getElementsByTagName('head')[0].appendChild(s);
-})();
+// // Marketo Munchkin
+// (function() {
+//     var didInit = false;
+//     function initMunchkin() {
+//         if(didInit === false) {
+//             didInit = true;
+//             Munchkin.init('482-YUQ-296');
+//         }
+//     }
+//     var s = document.createElement('script');
+//     s.type = 'text/javascript';
+//     s.async = true;
+//     s.src = 'https://munchkin.marketo.net/munchkin-beta.js';
+//     s.onreadystatechange = function() {
+//         if (this.readyState == 'complete' || this.readyState == 'loaded') {
+//             initMunchkin();
+//         }
+//     };
+//     s.onload = initMunchkin;
+//     document.getElementsByTagName('head')[0].appendChild(s);
+// })();
