@@ -50,16 +50,11 @@
     </style>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
-    <!-- <script async defer src="https://www.google.com/recaptcha/api.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-3"></script>
-    <script async src="https://script.crazyegg.com/pages/scripts/0058/5510.js"></script>
-    <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
-    <script src="head.js"></script> -->
+
 </head>
 
 <body>
     <section class="cover text-center">
-        <!--Semi-transparent navbar over background image-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,9 +75,8 @@
                         </li>
                     </ul>
                 </div>
-            </div><!--container-->
+            </div>
         </nav>
-        <!--Middle of the background image-->
         <div class="container">
             <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
                 Your case was received by Support. An email confirmation is on the way.
@@ -91,9 +85,8 @@
                 </button>
             </div>
             <h1 class="text-center">Welcome to Perfecto Support</h1>
-        </div><!--cover-container-->
+        </div>
     </section>
-    <!--Choose a Topic pills-->
     <div class="container">
         <!-- <div class="row justify-content-around">
             <div class="col-lg-8 col-md-10" style="padding-top:45px;">
@@ -190,7 +183,10 @@
                 </div>
             </div>
         </div>
-
+        <div id="searchStatus" class="alert alert-success collapse" role="alert">
+            <img src="https://support.perfecto.io/loading.gif" style="height:25px; width: 25px;" title="Loading..." /> Searching the Knowledge Base. Please wait...
+        </div>
+        <div id="searchResults"></div>
 
 
 
@@ -209,7 +205,7 @@
                 <input type="radio" name="options" id="option3" autocomplete="off"> <span class="fas fa-lightbulb"></span> Suggestion
             </label>
         </div> -->
-        <div id="searchResults"></div>
+        
         <!-- <h1 class="text-center topic">Choose a Topic</h1>
         <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
