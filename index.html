@@ -38,8 +38,7 @@
     <script>
         // If website isn't https://support.perfecto.io, redirect
         if (location.protocol != 'https:' || window.location.hostname != 'support.perfecto.io') {
-            alert('Need to redirect');
-            //window.location.replace(`https://support.perfecto.io/${location.search}`);
+            window.location.replace('https://support.perfecto.io/'+location.search);
         }
     </script>
 </head>
