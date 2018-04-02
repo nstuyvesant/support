@@ -6,7 +6,7 @@ $.getJSON('test-hierarchy.json', function(data) {
 
 // Handle click on tabs
 $('#issueTypes').on('shown.bs.tab', function(e) {
-    console.log(e);
+    //console.log(e);
     var selectedTabName = $(e.target).attr('aria-controls');
     $('#issueTypeSelected').text(selectedTabName);
     $('.typeahead').typeahead({

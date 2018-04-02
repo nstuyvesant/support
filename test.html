@@ -89,7 +89,7 @@
     </section>
     <div class="container">
         <h1 class="text-center topic">What brings you here?</h1>
-        <ul id="issueTypes" class="nav nav-pills nav-justified" role="tablist">
+        <ul id="caseTypes" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
                 <a id="typeIssue" data-toggle="tab" role="tab" aria-controls="issue" class="nav-link" href="#issues"><span class="fas fa-user-md"></span><br/>Issue</a>
             </li>
@@ -172,49 +172,11 @@
         <div id="searchResults"></div>
         <div id="didNotHelp" class="collapse">
             <h2>Didn't help?</h2>
-            <a href="#openCase" data-toggle="collapse" class="btn btn-success">Open Case</a>
+            <a href="#openCase" data-toggle="collapse" class="btn btn-success"><span class="fas fa-briefcase"></span> Open Case</a>
             <div id="openCase" class="collapse">FORM GOES HERE</div>
-            <a href="#" id="openCase" class="btn btn-success">Chat</a>
+            <a href="#" id="openCase" class="btn btn-success"><span class="far fa-comment-alt"></span> Chat</a>
         </div>
 
-
-
-        <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> <span class="fas fa-user-md"></span> Issue
-            </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> <span class="far fa-question-circle"></span> Question
-            </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> <span class="far fa-check-square"></span> Request
-            </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> <span class="fas fa-lightbulb"></span> Suggestion
-            </label>
-        </div> -->
-        
-        <!-- <h1 class="text-center topic">Choose a Topic</h1>
-        <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
-            <li class="nav-item">
-                <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
-            </li>
-            <li class="nav-item">
-                <a id="webTab" data-toggle="tab" role="tab" aria-controls="web" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
-            </li>
-            <li class="nav-item">
-                <a id="automationTab" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
-            </li>
-            <li class="nav-item">
-                <a id="performanceTab" data-toggle="tab" role="tab" aria-controls="performance" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Performance</a>
-            </li>
-            <li class="nav-item">
-                <a id="requestTab" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Request</a>
-            </li>
-            <li class="nav-item">
-                <a id="suggestionTab" data-toggle="tab" role="tab" aria-controls="suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
-            </li>
-        </ul> -->
     <!--
         <div class="row">&nbsp;</div>
         <div class="row justify-content-around">
@@ -313,7 +275,7 @@
                         <a class="nav-link" href="https://www.perfecto.io/platform/test-automation/">Test Automation</a>
                         <a class="nav-link" href="https://www.perfecto.io/platform/test-automation-reporting-analytics-digitalzoom/">Test Automation Analytics with Digitalzoom™</a>
                     </nav>
-                </div><!--col-md-2-->
+                </div>
                 <div class="col-md-2">
                     <nav class="nav flex-column">
                         <a class="nav-link active" href="https://www.perfecto.io/platform/capabilities/continuous-testing-for-devops/">BUILD AND...</a>
@@ -324,7 +286,7 @@
                         <a class="nav-link" href="http://www.perfecto.io/platform/capabilities/real-user-simulation-with-windtunnel/">Real User Simulation with WindTunnel™</a>
                         <a class="nav-link" href="http://www.perfecto.io/plan-with-the-blueprint-for-continuous-testing-success/">Blueprint for Continuous Testing Success</a>
                     </nav>
-                </div><!--col-md-2-->
+                </div>
                 <div class="col-md-2">
                     <nav class="nav flex-column">
                         <a class="nav-link active" href="">INTEGRATIONS</a>
@@ -334,7 +296,7 @@
                         <a class="nav-link" href="https://www.perfecto.io/testing-frameworks/">Testing Frameworks Integrations</a>
                         <a class="nav-link" href="https://www.perfecto.io/api-and-other-integrations/">APIs &amp; Other Integrations</a>
                     </nav>
-                </div><!--col-md-2-->
+                </div>
                 <div class="col-md-2">
                     <nav class="nav flex-column">
                         <a class="nav-link active" href="#">SUPPORT</a>
@@ -344,7 +306,7 @@
                         <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/pluginsextensions/">Plugins/Extensions</a>
                         <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/supported-devices/">Available Devices in the Perfecto Cloud Lab</a>
                     </nav>
-                </div><!--col-md-2-->
+                </div>
                 <div class="col-md-2">
                     <nav class="nav flex-column">
                         <a class="nav-link active" href="#">COMPANY</a>
@@ -355,7 +317,7 @@
                         <a class="nav-link" href="https://www.perfecto.io/our-customers/">Our Customers</a>
                         <a class="nav-link" href="https://www.perfecto.io/perfecto-press-releases/">Press Releases</a>
                     </nav>
-                </div><!--col-md-2-->
+                </div>
                 <div class="col-md-2">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -372,9 +334,9 @@
                    </nav>
                    <br/><br/>
                    <a title="Norton Secured" class="nav-link" target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.perfectomobile.com&lang=en"><img src="https://www.perfecto.io/wp-content/uploads/2018/02/logo-norton.png"></a>
-                </div><!--col-md-2-->
-            </div><!--row-->
-        </div><!--container-->
+                </div>
+            </div>
+        </div>
     </footer>
     <footer class="copyright">
         <div class="container">
@@ -384,8 +346,8 @@
                     <a class="nav-link active" href="https://www.perfecto.io/terms-conditions/">Terms &amp; Conditions</a>
                     <a class="nav-link active" href="https://www.perfecto.io/privacy-statement/">Privacy Statement</a>
                 </nav>
-            </div><!--row-->
-        </div><!--container-->         
+            </div>
+        </div>      
     </footer>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
