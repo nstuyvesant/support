@@ -169,9 +169,9 @@ $('#issueTypes').on('shown.bs.tab', function(e) {
     $('#issueTypeSelected').text(selectedTabName);
     $.getJSON('test-hierarchy.json', function(data) {
         console.log(data);
-        $('.typeahead').typeahead({
-            source: data.types['Issue'].subtopics
-        });
+        // $('.typeahead').typeahead({
+        //     source: data.types['Issue'].subtopics
+        // });
     });
     // loadSubtopics(selectedTabName);
     // if(selectedTabName != 'suggestion') {
