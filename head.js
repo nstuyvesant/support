@@ -1,8 +1,4 @@
-// If website isn't https://support.perfecto.io, redirect
-if (location.protocol != 'https' || window.location.hostname != 'support.perfecto.io') {
-    alert('redirect');
-    window.location.replace(`https://support.perfecto.io/${location.search}`);
-}
+
 
 // // Salesforce Live Agent
 // liveagent.init('https://d.la1-c1-lon.salesforceliveagent.com/chat', '572D000000001yp', '00D200000001UUG');
