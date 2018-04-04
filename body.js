@@ -44,27 +44,10 @@ var qs = function(key) {
     return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 };
 
-// Grab inbound querystring params into a string to append to description
+// If execution report is provided, put in hidden field for later append to description
 var setHiddenParametersField = function() {
-    // Cleanup style later
-    var parameters = '';
-    var timezone = qs('timezone');
-    if(timezone) parameters += `\nUser GMT Offset: ${timezone}`;
-    var mcmVersion = qs('mcmVersion');
-    if(mcmVersion) parameters += `\nCloud Version: ${mcmVersion}`;
-    var manufacturer = qs('manufacturer');
-    if(manufacturer) parameters += `\nManufacturer: ${manufacturer}`;
-    var model = qs('model');
-    if(model) parameters += `\nModel: ${model}`;
-    var os = qs('os');
-    if(os) parameters += `\nOS Version: ${os}`;
-    var deviceId = qs('deviceId');
-    if(deviceId) parameters += `\nDevice ID: ${deviceId}`;
-    var location = qs('location');
-    if(location) parameters += `\nLocation: ${location}`;
     var executionReport = qs('desc');
-    if(executionReport) parameters += `\n${executionReport}`;
-    if(parameters != '') $('#parameters').val(`\n==== Auto-attached by Perfecto =====${parameters}`);
+    if(executionReport) $('#parameters').val(`\n==== Auto-attached by Perfecto =====\n${executionReport}`);
 };
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce
@@ -217,6 +200,7 @@ $(document).ready(function() {
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
     $('#company').val(qs('company'));
+    $('#timezone').val(qs('timezone'));
     $('#mcmVersion').val(qs('mcmVersion'));
     $('#hssVersion').val(qs('hssVersion'));
     $('#location').val(qs('location'));
