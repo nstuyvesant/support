@@ -120,7 +120,6 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
     } else {
         $('#subtopic').hide();
         $('#severity').hide();
-        // TODO: remove validation requirement
     };
 });
 

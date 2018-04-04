@@ -33,7 +33,7 @@ a:hover {
 .cover {
     background: black url('https://support.perfecto.io/forest.jpg') center;
     background-size: cover;
-    min-height: 33rem;
+    min-height: 20rem;
     height: auto;
     border-radius: 0;
     width: 100%;
@@ -50,14 +50,13 @@ a.social:hover {
     filter: brightness(100%);
 }
 h1 {
-    font-size: 4vw;
+    font-size: 48px;
     padding-bottom: 5px;
-    margin-top: 30px;
-    padding-top: 20px;
+    margin-top: 20px;
+    padding-top: 0;
     filter: drop-shadow(4px 4px 10px black);
 }
 h1.topic {
-    margin-top: 0;
     margin-bottom: 20px;
     color: #82bc41;
     filter: none;
