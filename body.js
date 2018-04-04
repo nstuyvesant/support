@@ -216,17 +216,16 @@ $(document).ready(function() {
     }
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
-
-    $('company').val(qs('company'));
-    $('mcmVersion').val(qs('mcmVersion'));
-    $('hssVersion').val(qs('hssVersion'));
-    $('location').val(qs('location'));
-    $('cradleId').val(qs('cradleId'));
-    $('deviceId').val(qs('deviceId'));
-    $('manufacturer').val(qs('manufacturer'));
-    $('model').val(qs('model'));
-    $('os').val(qs('os'));
-    $('version').val(qs('version'));
+    $('#company').val(qs('company'));
+    $('#mcmVersion').val(qs('mcmVersion'));
+    $('#hssVersion').val(qs('hssVersion'));
+    $('#location').val(qs('location'));
+    $('#cradleId').val(qs('cradleId'));
+    $('#deviceId').val(qs('deviceId'));
+    $('#manufacturer').val(qs('manufacturer'));
+    $('#model').val(qs('model'));
+    $('#os').val(qs('os'));
+    $('#version').val(qs('version'));
 
     // Read articles and subtopics from JSON into object then load subtopics and articles for the default tab displayed (device)
     $.getJSON('hierarchy.json', function(data) {
