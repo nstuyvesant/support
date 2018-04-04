@@ -243,14 +243,14 @@ $(document).ready(function() {
             '00ND0000005cKFJ': { // severity
                 required: {
                     depends: function(element) {
-                        return $('#type') != 'suggestion';
+                        return $('#type').val() != 'suggestion';
                     }
                 }
             },
             '00ND0000004nqq2': { // subtopic
                 required: {
                     depends: function(element) {
-                        return $('#type') != 'suggestion';
+                        return $('#type').val() != 'suggestion';
                     }
                 }
             },
