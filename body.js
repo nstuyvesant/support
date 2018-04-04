@@ -120,6 +120,7 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
     } else {
         $('#subtopic').hide();
         $('#severity').hide();
+        // TODO: remove validation requirement
     };
 });
 
@@ -240,10 +241,18 @@ $(document).ready(function() {
                 required: true
             },
             '00ND0000005cKFJ': { // severity
-                required: true
+                required: {
+                    depends: function(element) {
+                        return $('#type') != 'suggestion';
+                    }
+                }
             },
             '00ND0000004nqq2': { // subtopic
-                required: true
+                required: {
+                    depends: function(element) {
+                        return $('#type') != 'suggestion';
+                    }
+                }
             },
             hiddenRecaptcha: {
                 required: function() {
