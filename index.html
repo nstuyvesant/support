@@ -136,14 +136,26 @@
                     </div>
                     <div class="card-body">
                         <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
+
                             <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                             <input type="hidden" name="orgid" value="00D200000001UUG">
-                            <input type=hidden name="recordType" id="recordType" value="01220000000HQCE">
+                            <input type="hidden" id="recordType" name="recordType" value="01220000000HQCE">
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
                             <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
                             <input type="hidden" id="priority" name="priority" value="Low">
+                            <input type="hidden" id="company" name="00N20000001N4eN">
                             <input type="hidden" id="caseSystemType" name="00ND0000005eFGw" value="N/A">
+                            <input type="hidden" id="mcmVersion" name="00ND0000005cI9n">
+                            <input type="hidden" id="hssVersion" name="00ND0000005cI3B">
+                            <input type="hidden" id="location" name="00N20000002vZQW">
+                            <input type="hidden" id="cradleId" name="00N20000002EtP1">
+                            <input type="hidden" id="deviceId" name="00ND0000005cetY">
+                            <input type="hidden" id="manufacturer" name="00N20000001N4eC">
+                            <input type="hidden" id="model" name="00N20000001N4gL">
+                            <input type="hidden" id="os" name="00N20000002vZPs">
+                            <input type="hidden" id="version" name="00N20000002u9Uv">
+
                             <div id="cloudStatusAlert" class="alert alert-danger alert-dismissible collapse" role="alert">
                                 <span id="message"></span>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

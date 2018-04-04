@@ -87,6 +87,7 @@ var searchConfluence = function(searchText, index) {
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             dataType: 'json',
             success: function(data, status, xhr) {
+                // Log these in case we want to put in pagination later
                 console.log('Number of articles', data.total);
                 console.log('Number of pages', Math.ceil(data.total/pageSize));
                 var searchResults = [];
@@ -94,7 +95,7 @@ var searchConfluence = function(searchText, index) {
                 $('#searchResults').empty(); // Clear the card of past articles
                 $('#searchResults').append('<br/><h2>Search Results</h2');
                 $.each(data.results, function(index, value) {
-                    value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
+                    value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting (odd Confluence tags)
                     value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                     value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
                     article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyTextHighlights}<br/><span class="article-date">${value.friendlyDate}</span></p></article>`;
@@ -176,7 +177,8 @@ $(document).ready(function() {
         displayOutageAlerts($('#fqdn').val());
     });
 
-    setInterval(refreshCaptchaTimestamp, 500); // every half-second
+    // reCAPTCHA requires a timestamp updated every half-second
+    setInterval(refreshCaptchaTimestamp, 500);
     setHiddenParametersField();
     var returnURL = 'https://support.perfecto.io/?submitted=true';
     $('#retURL').val(returnURL);
@@ -186,8 +188,8 @@ $(document).ready(function() {
         $('#submitStatus').show();
     }
 
-    // Load required fields from querystring if provided
-    var email = qs('username');
+    // Load required fields from querystring (if provided)
+    var email = qs('username'); // or could use email parameter sent (not sure why both are sent by MCM)
     $('#email').val(email);
     $('#email').val(email); // Overcomes Safari bug where placeholder doesn't disappear
 
@@ -195,8 +197,8 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn);
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
-    var phone = qs('phone');
-    if(phone && phone.length > 10) { // Often +123 is entered as a phone number on the MCM
+    var phone = qs('phoneNumber');
+    if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
         $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
     }
@@ -213,9 +215,20 @@ $(document).ready(function() {
         $('#fqdn').val(`${cname}.perfectomobile.com`); // Overcomes Safari bug where placeholder doesn't disappear
     }
 
+    // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
 
+    $('company').val(qs('company'));
+    $('mcmVersion').val(qs('mcmVersion'));
+    $('hssVersion').val(qs('hssVersion'));
+    $('location').val(qs('location'));
+    $('cradleId').val(qs('cradleId'));
+    $('deviceId').val(qs('deviceId'));
+    $('manufacturer').val(qs('manufacturer'));
+    $('model').val(qs('model'));
+    $('os').val(qs('os'));
+    $('version').val(qs('version'));
 
-    // Setup articles and subtopics for default selected tab (Device)
+    // Read articles and subtopics from JSON into object then load subtopics and articles for the default tab displayed (device)
     $.getJSON('hierarchy.json', function(data) {
         caseTree = data;
         loadSubtopics('device');
