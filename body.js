@@ -18,16 +18,6 @@ var loadSubtopics = function(tabName) {
     // Set Case Type and Topic
     $('#type').val(caseTree[tabName].type);
     $('#topic').val(caseTree[tabName].topic);
-    switch(tabName) {
-        case 'device':
-            $('#caseSystemType').val('Hosted - Mobile');
-            break;
-        case 'web':
-            $('#caseSystemType').val('Hosted - Web');
-            break;
-        default:
-            $('#caseSystemType').val('N/A');
-    }
     $('#description').val(caseTree[tabName].description);
     var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
     subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
