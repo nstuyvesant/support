@@ -119,7 +119,7 @@
         "Perfecto Native Issue",
         "Other"
       ],
-      "description": "Execution Report URL:\n\nDevelopment Tool (name and version):\n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "description": "Execution Report URL:\n\nReply to your email confirmation attaching the script and app (or URL)\n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
       "articles": [
         {
           "title": "Getting started with Appium",
