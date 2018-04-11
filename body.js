@@ -170,7 +170,7 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn);
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
-    var phone = qs('phoneNumber');
+    var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
         $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
