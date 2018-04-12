@@ -7,7 +7,7 @@ var loadArticles = function(tabName) {
             var url = currentNode.url;
             var title = currentNode.title;
             var synopsis = currentNode.synopsis;
-            var article = `<article><a href="${url}" target="_blank">${title}</a><p class="text-muted">${synopsis}</p></article>`;
+            var article = '<article><a href="' + url + '" target="_blank">' + title + '</a><p class="text-muted">' + synopsis + '</p></article>';
             $('#articles').append(article);
         });
     }
@@ -37,7 +37,7 @@ var qs = function(key) {
 // If execution report is provided, put in hidden field for later append to description
 var setHiddenParametersField = function() {
     var executionReport = qs('desc');
-    if(executionReport) $('#parameters').val(`\n==== Auto-attached by Perfecto =====\n${executionReport}`);
+    if(executionReport) $('#parameters').val('\n==== Auto-attached by Perfecto =====\n' + executionReport);
 };
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce
@@ -53,8 +53,8 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
-        const pageSize = 8;
-        const url = `https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=${encodeURI(searchText)}&startIndex=${index}&pageSize=${pageSize}`;
+        var pageSize = 8;
+        var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
             url: url,
             headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -70,8 +70,8 @@ var searchConfluence = function(searchText, index) {
                 $.each(data.results, function(index, value) {
                     value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting (odd Confluence tags)
                     value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
-                    value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
-                    article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.bodyTextHighlights}<br/><span class="article-date">${value.friendlyDate}</span></p></article>`;
+                    value.url = 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=' + value.id;
+                    article = '<article><a href="' + value.url + '" target="_blank">' + value.title + '</a><p class="text-muted">' + value.bodyTextHighlights + '<br/><span class="article-date">' + value.friendlyDate + '</span></p></article>';
                     $('#searchResults').append(article);
                     searchResults.push(article);
                 });
@@ -95,7 +95,7 @@ $('#searchForm').on('submit', function(e) {
 // Handle submit on request form
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
-    $('#description').val(`${$('#description').val()}${$('#parameters').val()}`);
+    $('#description').val($('#description').val() + $('#parameters').val());
 });
 
 // Handle click on tabs
@@ -184,8 +184,8 @@ $(document).ready(function() {
 
     var cname = qs('cname');
     if(!fqdn && cname) {
-        $('#fqdn').val(`${cname}.perfectomobile.com`);
-        $('#fqdn').val(`${cname}.perfectomobile.com`); // Overcomes Safari bug where placeholder doesn't disappear
+        $('#fqdn').val(cname + '.perfectomobile.com');
+        $('#fqdn').val(cname + '.perfectomobile.com'); // Overcomes Safari bug where placeholder doesn't disappear
     }
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
