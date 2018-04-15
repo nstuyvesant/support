@@ -87,7 +87,7 @@ var searchConfluence = function(searchText, index) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
     loadTopics(selectedTabName);
-    if(selectedTabName != 'suggestion') {
+    if(selectedTabName != 'Suggestion') {
         $('#topic').show();
         $('#severity').show();
         loadTopics(selectedTabName);
