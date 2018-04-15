@@ -83,8 +83,6 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
-
-
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
@@ -94,9 +92,11 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#severity').show();
         loadTopics(selectedTabName);
         loadArticles(selectedTabName);
+        $('#topic').prop('selectedIndex',0);
     } else {
         $('#topic').hide();
         $('#severity').hide();
+        $('#topicActual').val('Suggestion');
     };
 });
 
