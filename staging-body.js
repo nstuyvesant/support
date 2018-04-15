@@ -83,27 +83,7 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
-// Handle change to Topic - concat tab name, colon and space as prefix
-$('#topic').on('change', function(e) {
-    $('#topicActual').val(selectedTabName + ': ' + $(e.target).val());
-});
 
-// Handle submit on search form
-$('#searchForm').on('submit', function(e) {
-    e.preventDefault();  //prevent form from submitting
-    $('body').css('cursor','progress');
-    $('#searchStatus').show();
-    searchConfluence($('#queryString').val(), 0);
-});
-
-// Handle submit on request form
-$('#requestForm').on('submit', function(e) {
-    // Append parameters to description field
-    $('#description').val($('#description').val() + $('#parameters').val());
-});
-
-// Global scope
-var selectedTabName = 'Device';
 
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
@@ -118,6 +98,29 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#topic').hide();
         $('#severity').hide();
     };
+});
+
+var setTopicActual = function(value) {
+    $('#topicActual').val(selectedTabName + ': ' + value);
+}
+
+// Handle change to Topic - concat tab name, colon and space as prefix
+$('#topic').on('change', function(e) {
+    setTopicActual($(e.target).val());
+});
+
+// Handle submit on search form
+$('#searchForm').on('submit', function(e) {
+    e.preventDefault();  // prevent form from submitting
+    $('body').css('cursor','progress');
+    $('#searchStatus').show();
+    searchConfluence($('#queryString').val(), 0);
+});
+
+// Handle submit on request form
+$('#requestForm').on('submit', function(e) {
+    // Append parameters to description field
+    $('#description').val($('#description').val() + $('#parameters').val());
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -139,6 +142,8 @@ var recaptchaCallback = function() {
     $('#hiddenRecaptcha').valid();
 };
 
+// Global scope
+var selectedTabName = 'Device';
 var cloudStatus = {};
 var caseTree = {};
 
@@ -211,8 +216,8 @@ $(document).ready(function() {
     // Read articles and topics from JSON into object then load topics and articles for the default tab displayed (device)
     $.getJSON('staging-hierarchy.json', function(data) {
         caseTree = data;
-        loadTopics('device');
-        loadArticles('device');
+        loadTopics('Device');
+        loadArticles('Device');
     });
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
@@ -243,7 +248,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            '00ND0000006MZHc': { // topic
+            'topic': {
                 required: {
                     depends: function(element) {
                         return $('#type').val() != 'Suggestion';
