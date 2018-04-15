@@ -1,5 +1,5 @@
 {
-    "device": {
+    "Device": {
       "type": "Device",
       "topics": [
         "Unresponsive",
@@ -103,7 +103,7 @@
         }
       ]
     },
-    "browser": {
+    "Browser": {
       "type": "Browser",
       "topics": [
         "Page Click",
@@ -148,7 +148,7 @@
         }
       ]
     },
-    "automation": {
+    "Automation": {
       "type": "Automation",
       "topics": [
         "Execution Errors",
@@ -227,7 +227,7 @@
         }
       ]
     },
-    "cloud": {
+    "Cloud": {
       "type": "Cloud",
       "topics": [
         "Login",
@@ -268,7 +268,7 @@
         }
       ]
     },
-    "suggestion": {
+    "Suggestion": {
       "type": "Suggestion",
       "topics": [],
       "description": "Customers are our best source of ideas and we value your input!\nWhat feature do you want to see in the product?\n\nHow would this help you get more value from Perfecto?\n\nHow do you workaround the product not having this feature?\n",

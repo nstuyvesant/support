@@ -83,6 +83,11 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
+// Handle change to Topic - concat tab name, colon and space as prefix
+$('#topic').on('change', function(e) {
+    $('#topicActual').val(selectedTabName + ': ' + $(e.target).val());
+});
+
 // Handle submit on search form
 $('#searchForm').on('submit', function(e) {
     e.preventDefault();  //prevent form from submitting
@@ -97,9 +102,12 @@ $('#requestForm').on('submit', function(e) {
     $('#description').val($('#description').val() + $('#parameters').val());
 });
 
+// Global scope
+var selectedTabName = 'Device';
+
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
-    var selectedTabName = $(e.target).attr('aria-controls');
+    selectedTabName = $(e.target).attr('aria-controls');
     loadTopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#topic').show();

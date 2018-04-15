@@ -103,19 +103,19 @@
         <h1 class="text-center topic">Choose a Topic</h1>
         <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
-                <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="Device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
             </li>
             <li class="nav-item">
-                <a id="browserTab" data-toggle="tab" role="tab" aria-controls="browser" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
+                <a id="browserTab" data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
             </li>
             <li class="nav-item">
-                <a id="automationTab" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
+                <a id="automationTab" data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
             </li>
             <li class="nav-item">
-                <a id="cloudTab" data-toggle="tab" role="tab" aria-controls="cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
+                <a id="cloudTab" data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
             </li>
             <li class="nav-item">
-                <a id="suggestionTab" data-toggle="tab" role="tab" aria-controls="suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
+                <a id="suggestionTab" data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
             </li>
         </ul>
         <div class="row">&nbsp;</div>
@@ -142,6 +142,7 @@
                             <input type="hidden" id="recordType" name="recordType" value="01220000000HQCE">
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
+                            <input type="hidden" id="topicActual" name="00ND0000006MZHc" value="">
                             <input type="hidden" id="priority" name="priority" value="Low">
                             <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
                             <input type="hidden" id="company" name="00N20000001N4eN">
@@ -188,7 +189,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="topic" class="sr-only">Subtopic</label>
-                                <select id="topic" name="00ND0000006MZHc" class="form-control">
+                                <select id="topic" name="topic" class="form-control">
                                     <option selected value="" disabled>Select a subtopic...</option>
                                 </select>
                             </div>
