@@ -93,6 +93,7 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         loadTopics(selectedTabName);
         loadArticles(selectedTabName);
         $('#topic').prop('selectedIndex',0);
+        $('#topicActual').val('');
     } else {
         $('#topic').hide();
         $('#severity').hide();
