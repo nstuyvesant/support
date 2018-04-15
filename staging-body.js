@@ -196,7 +196,6 @@ $(document).ready(function() {
     $('#location').val(qs('location'));
     $('#cradleId').val(qs('cradleId'));
     $('#deviceId').val(qs('deviceId'));
-    $('#manufacturer').val(qs('manufacturer'));
     $('#model').val(qs('model'));
     $('#os').val(qs('os'));
     $('#version').val(qs('version'));
