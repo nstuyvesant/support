@@ -10,9 +10,11 @@ window._laq.push(function() {
 
 // // Global site tag (gtag.js) - Google Analytics
 window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag() {
+    dataLayer.push(arguments);
+}
 gtag('js', new Date());
-gtag('config', 'UA-2078617-3');
+gtag('config', 'UA-2078617-29');
 
 // Marketo Munchkin
 (function() {
