@@ -52,6 +52,7 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
+        ga('send','event','KnowledgeBase','Search', searchText);
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
@@ -86,6 +87,7 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
+    ga('send','event','Tab','Selected',selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -107,7 +109,9 @@ var setTopicActual = function(value) {
 
 // Handle change to Topic - concat tab name, colon and space as prefix
 $('#topic').on('change', function(e) {
-    setTopicActual($(e.target).val());
+    var selectedTopic = $(e.target).val();
+    setTopicActual(selectedTopic);
+    ga('send','event','Topic','Selected',selectedTopic);
 });
 
 // Handle submit on search form
@@ -122,6 +126,7 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
+    ga('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val());
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -129,6 +134,7 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
+        ga('send','event','Outage','Alert', cloudFQDN);
     }
 };
 
@@ -220,6 +226,7 @@ $(document).ready(function() {
         loadTopics('Device');
         loadArticles('Device');
     });
+    ga('send','event','Tab','Selected', 'Device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({

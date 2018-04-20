@@ -53,6 +53,7 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
+        ga('send','event','KnowledgeBase','Search', searchText);
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
@@ -96,11 +97,13 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
+    ga('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
 });
 
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
+    ga('send','event','Tab','Selected', selectedTabName);
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -118,6 +121,7 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
+        ga('send','event','Outage','Alert', cloudFQDN);
     }
 };
 
@@ -207,6 +211,7 @@ $(document).ready(function() {
         loadSubtopics('device');
         loadArticles('device');
     });
+    ga('send','event','Tab','Selected', 'device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
