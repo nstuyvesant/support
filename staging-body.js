@@ -1,6 +1,6 @@
 // Load articles in card lower-left from array (except for Suggestions)
 var loadArticles = function(tabName) {
-    if(tabName != 'suggestion') {
+    if(tabName != 'Suggestion') {
         $('#articles').empty(); // Clear the card of past articles
         $.each(caseTree[tabName].articles, function(index, value) {
             var currentNode = caseTree[tabName].articles[index];
