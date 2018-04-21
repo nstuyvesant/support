@@ -191,6 +191,10 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn);
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
+    if(fqdn) {
+        ga('send','event','Source','MCM/Digitalzoom', fqdn);
+    } else ga('send','event','Source','Direct', 'support.perfecto.io');
+
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
     if(!fqdn && cname) {

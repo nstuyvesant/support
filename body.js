@@ -176,6 +176,10 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn);
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
+    if(fqdn) {
+        ga('send','event','Source','MCM/Digitalzoom', fqdn);
+    } else ga('send','event','Source','Direct', 'support.perfecto.io');
+
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
