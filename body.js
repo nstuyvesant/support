@@ -54,10 +54,8 @@ var refreshCaptchaTimestamp = function() {
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
         // Report search event to Google Analytics
-        gtag('event', 'Search', {
-            'event_category:': 'Self-Service',
-            'event_label:': searchText 
-        });
+        gtag('event', 'Search');
+        gtag('event', 'Search: ' + searchText);
         var pageSize = 8;
         // Next line can be removed once Confluence gets an SSL cert
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
@@ -90,16 +88,6 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
-// Handle change to Topic - concat tab name, colon and space as prefix
-$('#subtopic').on('change', function(e) {
-    var selectedSubtopic = $(e.target).val();
-    // Report subtopic selection to Google Analytics
-    gtag('event', 'Selection', {
-        'event_category:': 'Subtopic',
-        'event_label:': selectedSubtopic
-    });
-});
-
 // Handle submit on search form
 $('#searchForm').on('submit', function(e) {
     e.preventDefault();  //prevent form from submitting
@@ -113,20 +101,14 @@ $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
     // Report submit event to Google Analytics
-    gtag('event', 'Create Case', {
-        'event_category:': 'Type/Topic/Subtopic',
-        'event_label:': $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val()
-    });
+    gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
 });
 
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
     // Report tab selection to Google Analytics
-    gtag('event', 'Navigate', {
-        'event_category:': 'Topic',
-        'event_label:': selectedTabName
-    });
+    gtag('event', 'Type: ' + selectedTabName);
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -147,10 +129,7 @@ var displayOutageAlerts = function(cloudFQDN) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
         // Report outage alert to Google Analytics
-        gtag('event', 'Alert', {
-            'event_category:': 'Outage',
-            'event_label:': cloudFQDN
-        });
+        gtag('event', 'Outage: ' + cloudFQDN);
     }
 };
 
@@ -205,15 +184,9 @@ $(document).ready(function() {
 
     // Report source to Google Analytics
     if(fqdn) {
-        gtag('event', 'Visit', {
-            'event_category:': 'Sources',
-            'event_label:': fqdn
-        });
+        gtag('event', 'Visit: ' + fqdn);
 
-    } else gtag('event', 'Visit', {
-        'event_category:': 'Sources',
-        'event_label:': 'support.perfecto.io'
-    });
+    } else gtag('event', 'Visit: Direct');
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
@@ -254,10 +227,7 @@ $(document).ready(function() {
     });
 
     // Report tab selection to Google Analytics
-    gtag('event', 'Navigate', {
-        'event_category:': 'Topic',
-        'event_label:': 'device'
-    });
+    gtag('event', 'Type: device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
