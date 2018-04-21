@@ -56,8 +56,7 @@ var searchConfluence = function(searchText, index) {
         // Report search event to Google Analytics
         gtag('event', 'Search', {
             'event_category:': 'Self-Service',
-            'event_label:': 'Search Text',
-            'value': searchText
+            'event_label:': searchText 
         });
         var pageSize = 8;
         // Next line can be removed once Confluence gets an SSL cert
@@ -97,8 +96,7 @@ $('#subtopic').on('change', function(e) {
     // Report subtopic selection to Google Analytics
     gtag('event', 'Selection', {
         'event_category:': 'Subtopic',
-        'event_label:': 'Name',
-        'value': selectedSubtopic
+        'event_label:': selectedSubtopic
     });
 });
 
@@ -116,9 +114,8 @@ $('#requestForm').on('submit', function(e) {
     $('#description').val($('#description').val() + $('#parameters').val());
     // Report submit event to Google Analytics
     gtag('event', 'Create Case', {
-        'event_category:': 'Cases',
-        'event_label:': 'Type/Topic/Subtopic',
-        'value': $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val()
+        'event_category:': 'Type/Topic/Subtopic',
+        'event_label:': $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val()
     });
 });
 
@@ -128,8 +125,7 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
     // Report tab selection to Google Analytics
     gtag('event', 'Navigate', {
         'event_category:': 'Topic',
-        'event_label:': 'Tab',
-        'value': selectedTabName
+        'event_label:': selectedTabName
     });
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
@@ -153,8 +149,7 @@ var displayOutageAlerts = function(cloudFQDN) {
         // Report outage alert to Google Analytics
         gtag('event', 'Alert', {
             'event_category:': 'Outage',
-            'event_label:': 'FQDN',
-            'value': cloudFQDN
+            'event_label:': cloudFQDN
         });
     }
 };
@@ -212,14 +207,12 @@ $(document).ready(function() {
     if(fqdn) {
         gtag('event', 'Visit', {
             'event_category:': 'Sources',
-            'event_label:': 'FQDN',
-            'value': fqdn
+            'event_label:': fqdn
         });
 
     } else gtag('event', 'Visit', {
         'event_category:': 'Sources',
-        'event_label:': 'FQDN',
-        'value': 'support.perfecto.io'
+        'event_label:': 'support.perfecto.io'
     });
 
     var phone = qs('phone');
@@ -263,8 +256,7 @@ $(document).ready(function() {
     // Report tab selection to Google Analytics
     gtag('event', 'Navigate', {
         'event_category:': 'Topic',
-        'event_label:': 'Name',
-        'value': 'device'
+        'event_label:': 'device'
     });
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
