@@ -87,7 +87,9 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
-    ga('send','event','Tab','Selected',selectedTabName);
+    ga('send', 'event', 'Tab', 'Selected', selectedTabName);
+    ga('set', 'page', '/' + selectedTabName);
+    ga('send', 'pageview');
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();

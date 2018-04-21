@@ -103,7 +103,9 @@ $('#requestForm').on('submit', function(e) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
-    ga('send','event','Tab','Selected', selectedTabName);
+    ga('send', 'event', 'Tab', 'Selected', selectedTabName);
+    ga('set', 'page', '/' + selectedTabName);
+    ga('send', 'pageview');
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
