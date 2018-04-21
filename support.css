@@ -79,7 +79,7 @@ article a {
 .nav-pills .nav-link.active {
     background-color:black;
 }
-.nav-pills .svg-inline--fa {
+.nav-pills .fas, .nav-pills .far {
     font-size: 4rem;
     margin-bottom: 5px;
 }
