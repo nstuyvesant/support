@@ -88,8 +88,6 @@ var searchConfluence = function(searchText, index) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
     ga('send', 'event', 'Tab', 'Selected', selectedTabName);
-    ga('set', 'page', '/' + selectedTabName);
-    ga('send', 'pageview');
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -103,6 +101,8 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#severity').hide();
         $('#topicActual').val('Suggestion');
     };
+    ga('set', 'page', '/' + selectedTabName);
+    ga('send', 'pageview');
 });
 
 var setTopicActual = function(value) {

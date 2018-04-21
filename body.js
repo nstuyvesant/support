@@ -104,8 +104,6 @@ $('#requestForm').on('submit', function(e) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
     ga('send', 'event', 'Tab', 'Selected', selectedTabName);
-    ga('set', 'page', '/' + selectedTabName);
-    ga('send', 'pageview');
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -116,6 +114,8 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#subtopic').hide();
         $('#severity').hide();
     };
+    ga('set', 'page', '/' + selectedTabName);
+    ga('send', 'pageview');
 });
 
 // Conditionally display outage alerts based on cloudStatus object
