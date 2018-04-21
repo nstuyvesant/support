@@ -53,11 +53,8 @@ var refreshCaptchaTimestamp = function() {
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
         // Report search event to Google Analytics
-        gtag('event', 'Search', {
-            'event_category:': 'Self-Service',
-            'event_label:': 'Search Text',
-            'value': searchText
-        });
+        gtag('event', 'Search');
+        gtag('event', 'Search: ' + searchText);
         // Next line can be removed once Confluence gets an SSL cert
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
@@ -94,11 +91,7 @@ var searchConfluence = function(searchText, index) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
     // Report tab selection to Google Analytics
-    gtag('event', 'Navigate', {
-        'event_category:': 'Type',
-        'event_label:': 'Name',
-        'value': selectedTabName
-    });
+    gtag('event', 'Type: ' + selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -124,12 +117,6 @@ var setTopicActual = function(value) {
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
     setTopicActual(selectedTopic);
-    // Report topic selection to Google Analytics
-    gtag('event', 'Selection', {
-        'event_category:': 'Topic',
-        'event_label:': 'Name',
-        'value': selectedTopic
-    });
 });
 
 // Handle submit on search form
@@ -145,11 +132,7 @@ $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
     // Report submit event to Google Analytics
-    gtag('event', 'Create Case', {
-        'event_category:': 'Cases',
-        'event_label:': 'Type/Topic/Subtopic',
-        'value': $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val()
-    });
+    gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -158,11 +141,7 @@ var displayOutageAlerts = function(cloudFQDN) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
         // Report outage alert to Google Analytics
-        gtag('event', 'Alert', {
-            'event_category:': 'Outage',
-            'event_label:': 'FQDN',
-            'value': cloudFQDN
-        });
+        gtag('event', 'Outage: ' + cloudFQDN);
     }
 };
 
@@ -219,17 +198,9 @@ $(document).ready(function() {
 
     // Report source to Google Analytics
     if(fqdn) {
-        gtag('event', 'Visit', {
-            'event_category:': 'Sources',
-            'event_label:': 'FQDN',
-            'value': fqdn
-        });
+        gtag('event', 'Visit: ' + fqdn);
 
-    } else gtag('event', 'Visit', {
-        'event_category:': 'Sources',
-        'event_label:': 'FQDN',
-        'value': 'support.perfecto.io'
-    });
+    } else gtag('event', 'Visit: Direct');
 
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
@@ -270,11 +241,7 @@ $(document).ready(function() {
     });
 
     // Report tab selection to Google Analytics
-    gtag('event', 'Navigate', {
-        'event_category:': 'Type',
-        'event_label:': 'Name',
-        'value': 'Device'
-    });
+    gtag('event', 'Type: Device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
