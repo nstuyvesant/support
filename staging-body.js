@@ -87,7 +87,7 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
-    gtag('send', 'event', 'Tab', 'Selected', selectedTabName);
+    gtag('event','Selected', 'Tab', 'Name', selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -113,7 +113,7 @@ var setTopicActual = function(value) {
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
     setTopicActual(selectedTopic);
-    gtag('send','event','Topic','Selected',selectedTopic);
+    gtag('event','Selected','Topic','Name',selectedTopic);
 });
 
 // Handle submit on search form
@@ -128,7 +128,7 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
-    gtag('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val());
+    gtag('event','Submit', 'Case','Type/Topic', $('#type').val() + '/' + $('#topic').val());
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -136,7 +136,7 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
-        gtag('send','event','Outage','Alert', cloudFQDN);
+        gtag('event','Alert','Outage','Cloud', cloudFQDN);
     }
 };
 
@@ -192,8 +192,8 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
     if(fqdn) {
-        gtag('send','event','Source','MCM/Digitalzoom', fqdn);
-    } else gtag('send','event','Source','Direct', 'support.perfecto.io');
+        gtag('event','Source','MCM/Digitalzoom', 'FQDN', fqdn);
+    } else gtag('event','Source','Direct', 'FQDN', 'support.perfecto.io');
 
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
@@ -232,7 +232,7 @@ $(document).ready(function() {
         loadTopics('Device');
         loadArticles('Device');
     });
-    gtag('send','event','Tab','Selected', 'Device');
+    gtag('event','Selected','Tab', 'Name', 'Device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({

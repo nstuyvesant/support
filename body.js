@@ -53,7 +53,7 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
-        gtag('send','event','KnowledgeBase','Search', searchText);
+        gtag('event','Search','KnowledgeBase', 'Searched', searchText);
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
@@ -97,13 +97,13 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
-    gtag('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
+    gtag('event','Submit', 'Case','Type/Topic/Subtopic', $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
 });
 
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
-    gtag('send', 'event', 'Tab', 'Selected', selectedTabName);
+    gtag('event', 'Selected', 'Tab', 'Name', selectedTabName);
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -123,7 +123,7 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
-        gtag('send','event','Outage','Alert', cloudFQDN);
+        gtag('event','Alert','Outage','Cloud', cloudFQDN);
     }
 };
 
@@ -177,8 +177,8 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
     if(fqdn) {
-        gtag('send','event','Source','MCM/Digitalzoom', fqdn);
-    } else gtag('send','event','Source','Direct', 'support.perfecto.io');
+        gtag('event','Source','MCM/Digitalzoom', 'FQDN', fqdn);
+    } else gtag('event','Source','Direct', 'FQDN', 'support.perfecto.io');
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
@@ -217,7 +217,7 @@ $(document).ready(function() {
         loadSubtopics('device');
         loadArticles('device');
     });
-    gtag('send','event','Tab','Selected', 'device');
+    gtag('event','Selected','Tab', 'Name', 'device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({

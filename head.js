@@ -8,11 +8,9 @@ window._laq.push(function() {
     liveagent.showWhenOffline('573D0000000028q', document.getElementById('liveagent_button_offline_573D0000000028q'));
 });
 
-// // Global site tag (gtag.js) - Google Analytics
+// Global site tag (gtag.js) - Google Analytics
 window.dataLayer = window.dataLayer || [];
-function gtag() {
-    dataLayer.push(arguments);
-}
+function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-2078617-29');
 
