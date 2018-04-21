@@ -52,7 +52,7 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
-        ga('send','event','KnowledgeBase','Search', searchText);
+        gtag('send','event','KnowledgeBase','Search', searchText);
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
@@ -87,7 +87,7 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
-    ga('send', 'event', 'Tab', 'Selected', selectedTabName);
+    gtag('send', 'event', 'Tab', 'Selected', selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -101,8 +101,8 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#severity').hide();
         $('#topicActual').val('Suggestion');
     };
-    ga('set', 'page', '/' + selectedTabName);
-    ga('send', 'pageview');
+    gtag('set', 'page', '/' + selectedTabName);
+    gtag('send', 'pageview');
 });
 
 var setTopicActual = function(value) {
@@ -113,7 +113,7 @@ var setTopicActual = function(value) {
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
     setTopicActual(selectedTopic);
-    ga('send','event','Topic','Selected',selectedTopic);
+    gtag('send','event','Topic','Selected',selectedTopic);
 });
 
 // Handle submit on search form
@@ -128,7 +128,7 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
-    ga('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val());
+    gtag('send','event','Case','Submit', $('#type').val() + '/' + $('#topic').val());
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -136,7 +136,7 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
-        ga('send','event','Outage','Alert', cloudFQDN);
+        gtag('send','event','Outage','Alert', cloudFQDN);
     }
 };
 
@@ -192,8 +192,8 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
     if(fqdn) {
-        ga('send','event','Source','MCM/Digitalzoom', fqdn);
-    } else ga('send','event','Source','Direct', 'support.perfecto.io');
+        gtag('send','event','Source','MCM/Digitalzoom', fqdn);
+    } else gtag('send','event','Source','Direct', 'support.perfecto.io');
 
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
@@ -232,7 +232,7 @@ $(document).ready(function() {
         loadTopics('Device');
         loadArticles('Device');
     });
-    ga('send','event','Tab','Selected', 'Device');
+    gtag('send','event','Tab','Selected', 'Device');
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
