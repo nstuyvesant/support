@@ -52,7 +52,13 @@ var refreshCaptchaTimestamp = function() {
 // Search Confluence via undocumented REST API (searchv3)
 var searchConfluence = function(searchText, index) {
     if(searchText != '') {
-        gtag('send','event','KnowledgeBase','Search', searchText);
+        // Report search event to Google Analytics
+        gtag('event', 'Search', {
+            'event_category:': 'Self-Service',
+            'event_label:': 'Search Text',
+            'value': searchText
+        });
+        // Next line can be removed once Confluence gets an SSL cert
         var pageSize = 8;
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
@@ -87,7 +93,12 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
-    gtag('event','Selected', 'Tab', 'Name', selectedTabName);
+    // Report tab selection to Google Analytics
+    gtag('event', 'Navigate', {
+        'event_category:': 'Type',
+        'event_label:': 'Name',
+        'value': selectedTabName
+    });
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -113,7 +124,12 @@ var setTopicActual = function(value) {
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
     setTopicActual(selectedTopic);
-    gtag('event','Selected','Topic','Name',selectedTopic);
+    // Report topic selection to Google Analytics
+    gtag('event', 'Selection', {
+        'event_category:': 'Topic',
+        'event_label:': 'Name',
+        'value': selectedTopic
+    });
 });
 
 // Handle submit on search form
@@ -128,7 +144,12 @@ $('#searchForm').on('submit', function(e) {
 $('#requestForm').on('submit', function(e) {
     // Append parameters to description field
     $('#description').val($('#description').val() + $('#parameters').val());
-    gtag('event','Submit', 'Case','Type/Topic', $('#type').val() + '/' + $('#topic').val());
+    // Report submit event to Google Analytics
+    gtag('event', 'Create Case', {
+        'event_category:': 'Cases',
+        'event_label:': 'Type/Topic/Subtopic',
+        'value': $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val()
+    });
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -136,7 +157,12 @@ var displayOutageAlerts = function(cloudFQDN) {
     if(cloudStatus.outages.indexOf(cloudFQDN) != -1 || cloudStatus.outages.indexOf('all') != -1) {
         $('#cloudStatusAlert').show();
         $('#message').text(cloudStatus.message);
-        gtag('event','Alert','Outage','Cloud', cloudFQDN);
+        // Report outage alert to Google Analytics
+        gtag('event', 'Alert', {
+            'event_category:': 'Outage',
+            'event_label:': 'FQDN',
+            'value': cloudFQDN
+        });
     }
 };
 
@@ -191,9 +217,19 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn);
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
+    // Report source to Google Analytics
     if(fqdn) {
-        gtag('event','Source','MCM/Digitalzoom', 'FQDN', fqdn);
-    } else gtag('event','Source','Direct', 'FQDN', 'support.perfecto.io');
+        gtag('event', 'Visit', {
+            'event_category:': 'Sources',
+            'event_label:': 'FQDN',
+            'value': fqdn
+        });
+
+    } else gtag('event', 'Visit', {
+        'event_category:': 'Sources',
+        'event_label:': 'FQDN',
+        'value': 'support.perfecto.io'
+    });
 
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
@@ -232,7 +268,13 @@ $(document).ready(function() {
         loadTopics('Device');
         loadArticles('Device');
     });
-    gtag('event','Selected','Tab', 'Name', 'Device');
+
+    // Report tab selection to Google Analytics
+    gtag('event', 'Navigate', {
+        'event_category:': 'Type',
+        'event_label:': 'Name',
+        'value': 'Device'
+    });
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
