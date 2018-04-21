@@ -91,7 +91,7 @@ var searchConfluence = function(searchText, index) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
     // Report tab selection to Google Analytics
-    gtag('event', 'Type: ' + selectedTabName);
+    //gtag('event', 'Type: ' + selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -105,8 +105,8 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#severity').hide();
         $('#topicActual').val('Suggestion');
     };
-    gtag('set', 'page', '/' + selectedTabName);
-    gtag('send', 'pageview');
+    // Treat tabs as virtual pages with Google Analytics
+    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName});
 });
 
 var setTopicActual = function(value) {

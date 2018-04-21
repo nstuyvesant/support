@@ -108,7 +108,7 @@ $('#requestForm').on('submit', function(e) {
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
     // Report tab selection to Google Analytics
-    gtag('event', 'Type: ' + selectedTabName);
+    //gtag('event', 'Type: ' + selectedTabName);
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -119,8 +119,8 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#subtopic').hide();
         $('#severity').hide();
     };
-    gtag('set', 'page', '/' + selectedTabName);
-    gtag('send', 'pageview');
+    // Treat tabs as virtual pages with Google Analytics
+    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName});
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -227,7 +227,8 @@ $(document).ready(function() {
     });
 
     // Report tab selection to Google Analytics
-    gtag('event', 'Type: device');
+    //gtag('event', 'Type: device');
+    gtag('config', 'UA-2078617-29', {'page_path': '/device'});
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
