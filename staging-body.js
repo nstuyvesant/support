@@ -90,8 +90,6 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
-    // Report tab selection to Google Analytics
-    //gtag('event', 'Type: ' + selectedTabName);
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -240,8 +238,8 @@ $(document).ready(function() {
         loadArticles('Device');
     });
 
-    // Report tab selection to Google Analytics
-    gtag('event', 'Type: Device');
+    // Treat tabs as virtual pages in Google Analytics
+    gtag('config', 'UA-2078617-29', {'page_path': '/Device'});
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({

@@ -107,8 +107,6 @@ $('#requestForm').on('submit', function(e) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     var selectedTabName = $(e.target).attr('aria-controls');
-    // Report tab selection to Google Analytics
-    //gtag('event', 'Type: ' + selectedTabName);
     loadSubtopics(selectedTabName);
     if(selectedTabName != 'suggestion') {
         $('#subtopic').show();
@@ -226,8 +224,7 @@ $(document).ready(function() {
         loadArticles('device');
     });
 
-    // Report tab selection to Google Analytics
-    //gtag('event', 'Type: device');
+    // Treat tabs as virtual pages in Google Analytics
     gtag('config', 'UA-2078617-29', {'page_path': '/device'});
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
