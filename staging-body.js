@@ -11,9 +11,11 @@ var loadArticles = function(tabName) {
             $('#articles').append(article);
         });
         // Setup Google Analytics tracking on articles found
-        $('a.article').on('click', function() {
+        $('a.article').on('click', function(e) {
+            var articleName = $(e.target).text();
             gtag('event', 'Suggested Article');
-            console.log('Suggested article');
+            gtag('event', 'Suggested Article: ' + articleName);
+            console.log('Suggested article: ' + articleName);
         });
     }
 };
