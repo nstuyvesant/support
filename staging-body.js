@@ -228,6 +228,7 @@ $(document).ready(function() {
     }
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
+    $('#origin').val(qs('origin'));
     $('#company').val(qs('company'));
     $('#account').val(qs('accountId'));
     $('#contact').val(qs('contactId'));
