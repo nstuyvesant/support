@@ -98,10 +98,12 @@ $('#searchForm').on('submit', function(e) {
 
 // Handle submit on request form
 $('#requestForm').on('submit', function(e) {
-    // Append parameters to description field
-    $('#description').val($('#description').val() + $('#parameters').val());
-    // Report submit event to Google Analytics
-    gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
+    if($('#requestForm').valid) {
+        // Append execution URL to description
+        $('#description').val($('#description').val() + $('#parameters').val());
+        // Report submit event to Google Analytics
+        gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
+    }
 });
 
 // Handle click on tabs
@@ -182,7 +184,7 @@ $(document).ready(function() {
 
     // Report source to Google Analytics
     if(fqdn) {
-        gtag('event', 'Visit: ' + fqdn);
+        gtag('event', 'Visit: MCM/Digitalzoom');
 
     } else gtag('event', 'Visit: Direct');
 
