@@ -118,7 +118,7 @@ $('#topic').on('change', function(e) {
 });
 
 // Track clicks on articles
-$('a.article').click(function() {
+$('a.article').on('click', function() {
     gtag('event', 'Suggested Article');
     console.log('Suggested article');
 });
