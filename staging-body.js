@@ -90,6 +90,8 @@ var searchConfluence = function(searchText, index) {
 // Handle click on tabs
 $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
+    // Treat tabs as virtual pages with Google Analytics
+    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName.toLowerCase()});
     loadTopics(selectedTabName);
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
@@ -103,8 +105,6 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
         $('#severity').hide();
         $('#topicActual').val('Suggestion');
     };
-    // Treat tabs as virtual pages with Google Analytics
-    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName});
 });
 
 var setTopicActual = function(value) {
@@ -237,9 +237,6 @@ $(document).ready(function() {
         loadTopics('Device');
         loadArticles('Device');
     });
-
-    // Treat tabs as virtual pages in Google Analytics
-    gtag('config', 'UA-2078617-29', {'page_path': '/Device'});
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
     $('#requestForm').validate({
