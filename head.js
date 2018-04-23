@@ -20,7 +20,7 @@ gtag('config', 'UA-2078617-29', {'page_path': '/device'});
     function initMunchkin() {
         if(didInit === false) {
             didInit = true;
-            Munchkin.init('482-YUQ-296');
+            Munchkin.init('482-YUQ-296', {asyncOnly: true});
         }
     }
     var s = document.createElement('script');
