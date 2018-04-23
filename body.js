@@ -10,6 +10,13 @@ var loadArticles = function(tabName) {
             var article = '<article><a href="' + url + '" class="article" target="_blank">' + title + '</a><p class="text-muted">' + synopsis + '</p></article>';
             $('#articles').append(article);
         });
+        // Setup Google Analytics tracking on articles found
+        $('a.article').on('click', function(e) {
+            var articleName = $(e.target).text();
+            gtag('event', 'Suggested Article');
+            gtag('event', 'Suggested Article: ' + articleName);
+            console.log('Suggested article: ' + articleName);
+        });
     }
 };
 
