@@ -117,6 +117,11 @@ $('#topic').on('change', function(e) {
     setTopicActual(selectedTopic);
 });
 
+// Handle change to Topic - concat tab name, colon and space as prefix
+$('article a').on('click', function(e) {
+    console.log('Clicked article');
+});
+
 // Handle submit on search form
 $('#searchForm').on('submit', function(e) {
     e.preventDefault();  // prevent form from submitting
