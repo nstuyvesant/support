@@ -120,6 +120,7 @@ $('#topic').on('change', function(e) {
 // Handle change to Topic - concat tab name, colon and space as prefix
 $('a.article').on('click', function(e) {
     console.log('Clicked article');
+    gtag('event', 'Suggested Article');
 });
 
 // Handle submit on search form
