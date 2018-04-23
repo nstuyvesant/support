@@ -10,6 +10,11 @@ var loadArticles = function(tabName) {
             var article = '<article><a href="' + url + '" class="article" target="_blank">' + title + '</a><p class="text-muted">' + synopsis + '</p></article>';
             $('#articles').append(article);
         });
+        // Setup Google Analytics tracking on articles found
+        $('a.article').on('click', function() {
+            gtag('event', 'Suggested Article');
+            console.log('Suggested article');
+        });
     }
 };
 
@@ -115,12 +120,6 @@ var setTopicActual = function(value) {
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
     setTopicActual(selectedTopic);
-});
-
-// Track clicks on articles
-$('a.article').on('click', function() {
-    gtag('event', 'Suggested Article');
-    console.log('Suggested article');
 });
 
 // Handle submit on search form
