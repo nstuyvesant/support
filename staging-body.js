@@ -249,6 +249,13 @@ $(document).ready(function() {
                 required: true,
                 email: true
             },
+            phone: {
+                required: {
+                    depends: function(element) {
+                        return $("#severity").val() == "Critical";
+                    }
+                }
+            },
             '00ND0000002w9Lj': { // fqdn
                 required: true,
                 minlength: 13
