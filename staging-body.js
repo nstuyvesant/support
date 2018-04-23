@@ -117,9 +117,8 @@ $('#topic').on('change', function(e) {
     setTopicActual(selectedTopic);
 });
 
-// Handle change to Topic - concat tab name, colon and space as prefix
-$('a.article').on('click', function(e) {
-    console.log('Clicked article');
+// Track clicks on articles
+$('a.article').click(function() {
     gtag('event', 'Suggested Article');
 });
 

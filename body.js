@@ -88,6 +88,11 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
+// Track clicks on articles
+$('a.article').click(function() {
+    gtag('event', 'Suggested Article');
+});
+
 // Handle submit on search form
 $('#searchForm').on('submit', function(e) {
     e.preventDefault();  //prevent form from submitting
