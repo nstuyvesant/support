@@ -193,8 +193,8 @@ $(document).ready(function() {
         gtag('event', 'Visit: MCM/Digitalzoom');
 
     } else gtag('event', 'Visit: Direct');
-    var accountId = qs('accountId');
-    if(accountId) gtag('event', 'Visit: Customer Portal');
+    var origin = qs('origin');
+    if(origin == 'Customer Portal') gtag('event', 'Visit: Customer Portal');
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
@@ -215,10 +215,8 @@ $(document).ready(function() {
     }
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
-    $('#origin').val(qs('origin'));
+    $('#origin').val(origin);
     $('#company').val(qs('company'));
-    $('#account').val(accountId);
-    $('#contact').val(qs('contactId'));
     $('#timezone').val(qs('timezone'));
     $('#mcmVersion').val(qs('mcmVersion'));
     $('#hssVersion').val(qs('hssVersion'));
