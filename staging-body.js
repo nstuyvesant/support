@@ -120,6 +120,7 @@ $('#topic').on('change', function(e) {
 // Track clicks on articles
 $('a.article').click(function() {
     gtag('event', 'Suggested Article');
+    console.log('Suggested article');
 });
 
 // Handle submit on search form
