@@ -15,7 +15,6 @@ var loadArticles = function(tabName) {
             var articleName = $(e.target).text();
             gtag('event', 'Suggested Article');
             gtag('event', 'Suggested Article: ' + articleName);
-            console.log('Suggested article: ' + articleName);
         });
     }
 };
@@ -82,12 +81,19 @@ var searchConfluence = function(searchText, index) {
                     value.title = value.title.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting (odd Confluence tags)
                     value.bodyTextHighlights = value.bodyTextHighlights.replace(/@@@e?n?d?hl@@@/g, ''); // strip out formatting
                     value.url = 'http://developers.perfectomobile.com/pages/viewpage.action?pageId=' + value.id;
-                    article = '<article><a href="' + value.url + '" target="_blank">' + value.title + '</a><p class="text-muted">' + value.bodyTextHighlights + '<br/><span class="article-date">' + value.friendlyDate + '</span></p></article>';
+                    article = '<article><a href="' + value.url + '" class="search" target="_blank">' + value.title + '</a><p class="text-muted">' + value.bodyTextHighlights + '<br/><span class="article-date">' + value.friendlyDate + '</span></p></article>';
                     $('#searchResults').append(article);
                     searchResults.push(article);
                 });
                 $('#searchResults').append("<h2>Didn't help? Please continue below to open a case...</h2");
                 $('#searchStatus').hide();
+                // Setup Google Analytics tracking on articles found
+                $('a.search').on('click', function(e) {
+                    var articleName = $(e.target).text();
+                    gtag('event', 'Search Article');
+                    gtag('event', 'Search Article: ' + articleName);
+                });
+                // Change cursor to normal
                 $('body').css('cursor','default');
             }
         });
