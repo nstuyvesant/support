@@ -7,7 +7,7 @@ var loadArticles = function(tabName) {
             var url = currentNode.url;
             var title = currentNode.title;
             var synopsis = currentNode.synopsis;
-            var article = '<article><a href="' + url + '" target="_blank">' + title + '</a><p class="text-muted">' + synopsis + '</p></article>';
+            var article = '<article><a href="' + url + '" class="article" target="_blank">' + title + '</a><p class="text-muted">' + synopsis + '</p></article>';
             $('#articles').append(article);
         });
     }
@@ -118,7 +118,7 @@ $('#topic').on('change', function(e) {
 });
 
 // Handle change to Topic - concat tab name, colon and space as prefix
-$('article a').on('click', function(e) {
+$('a.article').on('click', function(e) {
     console.log('Clicked article');
 });
 
