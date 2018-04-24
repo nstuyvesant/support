@@ -1,6 +1,6 @@
 // Load articles in card lower-left from array (except for Suggestions)
 var loadArticles = function(tabName) {
-    if(tabName != 'Suggestion') {
+    if(tabName != 'suggestion') {
         $('#articles').empty(); // Clear the card of past articles
         $.each(caseTree[tabName].articles, function(index, value) {
             var currentNode = caseTree[tabName].articles[index];
@@ -19,16 +19,17 @@ var loadArticles = function(tabName) {
     }
 };
 
-// Sets Case Type and Topic
-var loadTopics = function(tabName) {
+// Sets Case Type, Topic, and Subtopic
+var loadSubtopics = function(tabName) {
     // Set Case Type and Topic
     $('#type').val(caseTree[tabName].type);
+    $('#topic').val(caseTree[tabName].topic);
     $('#description').val(caseTree[tabName].description);
-    var topicsList = $('#topic'); // Get a reference so we don't scan the DOM on $.each below
-    topicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
-    // Add the topics for the tab
-    $.each(caseTree[tabName].topics, function(index, value) {
-        topicsList.append($('<option />').attr('value', value).text(value)); 
+    var subtopicsList = $('#subtopic'); // Get a reference so we don't scan the DOM on $.each below
+    subtopicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
+    // Add the subtopics for the tab
+    $.each(caseTree[tabName].subtopics, function(index, value) {
+        subtopicsList.append($('<option />').attr('value', value).text(value)); 
     });
 };
 
@@ -61,8 +62,8 @@ var searchConfluence = function(searchText, index) {
         // Report search event to Google Analytics
         gtag('event', 'Search');
         gtag('event', 'Search: ' + searchText);
-        // Next line can be removed once Confluence gets an SSL cert
         var pageSize = 8;
+        // Next line can be removed once Confluence gets an SSL cert
         var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
             url: url,
@@ -100,39 +101,15 @@ var searchConfluence = function(searchText, index) {
     }
 };
 
-// Handle click on tabs
-$('#topicTabs').on('shown.bs.tab', function(e) {
-    selectedTabName = $(e.target).attr('aria-controls');
-    // Treat tabs as virtual pages with Google Analytics
-    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName.toLowerCase()});
-    loadTopics(selectedTabName);
-    if(selectedTabName != 'Suggestion') {
-        $('#topic').show();
-        $('#severity').show();
-        loadTopics(selectedTabName);
-        loadArticles(selectedTabName);
-        $('#topic').prop('selectedIndex',0);
-        $('#topicActual').val('');
-    } else {
-        $('#topic').hide();
-        $('#severity').hide();
-        $('#topicActual').val('Suggestion');
-    };
-});
-
-var setTopicActual = function(value) {
-    $('#topicActual').val(selectedTabName + ': ' + value);
-}
-
-// Handle change to Topic - concat tab name, colon and space as prefix
-$('#topic').on('change', function(e) {
-    var selectedTopic = $(e.target).val();
-    setTopicActual(selectedTopic);
+// Track clicks on articles
+$('a.article').click(function() {
+    gtag('event', 'Suggested Article');
+    console.log('Suggested article');
 });
 
 // Handle submit on search form
 $('#searchForm').on('submit', function(e) {
-    e.preventDefault();  // prevent form from submitting
+    e.preventDefault();  //prevent form from submitting
     $('body').css('cursor','progress');
     $('#searchStatus').show();
     searchConfluence($('#queryString').val(), 0);
@@ -146,6 +123,23 @@ $('#requestForm').on('submit', function(e) {
         // Report submit event to Google Analytics
         gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
     }
+});
+
+// Handle click on tabs
+$('#topicTabs').on('shown.bs.tab', function(e) {
+    var selectedTabName = $(e.target).attr('aria-controls');
+    // Treat tabs as virtual pages with Google Analytics
+    gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName});
+    loadSubtopics(selectedTabName);
+    if(selectedTabName != 'suggestion') {
+        $('#subtopic').show();
+        $('#severity').show();
+        loadSubtopics(selectedTabName);
+        loadArticles(selectedTabName);
+    } else {
+        $('#subtopic').hide();
+        $('#severity').hide();
+    };
 });
 
 // Conditionally display outage alerts based on cloudStatus object
@@ -169,8 +163,6 @@ var recaptchaCallback = function() {
     $('#hiddenRecaptcha').valid();
 };
 
-// Global scope
-var selectedTabName = 'Device';
 var cloudStatus = {};
 var caseTree = {};
 
@@ -217,13 +209,6 @@ $(document).ready(function() {
     var origin = qs('origin');
     if(origin == 'Customer Portal') gtag('event', 'Visit: Customer Portal');
 
-    // Digitalzoom sends the FQDN as cname instead of appUrl
-    var cname = qs('cname');
-    if(!fqdn && cname) {
-        $('#fqdn').val(cname + '.perfectomobile.com');
-        $('#fqdn').val(cname + '.perfectomobile.com'); // Overcomes Safari bug where placeholder doesn't disappear
-    }
-
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
@@ -236,6 +221,12 @@ $(document).ready(function() {
         $('#name').val(name); // Overcomes Safari bug where placeholder doesn't disappear                
     }
 
+    var cname = qs('cname');
+    if(!fqdn && cname) {
+        $('#fqdn').val(cname + '.perfectomobile.com');
+        $('#fqdn').val(cname + '.perfectomobile.com'); // Overcomes Safari bug where placeholder doesn't disappear
+    }
+
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
     $('#origin').val(origin);
     $('#company').val(qs('company'));
@@ -245,15 +236,16 @@ $(document).ready(function() {
     $('#location').val(qs('location'));
     $('#cradleId').val(qs('cradleId'));
     $('#deviceId').val(qs('deviceId'));
+    $('#manufacturer').val(qs('manufacturer'));
     $('#model').val(qs('model'));
     $('#os').val(qs('os'));
     $('#version').val(qs('version'));
 
-    // Read articles and topics from JSON into object then load topics and articles for the default tab displayed (device)
-    $.getJSON('staging-hierarchy.json', function(data) {
+    // Read articles and subtopics from JSON into object then load subtopics and articles for the default tab displayed (device)
+    $.getJSON('old-hierarchy.json', function(data) {
         caseTree = data;
-        loadTopics('Device');
-        loadArticles('Device');
+        loadSubtopics('device');
+        loadArticles('device');
     });
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
@@ -291,7 +283,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            'topic': {
+            '00ND0000004nqq2': { // subtopic
                 required: {
                     depends: function(element) {
                         return $('#type').val() != 'Suggestion';

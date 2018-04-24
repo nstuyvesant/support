@@ -102,22 +102,19 @@
         <h1 class="text-center topic">Choose a Topic</h1>
         <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
-                <a id="deviceTab" data-toggle="tab" role="tab" aria-controls="device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
             </li>
             <li class="nav-item">
-                <a id="webTab" data-toggle="tab" role="tab" aria-controls="web" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
+                <a data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
             </li>
             <li class="nav-item">
-                <a id="automationTab" data-toggle="tab" role="tab" aria-controls="automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
+                <a data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
             </li>
             <li class="nav-item">
-                <a id="performanceTab" data-toggle="tab" role="tab" aria-controls="performance" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
             </li>
             <li class="nav-item">
-                <a id="requestTab" data-toggle="tab" role="tab" aria-controls="request" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Request</a>
-            </li>
-            <li class="nav-item">
-                <a id="suggestionTab" data-toggle="tab" role="tab" aria-controls="suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
+                <a data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
             </li>
         </ul>
         <div class="row">&nbsp;</div>
@@ -145,7 +142,7 @@
                             <input type="hidden" id="recordType" name="recordType" value="01220000000HQCE">
                             <input type="hidden" id="retURL" name="retURL" value="">
                             <input type="hidden" id="type" name="type" value="Issue">
-                            <input type="hidden" id="topic" name="00ND0000006MZHc" value="Device Issue">
+                            <input type="hidden" id="topicActual" name="00ND0000006MZHc" value="">
                             <input type="hidden" id="priority" name="priority" value="Low">
                             <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
                             <input type="hidden" id="company" name="company">
@@ -154,7 +151,6 @@
                             <input type="hidden" id="location" name="00N20000002vZQW">
                             <input type="hidden" id="cradleId" name="00N20000002EtP1">
                             <input type="hidden" id="deviceId" name="00ND0000005cetY">
-                            <input type="hidden" id="manufacturer" name="00N20000001N4eC">
                             <input type="hidden" id="model" name="00N20000001N4gL">
                             <input type="hidden" id="os" name="00N20000002vZPs">
                             <input type="hidden" id="version" name="00N20000002u9Uv">
@@ -192,8 +188,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="subtopic" class="sr-only">Subtopic</label>
-                                <select id="subtopic" name="00ND0000004nqq2" class="form-control">
+                                <label for="topic" class="sr-only">Subtopic</label>
+                                <select id="topic" name="topic" class="form-control">
                                     <option selected value="" disabled>Select a subtopic...</option>
                                 </select>
                             </div>

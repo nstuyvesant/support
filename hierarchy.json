@@ -1,15 +1,22 @@
 {
-    "device": {
-      "type": "Issue",
-      "topic": "Device Issue",
-      "subtopics": [
+    "Device": {
+      "type": "Device",
+      "topics": [
+        "Unresponsive",
         "Cradle Error",
-        "Device Unresponsive",
-        "Device Locked",
-        "Network Connectivity Issue",
-        "Device Disconnected",
-        "Device Busy",
-        "App Install Failed",
+        "Network",
+        "Offline",
+        "Busy",
+        "Configuration",
+        "Upgrade",
+        "Swap",
+        "Request New",
+        "App",
+        "Performance/Latency",
+        "Performance/App",
+        "Fingerprint",
+        "Image Injection",
+        "DevTunnel",
         "Other"
       ],
       "description": "Device (model, ID, OS, version): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
@@ -45,6 +52,21 @@
           "synopsis": "A list of errors and solutions to help connect devices."
         },
         {
+          "title": "Image Mode: What is it and how do I fix it?",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526",
+          "synopsis": "If interacting with your device is slow, your streaming server may be blocked by your IT department."
+        },
+        {
+          "title": "How do I troubleshoot interactive latency?",
+          "url": "http://developers.perfectomobile.com/display/TT/Networking+Best+Practices+and+Performance+Troubleshooting",
+          "synopsis": "Optimize performance and prevent disconnections in your network. Understand the protocols used, effects of proxy servers and VPNs."
+        },
+        {
+          "title": "Troubleshooting iOS App Install and Launch Failures",
+          "url": "http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures",
+          "synopsis": "What you need to look for when your iOS app fails to install or launch."
+        },
+        {
           "title": "Release a busy device via the REST API",
           "url": "http://developers.perfectomobile.com/display/PD/Release+Device",
           "synopsis": "Forcefully releases the device specified by device ID when the device is either allocated to the user or the user is an administrator."
@@ -58,22 +80,44 @@
           "title": "Troubleshooting app install failed on Android",
           "url": "http://developers.perfectomobile.com/display/TT/Android+App%3A+Install+Failed+UID+Changed+message",
           "synopsis": "How to resolve a Install_Failed_UID_Changed message."
+        },
+        {
+          "title": "How can I launch an iOS app faster?",
+          "url": "http://developers.perfectomobile.com/display/TT/iOS+Troubleshooting%3A+Slow+iOS+app+launch",
+          "synopsis": "Learn why your iOS app is taking a long time to launch."
+        },
+        {
+          "title": "Installing an Application using the Install Widget",
+          "url": "http://developers.perfectomobile.com/display/TT/Installing+an+Application+using+the+Install+Widget",
+          "synopsis": "Here is how you use the install widget of the Perfecto Lab, to install your application."
+        },
+        {
+          "title": "Requesting a device swap",
+          "url": "http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap",
+          "synopsis": "Everything you ever wanted to know about swapping devices."
+        },
+        {
+          "title": "Installing Mobile Provisioning Profiles (regiOS)",
+          "url": "http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module",
+          "synopsis": "Apple iOS devices require Mobile Provisioning Profiles in order to work with Perfecto."
         }
       ]
     },
-    "web": {
-      "type": "Issue",
-      "topic": "Web Issue",
-      "subtopics": [
-        "Web Browser Availability",
-        "Web Video Issue",
-        "Web Functionality Issue",
+    "Browser": {
+      "type": "Browser",
+      "topics": [
+        "Page Click",
+        "Display",
+        "Launch Failed",
+        "Performance/Page Load Time",
+        "Not Available",
+        "Launch Failed",
         "Other"
       ],
-      "description": "Browser (version, OS): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
+      "description": "Browser (name, version, OS): \n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
       "articles": [
         {
-          "title": "Desktop web testing",
+          "title": "Browser testing",
           "url": "http://developers.perfectomobile.com/display/TT/Desktop+Web+Testing",
           "synopsis": "Tips and tricks for desktop web testing."
         },
@@ -104,23 +148,38 @@
         }
       ]
     },
-    "automation": {
-      "type": "Issue",
-      "topic": "Automation Issue",
-      "subtopics": [
-        "Appium Issue",
-        "Selenium Issue",
-        "Espresso Issue",
-        "XCTest Issue",
-        "JavaScript Issue",
-        "Object Spy Issue",
-        "UFT Issue",
-        "Framework Issue",
-        "Perfecto Native Issue",
+    "Automation": {
+      "type": "Automation",
+      "topics": [
+        "Execution Errors",
+        "Object Identification",
+        "Performance/Execution",
+        "Plug-in or API",
+        "Reporting",
         "Other"
       ],
       "description": "Execution Report URL:\n\nReply to your email confirmation attaching the script and app (or URL)\n\nWhat happened:\n\nWhat you expected to happen:\n\nSteps to reproduce:\n",
       "articles": [
+        {
+          "title": "Faster script execution",
+          "url": "http://developers.perfectomobile.com/display/TT/Faster+Script+Execution",
+          "synopsis": "In this article, we provide suggestions how to improve your script execution time."
+        },
+        {
+          "title": "Find elements faster with Appium and XCUITest",
+          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21436560",
+          "synopsis": "In this article, we suggest another way to locate (find) an element which significantly improves the performance and shortens the execution time."
+        },
+        {
+          "title": "How can I launch an iOS app faster?",
+          "url": "http://developers.perfectomobile.com/display/TT/iOS+Troubleshooting%3A+Slow+iOS+app+launch",
+          "synopsis": "Learn why your iOS app is taking a long time to launch."
+        },
+        {
+          "title": "Parallel execution with TestNG",
+          "url": "http://developers.perfectomobile.com/display/TT/Parallel+Execution+with+TestNG",
+          "synopsis": "Save time by running scripts in parallel. Remember not to try to use the same device from multiple scripts."
+        },
         {
           "title": "Getting started with Appium",
           "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=19170304",
@@ -168,89 +227,29 @@
         }
       ]
     },
-    "performance": {
-      "type": "Issue",
-      "topic": "Performance Issue",
-      "subtopics": [
-        "Image Mode",
-        "Interactive Latency",
-        "Execution Slow",
-        "App Install Slow",
-        "App Launch Slow",
-        "Login Slow",
-        "Other"
-      ],
-      "description": "Did you try it from home without using a VPN? N|Y\n\nDoes it happen at certain times of day? N|Y\n\nSteps to reproduce:\n",
-      "articles": [
-        {
-          "title": "Image Mode: What is it and how do I fix it?",
-          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526",
-          "synopsis": "If interacting with your device is slow, your streaming server may be blocked by your IT department."
-        },
-        {
-          "title": "How do I troubleshoot interactive latency?",
-          "url": "http://developers.perfectomobile.com/display/TT/Networking+Best+Practices+and+Performance+Troubleshooting",
-          "synopsis": "Optimize performance and prevent disconnections in your network. Understand the protocols used, effects of proxy servers and VPNs."
-        },
-        {
-          "title": "Troubleshooting iOS App Install and Launch Failures",
-          "url": "http://developers.perfectomobile.com/display/TT/Troubleshooting+iOS+App+Install+and+Launch+Failures",
-          "synopsis": "What you need to look for when your iOS app fails to install or launch."
-        },
-        {
-          "title": "Faster script execution",
-          "url": "http://developers.perfectomobile.com/display/TT/Faster+Script+Execution",
-          "synopsis": "In this article, we provide suggestions how to improve your script execution time."
-        },
-        {
-          "title": "Parallel execution with TestNG",
-          "url": "http://developers.perfectomobile.com/display/TT/Parallel+Execution+with+TestNG",
-          "synopsis": "Save time by running scripts in parallel. Remember not to try to use the same device from multiple scripts."
-        },
-        {
-          "title": "Find elements faster with Appium and XCUITest",
-          "url": "http://developers.perfectomobile.com/pages/viewpage.action?pageId=21436560",
-          "synopsis": "In this article, we suggest another way to locate (find) an element which significantly improves the performance and shortens the execution time."
-        },
-        {
-          "title": "How can I launch an iOS app faster?",
-          "url": "http://developers.perfectomobile.com/display/TT/iOS+Troubleshooting%3A+Slow+iOS+app+launch",
-          "synopsis": "Learn why your iOS app is taking a long time to launch."
-        },
-        {
-          "title": "Installing an Application using the Install Widget",
-          "url": "http://developers.perfectomobile.com/display/TT/Installing+an+Application+using+the+Install+Widget",
-          "synopsis": "Here is how you use the install widget of the Perfecto Lab, to install your application."
-        }
-      ]
-    },
-    "request": {
-      "type": "Request",
-      "topic": "Request",
-      "subtopics": [
-        "New Device Request",
-        "Device Swap",
-        "Device Upgrade",
-        "Configuration Change",
-        "New Cloud User",
-        "Reg iOS Request",
-        "Cloud Upgrade",
-        "Device Template",
+    "Cloud": {
+      "type": "Cloud",
+      "topics": [
+        "Login",
+        "Configuration",
+        "New User",
+        "Upgrade",
         "Product Info",
-        "Documentation",
+        "Subscription",
+        "Security",
         "Other"
       ],
-      "description": "If requesting a device swap, please let us know what device to remove (Device ID) as well as what device to add (be specific to save time).",
+      "description": "",
       "articles": [
         {
-          "title": "Requesting a device swap",
-          "url": "http://developers.perfectomobile.com/display/TT/Requesting+a+Device+Swap",
-          "synopsis": "Everything you ever wanted to know about swapping devices."
+          "title": "Product documentation",
+          "url": "http://developers.perfectomobile.com/display/PD/Documentation",
+          "synopsis": "Documentation for your Perfecto platform."
         },
         {
-          "title": "Installing Mobile Provisioning Profiles (regiOS)",
-          "url": "http://developers.perfectomobile.com/display/TT/How+to+Properly+Install+the+regiOS+Provisioning+Module",
-          "synopsis": "Apple iOS devices require Mobile Provisioning Profiles in order to work with Perfecto."
+          "title": "Latest Release Notes",
+          "url": "http://developers.perfectomobile.com/display/PD/Product+Updates",
+          "synopsis": "Check out all the changes in the latest Release Notes."
         },
         {
           "title": "User management - adding users, roles, tokens",
@@ -263,26 +262,15 @@
           "synopsis": "Perfecto provides a REST API for administrative functions."
         },
         {
-          "title": "Cloud updates",
-          "url": "http://developers.perfectomobile.com/display/PD/Product+Updates",
-          "synopsis": "Check out all the changes in the latest Release Notes."
-        },
-        {
           "title": "Adding templates",
           "url": "http://developers.perfectomobile.com/display/TT/Adding+Templates+to+the+User+Directory",
           "synopsis": "How to add device templates to your cloud."
-        },
-        {
-          "title": "Product documementation",
-          "url": "http://developers.perfectomobile.com/display/PD/Documentation",
-          "synopsis": "Documentation for your Perfecto platform."
         }
       ]
     },
-    "suggestion": {
+    "Suggestion": {
       "type": "Suggestion",
-      "topic": "",
-      "subtopics": [],
+      "topics": [],
       "description": "Customers are our best source of ideas and we value your input!\nWhat feature do you want to see in the product?\n\nHow would this help you get more value from Perfecto?\n\nHow do you workaround the product not having this feature?\n",
       "articles": []
     }
