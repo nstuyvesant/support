@@ -250,7 +250,7 @@ $(document).ready(function() {
     $('#version').val(qs('version'));
 
     // Read articles and topics from JSON into object then load topics and articles for the default tab displayed (device)
-    $.getJSON('staging-hierarchy.json', function(data) {
+    $.getJSON('hierarchy.json', function(data) {
         caseTree = data;
         loadTopics('Device');
         loadArticles('Device');
