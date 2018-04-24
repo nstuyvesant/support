@@ -242,7 +242,7 @@ $(document).ready(function() {
     $('#version').val(qs('version'));
 
     // Read articles and subtopics from JSON into object then load subtopics and articles for the default tab displayed (device)
-    $.getJSON('hierarchy.json', function(data) {
+    $.getJSON('old-hierarchy.json', function(data) {
         caseTree = data;
         loadSubtopics('device');
         loadArticles('device');
