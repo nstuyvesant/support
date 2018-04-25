@@ -309,6 +309,16 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Marketo Munchkin
+    $.ajax({
+        url: '//munchkin.marketo.net/munchkin-beta.js',
+        dataType: 'script',
+        cache: true,
+        success: function() {
+        Munchkin.init('482-YUQ-296');
+        }
+    });
 });
 
 // Querystring test params
