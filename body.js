@@ -1,9 +1,9 @@
 // Load articles in card lower-left from array (except for Suggestions)
-var loadArticles = function(tabName) {
-    if(tabName != 'Suggestion') {
+var loadArticles = function() {
+    if(selectedTabName != 'Suggestion') {
         $('#articles').empty(); // Clear the card of past articles
-        $.each(caseTree[tabName].articles, function(index, value) {
-            var currentNode = caseTree[tabName].articles[index];
+        $.each(caseTree[selectedTabName].articles, function(index, value) {
+            var currentNode = caseTree[selectedTabName].articles[index];
             var url = currentNode.url;
             var title = currentNode.title;
             var synopsis = currentNode.synopsis;
@@ -20,14 +20,14 @@ var loadArticles = function(tabName) {
 };
 
 // Sets Case Type and Topic
-var loadTopics = function(tabName) {
+var loadTopics = function() {
     // Set Case Type and Topic
-    $('#type').val(caseTree[tabName].type);
-    $('#description').val(caseTree[tabName].description);
+    $('#type').val(caseTree[selectedTabName].type);
+    $('#description').val(caseTree[selectedTabName].description);
     var topicsList = $('#topic'); // Get a reference so we don't scan the DOM on $.each below
     topicsList.find("option:gt(0)").remove(); // Leave the first item - bag the rest
     // Add the topics for the tab
-    $.each(caseTree[tabName].topics, function(index, value) {
+    $.each(caseTree[selectedTabName].topics, function(index, value) {
         topicsList.append($('<option />').attr('value', value).text(value)); 
     });
 };
@@ -105,12 +105,12 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
     selectedTabName = $(e.target).attr('aria-controls');
     // Treat tabs as virtual pages with Google Analytics
     gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedTabName.toLowerCase()});
-    loadTopics(selectedTabName);
+    loadTopics();
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
         $('#severity').show();
-        loadTopics(selectedTabName);
-        loadArticles(selectedTabName);
+        loadTopics();
+        loadArticles();
         $('#topic').prop('selectedIndex',0);
         $('#topicActual').val('');
     } else {
@@ -210,12 +210,14 @@ $(document).ready(function() {
     $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
     // Report source to Google Analytics
+    var origin = qs('origin');
     if(fqdn) {
         gtag('event', 'Visit: MCM/Digitalzoom');
-
-    } else gtag('event', 'Visit: Direct');
-    var origin = qs('origin');
-    if(origin == 'Customer Portal') gtag('event', 'Visit: Customer Portal');
+    } else if(origin == 'Customer Portal') {
+        gtag('event', 'Visit: Customer Portal');
+    } else {
+        gtag('event', 'Visit: Direct');
+    }
 
     // Digitalzoom sends the FQDN as cname instead of appUrl
     var cname = qs('cname');
@@ -252,8 +254,8 @@ $(document).ready(function() {
     // Read articles and topics from JSON into object then load topics and articles for the default tab displayed (device)
     $.getJSON('hierarchy.json', function(data) {
         caseTree = data;
-        loadTopics('Device');
-        loadArticles('Device');
+        loadTopics();
+        loadArticles();
     });
 
     // Setup form validate. jQuery Validation bug for selects - must use name not ID
