@@ -144,7 +144,7 @@ $('#requestForm').on('submit', function(e) {
         // Append execution URL to description
         $('#description').val($('#description').val() + $('#parameters').val());
         // Report submit event to Google Analytics
-        gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#subtopic').val());
+        gtag('event', 'Case: ' + $('#type').val() + '/' + $('#topic').val());
     }
 });
 
