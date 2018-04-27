@@ -314,7 +314,7 @@ $(document).ready(function() {
 
     // Marketo Munchkin
     $.ajax({
-        url: '//munchkin.marketo.net/munchkin-beta.js',
+        url: 'https://munchkin.marketo.net/munchkin-beta.js',
         dataType: 'script',
         cache: true,
         success: function() {
