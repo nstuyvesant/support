@@ -31,7 +31,7 @@ a:hover {
     filter: brightness(85%);
 }
 .cover {
-    background: black url('https://support.perfecto.io/forest.jpg') center;
+    background: black url('forest.jpg') center;
     background-size: cover;
     min-height: 20rem;
     height: auto;
@@ -90,7 +90,6 @@ label.error {
 .article-date {
     font-size: 0.8rem;
 }
-
 /* Footer styling */
 footer {
     border-color: #e9eaee;
