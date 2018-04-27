@@ -115,7 +115,7 @@
                 <h1 class="text-center topic">What type of device issue?</h1>
                 <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link topic" href="#offline"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
                     <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link topic topic" href="#suggestedArticles"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
@@ -226,6 +226,7 @@
                     <div class="card">
                         <div class="card-header">These articles might help...</div>
                         <div id="articles" class="card-body">
+                            <div id="offline" class="collapse">Device: Offline</div>
                             PLACEHOLDER for articles relevant for Topic chosen.
                         </div>
                     </div>
@@ -246,7 +247,7 @@
                     <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
                         <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                         <input type="hidden" name="orgid" value="00D200000001UUG">
-                        <input type=hidden name="recordType" id="recordType" value="01220000000HQCE">
+                        <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
                         <input type="hidden" id="retURL" name="retURL" value="">
                         <input type="hidden" id="type" name="type">
                         <input type="hidden" id="topic" name="00ND0000006MZHc">
@@ -258,14 +259,21 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <label for="severity">Severity of this Support Case</label>
-                            <div id="severity" class="btn-group" role="group" data-toggle="buttons-radio">
-                                <a href="#low" class="btn btn-success active" data-toggle="tab"><span class="far fa-smile"></span> Low/Minor</a>
-                                <a href="#medium" class="btn btn-secondary" data-toggle="tab"><span class="far fa-meh"></span> Medium</a>
-                                <a href="#major" class="btn btn-warning" data-toggle="tab"><span class="far fa-frown"></span> Major</a>
-                                <a href="#critical" class="btn btn-danger"  data-toggle="tab"><span class="fas fa-ambulance"></span> Critical</a>
+                            <label for="severity">Severity of this Support Case</label><br/>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-success active">
+                                    <input name="severity" value="Low/Minor" type="radio" checked autocomplete="off"><span class="far fa-smile"></span> Low/Minor
+                                </label>
+                                <label class="btn btn-secondary">
+                                    <input name="severity" value="Medium" type="radio" autocomplete="off"><span class="far fa-meh"></span> Medium
+                                </label>
+                                <label class="btn btn-warning">
+                                    <input name="severity" value="Major" type="radio" autocomplete="off"><span class="far fa-frown"></span> Major
+                                </label>
+                                <label class="btn btn-danger">
+                                    <input name="severity" value="Critical" type="radio" autocomplete="off"><span class="fas fa-ambulance"></span> Critical
+                                </label>
                             </div>
-                            <input type="hidden" id="severity" name="00ND0000005cKFJ" value="Low/Minor">
                         </div>
                         <div class="form-group">
                             <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
