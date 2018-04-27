@@ -79,7 +79,7 @@ article a {
 .nav-pills .nav-link.active {
     background-color:black;
 }
-.nav-pills .fas, .nav-pills .far {
+.nav-pills .fas, .nav-pills .far, .nav-pills .fab {
     font-size: 4rem;
     margin-bottom: 5px;
 }
