@@ -50,6 +50,12 @@
             padding-bottom: 0.5rem;
             margin-bottom: 20px;
         }
+        .nav-pills .fas, .nav-pills .far, .nav-pills .fab {
+            font-size: 3rem;
+        }
+        h1.topic {
+            font-size: 36px;
+        }
     </style>
 </head>
 
@@ -92,7 +98,7 @@
     </section>
     <div class="container">
 
-        <ul id="typeTabs" class="nav nav-pills nav-justified" role="tablist">
+        <ul id="typeTabs" class="nav nav-tabs nav-justified" role="tablist">
                 <li class="nav-item">
                     <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link type" href="#device"><span class="fas fa-mobile-alt"></span><br/>Device</a>
                 </li>
@@ -112,7 +118,7 @@
 
         <div class="tab-content">
             <div id="device" class="tab-pane fade" role="tabpanel">
-                <h1 class="text-center topic">What type of device issue?</h1>
+                <h1 class="text-center topic">Select type of device issue</h1>
                 <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
@@ -230,8 +236,8 @@
                                 <li>Device was reserved by someone else.</li>
                                 <li>Device was disconnected from your cloud due to a requested swap. If so, please click <b>Swap</b> above (if you have the authority).</li>
                                 <li>Device passcode lock engaged due to reboot or upgrade.</li>
-                                <li>Device passcode lock engaged due to lack of interaction within the timeout period of a Mobile Device Management tool.</li>
-                                <li>Device failed due to defective battery.</li>
+                                <li>Device passcode lock engaged due to lack of interaction within the timeout period of a Mobile Device Management tool. See <a href="#mdm">Mobile Device Management Lockout Policy &gt;</a></li>
+                                <li>Device failed due to defective battery. <a href="#mdm">Request a new device &gt;</a></li>
                                 <li>If device is a tablet, continuous use drained battery faster than it could recharge (tablet design issue).</li>
                             </ul>
                         </div>
@@ -249,7 +255,8 @@
                                 <li>Click the <b>Recover</b> button at the bottom of the dialog.</li>
                                 <li>Wait at least 3 minutes then try to open the device.</li>
                             </ol>
-                            <p>If the the device is locking due to a Mobile Device Management policy, we can prevent this problem by configuring your cloud's device timeout period to be shorter than the MDM lockout period. Please open a case and we'll take care of this for you.</p>
+
+                            <p id="mdm"><b>Mobile Device Management Lockout Policy</b><br/>If the the device is locking due to a Mobile Device Management policy, we can prevent this problem by configuring your cloud's device timeout period to be shorter than the MDM lockout period. Please open a case and we'll take care of this for you.</p>
                         </div>
                     </div>
                 </div>

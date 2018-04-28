@@ -83,6 +83,10 @@ article a {
     font-size: 4rem;
     margin-bottom: 5px;
 }
+.nav-tabs .fas, .nav-tabs .far, .nav-tabs .fab {
+    font-size: 4rem;
+    margin-bottom: 5px;
+}
 label.error {
     font-size: 0.8rem;
     color: red;
