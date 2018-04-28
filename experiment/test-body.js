@@ -9,13 +9,8 @@ $('#typeTabs').on('shown.bs.tab', function(e) {
 
 // Set global topic based on tab selection
 $('ul.nav-pills').on('shown.bs.tab', function(e) {
-    var target = $(e.target);
-    selectedTopic = target.attr('aria-controls');
+    selectedTopic = $(e.target).attr('aria-controls');
     $('#topic').val(selectedTopic);
-    if(target.attr('href') == '#') {
-        $('.article').collapse(); // all articles because this one has none
-    }
-    // BUG is that article won't be redisplayed ever.
     $('#contactSupport').show();
 });
 

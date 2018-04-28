@@ -124,25 +124,25 @@
                 <h2 class="text-center">Select type of device issue</h2>
                 <ul id="deviceTab" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#offline"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#deviceOffline"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#"><span class="fab fa-app-store"></span><br/>App-related</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#deviceApp"><span class="fab fa-app-store"></span><br/>App-related</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#devicePerformance"><span class="fas fa-stopwatch"></span><br/>Performance</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#deviceOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -151,22 +151,22 @@
                 <h2 class="text-center">What type of browser issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#browserLaunch"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#browserSlow"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#browserInteraction"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#browserNetwork"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#browserDisplay"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#browserOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -175,22 +175,22 @@
                 <h2 class="text-center">What type of automation issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#"><span class="far fa-times-circle"></span><br/>Execution Error</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#automationExecution"><span class="far fa-times-circle"></span><br/>Execution Error</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#"><span class="far fa-check-square"></span><br/>Reporting</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting"><span class="far fa-check-square"></span><br/>Reporting</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -199,29 +199,29 @@
                 <h2 class="text-center">What type of cloud or admin issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#"><span class="far fa-user"></span><br/>New User Request</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser"><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage"><span class="fas fa-ambulance"></span><br/>Outage</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="suggestion" class="tab-content collapse">
                 <h2 class="text-center">Customers are our best source of ideas; we value your input!</h2>
-                <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
+                <form id="suggestionForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
                     <div class="form-group">
                         <label for="suggestionDescription">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
                         <input type="hidden" id="captcha_settings2" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
@@ -244,41 +244,141 @@
 
         </div>
         
-        <div id="offline" class="collapse article" style="margin-top:30px;">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Common reasons (EXAMPLE for Device/Offline ONLY)</div>
-                        <div id="articles" class="card-body">
-                            <ul>
-                                <li>Device was reserved by someone else.</li>
-                                <li>Device was disconnected from your cloud due to a requested swap. If so, please click <b>Swap</b> above (if you have the authority).</li>
-                                <li>Device passcode lock engaged due to reboot or upgrade.</li>
-                                <li>Device passcode lock engaged due to lack of interaction within the timeout period of a Mobile Device Management tool. See <a href="#mdm">Mobile Device Management Lockout Policy &gt;</a></li>
-                                <li>Device failed due to defective battery. <a href="#mdm">Request a new device &gt;</a></li>
-                                <li>If device is a tablet, continuous use drained battery faster than it could recharge (tablet design issue).</li>
-                            </ul>
+        <div class="tab-content" id="articleContent" style="margin-top:30px;">
+
+            <div id="deviceOffline" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+                                    <li>Device was reserved by someone else.</li>
+                                    <li>Device was disconnected from your cloud due to a requested swap. If so, please click <b>Swap</b> above (if you have the authority).</li>
+                                    <li>Device passcode lock engaged due to reboot or upgrade.</li>
+                                    <li>Device passcode lock engaged due to lack of interaction within the timeout period of a Mobile Device Management tool. See <a href="#mdm">Mobile Device Management Lockout Policy &gt;</a></li>
+                                    <li>Device failed due to defective battery. <a href="#mdm">Request a new device &gt;</a></li>
+                                    <li>If device is a tablet, continuous use drained battery faster than it could recharge (tablet design issue).</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Solutions</div>
-                        <div id="articles" class="card-body">
-                            <b>Device Recovery</b><br/>
-                            <ol>
-                                <li>Login to your Perfecto Cloud.</li>
-                                <li>Click the <b>Launch Mobile</b> button</li>
-                                <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, single click the device that is <b>Offline</b>.</li>
-                                <li>Click the <b>Recover</b> button at the bottom of the dialog.</li>
-                                <li>Wait at least 3 minutes then try to open the device.</li>
-                            </ol>
-
-                            <p id="mdm"><b>Mobile Device Management Lockout Policy</b><br/>If the the device is locking due to a Mobile Device Management policy, we can prevent this problem by configuring your cloud's device timeout period to be shorter than the MDM lockout period. Please open a case and we'll take care of this for you.</p>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>Device Recovery</b><br/>
+                                <ol>
+                                    <li>Login to your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, single click the device that is <b>Offline</b>.</li>
+                                    <li>Click the <b>Recover</b> button at the bottom of the dialog.</li>
+                                    <li>Wait at least 3 minutes then try to open the device.</li>
+                                </ol>
+    
+                                <p id="mdm"><b>Mobile Device Management Lockout Policy</b><br/>If the the device is locking due to a Mobile Device Management policy, we can prevent this problem by configuring your cloud's device timeout period to be shorter than the MDM lockout period. Please open a case and we'll take care of this for you.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div id="deviceNetwork" class="tab-pane fade" role="tabpanel">
+                Content for Device: Network
+            </div>
+
+            <div id="deviceApp" class="tab-pane fade" role="tabpanel">
+                Content for Device: App
+            </div>
+
+            <div id="deviceUpgrade" class="tab-pane fade" role="tabpanel">
+                Please open a Support Case (Device: Upgrade)
+            </div>
+
+            <div id="deviceSwap" class="tab-pane fade" role="tabpanel">
+                Please open a Support Case (Device: Swap)
+            </div>
+
+            <div id="devicePerformance" class="tab-pane fade" role="tabpanel">
+                How-to advice to determine performance problem
+            </div>
+
+            <div id="deviceOther" class="tab-pane fade" role="tabpanel">
+                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Device: Other)
+            </div>
+
+            <div id="browserLaunch" class="tab-pane fade" role="tabpanel">
+                Content for Browser: Launch Failed
+            </div>
+
+            <div id="browserSlow" class="tab-pane fade" role="tabpanel">
+                Content for Browser: Pages Load Slowly
+            </div>
+
+            <div id="browserInteraction" class="tab-pane fade" role="tabpanel">
+                Content for Browser: Page Interaction
+            </div>
+
+            <div id="browserNetwork" class="tab-pane fade" role="tabpanel">
+                Content for Browser: Network
+            </div>
+
+            <div id="browserDisplay" class="tab-pane fade" role="tabpanel">
+                Content for Browser: Page Display Distorted
+            </div>
+
+            <div id="browserOther" class="tab-pane fade" role="tabpanel">
+                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Browser: Other)
+            </div>
+
+            <div id="automationExecution" class="tab-pane fade" role="tabpanel">
+                Content for Automation: Execution Error
+            </div>
+
+            <div id="automationObject" class="tab-pane fade" role="tabpanel">
+                Content for Automation: Object Identification
+            </div>
+
+            <div id="automationReporting" class="tab-pane fade" role="tabpanel">
+                Content for Automation: Reporting
+            </div>
+
+            <div id="automationAPI" class="tab-pane fade" role="tabpanel">
+                Content for Automation: Plug-in or API
+            </div>
+
+            <div id="automationPerformance" class="tab-pane fade" role="tabpanel">
+                Content for Automation: Performance/Execution Slow
+            </div>
+    
+            <div id="automationOther" class="tab-pane fade" role="tabpanel">
+                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Automation: Other)
+            </div>
+
+            <div id="cloudUser" class="tab-pane fade" role="tabpanel">
+                Please open a Support Case (Cloud: New User)
+            </div>
+
+            <div id="cloudConfig" class="tab-pane fade" role="tabpanel">
+                Content for Cloud: Configuration
+            </div>
+
+            <div id="cloudInfo" class="tab-pane fade" role="tabpanel">
+                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Cloud: Product Info)
+            </div>
+
+            <div id="cloudLogin" class="tab-pane fade" role="tabpanel">
+                Content for Cloud: Login
+            </div>
+
+            <div id="cloudOutage" class="tab-pane fade" role="tabpanel">
+                Please open a Support Case (Cloud: Outage)
+            </div>
+    
+            <div id="cloudOther" class="tab-pane fade" role="tabpanel">
+                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution.
+            </div>
+
         </div>
 
         <div id="contactSupport" class="collapse">
