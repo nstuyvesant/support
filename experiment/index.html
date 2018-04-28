@@ -53,8 +53,10 @@
         .nav-pills .fas, .nav-pills .far, .nav-pills .fab {
             font-size: 3rem;
         }
-        h1.topic {
+        h2 {
             font-size: 36px;
+            color: #82bc41;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -118,115 +120,131 @@
 
         <div class="tab-content">
             <div id="device" class="tab-pane fade" role="tabpanel">
-                <h1 class="text-center topic">Select type of device issue</h1>
+                <h2 class="text-center">Select type of device issue</h2>
                 <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                        <a data-toggle="collapse" aria-controls="Device: Offline" class="nav-link topic" href="#main"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link topic topic" href="#suggestedArticles"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                        <a data-toggle="collapse" aria-controls="Device: Network" class="nav-link topic topic" href="#main"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link topic" href="#suggestedArticles"><span class="fab fa-app-store"></span><br/>App-related</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link topic" href="#main"><span class="fab fa-app-store"></span><br/>App-related</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link topic" href="#main"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link topic" href="#main"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link topic" href="#suggestedArticles"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link topic" href="#main"><span class="fas fa-stopwatch"></span><br/>Performance</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link topic" href="#suggestedArticles"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link topic" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="browser" class="tab-pane fade" role="tabpanel">
-                <h1 class="text-center topic">What type of browser issue?</h1>
+                <h2 class="text-center">What type of browser issue?</h2>
                 <ul id="questionTypes" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link" href="#suggestedArticles"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
+                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link" href="#main"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#suggestedArticles"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
+                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#main"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#suggestedArticles"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
+                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#main"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#suggestedArticles"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#main"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#suggestedArticles"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#main"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#suggestedArticles"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="automation" class="tab-pane fade" role="tabpanel">
-                <h1 class="text-center topic">What type of automation issue?</h1>
+                <h2 class="text-center">What type of automation issue?</h2>
                 <ul id="requestTypes" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#suggestedArticles"><span class="far fa-times-circle"></span><br/>Execution Error</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#main"><span class="far fa-times-circle"></span><br/>Execution Error</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#suggestedArticles"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#main"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#suggestedArticles"><span class="far fa-check-square"></span><br/>Reporting</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#main"><span class="far fa-check-square"></span><br/>Reporting</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#suggestedArticles"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#main"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#suggestedArticles"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#main"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#suggestedArticles"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="cloud" class="tab-pane fade" role="tabpanel">
-                <h1 class="text-center topic">What type of cloud or admin issue?</h1>
+                <h2 class="text-center">What type of cloud or admin issue?</h2>
                 <ul id="requestTypes" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#suggestedArticles"><span class="far fa-user"></span><br/>New User Request</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#main"><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#suggestedArticles"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#main"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#suggestedArticles"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#main"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#suggestedArticles"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#main"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#suggestedArticles"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#main"><span class="fas fa-ambulance"></span><br/>Outage</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#suggestedArticles"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="suggestion" class="tab-content collapse">
-                <h2>Customers are our best source of ideas and we value your input!</h2>
-                <div class="form-group">
-                    <label for="description">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
-                    <textarea class="form-control" rows="7" id="description" name="description" placeholder="Provide your suggestion here"></textarea>
-                </div>
+                <h2 class="text-center">Customers are our best source of ideas; we value your input!</h2>
+                <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
+                    <div class="form-group">
+                        <label for="suggestionDescription">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
+                        <input type="hidden" id="captcha_settings2" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                        <input type="hidden" name="orgid" value="00D200000001UUG">
+                        <input type="hidden" name="recordType" value="01220000000HQCE">
+                        <input type="hidden" name="retURL" value="https://support.perfecto.io/?submitted=true">
+                        <input type="hidden" name="type" value="Suggestion">
+                        <input type="hidden" name="00ND0000006MZHc" value="Suggestion">
+                        <input type="hidden" name="priority" value="Low">
+                        <input type="hidden" name="00ND0000005cKFJ" value="Low/Minor">
+                        <input type="hidden" name="subject" value="Suggestion via Support Portal">
+                        <textarea id="suggestionDescription" class="form-control" rows="7" name="description" placeholder="Provide your suggestion here" required></textarea>
+                        <br/>
+                        <!--FIX RECAPTCHA DUE TO THERE BEING 2 FORMS-->
+                        <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
+                        <input id="hiddenRecaptcha2" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha"><br/>
+                        <input type="submit" class="btn btn-success">
+                    </div>
+                </form>
             </div>
 
         </div>
         
-        <div id="suggestedArticles" class="collapse" style="margin-top:30px;">
+        <div id="main" class="collapse" style="margin-top:30px;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -280,7 +298,7 @@
                                 <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                                 <input type="hidden" name="orgid" value="00D200000001UUG">
                                 <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
-                                <input type="hidden" id="retURL" name="retURL" value="">
+                                <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
                                 <input type="hidden" id="type" name="type">
                                 <input type="hidden" id="topic" name="00ND0000006MZHc">
                                 <input type="hidden" id="priority" name="priority" value="Low">
@@ -294,16 +312,16 @@
                                     <label for="severity">Severity of this Support Case</label><br/>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-success active">
-                                            <input name="severity" value="Low/Minor" type="radio" checked autocomplete="off"><span class="far fa-smile"></span> Low/Minor
+                                            <input name="00ND0000005cKFJ" value="Low/Minor" type="radio" checked autocomplete="off"><span class="far fa-smile"></span> Low/Minor
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input name="severity" value="Medium" type="radio" autocomplete="off"><span class="far fa-meh"></span> Medium
+                                            <input name="00ND0000005cKFJ" value="Medium" type="radio" autocomplete="off"><span class="far fa-meh"></span> Medium
                                         </label>
                                         <label class="btn btn-warning">
-                                            <input name="severity" value="Major" type="radio" autocomplete="off"><span class="far fa-frown"></span> Major
+                                            <input name="00ND0000005cKFJ" value="Major" type="radio" autocomplete="off"><span class="far fa-frown"></span> Major
                                         </label>
                                         <label class="btn btn-danger">
-                                            <input name="severity" value="Critical" type="radio" autocomplete="off"><span class="fas fa-ambulance"></span> Critical
+                                            <input name="00ND0000005cKFJ" value="Critical" type="radio" autocomplete="off"><span class="fas fa-ambulance"></span> Critical
                                         </label>
                                     </div>
                                 </div>
