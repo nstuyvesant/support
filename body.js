@@ -195,8 +195,6 @@ $(document).ready(function() {
     // reCAPTCHA requires a timestamp updated every half-second
     setInterval(refreshCaptchaTimestamp, 500);
     setHiddenParametersField();
-    var returnURL = 'https://support.perfecto.io/?submitted=true';
-    $('#retURL').val(returnURL);
 
     // Show confirmation if submitted
     if(qs('submitted')) {
@@ -321,7 +319,7 @@ $(document).ready(function() {
         dataType: 'script',
         cache: true,
         success: function() {
-        Munchkin.init('482-YUQ-296');
+            Munchkin.init('482-YUQ-296');
         }
     });
 });
