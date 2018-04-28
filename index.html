@@ -161,6 +161,33 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                            <!-- <div class="form-group">
+                                <label for="severity" class="sr-only">Severity of this request</label>
+                                <select id="severity" name="00ND0000005cKFJ" class="form-control">
+                                    <option selected value="" disabled>Select a severity...</option>
+                                    <option value="Low/Minor">Low/Minor</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Major">Major</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label>Severity of this Support Case</label><br/>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-success active" data-toggle="tooltip" data-placement="bottom" title="Minor problem that does not impact the service">
+                                        <input name="00ND0000005cKFJ" value="Low/Minor" type="radio" checked autocomplete="off"><span class="far fa-smile"></span> Low/Minor
+                                    </label>
+                                    <label class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Need a solution but non-blocking">
+                                        <input name="00ND0000005cKFJ" value="Medium" type="radio" autocomplete="off"><span class="far fa-meh"></span> Medium
+                                    </label>
+                                    <label class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Portion of cloud is unusable (such as a device or web license)">
+                                        <input name="00ND0000005cKFJ" value="Major" type="radio" autocomplete="off"><span class="far fa-frown"></span> Major
+                                    </label>
+                                    <label class="btn btn-danger">
+                                        <input name="00ND0000005cKFJ" value="Critical" type="radio" autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable."><span class="fas fa-ambulance"></span> Critical
+                                    </label>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
                                 <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" />
@@ -176,33 +203,6 @@
                             <div class="form-group">
                                 <label for="phone" class="sr-only">Best phone number to reach you</label>
                                 <input class="form-control" type="phone" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel-national" maxlength="40" />
-                            </div>
-                            <!-- <div class="form-group">
-                                <label for="severity" class="sr-only">Severity of this request</label>
-                                <select id="severity" name="00ND0000005cKFJ" class="form-control">
-                                    <option selected value="" disabled>Select a severity...</option>
-                                    <option value="Low/Minor">Low/Minor</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Major">Major</option>
-                                    <option value="Critical">Critical</option>
-                                </select>
-                            </div> -->
-                            <div class="form-group">
-                                <label>Severity of this Support Case</label><br/>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-success active">
-                                        <input name="00ND0000005cKFJ" value="Low/Minor" type="radio" checked autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="Minor problem that does not impact the service"><span class="far fa-smile"></span> Low/Minor
-                                    </label>
-                                    <label class="btn btn-secondary">
-                                        <input name="00ND0000005cKFJ" value="Medium" type="radio" autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="Need a solution but non-blocking"><span class="far fa-meh"></span> Medium
-                                    </label>
-                                    <label class="btn btn-warning">
-                                        <input name="00ND0000005cKFJ" value="Major" type="radio" autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="Portion of cloud is unusable (such as a device or web license)"><span class="far fa-frown"></span> Major
-                                    </label>
-                                    <label class="btn btn-danger">
-                                        <input name="00ND0000005cKFJ" value="Critical" type="radio" autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable."><span class="fas fa-ambulance"></span> Critical
-                                    </label>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="topic" class="sr-only">Subtopic</label>
