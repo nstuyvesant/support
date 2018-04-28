@@ -56,7 +56,8 @@
         h2 {
             font-size: 36px;
             color: #82bc41;
-            margin-top: 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -101,119 +102,119 @@
     <div class="container">
 
         <ul id="typeTabs" class="nav nav-tabs nav-justified" role="tablist">
-                <li class="nav-item">
-                    <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link type" href="#device"><span class="fas fa-mobile-alt"></span><br/>Device</a>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link type" href="#browser"><span class="fas fa-globe"></span><br/>Browser</a>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link type" href="#automation"><span class="fas fa-code-branch"></span><br/>Automation</a>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link type" href="#cloud"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link type" href="#suggestion"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
-                </li>
+            <li class="nav-item">
+                <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link type" href="#device"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link type" href="#browser"><span class="fas fa-globe"></span><br/>Browser</a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link type" href="#automation"><span class="fas fa-code-branch"></span><br/>Automation</a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link type" href="#cloud"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
+            </li>
+            <li class="nav-item">
+                <a id="suggestionType" data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link type" href="#suggestion"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
+            </li>
         </ul>
 
         <div class="tab-content">
             <div id="device" class="tab-pane fade" role="tabpanel">
                 <h2 class="text-center">Select type of device issue</h2>
-                <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
+                <ul id="deviceTab" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link topic" href="#main"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#offline"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link topic topic" href="#main"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link topic" href="#main"><span class="fab fa-app-store"></span><br/>App-related</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#"><span class="fab fa-app-store"></span><br/>App-related</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link topic" href="#main"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link topic" href="#main"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link topic" href="#main"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Performance</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link topic" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="browser" class="tab-pane fade" role="tabpanel">
                 <h2 class="text-center">What type of browser issue?</h2>
-                <ul id="questionTypes" class="nav nav-pills nav-justified" role="tablist">
+                <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link" href="#main"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
+                        <a id="questionDevice" data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#main"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
+                        <a id="questionBrowser" data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#main"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
+                        <a id="questionAutomation" data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#main"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#main"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="automation" class="tab-pane fade" role="tabpanel">
                 <h2 class="text-center">What type of automation issue?</h2>
-                <ul id="requestTypes" class="nav nav-pills nav-justified" role="tablist">
+                <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#main"><span class="far fa-times-circle"></span><br/>Execution Error</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#"><span class="far fa-times-circle"></span><br/>Execution Error</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#main"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#main"><span class="far fa-check-square"></span><br/>Reporting</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#"><span class="far fa-check-square"></span><br/>Reporting</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#main"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#main"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
 
             <div id="cloud" class="tab-pane fade" role="tabpanel">
                 <h2 class="text-center">What type of cloud or admin issue?</h2>
-                <ul id="requestTypes" class="nav nav-pills nav-justified" role="tablist">
+                <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#main"><span class="far fa-user"></span><br/>New User Request</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#"><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#main"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#main"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#main"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#main"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#"><span class="fas fa-ambulance"></span><br/>Outage</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#main"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -230,7 +231,6 @@
                         <input type="hidden" name="type" value="Suggestion">
                         <input type="hidden" name="00ND0000006MZHc" value="Suggestion">
                         <input type="hidden" name="priority" value="Low">
-                        <input type="hidden" name="00ND0000005cKFJ" value="Low/Minor">
                         <input type="hidden" name="subject" value="Suggestion via Support Portal">
                         <textarea id="suggestionDescription" class="form-control" rows="7" name="description" placeholder="Provide your suggestion here" required></textarea>
                         <br/>
@@ -244,7 +244,7 @@
 
         </div>
         
-        <div id="main" class="collapse" style="margin-top:30px;">
+        <div id="offline" class="collapse article" style="margin-top:30px;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -279,6 +279,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="contactSupport" class="collapse">
             <div class="row">
                 <div class="col-md-6">
                     <h2 style="margin-top:20px;margin-bottom:10px;">Contact Support</h2>
@@ -286,11 +289,11 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <a href="#" class="btn btn-success nav-pills"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>&nbsp;&nbsp;
-                    <a id="openSupportCase" href="#supportCase" data-toggle="collapse" class="btn btn-success nav-pills"><span class="fas fa-briefcase"></span><br/>Open Support Case</a>&nbsp;&nbsp;
-                    <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a>
+                    <a href="#" class="btn btn-success nav-pills" title="Start a chat session"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>&nbsp;&nbsp;
+                    <a id="openSupportCase" href="#supportCase" data-toggle="collapse" class="btn btn-success nav-pills" title="Open a Support Case"><span class="fas fa-briefcase"></span><br/>Open Support Case</a>&nbsp;&nbsp;
+                    <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills" title="Schedule a Webex"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a>
                 </div>
-                <div id="supportCase" class="col-md-6 collapse">
+                <div id="supportCase" class="col-md-6 collapse with-tooltips">
                     <div class="card">
                         <div class="card-header">Open a Case</div>
                         <div id="articles" class="card-body">
@@ -327,7 +330,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
-                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255"  data-toggle="tooltip" data-placement="bottom" title="Please provide the fully-qualified domain name of your cloud without (https://)." />
+                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" data-toggle="tooltip" data-placement="bottom" title="Please provide the fully-qualified domain name of your cloud without (https://)." />
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="sr-only">Your name</label>

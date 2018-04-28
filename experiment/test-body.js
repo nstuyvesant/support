@@ -1,38 +1,34 @@
-// var caseTree = {};
+// Variables with global scope
+var selectedType;
+var selectedTopic;
 
-// $.getJSON('test-hierarchy.json', function(data) {
-//     caseTree = data;
-// });
+// Set global type based on tab selection
+$('#typeTabs').on('shown.bs.tab', function(e) {
+    selectedType = $(e.target).attr('aria-controls');
+});
 
-// // Handle Support Case is displayed
-$('#supportCase').on('shown.bs.collapse', function() {
+// Set global topic based on tab selection
+$('ul.nav-pills').on('shown.bs.tab', function(e) {
+    var target = $(e.target);
+    selectedTopic = target.attr('aria-controls');
+    $('#topic').val(selectedTopic);
+    if(target.attr('href') == '#') {
+        $('.article').collapse(); // all articles because this one has none
+    }
+    // BUG is that article won't be redisplayed ever.
+    $('#contactSupport').show();
+});
+
+// Enable tooltips for previously hidden objects
+$('.with-tooltips').on('shown.bs.collapse', function() {
     $('[data-toggle="tooltip"]').tooltip({ // Turn on tool tips for the now-visible form
         container: 'body'
     });
 });
 
-// // Handle click on tabs
-// $('#issueTypes').on('shown.bs.tab', function(e) {
-//     //console.log(e);
-//     var selectedTabName = $(e.target).attr('aria-controls');
-//     $('#issueTypeSelected').text(selectedTabName);
-//     $('.typeahead').typeahead({
-//         // TODO: load the one appropriate for selectedTabName
-//         source: caseTree.types[0].topics[0].subtopics
-//     });
-//     $('#searchResults').empty(); // Clear the card of past articles
-//     $('#searchResults').append('<br/><h2>Maybe one of these articles can help...</h2');
-//     var searchResults = [];
-//     var article = '';
-//     $.each(caseTree.types[0].topics[0].articles, function(index, value) {
-//         value.url = `http://developers.perfectomobile.com/pages/viewpage.action?pageId=${value.id}`;
-//         article = `<article><a href="${value.url}" target="_blank">${value.title}</a><p class="text-muted">${value.synopsis}</p></article>`;
-//         $('#searchResults').append(article);
-//         searchResults.push(article);
-//     });
-//     $('#didNotHelp').show();
-//     $('body').css('cursor','default');
-// });
+$('#suggestionType').on('click', function(e) {
+    $('#contactSupport').hide();
+});
 
 // DOM loaded
 $(document).ready(function() {
