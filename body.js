@@ -189,6 +189,9 @@ $(document).ready(function() {
         displayOutageAlerts($('#fqdn').val());
     });
 
+    // Turn on tool tips
+    $('[data-toggle="tooltip"]').tooltip();
+
     // reCAPTCHA requires a timestamp updated every half-second
     setInterval(refreshCaptchaTimestamp, 500);
     setHiddenParametersField();

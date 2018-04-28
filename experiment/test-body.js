@@ -29,5 +29,5 @@ $('#issueTypes').on('shown.bs.tab', function(e) {
 
 // DOM loaded
 $(document).ready(function() {
-
+    $('[data-toggle="tooltip"]').tooltip(); // Turn on tool tips
 });
