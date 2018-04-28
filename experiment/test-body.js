@@ -27,5 +27,5 @@ $('#suggestionType').on('click', function(e) {
 
 // DOM loaded
 $(document).ready(function() {
-    
+    //TODO: Add jQuery validation of form, recaptcha on second form, chat, and TimeTrade
 });
