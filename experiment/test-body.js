@@ -5,6 +5,9 @@ var selectedTopic;
 // Set global type based on tab selection
 $('#typeTabs').on('shown.bs.tab', function(e) {
     selectedType = $(e.target).attr('aria-controls');
+    if(selectedType == 'Suggestion') {
+        $('#articleContent').collapse();
+    }
 });
 
 // Set global topic based on tab selection
@@ -22,7 +25,8 @@ $('.with-tooltips').on('shown.bs.collapse', function() {
 });
 
 $('#suggestionType').on('click', function(e) {
-    $('#contactSupport').hide();
+    $('.tab-pane').removeClass('active show');
+    $('#contactSupport').removeAttr('style');
 });
 
 // DOM loaded
