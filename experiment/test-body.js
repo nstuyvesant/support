@@ -13,15 +13,16 @@ var captchaCallback = function() {
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamp = function() {
-    //var response = document.getElementById('g-recaptcha-response');
-    var response = $('.g-recaptcha-response');
-    if (response == null || response.value.trim() == "") {
-        var elems = JSON.parse($('#caseCaptchaSettings').val());
-        elems.ts = JSON.stringify(new Date().getTime());
-        var elemsStr = JSON.stringify(elems);
-        $('#caseCaptchaSettings').val(elemsStr);
-        $('#suggestionCaptchaSettings').val(elemsStr);
-    }
+    // Update the captcha_settings fields in Suggestions and Case forms
+    var captchaSettings = JSON.parse($('#caseCaptchaSettings').val());
+    captchaSettings.ts = JSON.stringify(new Date().getTime());
+    var captchSettingsString = JSON.stringify(captchaSettings);
+
+    // Only save updated captcha settings if response is null or empty (for each form)
+    var suggestionCaptchaResponse = $('#g-recaptcha-response');
+    if (suggestionCaptchaResponse == null || suggestionCaptchaResponse.value.trim() == "") $('#suggestionCaptchaSettings').val(captchSettingsString);
+    var caseCaptchaCaptchaResponse = $('#g-recaptcha-response-1');
+    if (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.value.trim() == "") $('#caseCaptchaSettings').val(captchSettingsString);
 }
 
 // Remove error message on hidden field
