@@ -4,8 +4,9 @@ var selectedTopic;
 var descriptionTemplate;
 var cloudStatus = {};
 
-// Explict reCAPTCHA 2.0 handling for multiple fields
+// Explict reCAPTCHA 2.0 handling for multiple forms
 var captchaCallback = function() {
+    // Find all divs with class="g-recaptcha" and render the reCAPTCHA content there
     $('.g-recaptcha').each(function(index, el) {
         grecaptcha.render(el, {'sitekey' : '6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E'});
     });
@@ -20,9 +21,9 @@ var refreshCaptchaTimestamp = function() {
 
     // Only save updated captcha settings if response is null or empty (for each form)
     var suggestionCaptchaResponse = $('#g-recaptcha-response');
-    if (suggestionCaptchaResponse == null || suggestionCaptchaResponse.value.trim() == "") $('#suggestionCaptchaSettings').val(captchSettingsString);
+    if (suggestionCaptchaResponse == null || suggestionCaptchaResponse.val().trim() == "") $('#suggestionCaptchaSettings').val(captchSettingsString);
     var caseCaptchaCaptchaResponse = $('#g-recaptcha-response-1');
-    if (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.value.trim() == "") $('#caseCaptchaSettings').val(captchSettingsString);
+    if (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.val().trim() == "") $('#caseCaptchaSettings').val(captchSettingsString);
 }
 
 // Remove error message on hidden field
