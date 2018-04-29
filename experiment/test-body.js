@@ -4,19 +4,22 @@ var selectedTopic;
 var descriptionTemplate;
 var cloudStatus = {};
 
-// Set timestamp for reCAPTCHA settings submitted to Salesforce
+// Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamp = function() {
     var response = document.getElementById('g-recaptcha-response');
     if (response == null || response.value.trim() == "") {
-        var elems = JSON.parse($('#captcha_settings').val());
+        var elems = JSON.parse($('#caseCaptchaSettings').val());
         elems.ts = JSON.stringify(new Date().getTime());
-        $('#captcha_settings').val(JSON.stringify(elems));
+        var elemsStr = JSON.stringify(elems);
+        $('#caseCaptchaSettings').val(elemsStr);
+        $('#suggestionCaptchaSettings').val(elemsStr);
     }
 }
 
 // Remove error message on hidden field
 var recaptchaCallback = function() {
-    $('#hiddenRecaptcha').valid();
+    $('#hiddenRecaptchaCase').valid();
+    $('#hiddenRecaptchaSuggestion').valid();
 };
 
 // Extract querystring values
@@ -125,14 +128,24 @@ $(document).ready(function() {
         $('#submitStatus').show();
     }
 
+    var name = qs('name');
+    if(name) {
+        $('#name').val(name);
+        $('#nameSuggestion').val(name);
+    }
+
     // Load required fields from querystring (if provided)
     var email = qs('username'); // or could use email parameter sent (not sure why both are sent by MCM)
     $('#email').val(email);
-    $('#email').val(email); // Overcomes Safari bug where placeholder doesn't disappear
+    $('#emailSuggestion').val(email);
+
+    var phone = qs('phone');
+    if(phone && phone.length > 10) { // Discard if it's too short to be real
+        $('#phone').val(phone);          
+    }
 
     var fqdn = qs('appUrl');
     $('#fqdn').val(fqdn);
-    $('#fqdn').val(fqdn); // Overcomes Safari bug where placeholder doesn't disappear
 
     // Report source to Google Analytics
     var origin = qs('origin');
@@ -148,19 +161,6 @@ $(document).ready(function() {
     var cname = qs('cname');
     if(!fqdn && cname) {
         $('#fqdn').val(cname + '.perfectomobile.com');
-        $('#fqdn').val(cname + '.perfectomobile.com'); // Overcomes Safari bug where placeholder doesn't disappear
-    }
-
-    var phone = qs('phone');
-    if(phone && phone.length > 10) { // Discard if it's too short to be real
-        $('#phone').val(phone);
-        $('#phone').val(phone); // Overcomes Safari bug where placeholder doesn't disappear                
-    }
-
-    var name = qs('name');
-    if(name) {
-        $('#name').val(name);
-        $('#name').val(name); // Overcomes Safari bug where placeholder doesn't disappear                
     }
 
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
@@ -239,10 +239,7 @@ $(document).ready(function() {
             Munchkin.init('482-YUQ-296');
         }
     });
-    //TODO: Add recaptcha on second form, chat, and TimeTrade
 });
-
-// SHOULD WE ASK FOR contact info on Suggestion form?
 
 // TODO: REMOVE /device from head.js as / is the true root now.
 

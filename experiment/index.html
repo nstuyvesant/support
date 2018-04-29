@@ -224,7 +224,7 @@
                 <form id="suggestionForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
                     <div class="form-group">
                         <label for="suggestionDescription">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
-                        <input type="hidden" id="captcha_settings2" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                        <input type="hidden" id="suggestionCaptchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                         <input type="hidden" name="orgid" value="00D200000001UUG">
                         <input type="hidden" name="recordType" value="01220000000HQCE">
                         <input type="hidden" name="retURL" value="https://support.perfecto.io/?submitted=true">
@@ -232,12 +232,18 @@
                         <input type="hidden" name="00ND0000006MZHc" value="Suggestion">
                         <input type="hidden" name="priority" value="Low">
                         <input type="hidden" name="subject" value="Suggestion via Support Portal">
-                        <!--SHOULD WE GET CONTACT INFO FOR SUGGESTIONS (NAME, PHONE, EMAIL, COMPANY)? PROBABLY-->
+                        <div class="form-group">
+                            <label for="name" class="sr-only">Your name</label>
+                            <input type="text" class="form-control" placeholder="First and last name (optional)" id="nameSuggestion" name="name" autocomplete="name" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your first and last name." />
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Your work email address</label>
+                            <input class="form-control" type="email" id="emailSuggestion" name="email" placeholder="Work email address (optional)" autocomplete="email" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your work email address (ie not gmail.com)." />
+                        </div>
                         <textarea id="suggestionDescription" class="form-control" rows="7" name="description" placeholder="Provide your suggestion here" required></textarea>
                         <br/>
-                        <!--FIX RECAPTCHA DUE TO THERE BEING 2 FORMS-->
                         <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
-                        <input id="hiddenRecaptcha2" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha"><br/>
+                        <input id="hiddenRecaptchaSuggestion" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha"><br/>
                         <input type="submit" class="btn btn-success">
                     </div>
                 </form>
@@ -402,7 +408,7 @@
                         <div id="articles" class="card-body">
                             <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
 
-                                <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                                <input type="hidden" id="caseCaptchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                                 <input type="hidden" name="orgid" value="00D200000001UUG">
                                 <input type="hidden" id="origin" name="origin" value="Web">
                                 <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
@@ -473,7 +479,7 @@
                                 <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
                                 <input type="hidden" id="external" name="external" value="1" />
                                 <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
-                                <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha"><br/>
+                                <input id="hiddenRecaptchaCase" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha"><br/>
                                 <input type="submit" class="btn btn-success" id="submit">
                             </form>
                         </div>
