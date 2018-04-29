@@ -48,6 +48,16 @@ $('#fqdn').on('change', function(e) {
     displayOutageAlerts(newFQDN);
 });
 
+// Handle change to phone
+$('#phone').on('change', function(e) {
+    var phoneEntered = $(e.target).val();
+    var phone = libphonenumber.parseNumber(phoneEntered, 'US');
+    //var phone = new libphonenumber.AsYouType('US').input(phone);
+    var phoneFormatted = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+    $('#phone').val(phoneFormatted);
+    $('#phone').val(phoneFormatted); // Overcome Safari bug by doing it twice
+});
+
 // Type chosen and tab displayed. Set global variable and reset state
 $('#typeTabs').on('shown.bs.tab', function(e) {
     selectedType = $(e.target).attr('aria-controls');
