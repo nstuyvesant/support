@@ -13,13 +13,13 @@ var captchaCallback = function() {
 };
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
-var refreshCaptchaTimestamp = function() {
+var refreshCaptchaTimestamps = function() {
     // Update the captcha_settings fields in Suggestions and Case forms
     var captchaSettings = JSON.parse($('#caseCaptchaSettings').val());
     captchaSettings.ts = JSON.stringify(new Date().getTime());
     var captchSettingsString = JSON.stringify(captchaSettings);
 
-    // Only save updated captcha settings if response is null or empty (for each form)
+    // Only save updated captcha settings if each form's captcha response is null or empty (for each form)
     var suggestionCaptchaResponse = $('#g-recaptcha-response');
     if (suggestionCaptchaResponse == null || suggestionCaptchaResponse.val().trim() == "") $('#suggestionCaptchaSettings').val(captchSettingsString);
     var caseCaptchaCaptchaResponse = $('#g-recaptcha-response-1');
@@ -126,15 +126,13 @@ $('#requestForm').on('submit', function(e) {
 // DOM loaded
 $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
-
-    // Uncomment for production
-    // $.getJSON('../health.json', function(data) {
-    //     cloudStatus = data;
-    //     displayOutageAlerts($('#fqdn').val());
-    // });
+    $.getJSON('../health.json', function(data) {
+        cloudStatus = data;
+        displayOutageAlerts($('#fqdn').val());
+    });
 
     // reCAPTCHA requires a timestamp updated every half-second
-    setInterval(refreshCaptchaTimestamp, 500);
+    setInterval(refreshCaptchaTimestamps, 500);
     setHiddenParametersField();
 
     // Show confirmation if submitted
@@ -200,7 +198,29 @@ $(document).ready(function() {
     $('#os').val(qs('os'));
     $('#version').val(qs('version'));
 
-    // Setup form validate. jQuery Validation bug for selects - must use name not ID
+    // Setup form validation for Suggestions (minimal)
+    $('#suggestionForm').validate({
+        ignore: ".ignore",
+        rules: {
+            email: {
+                email: true
+            },
+            description: {
+                required: true
+            },
+            hiddenRecaptcha: {
+                required: function() {
+                    if (grecaptcha.getResponse() == '') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    });
+
+    // Setup form validation for Cases. jQuery Validation bug for selects - must use name not ID.
     $('#requestForm').validate({
         ignore: ".ignore",
         rules: {
