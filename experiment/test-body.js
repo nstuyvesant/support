@@ -147,8 +147,10 @@ $(document).ready(function() {
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
-        $('#phone').val(formatPhone(phone));          
+        var testPhone = formatPhone(phone);
+        if(testPhone) phone = testPhone; // otherwise leave alone     
     }
+    $('#phone').val(phone);
 
     var fqdn = qs('appUrl');
     $('#fqdn').val(fqdn);
