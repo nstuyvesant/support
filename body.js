@@ -124,6 +124,16 @@ var setTopicActual = function(value) {
     $('#topicActual').val(selectedTabName + ': ' + value);
 }
 
+// Handle change to phone
+$('#phone').on('change', function(e) {
+    var phoneEntered = $(e.target).val();
+    var phone = libphonenumber.parseNumber(phoneEntered, 'US');
+    //var phone = new libphonenumber.AsYouType('US').input(phone);
+    var phoneFormatted = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+    $('#phone').val(phoneFormatted);
+    $('#phone').val(phoneFormatted); // Overcome Safari bug by doing it twice
+});
+
 // Handle change to Topic - concat tab name, colon and space as prefix
 $('#topic').on('change', function(e) {
     var selectedTopic = $(e.target).val();
