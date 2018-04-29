@@ -4,6 +4,13 @@ var selectedTopic;
 var descriptionTemplate;
 var cloudStatus = {};
 
+// Explict reCAPTCHA 2.0 handling for multiple fields
+var captchaCallback = function() {
+    $('.g-recaptcha').each(function(index, el) {
+        grecaptcha.render(el, {'sitekey' : '6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E'});
+    });
+};
+
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamp = function() {
     //var response = document.getElementById('g-recaptcha-response');
@@ -119,10 +126,10 @@ $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
 
     // Uncomment for production
-    // $.getJSON('health.json', function(data) {
-    //     cloudStatus = data;
-    //     displayOutageAlerts($('#fqdn').val());
-    // });
+    $.getJSON('../health.json', function(data) {
+        cloudStatus = data;
+        displayOutageAlerts($('#fqdn').val());
+    });
 
     // reCAPTCHA requires a timestamp updated every half-second
     setInterval(refreshCaptchaTimestamp, 500);

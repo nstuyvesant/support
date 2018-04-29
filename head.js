@@ -12,5 +12,5 @@ window._laq.push(function() {
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'UA-2078617-29', {'page_path': '/device'});
+gtag('config', 'UA-2078617-29', {'page_path': '/device'}); // TODO: Remove object once experiment is live
 
