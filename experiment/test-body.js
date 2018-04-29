@@ -6,7 +6,8 @@ var cloudStatus = {};
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamp = function() {
-    var response = document.getElementById('g-recaptcha-response');
+    //var response = document.getElementById('g-recaptcha-response');
+    var response = $('.g-recaptcha-response');
     if (response == null || response.value.trim() == "") {
         var elems = JSON.parse($('#caseCaptchaSettings').val());
         elems.ts = JSON.stringify(new Date().getTime());
