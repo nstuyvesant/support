@@ -126,10 +126,10 @@ $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
 
     // Uncomment for production
-    $.getJSON('../health.json', function(data) {
-        cloudStatus = data;
-        displayOutageAlerts($('#fqdn').val());
-    });
+    // $.getJSON('../health.json', function(data) {
+    //     cloudStatus = data;
+    //     displayOutageAlerts($('#fqdn').val());
+    // });
 
     // reCAPTCHA requires a timestamp updated every half-second
     setInterval(refreshCaptchaTimestamp, 500);
