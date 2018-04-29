@@ -47,7 +47,8 @@ var displayOutageAlerts = function(cloudFQDN) {
 
 var formatPhone = function(rawPhoneNumber) {
     var phone = libphonenumber.parseNumber(rawPhoneNumber, 'US');
-    return libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+    var processedPhone = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+    return processedPhone ? processedPhone : phone;
 };
 
 // Handle change to FQDN
@@ -147,8 +148,7 @@ $(document).ready(function() {
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
-        var testPhone = formatPhone(phone);
-        if(testPhone) phone = testPhone; // otherwise leave alone     
+        phone = formatPhone(phone);
     }
     $('#phone').val(phone);
 
