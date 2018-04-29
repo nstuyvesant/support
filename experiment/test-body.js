@@ -69,8 +69,7 @@ $('#typeTabs').on('shown.bs.tab', function(e) {
 $('ul.nav-pills').on('shown.bs.tab', function(e) {
     selectedTopic = $(e.target).attr('aria-controls');
     $('#topic').val(selectedTopic);
-    $('#subject').val(selectedTopic);
-    $('#subject').val(selectedTopic); // Second time to overcome Safari bug
+    $('#subject').val(selectedTopic); // don't worry about Safari bug as field is currently hidden
 
     //TODO: Embed description template as a property of Topic tabs, load into descriptionTemplate variable
     gtag('event', 'Topic: ' + selectedTopic);
