@@ -124,25 +124,25 @@
                 <h2 class="text-center">Select type of device issue</h2>
                 <ul id="deviceTab" class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#deviceOffline"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#deviceOffline" data-description="Device (model, ID, OS, version): &#xa;Was it restarted or upgraded recently? Y|N&#xa;Is there a passcode? Y|N&#xa;Passcode (if relevant): &#xa;Is there an MDM managing this device? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork" data-description="Device (model, ID, OS, version): &#xa;Can device's browser reach www.google.com? Y|N&#xa;If WiFi issue, is SSID Perfecto? Y|N&#xa;If WiFi issue, how many bars reception? &#xa;If WiFi issue, did you try toggling Airplane Mode? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#deviceApp"><span class="fab fa-app-store"></span><br/>App-related</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#deviceApp" data-description="Device (model, ID, OS, version): &#xa;Type of app-issue: Install|Crash|Performance&#xa;What's happening and what was expected?&#xa;"><span class="fab fa-app-store"></span><br/>App-related</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade" data-description="Device (model, ID, OS, version): &#xa;Is the device currently in use? Y|N"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap" data-description="Device you want to replace (model, ID, OS, version): &#xa;Device you want to add (model, ID, OS, version): &#xa;Is the device to replace currently in use? Y|N"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#devicePerformance"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#devicePerformance" data-description="Device (model, ID, OS, version): &#xa;Related to: Touch Response|Script Execution|App&#xa;User's location matter? Y|N&#xa;How about time of day? Y|N&#xa;Same performance @ home? Y|N&#xa;Without VPN? Y|N"><span class="fas fa-stopwatch"></span><br/>Performance</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#deviceOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#deviceOther" data-description="Device (model, ID, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -151,22 +151,22 @@
                 <h2 class="text-center">What type of browser issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#browserLaunch"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#browserLaunch" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#browserSlow"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#browserSlow" data-description="Browser (name, OS, version): &#xa;What URL is slow? &#xa;Is www.google.com slow? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#browserInteraction"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#browserInteraction" data-description="Browser (name, OS, version): &#xa;What are the steps to reach that page?&#xa;What's happening and what was expected?&#xa;"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#browserNetwork"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#browserNetwork" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#browserDisplay"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#browserDisplay" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#browserOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#browserOther" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -175,22 +175,22 @@
                 <h2 class="text-center">What type of automation issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#automationExecution"><span class="far fa-times-circle"></span><br/>Execution Error</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#automationExecution" data-description="Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-times-circle"></span><br/>Execution Error</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject" data-description="Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting"><span class="far fa-check-square"></span><br/>Reporting</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-check-square"></span><br/>Reporting</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI" data-description="Env: REST API|Jenkins|IntelliJ|Eclipse|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;Can you share you script and framework? Y|N&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -199,22 +199,22 @@
                 <h2 class="text-center">What type of cloud or admin issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser"><span class="far fa-user"></span><br/>New User Request</a>
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig" data-description="What kind of configuration change would you like?&#xa;"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? Y|N&#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin" data-description="Did you try a password reset? Y|N&#xa;Is your login a valid email address? Y|N&#xa;What's happening?&#xa;"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage" data-description="Any difference when connecting @ home? Y|N&#xa;Did you try without VPN? Y|N&#xa;When did you first observe the outage?&#xa;"><span class="fas fa-ambulance"></span><br/>Outage</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther" data-description="How can we help?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>

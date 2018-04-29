@@ -77,11 +77,14 @@ $('#typeTabs').on('shown.bs.tab', function(e) {
 
 // Topic chosen and tab displayed. Set global variable.
 $('ul.nav-pills').on('shown.bs.tab', function(e) {
-    selectedTopic = $(e.target).attr('aria-controls');
+    var target = $(e.target);
+    selectedTopic = target.attr('aria-controls');
+    var description = target.attr('data-description');
+    // Set the form fields (not currently visible)
     $('#topic').val(selectedTopic);
     $('#subject').val(selectedTopic); // don't worry about Safari bug as field is currently hidden
-
-    //TODO: Embed description template as a property of Topic tabs, load into descriptionTemplate variable
+    $('#description').val(description);
+    // Log Google Analytics event
     gtag('event', 'Topic: ' + selectedTopic);
     $('#contactSupport').show();
 });
