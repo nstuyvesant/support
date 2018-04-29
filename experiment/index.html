@@ -79,10 +79,10 @@
                             <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">Online Training</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://developers.perfectomobile.com" target="_blank">Community</a>
+                            <a class="nav-link" href="http://developers.perfectomobile.com" target="_blank"><span class="fas fa-search"></span> Search Community</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><i class="fa fa-user"></i> Customer Login
+                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><span class="fa fa-user"></span> Customer Login
                             </a>
                         </li>
                     </ul>
@@ -248,7 +248,7 @@
         <div class="tab-content" id="articleContent" style="margin-top:30px;">
 
             <div id="deviceOffline" class="tab-pane fade" role="tabpanel">
-                Yoram: this is an example of what it might look like. Avoid critiquing this content as it's not finalized.
+                Yoram: please compute the value of <i>e</i> to 20 digits (manually) using Newton's Series Expansion <i class="far fa-smile"></i>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -392,9 +392,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" style="display: none;" class="btn btn-success nav-pills" title="Start a chat session"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>
-                    <a class="btn btn-light nav-pills disabled" style="display: none;" id="liveagent_button_offline_573D0000000028q"><span class="far fa-comment-alt"></span> Chat Offline</a>&nbsp;&nbsp;
+                    <a class="btn btn-light nav-pills disabled" style="display: none;" id="liveagent_button_offline_573D0000000028q"><span class="far fa-comment-alt"></span><br/>Chat Offline</a>&nbsp;&nbsp;
                     <a id="openSupportCase" href="#supportCase" data-toggle="collapse" class="btn btn-success nav-pills" title="Open a Support Case"><span class="fas fa-briefcase"></span><br/>Open Support Case</a>&nbsp;&nbsp;
-                    <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills" title="Schedule a Webex"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a>
+                    <!-- <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills" title="Schedule a Webex"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a> -->
                 </div>
                 <div id="supportCase" class="col-md-6 collapse with-tooltips">
                     <div class="card">
@@ -431,7 +431,7 @@
                                     <label for="severity">Priority of this Support Case</label><br/>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-success active" data-toggle="tooltip" data-placement="bottom" title="Non-blocking issues">
-                                            <input name="priority" value="Low" type="radio" checked autocomplete="off"><span class="far fa-smile"></span> Low
+                                            <input name="priority" value="Low" type="radio" checked autocomplete="off"><span class="far fa-meh"></span> Low
                                         </label>
                                         <label class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Need a solution but non-blocking">
                                             <input name="priority" value="Normal" type="radio" autocomplete="off"><span class="far fa-meh"></span> Normal
@@ -445,8 +445,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
-                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" data-toggle="tooltip" data-placement="bottom" title="Please provide the fully-qualified domain name of your cloud without (https://)." />
+                                    <label for="fqdn" class="sr-only">Your cloud's hostname</label>
+                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud (eg. yourcloud.perfectomobile.com)" maxlength="255" data-toggle="tooltip" data-placement="bottom" title="Please provide the fully-qualified domain name of your cloud without (https://)." />
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="sr-only">Your name</label>
