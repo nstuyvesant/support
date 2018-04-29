@@ -45,6 +45,11 @@ var displayOutageAlerts = function(cloudFQDN) {
     }
 };
 
+var formatPhone = function(rawPhoneNumber) {
+    var phone = libphonenumber.parseNumber(rawPhoneNumber, 'US');
+    return libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+};
+
 // Handle change to FQDN
 $('#fqdn').on('change', function(e) {
     var newFQDN = $(e.target).val();
@@ -54,9 +59,7 @@ $('#fqdn').on('change', function(e) {
 // Handle change to phone
 $('#phone').on('change', function(e) {
     var phoneEntered = $(e.target).val();
-    var phone = libphonenumber.parseNumber(phoneEntered, 'US');
-    //var phone = new libphonenumber.AsYouType('US').input(phone);
-    var phoneFormatted = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
+    var phoneFormatted = formatPhone(phoneEntered);
     $('#phone').val(phoneFormatted);
     $('#phone').val(phoneFormatted); // Overcome Safari bug by doing it twice
 });
@@ -136,12 +139,15 @@ $(document).ready(function() {
 
     // Load required fields from querystring (if provided)
     var email = qs('username'); // or could use email parameter sent (not sure why both are sent by MCM)
+    if(!email) {
+        email = qs('email');
+    }
     $('#email').val(email);
     $('#emailSuggestion').val(email);
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
-        $('#phone').val(phone);          
+        $('#phone').val(formatPhone(phone));          
     }
 
     var fqdn = qs('appUrl');
@@ -166,7 +172,13 @@ $(document).ready(function() {
     // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
     $('#origin').val(origin);
     $('#company').val(qs('company'));
-    $('#timezone').val(qs('timezone'));
+    var timezone = qs('timezone');
+    if(!timezone) {
+        var d = new Date();
+        var n = d.getTimezoneOffset();
+        timezone = -n/60;
+    }
+    $('#timezone').val(timezone);
     $('#mcmVersion').val(qs('mcmVersion'));
     $('#hssVersion').val(qs('hssVersion'));
     $('#location').val(qs('location'));
