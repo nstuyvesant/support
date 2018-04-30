@@ -114,7 +114,7 @@ $('.with-tooltips').on('shown.bs.collapse', function() {
 });
 
 // Handle submit on request form
-$('#requestForm').on('submit', function(e) {
+$('#requestForm').on('submit', function() {
     if($('#requestForm').valid) {
         // Append execution URL to description
         $('#description').val($('#description').val() + $('#parameters').val());
@@ -124,8 +124,11 @@ $('#requestForm').on('submit', function(e) {
 });
 
 // Make radio buttons in button-groups work
-$('input[type=radio]').on('change', function() {
-    $('input:checked').parent().addClass("selected");
+$('input[type=radio]').on('changed', function(e) {
+    var target = $(e.target);
+    console.log(target.val());
+    target.parent.addClass("selected");
+    //$('input:checked').parent()
 });
 
 // DOM loaded
