@@ -137,10 +137,8 @@ $(document).ready(function() {
 
     // Make radio buttons in button-groups work
     $('input[type=radio]').change(function(e) {
-        var target = $(e.target); // Will this work?
-        console.log(target.val());
-        target.parent.addClass("selected");
-        //$('input:checked').parent()
+        var target = $(e.target);
+        target.parent().addClass("selected");
     });
 
     // Show confirmation if submitted
