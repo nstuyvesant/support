@@ -123,7 +123,7 @@ $('#requestForm').on('submit', function() {
     }
 });
 
-// DOM loaded
+// DOM ready
 $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
     $.getJSON('../health.json', function(data) {
@@ -136,7 +136,7 @@ $(document).ready(function() {
     setHiddenParametersField();
 
     // Make radio buttons in button-groups work
-    $('input[type=radio]').change(function(e) {
+    $('input[name=priority]:radio').on("change", function(e) {
         var target = $(e.target);
         $('#fqdn').focus();
         $('label.btn').removeClass("focus");
