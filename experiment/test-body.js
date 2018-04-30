@@ -125,7 +125,7 @@ $('#requestForm').on('submit', function(e) {
 
 // Make radio buttons in button-groups work
 $('input[type=radio]').on('change', function() {
-    $('input:checked').parent().addClass("focus"); // Change active with your own class name
+    $('input:checked').parent().addClass("selected");
 });
 
 // DOM loaded
