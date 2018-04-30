@@ -56,6 +56,7 @@ var displayOutageAlerts = function(cloudFQDN) {
 };
 
 var formatPhone = function(rawPhoneNumber) {
+    //BUG: if the phone number isn't 10 digits, phone will be blank and cause error
     var phone = libphonenumber.parseNumber(rawPhoneNumber, 'US');
     var processedPhone = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
     return processedPhone ? processedPhone : phone;
