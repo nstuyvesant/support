@@ -123,6 +123,12 @@ $('#requestForm').on('submit', function(e) {
     }
 });
 
+// Make radio buttons in button-groups work
+$('input[type=radio]').on('change', function() {
+    alert('Radio change');
+    $('input:checked').parent().addClass("active"); // Change active with your own class name
+});
+
 // DOM loaded
 $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
