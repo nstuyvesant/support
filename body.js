@@ -63,7 +63,7 @@ var searchConfluence = function(searchText, index) {
         gtag('event', 'Search: ' + searchText);
         // Next line can be removed once Confluence gets an SSL cert
         var pageSize = 8;
-        var url = 'https://cors-anywhere.herokuapp.com/http://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
+        var url = 'https://developers.perfectomobile.com/rest/searchv3/1.0/search?queryString=' + encodeURI(searchText) + '&startIndex=' + index + '&pageSize=' + pageSize;
         $.ajax({
             url: url,
             headers: {'X-Requested-With': 'XMLHttpRequest'},
