@@ -123,13 +123,6 @@ $('#requestForm').on('submit', function() {
     }
 });
 
-// Make radio buttons in button-groups work
-$('input[type=radio]').change(function() {
-    console.log(this.val());
-    this.parent.addClass("selected");
-    //$('input:checked').parent()
-});
-
 // DOM loaded
 $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
@@ -141,6 +134,14 @@ $(document).ready(function() {
     // reCAPTCHA requires a timestamp updated every half-second
     setInterval(refreshCaptchaTimestamps, 500);
     setHiddenParametersField();
+
+    // Make radio buttons in button-groups work
+    $('input[type=radio]').change(function() {
+        alert('click radio');
+        console.log(this.val());
+        this.parent.addClass("selected");
+        //$('input:checked').parent()
+    });
 
     // Show confirmation if submitted
     if(qs('submitted')) {
