@@ -124,10 +124,9 @@ $('#requestForm').on('submit', function() {
 });
 
 // Make radio buttons in button-groups work
-$('input[type=radio]').on('change', function(e) {
-    var target = $(e.target);
-    console.log(target.val());
-    target.parent.addClass("selected");
+$('input[type=radio]').change(function() {
+    console.log(this.val());
+    this.parent.addClass("selected");
     //$('input:checked').parent()
 });
 
