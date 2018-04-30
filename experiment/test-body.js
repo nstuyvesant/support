@@ -138,7 +138,7 @@ $(document).ready(function() {
     // Make radio buttons in button-groups work
     $('input[type=radio]').change(function(e) {
         var target = $(e.target);
-        target.parent().addClass("selected");
+        target.parent().addClass("focus active");
     });
 
     // Show confirmation if submitted
