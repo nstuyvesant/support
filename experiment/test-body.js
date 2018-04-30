@@ -138,10 +138,8 @@ $(document).ready(function() {
     // Make radio buttons in button-groups work
     $('input[name=priority]:radio').on("change", function(e) {
         var target = $(e.target);
-        $('#fqdn').focus();
-        $('label.btn').removeClass("focus");
-        console.log(target.parent());
-        target.parent().addClass("focus");
+        $('label.btn').removeClass("selected");
+        target.parent().addClass("selected");
     });
 
     // Show confirmation if submitted
