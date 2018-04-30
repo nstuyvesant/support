@@ -95,6 +95,22 @@ $('ul.nav-pills').on('shown.bs.tab', function(e) {
     $('#topic').val(selectedTopic);
     $('#subject').val(selectedTopic); // don't worry about Safari bug as field is currently hidden
     $('#description').val(description);
+    
+    if(selectedTopic == 'Cloud: Outage') { // Make Urgent visible
+        $('#priorityLow').parent().removeClass('selected')
+        var priorityUrgent = $('#priorityUrgent');
+        priorityUrgent.prop('checked',true);
+        priorityUrgent.parent().removeClass('collapse');
+        priorityUrgent.parent().addClass('selected');
+        $('#priorityHigh').parent().removeClass('currently-last');
+    } else { // Reset priority
+        $('#priorityUrgent').parent().addClass('collapse');
+        $('#priorityUrgent').removeClass('selected');
+        $('#priorityLow').prop('checked',true);
+        $('#priorityLow').parent().addClass('selected');
+        $('#priorityHigh').parent().addClass('currently-last');
+    }
+
     // Log Google Analytics event
     gtag('event', 'Topic: ' + selectedTopic);
     $('#contactSupport').show();
@@ -160,7 +176,9 @@ $(document).ready(function() {
     if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
     }
-    $("#phone").intlTelInput();
+    $("#phone").intlTelInput({
+        utilsScript : 'https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.1.11/libphonenumber-js.min.js'
+    });
 
     var fqdn = qs('appUrl');
     $('#fqdn').val(fqdn);

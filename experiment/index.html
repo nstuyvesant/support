@@ -71,6 +71,14 @@
                 background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/img/flags@2x.png');
             }
         }
+        label.currently-last {
+            -webkit-border-top-right-radius: 4px!important;
+            -moz-border-radius-topright: 4px!important;
+            border-top-right-radius: 4px!important;
+            -webkit-border-bottom-right-radius: 4px!important;
+            -moz-border-radius-bottomright: 4px!important;
+            border-bottom-right-radius: 4px!important;
+        }
     </style>
 </head>
 
@@ -190,19 +198,19 @@
                         <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#automationExecution" data-description="Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-times-circle"></span><br/>Execution Error</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject" data-description="Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject" data-description="Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-check-square"></span><br/>Reporting</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-check-square"></span><br/>Reporting</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI" data-description="Env: REST API|Jenkins|IntelliJ|Eclipse|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI" data-description="Env: REST API|Jenkins|IntelliJ|Eclipse|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;Can you share you script and framework? Y|N&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;Can you share you script and framework? Y|N&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther" data-description="Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -211,22 +219,22 @@
                 <h2 class="text-center">What type of cloud or admin issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig" data-description="What kind of configuration change would you like?&#xa;"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig" data-description="What kind of configuration change would you like?&#xa;"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? Y|N&#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? Y|N&#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
-                        <a id="requestCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin" data-description="Did you try a password reset? Y|N&#xa;Is your login a valid email address? Y|N&#xa;What's happening?&#xa;"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin" data-description="Did you try a password reset? Y|N&#xa;Is your login a valid email address? Y|N&#xa;What's happening?&#xa;"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage" data-description="Any difference when connecting @ home? Y|N&#xa;Did you try without VPN? Y|N&#xa;When did you first observe the outage?&#xa;"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                        <a id="outage" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage" data-description="Any difference when connecting @ home? Y|N&#xa;Did you try without VPN? Y|N&#xa;When did you first observe the outage?&#xa;"><span class="fas fa-ambulance"></span><br/>Outage</a>
                     </li>
                     <li class="nav-item">
-                        <a id="questionCloud" data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther" data-description="How can we help?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther" data-description="How can we help?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
             </div>
@@ -347,7 +355,7 @@
             </div>
 
             <div id="browserOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Browser: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank"><b>Knowledge Base</b></a> to see if there's a solution (Browser: Other)
             </div>
 
             <div id="automationExecution" class="tab-pane fade" role="tabpanel">
@@ -371,7 +379,7 @@
             </div>
     
             <div id="automationOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Automation: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank"><b>Knowledge Base</b></a> to see if there's a solution (Automation: Other)
             </div>
 
             <div id="cloudUser" class="tab-pane fade" role="tabpanel">
@@ -388,8 +396,8 @@
                         <div class="card">
                             <div class="card-header">Solutions</div>
                             <div class="card-body">
-                                Check out our <a href="https://developers.perfectomobile.com" target="_blank"><b>Product Documentation</b></a><br/>
-                                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a Solution
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>Knowledge Base Search</b></a> for an answer.
                             </div>
                         </div>
                     </div>
@@ -405,7 +413,7 @@
             </div>
     
             <div id="cloudOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Cloud: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank"><b>Knowledge Base</b></a> to see if there's a solution (Cloud: Other)
             </div>
 
         </div>
@@ -457,17 +465,17 @@
                                 
                                 <div class="form-group">
                                     <label for="priorityLow">Priority of this Support Case</label><br/>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-success active selected" data-toggle="tooltip" data-placement="bottom" title="Non-blocking issues">
+                                    <div id="radioPriority" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-success active selected" data-toggle="tooltip" data-placement="bottom" title="I can still work but this needs to be solved">
                                             <input type="radio" name="priority" id="priorityLow" value="Low" autocomplete="off" checked><span class="far fa-meh"></span> Low
                                         </label>
-                                        <label class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Need a solution but non-blocking">
+                                        <label class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Some functionality is not working and it's slowing me down">
                                             <input type="radio" name="priority" id="priorityMedium" value="Normal" autocomplete="off"><span class="far fa-meh"></span> Normal
                                         </label>
-                                        <label class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Portion of cloud is unusable (such as a device or web license)">
+                                        <label class="btn btn-warning currently-last" data-toggle="tooltip" data-placement="bottom" title="Significant portion of cloud is unusable (such as a device or web license)">
                                             <input type="radio" name="priority" id="priorityHigh" value="High" autocomplete="off"><span class="far fa-frown"></span> High
                                         </label>
-                                        <label class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable.">
+                                        <label class="btn btn-danger collapse" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable.">
                                             <input type="radio" name="priority" id="priorityUrgent" value="Urgent" autocomplete="off"><span class="fas fa-ambulance"></span> Urgent
                                         </label>
                                     </div>
@@ -489,7 +497,7 @@
                                     <input class="form-control" type="tel" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" title="Please provide your phone number with + and the country code." />
                                 </div>
                                 <div class="form-group">
-                                    <label for="subject" class="sr-only">Subject</label>
+                                    <label for="subject">Subject</label>
                                     <input class="form-control" type="text" id="subject" name="subject" placeholder="Subject of your request" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="This helps identify the case in a list without reading the full description." />
                                 </div>
                                 <div class="form-group">
