@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/css/intlTelInput.css" integrity="sha256-Q35kn/SM+AW5mosKvh9cdofWZ2XZQECPFULVWv4LB6U=" crossorigin="anonymous" />
     <link rel="stylesheet" href="../support.css" />
     <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/support.perfecto.io\/","sameAs":["https:\/\/www.facebook.com\/pages\/Perfecto-Mobile-Inc\/230120033794254","https:\/\/www.linkedin.com\/company\/perfecto-mobile","https:\/\/www.youtube.com\/user\/PerfectoMobile","https:\/\/twitter.com\/perfectomobile"],"@id":"#organization","name":"Perfecto","logo":"https:\/\/www.perfecto.io\/wp-content\/uploads\/2018\/01\/perfecto-logo-sticky.png"}</script>
     <!--Uncomment for production-->
@@ -61,6 +62,14 @@
         }
         .selected {
             font-weight: 700;
+        }
+        .iti-flag {
+            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/img/flags@2x.png');
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+            .iti-flag {
+                background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/img/flags@2x.png');
+            }
         }
     </style>
 </head>
@@ -314,7 +323,7 @@
             </div>
 
             <div id="deviceOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Device: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Device: Other)
             </div>
 
             <div id="browserLaunch" class="tab-pane fade" role="tabpanel">
@@ -338,7 +347,7 @@
             </div>
 
             <div id="browserOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Browser: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Browser: Other)
             </div>
 
             <div id="automationExecution" class="tab-pane fade" role="tabpanel">
@@ -362,7 +371,7 @@
             </div>
     
             <div id="automationOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Automation: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Automation: Other)
             </div>
 
             <div id="cloudUser" class="tab-pane fade" role="tabpanel">
@@ -374,7 +383,17 @@
             </div>
 
             <div id="cloudInfo" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Cloud: Product Info)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com" target="_blank"><b>Product Documentation</b></a><br/>
+                                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a Solution
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="cloudLogin" class="tab-pane fade" role="tabpanel">
@@ -386,7 +405,7 @@
             </div>
     
             <div id="cloudOther" class="tab-pane fade" role="tabpanel">
-                Try searching our <a href="http://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Cloud: Other)
+                Try searching our <a href="https://developers.perfectomobile.com/" target="_blank">Knowledge Base</a> to see if there's a solution (Cloud: Other)
             </div>
 
         </div>
@@ -467,7 +486,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone" class="sr-only">Best phone number to reach you</label>
-                                    <input class="form-control" type="phone" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" title="Please provide your phone number with + and the country code." />
+                                    <input class="form-control" type="tel" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" title="Please provide your phone number with + and the country code." />
                                 </div>
                                 <div class="form-group">
                                     <label for="subject" class="sr-only">Subject</label>
@@ -582,7 +601,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.1.11/libphonenumber-js.min.js" integrity="sha256-WpMe4MJBE9YQsdLF6GgaKw881rFAOqKEH3Hy+0xj3As=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/intlTelInput.min.js" integrity="sha256-dLpfqfcISNx23y++rQZ+s+FrULgeG7AmNXeH1J9DN38=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js" integrity="sha256-exM598+tqO6jcnd0IB/8vpdsvGM6wAcyu7vCWHB1KKU=" crossorigin="anonymous"></script>
     <script src="test-body.js"></script>
 </body>
 

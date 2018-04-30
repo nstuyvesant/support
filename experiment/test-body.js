@@ -21,9 +21,9 @@ var refreshCaptchaTimestamps = function() {
 
     // Only save updated captcha settings if each form's captcha response is null or empty (for each form)
     var suggestionCaptchaResponse = $('#g-recaptcha-response');
-    if (suggestionCaptchaResponse == null || suggestionCaptchaResponse.val().trim() == "") $('#suggestionCaptchaSettings').val(captchSettingsString);
+    if (!suggestionCaptchaResponse && (suggestionCaptchaResponse == null || suggestionCaptchaResponse.val().trim() == "")) $('#suggestionCaptchaSettings').val(captchSettingsString);
     var caseCaptchaCaptchaResponse = $('#g-recaptcha-response-1');
-    if (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.val().trim() == "") $('#caseCaptchaSettings').val(captchSettingsString);
+    if (!caseCaptchaCaptchaResponse && (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.val().trim() == "")) $('#caseCaptchaSettings').val(captchSettingsString);
 }
 
 // Remove error message on hidden field
@@ -53,13 +53,6 @@ var displayOutageAlerts = function(cloudFQDN) {
         // Report outage alert to Google Analytics
         gtag('event', 'Outage: ' + cloudFQDN);
     }
-};
-
-var formatPhone = function(rawPhoneNumber) {
-    //BUG: if the phone number isn't 10 digits, phone will be blank and cause error
-    var phone = libphonenumber.parseNumber(rawPhoneNumber, 'US');
-    var processedPhone = libphonenumber.formatNumber(phone.phone, phone.country, 'International');
-    return processedPhone ? processedPhone : phone;
 };
 
 // Handle change to FQDN
@@ -127,6 +120,7 @@ $('#requestForm').on('submit', function() {
 // DOM ready
 $(document).ready(function() {
     // Load status of clouds to display alert if one or more clouds are having an outage
+    // Uncomment for production
     $.getJSON('../health.json', function(data) {
         cloudStatus = data;
         displayOutageAlerts($('#fqdn').val());
@@ -164,9 +158,9 @@ $(document).ready(function() {
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
-        phone = formatPhone(phone);
+        $('#phone').val(phone);
     }
-    $('#phone').val(phone);
+    $("#phone").intlTelInput();
 
     var fqdn = qs('appUrl');
     $('#fqdn').val(fqdn);
