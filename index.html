@@ -143,7 +143,6 @@
                             <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
                             <input type="hidden" id="type" name="type" value="Device">
                             <input type="hidden" id="topicActual" name="00ND0000006MZHc" value="">
-                            <input type="hidden" id="priority" name="priority" value="Low">
                             <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
                             <input type="hidden" id="company" name="company">
                             <input type="hidden" id="mcmVersion" name="00ND0000005cI9n">
@@ -162,13 +161,13 @@
                                 </button>
                             </div>
                             <div class="form-group">
-                                <label for="severity" class="sr-only">Severity of this request</label>
-                                <select id="severity" name="00ND0000005cKFJ" class="form-control">
+                                <label for="priority" class="sr-only">Priority of this request</label>
+                                <select id="priority" name="priority" class="form-control">
                                     <option selected value="" disabled>Select a severity...</option>
-                                    <option value="Low/Minor">Low/Minor</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Major">Major</option>
-                                    <option value="Critical">Critical</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
                                 </select>
                             </div>
                             <!-- <div class="form-group">

@@ -108,14 +108,14 @@ $('#topicTabs').on('shown.bs.tab', function(e) {
     loadTopics();
     if(selectedTabName != 'Suggestion') {
         $('#topic').show();
-        $('#severity').show();
+        $('#priority').show();
         loadTopics();
         loadArticles();
         $('#topic').prop('selectedIndex',0);
         $('#topicActual').val('');
     } else {
         $('#topic').hide();
-        $('#severity').hide();
+        $('#priority').hide();
         $('#topicActual').val('Suggestion');
     };
 });
@@ -283,7 +283,7 @@ $(document).ready(function() {
             phone: {
                 required: {
                     depends: function(element) {
-                        return $("#severity").val() == "Critical";
+                        return $("#priority").val() == "Urgent";
                     }
                 }
             },
@@ -297,7 +297,7 @@ $(document).ready(function() {
             description: {
                 required: true
             },
-            '00ND0000005cKFJ': { // severity
+            'priority': { // priority
                 required: {
                     depends: function(element) {
                         return $('#type').val() != 'Suggestion';
