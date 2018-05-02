@@ -228,7 +228,7 @@ $(document).ready(function() {
             description: {
                 required: true
             },
-            hiddenRecaptcha: {
+            hiddenRecaptchaSuggestion: {
                 required: function() {
                     if (grecaptcha.getResponse() == '') {
                         return true;
@@ -271,7 +271,7 @@ $(document).ready(function() {
             description: {
                 required: true
             },
-            hiddenRecaptcha: {
+            hiddenRecaptchaCase: {
                 required: function() {
                     if (grecaptcha.getResponse() == '') {
                         return true;
