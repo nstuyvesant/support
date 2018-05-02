@@ -6,14 +6,13 @@ var cloudStatus = {};
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamps = function() {
-    // Update the captcha_settings fields in Case form
-    var captchaSettings = JSON.parse($('#caseCaptchaSettings').val());
-    captchaSettings.ts = JSON.stringify(new Date().getTime());
-    var captchSettingsString = JSON.stringify(captchaSettings);
-
     // Only save updated captcha settings if form's captcha response is null or empty (for each form)
-    var caseCaptchaCaptchaResponse = $('#g-recaptcha-response');
-    if (!caseCaptchaCaptchaResponse && (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.val().trim() == "")) $('#caseCaptchaSettings').val(captchSettingsString);
+    var response = $('#g-recaptcha-response');
+    if (response == null || response.val().trim() == '') {
+        var captchaSettings = JSON.parse($('#captchaSettings').val());
+        captchaSettings.ts = JSON.stringify(new Date().getTime());    
+        $('#captchaSettings').val(JSON.stringify(captchaSettings));
+    }
 }
 
 // Remove error message on hidden field

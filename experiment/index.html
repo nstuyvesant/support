@@ -659,12 +659,12 @@
                         <div id="articles" class="card-body">
                             <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
 
-                                <input type="hidden" id="caseCaptchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                                <input type="hidden" id="captchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                                 <input type="hidden" name="orgid" value="00D200000001UUG">
                                 <input type="hidden" id="origin" name="origin" value="Web">
                                 <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
-                                <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
-                                <input type="hidden" id="type" name="type" value="Device">
+                                <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/experiment?submitted=true">
+                                <input type="hidden" id="type" name="type">
                                 <input type="hidden" id="topic" name="00ND0000006MZHc">
                                 <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
                                 <input type="hidden" id="company" name="company">
