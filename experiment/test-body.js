@@ -8,7 +8,10 @@ var cloudStatus = {};
 var captchaCallback = function() {
     // Find all divs with class="g-recaptcha" and render the reCAPTCHA content there
     $('.g-recaptcha').each(function(index, el) {
-        grecaptcha.render(el, {'sitekey' : '6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E'});
+        grecaptcha.render(el, {
+            'sitekey' : '6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E',
+            'callcack': 'recaptchaCallback'
+        });
     });
 };
 
