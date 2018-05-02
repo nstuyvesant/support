@@ -5,7 +5,7 @@ var descriptionTemplate;
 var cloudStatus = {};
 
 // Explict reCAPTCHA 2.0 handling for multiple forms
-var captchaCallback = function() {
+var recaptchaOnLoad = function() {
     // Find all divs with class="g-recaptcha" and render the reCAPTCHA content there
     $('.g-recaptcha').each(function(index, el) {
         grecaptcha.render(el, {
@@ -231,9 +231,9 @@ $(document).ready(function() {
             description: {
                 required: true
             },
-            hiddenRecaptchaSuggestion: {
+            hiddenRecaptcha: {
                 required: function() {
-                    if (grecaptcha.getResponse() == '') {
+                    if (grecaptcha.getResponse('recaptchaSuggestion') == '') {
                         return true;
                     } else {
                         return false;
@@ -274,9 +274,9 @@ $(document).ready(function() {
             description: {
                 required: true
             },
-            hiddenRecaptchaCase: {
+            hiddenRecaptcha: {
                 required: function() {
-                    if (grecaptcha.getResponse() == '') {
+                    if (grecaptcha.getResponse('recaptchaCase') == '') {
                         return true;
                     } else {
                         return false;
