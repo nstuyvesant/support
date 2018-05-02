@@ -322,12 +322,39 @@
 
             <div id="deviceApp" class="tab-pane fade" role="tabpanel">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">Solutions for Device: App</div>
-                            <div class="card-body">
-                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
-                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>How to fix Application Related Issues</b><br/>
+                                <ol>
+                                    <li>Log into your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button.</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
+                                    <li>For iOS App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshoot+Application+Installation+on+iOS+devices" target="_blank">Troubleshooting iOS App Installs</a>.
+									<li>For Android App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Android+Troubleshooting" target="_blank">Troubleshooting Android App Installs</li>
+                                    
+                                <b>Apps fail to Upload to the Repository</b><br/>
+                                <ol>
+                                    <li>Follow Steps <b>1-3</b> above.</li>
+									<li>Upload your app using the repository in the <b>Perfecto Lab View</b></li>
+                                    <li>If you receive an error that the app exceeds the allowed size to upload, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshooting%3A+Media+is+too+large+to+Upload" target="_blank">Troubleshooting Media Uploads</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+                                    <li>Application is not signed with the device ID or developer certificate</li>
+                                    <li>The application does not support the device or OS version</li>
+                                    <li>The application size exceeds the current maximum upload size for applications</li>
+                                    <li>The application will not start</>
+									<li>There is a failed install error due to size warning and/or an invalid UDID</li>
+									<li>The application exceeds the allowable size for app installs</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -362,12 +389,44 @@
 
             <div id="devicePerformance" class="tab-pane fade" role="tabpanel">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">Solutions for Device: Performance</div>
-                            <div class="card-body">
-                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
-                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>How to address Performance Related Issues</b><br/>
+								<ol>
+									<li>Review the KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Perfecto%27s+Network+Connectivity+Test" target="_blank">Perfecto's Bandwidth Requirements</a>.</li>
+									<li>Make sure that the minimum requirements for bandwidth are met by running the related test for your location</li>
+									<li>If the bandwidth is too low for cloud use, please contact your local IT support for assistance to increase bandwidth</li>
+								</ol>
+                                <b>How to address Slow Manual Device Interaction</b><br/>
+								<ol>
+                                    <li>Log into your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button.</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
+                                    <li>Perform the test in KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Perfecto%27s+Network+Connectivity+Test" target="_blank">Perfecto's Connectivity Test</a>.</li>
+									<li>If the results exceed the minimum bandwidth requirements, open a case with Perfecto Support for further assistance</li>
+								</ol>
+								<b>How to address Image Mode on Devices</b><br/>
+								<ol>
+									<li>Follow Steps <b>1-4</b> above.</li>
+									<li>Ensure your bandwidth meets the minimum requirements for cloud use</li>
+									<li>Contact your IT team to allow cloud access as per the KnowledgeBase article: <a href="https://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526" target="_blank">Image Mode</a></li>
+								</ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+									<li>Manual actions on devices are taking upwards of 8 seconds per command</li>
+                                    <li>Testers do not have enough bandwidth to use the cloud</li>
+                                    <li>Security options are slowing down the connection to the cloud</li>
+                                    <li>Testers are using virtual desktops that are slowing the connection to the cloud</li>
+                                    <li>End users are in <a href="https://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526" target="_blank">Image Mode</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
