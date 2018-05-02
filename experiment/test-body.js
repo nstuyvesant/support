@@ -64,7 +64,8 @@ $('#fqdn').on('change', function(e) {
 // Handle change to phone
 $('#phone').on('change', function(e) {
     var phoneEntered = $(e.target).val();
-    var phoneFormatted = formatPhone(phoneEntered);
+    var phoneFormatted = phoneEntered.intlTelInput('getNumber');
+    alert(phoneEntered);
     $('#phone').val(phoneFormatted);
     $('#phone').val(phoneFormatted); // Overcome Safari bug by doing it twice
 });
@@ -177,7 +178,9 @@ $(document).ready(function() {
         $('#phone').val(phone);
     }
     $("#phone").intlTelInput({
-        utilsScript : 'https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.1.11/libphonenumber-js.min.js'
+        nationalMode: false,
+        separateDialCode: true,
+        utilsScript : 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
     });
 
     var fqdn = qs('appUrl');
@@ -244,8 +247,11 @@ $(document).ready(function() {
     $('#requestForm').validate({
         ignore: ".ignore",
         rules: {
+            priority: {
+                required: true
+            },
             name: {
-                required: true                        
+                required: true
             },
             email: {
                 required: true,
@@ -267,20 +273,6 @@ $(document).ready(function() {
             },
             description: {
                 required: true
-            },
-            '00ND0000005cKFJ': { // severity
-                required: {
-                    depends: function(element) {
-                        return $('#type').val() != 'Suggestion';
-                    }
-                }
-            },
-            'topic': {
-                required: {
-                    depends: function(element) {
-                        return $('#type').val() != 'Suggestion';
-                    }
-                }
             },
             hiddenRecaptcha: {
                 required: function() {
