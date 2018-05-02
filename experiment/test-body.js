@@ -4,35 +4,21 @@ var selectedTopic;
 var descriptionTemplate;
 var cloudStatus = {};
 
-// Explict reCAPTCHA 2.0 handling for multiple forms
-var recaptchaOnLoad = function() {
-    // Find all divs with class="g-recaptcha" and render the reCAPTCHA content there
-    $('.g-recaptcha').each(function(index, el) {
-        grecaptcha.render(el, {
-            'sitekey' : '6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E',
-            'callcack': 'recaptchaCallback'
-        });
-    });
-};
-
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
 var refreshCaptchaTimestamps = function() {
-    // Update the captcha_settings fields in Suggestions and Case forms
+    // Update the captcha_settings fields in Case form
     var captchaSettings = JSON.parse($('#caseCaptchaSettings').val());
     captchaSettings.ts = JSON.stringify(new Date().getTime());
     var captchSettingsString = JSON.stringify(captchaSettings);
 
-    // Only save updated captcha settings if each form's captcha response is null or empty (for each form)
-    var suggestionCaptchaResponse = $('#g-recaptcha-response');
-    if (!suggestionCaptchaResponse && (suggestionCaptchaResponse == null || suggestionCaptchaResponse.val().trim() == "")) $('#suggestionCaptchaSettings').val(captchSettingsString);
-    var caseCaptchaCaptchaResponse = $('#g-recaptcha-response-1');
+    // Only save updated captcha settings if form's captcha response is null or empty (for each form)
+    var caseCaptchaCaptchaResponse = $('#g-recaptcha-response');
     if (!caseCaptchaCaptchaResponse && (caseCaptchaCaptchaResponse == null || caseCaptchaCaptchaResponse.val().trim() == "")) $('#caseCaptchaSettings').val(captchSettingsString);
 }
 
 // Remove error message on hidden field
 var recaptchaCallback = function() {
-    $('#hiddenRecaptchaCase').valid();
-    $('#hiddenRecaptchaSuggestion').valid();
+    $('#hiddenRecaptcha').valid();
 };
 
 // Extract querystring values
@@ -95,7 +81,6 @@ $('ul.nav-pills').on('shown.bs.tab', function(e) {
     var description = target.attr('data-description');
     // Set the form fields (not currently visible)
     $('#topic').val(selectedTopic);
-    $('#subject').val(selectedTopic); // don't worry about Safari bug as field is currently hidden
     $('#description').val(description);
     
     if(selectedTopic == 'Cloud: Outage') { // Make Urgent visible
@@ -163,7 +148,6 @@ $(document).ready(function() {
     var name = qs('name');
     if(name) {
         $('#name').val(name);
-        $('#nameSuggestion').val(name);
     }
 
     // Load required fields from querystring (if provided)
@@ -172,7 +156,6 @@ $(document).ready(function() {
         email = qs('email');
     }
     $('#email').val(email);
-    $('#emailSuggestion').val(email);
 
     var phone = qs('phone');
     if(phone && phone.length > 10) { // Discard if it's too short to be real
@@ -221,28 +204,6 @@ $(document).ready(function() {
     $('#os').val(qs('os'));
     $('#version').val(qs('version'));
 
-    // Setup form validation for Suggestions (minimal)
-    $('#suggestionForm').validate({
-        ignore: ".ignore",
-        rules: {
-            email: {
-                email: true
-            },
-            description: {
-                required: true
-            },
-            hiddenRecaptcha: {
-                required: function() {
-                    if (grecaptcha.getResponse('recaptchaSuggestion') == '') {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-        }
-    });
-
     // Setup form validation for Cases. jQuery Validation bug for selects - must use name not ID.
     $('#requestForm').validate({
         ignore: ".ignore",
@@ -260,7 +221,7 @@ $(document).ready(function() {
             phone: {
                 required: {
                     depends: function(element) {
-                        return $("#severity").val() == "Critical";
+                        return $('#priority').val() == "Urgent";
                     }
                 }
             },
@@ -276,7 +237,7 @@ $(document).ready(function() {
             },
             hiddenRecaptcha: {
                 required: function() {
-                    if (grecaptcha.getResponse('recaptchaCase') == '') {
+                    if (grecaptcha.getResponse() == '') {
                         return true;
                     } else {
                         return false;

@@ -39,7 +39,7 @@
         }
     </script> -->
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-29" async></script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoadk&render=explicit" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://script.crazyegg.com/pages/scripts/0058/5510.js" async></script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script src="../head.js"></script><!--Remove ../ here-->
@@ -136,9 +136,6 @@
             </li>
             <li class="nav-item">
                 <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link type" href="#cloud"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
-            </li>
-            <li class="nav-item">
-                <a id="suggestionType" data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link type" href="#suggestion"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
             </li>
         </ul>
 
@@ -240,36 +237,6 @@
                         <a data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther" data-description="How can we help?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
                     </li>
                 </ul>
-            </div>
-
-            <div id="suggestion" class="tab-content collapse">
-                <h2 class="text-center">Customers are our best source of ideas; we value your input!</h2>
-                <form id="suggestionForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
-                    <div class="form-group">
-                        <label for="suggestionDescription">Please tell us what you think we should add and how it will help you get more value from Perfecto. Also, please let us know what you're doing without the feature.</label>
-                        <input type="hidden" id="suggestionCaptchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
-                        <input type="hidden" name="orgid" value="00D200000001UUG">
-                        <input type="hidden" name="recordType" value="01220000000HQCE">
-                        <input type="hidden" name="retURL" value="https://support.perfecto.io/?submitted=true">
-                        <input type="hidden" name="type" value="Suggestion">
-                        <input type="hidden" name="00ND0000006MZHc" value="Suggestion">
-                        <input type="hidden" name="priority" value="Low">
-                        <input type="hidden" name="subject" value="Suggestion via Support Portal">
-                        <div class="form-group">
-                            <label for="name" class="sr-only">Your name</label>
-                            <input type="text" class="form-control" placeholder="First and last name (optional)" id="nameSuggestion" name="name" autocomplete="name" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your first and last name." />
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="sr-only">Your work email address</label>
-                            <input class="form-control" type="email" id="emailSuggestion" name="email" placeholder="Work email address (optional)" autocomplete="email" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your work email address (ie not gmail.com)." />
-                        </div>
-                        <textarea id="suggestionDescription" class="form-control" rows="7" name="description" placeholder="Provide your suggestion here" required></textarea>
-                        <br/>
-                        <div id="recaptchaSuggestion" class="g-recaptcha"></div>
-                        <input type="hidden" id="hiddenRecaptchaSuggestion" name="hiddenRecaptcha" class="hiddenRecaptcha required" ><br/>
-                        <input type="submit" class="btn btn-success">
-                    </div>
-                </form>
             </div>
 
         </div>
@@ -748,7 +715,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone" class="sr-only">Best phone number to reach you</label>
-                                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" title="Please provide your phone number with + and the country code." />
+                                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" placeholder="Phone" title="Please provide your phone number with + and the country code." />
                                 </div>
                                 <div class="form-group">
                                     <label for="subject">Subject</label>
@@ -762,8 +729,8 @@
                                 </div>
                                 <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
                                 <input type="hidden" id="external" name="external" value="1" />
-                                <div id="recaptchaCase" class="g-recaptcha"></div>
-                                <input id="hiddenRecaptchaCase" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha"><br/>
+                                <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
+                                <input id="hiddenRecaptcha" name="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required"><br/>
                                 <input type="submit" class="btn btn-success" id="submit">
                             </form>
                         </div>
