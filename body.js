@@ -220,7 +220,7 @@ $(document).ready(function() {
             phone: {
                 required: {
                     depends: function(element) {
-                        return $('#priority').val() == "Urgent";
+                        return ($('#priority').val() == "Urgent" || $('#priority').val() == "High");
                     }
                 }
             },
