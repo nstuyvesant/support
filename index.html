@@ -28,19 +28,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/css/intlTelInput.css" integrity="sha256-Q35kn/SM+AW5mosKvh9cdofWZ2XZQECPFULVWv4LB6U=" crossorigin="anonymous" />
     <link rel="stylesheet" href="support.css" />
-    <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/support.perfecto.io\/","sameAs":["https:\/\/www.facebook.com\/pages\/Perfecto-Mobile-Inc\/230120033794254","https:\/\/www.linkedin.com\/company\/perfecto-mobile","https:\/\/www.youtube.com\/user\/PerfectoMobile","https:\/\/twitter.com\/perfectomobile"],"@id":"#organization","name":"Perfecto","logo":"https:\/\/www.perfecto.io\/wp-content\/uploads\/2018\/01\/perfecto-logo-sticky.png"}</script>
+    <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/support.perfecto.io\/","sameAs":["https:\/\/www.facebook.com\/pages\/Perfecto-Mobile-Inc\/230120033794254","https:\/\/www.linkedin.com\/company\/perfecto-mobile","https:\/\/www.youtube.com\/user\/PerfectoMobile","https:\/\/twitter.com\/perfectomobile"],"@id":"https:\/\/www.perfecto.io","name":"Perfecto","logo":"https:\/\/www.perfecto.io\/wp-content\/uploads\/2018\/01\/perfecto-logo-sticky.png"}</script>
     <script>
         // If website isn't https://support.perfecto.io, redirect
-        if (location.protocol != 'https:' || window.location.hostname != 'support.perfecto.io') {
-            window.location.replace('https://support.perfecto.io/' + location.search);
-        }
+        // if (location.protocol != 'https:' || window.location.hostname != 'support.perfecto.io') {
+        //     window.location.replace('https://support.perfecto.io/' + location.search);
+        // }
     </script>
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-29" async></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://script.crazyegg.com/pages/scripts/0058/5510.js" async></script>
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script src="head.js"></script>
+    <!--Update support.css with these changes-->
+    <style>
+        .cover {
+            min-height: 13rem;
+            padding-top: 2rem;
+            padding-bottom: 0.5rem;
+            margin-bottom: 20px;
+        }
+        .nav-pills .fas, .nav-pills .far, .nav-pills .fab {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 36px;
+            color: #82bc41;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .selected {
+            font-weight: 700;
+        }
+        .iti-flag {
+            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/img/flags.png');
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+            .iti-flag {
+                background-image: url('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/img/flags@2x.png');
+            }
+        }
+        label.currently-last {
+            -webkit-border-top-right-radius: 4px!important;
+            -moz-border-radius-topright: 4px!important;
+            border-top-right-radius: 4px!important;
+            -webkit-border-bottom-right-radius: 4px!important;
+            -moz-border-radius-bottomright: 4px!important;
+            border-bottom-right-radius: 4px!important;
+        }
+        .intl-tel-input {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,7 +104,7 @@
                             <a class="nav-link" href="https://developers.perfectomobile.com" target="_blank"><span class="fas fa-search"></span> Search Community</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><i class="fa fa-user"></i> Customer Login
+                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><span class="fa fa-user"></span> Customer Login
                             </a>
                         </li>
                     </ul>
@@ -78,158 +119,686 @@
                 </button>
             </div>
             <h1 class="text-center">Welcome to Perfecto Support</h1>
-            <div class="row justify-content-around">
-                <div class="col-lg-8 col-md-10" style="padding-top:10px;">
-                    <form id="searchForm" name="searchForm" action="https://developers.perfectomobile.com/dosearchsite.action" method="GET">
-                        <div class="form-group">
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
-                                </div>
-                                <input class="form-control typeahead" name="queryString" id="queryString" type="text" required autofocus placeholder="Search Support" aria-label="Search Support" autocomplete="off">
-                            </div>
-                        </div>
-                    </form>
-                    <div id="searchStatus" class="alert alert-success collapse" role="alert">
-                        <img src="loading.gif" style="height:25px; width: 25px;" title="Loading..." /> Searching the Knowledge Base. Please wait...
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <div class="container">
-        <div id="searchResults"></div>
-        <h1 class="text-center topic">Choose a Topic</h1>
-        <ul id="topicTabs" class="nav nav-pills nav-justified" role="tablist">
+
+        <ul id="typeTabs" class="nav nav-tabs nav-justified" role="tablist">
             <li class="nav-item">
-                <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link active" href="#"><span class="fas fa-mobile-alt"></span><br/>Device</a>
+                <a data-toggle="tab" role="tab" aria-controls="Device" class="nav-link type" href="#device"><span class="fas fa-mobile-alt"></span><br/>Device</a>
             </li>
             <li class="nav-item">
-                <a data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link" href="#"><span class="fas fa-globe"></span><br/>Browser</a>
+                <a data-toggle="tab" role="tab" aria-controls="Browser" class="nav-link type" href="#browser"><span class="fas fa-globe"></span><br/>Browser</a>
             </li>
             <li class="nav-item">
-                <a data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link" href="#"><span class="fas fa-code-branch"></span><br/>Automation</a>
+                <a data-toggle="tab" role="tab" aria-controls="Automation" class="nav-link type" href="#automation"><span class="fas fa-code-branch"></span><br/>Automation</a>
             </li>
             <li class="nav-item">
-                <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link" href="#"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
-            </li>
-            <li class="nav-item">
-                <a data-toggle="tab" role="tab" aria-controls="Suggestion" class="nav-link" href="#"><span class="fas fa-lightbulb"></span><br/>Suggestion</a>
+                <a data-toggle="tab" role="tab" aria-controls="Cloud" class="nav-link type" href="#cloud"><span class="fas fa-cloud"></span><br/>Cloud/Admin</a>
             </li>
         </ul>
-        <div class="row">&nbsp;</div>
-        <div class="row justify-content-around">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header"><a class="btn btn-light disabled">Articles below might help...</a></div>
-                    <div id="articles" class="card-body">
-                    </div>
-                </div><br/>
+
+        <div id="topicTabs" class="tab-content">
+            <div id="device" class="tab-pane fade" role="tabpanel">
+                <h2 class="text-center">Select type of device issue</h2>
+                <ul id="deviceTab" class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#deviceOffline" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;Was it restarted or upgraded recently? Y|N&#xa;Is there a passcode? Y|N&#xa;Passcode (if relevant): &#xa;Is there an MDM managing this device? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;Can device's browser reach www.google.com? Y|N&#xa;If WiFi issue, is SSID Perfecto? Y|N&#xa;If WiFi issue, did you try toggling Airplane Mode? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#deviceApp" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;Type of app-issue: Install|Crash|Performance&#xa;What's happening and what was expected?&#xa;"><span class="fab fa-app-store"></span><br/>App-related</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap" data-description="Device you want to replace (model, ID, OS, version): &#xa;Device you want to add (model, ID, OS, version): &#xa;Is the device to replace currently in use? Y|N"><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#devicePerformance" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;Related to: Touch Response|Script Execution|App&#xa;User's location matter? Y|N&#xa;How about time of day? Y|N&#xa;Same performance @ home? Y|N&#xa;Without VPN? Y|N"><span class="fas fa-stopwatch"></span><br/>Performance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Other" class="nav-link" href="#deviceOther" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control?&#xa;What's happening and what was expected?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <a class="btn btn-light disabled"><i class="fas fa-pencil-alt"></i> Submit a request below</a>
-                        <a class="btn btn-success float-right" href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" style="display: none;"><i class="far fa-comment-alt"></i> Get Help via Chat</a>
-                        <a class="btn btn-light disabled float-right" style="display: none;" id="liveagent_button_offline_573D0000000028q"><i class="far fa-comment-alt"></i> Chat Offline</a>
+
+            <div id="browser" class="tab-pane fade" role="tabpanel">
+                <h2 class="text-center">What type of browser issue?</h2>
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Launch Failed" class="nav-link topic" href="#browserLaunch" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="fas fa-rocket"></span><br/>Launch Failed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Performance/Page Load Time" class="nav-link" href="#browserSlow" data-description="Browser (name, OS, version): &#xa;What URL is slow? &#xa;Is www.google.com slow? Y|N&#xa;What's happening and what was expected?&#xa;"><span class="fas fa-stopwatch"></span><br/>Pages Load Slowly</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Interaction" class="nav-link" href="#browserInteraction" data-description="Browser (name, OS, version): &#xa;What are the steps to reach that page?&#xa;What's happening and what was expected?&#xa;"><span class="far fa-hand-point-up"></span><br/>Page Interaction Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Network" class="nav-link" href="#browserNetwork" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="fas fa-wifi"></span><br/>Browser Network Issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Page Display Distorted" class="nav-link" href="#browserDisplay" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="far fa-file-code"></span><br/>Page Display Issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Browser: Other" class="nav-link" href="#browserOther" data-description="Browser (name, OS, version): &#xa;What's happening and what was expected?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="automation" class="tab-pane fade" role="tabpanel">
+                <h2 class="text-center">What type of automation issue?</h2>
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a id="requestBrowser" data-toggle="tab" role="tab" aria-controls="Automation: Execution Errors" class="nav-link" href="#automationExecution" data-description="Execution Report URL: &#xa;Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-times-circle"></span><br/>Execution Error</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Object Identification" class="nav-link" href="#automationObject" data-description="Execution Report URL: &#xa;Script runs OK on some devices/browsers? Y|N&#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-search-minus"></span><br/>Object Identification Issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Reporting" class="nav-link" href="#automationReporting" data-description="Execution Report URL: &#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-check-square"></span><br/>Reporting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Plug-in or API" class="nav-link" href="#automationAPI" data-description="Execution Report URL: &#xa;Env: REST API|Jenkins|IntelliJ|Eclipse|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-plug"></span><br/>API or Plug-in Issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Performance/Execution" class="nav-link" href="#automationPerformance" data-description="Execution Report URL: &#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;Can you share you script and framework? Y|N&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="fas fa-stopwatch"></span><br/>Execution Slow</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Automation: Other" class="nav-link" href="#automationOther" data-description="Execution Report URL: &#xa;Env: Selenium|Appium|XCTest|Espresso|Protractor|Other&#xa;What's happening and what was expected?&#xa;What are the steps to reproduce?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="cloud" class="tab-pane fade" role="tabpanel">
+                <h2 class="text-center">What type of cloud or admin issue?</h2>
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig" data-description="What kind of configuration change would you like?&#xa;"><span class="fas fa-cogs"></span><br/>Configuration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? Y|N&#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin" data-description="Did you try a password reset? Y|N&#xa;Is your login a valid email address? Y|N&#xa;What's happening?&#xa;"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="outage" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link" href="#cloudOutage" data-description="Any difference when connecting @ home? Y|N&#xa;Did you try without VPN? Y|N&#xa;When did you first observe the outage?&#xa;"><span class="fas fa-ambulance"></span><br/>Outage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Other" class="nav-link" href="#cloudOther" data-description="How can we help?&#xa;"><span class="far fa-question-circle"></span><br/>Something Else</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="tab-content" id="articleContent" style="margin-top:30px;">
+
+            <div id="deviceOffline" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>Device Recovery</b><br/>
+                                <ol>
+                                    <li>Login to your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, single click the device that is <b>Offline</b>.</li>
+                                    <li>Click the <b>Recover</b> button at the bottom of the dialog.</li>
+                                    <li>Wait at least 3 minutes then try to open the device.</li>
+                                </ol>
+    
+                                <p id="mdm"><b>Mobile Device Management Lockout Policy</b><br/>If the the device is locking due to a Mobile Device Management policy, we can prevent this problem by configuring your cloud's device timeout period to be shorter than the MDM lockout period. For more information, see <a href="https://developers.perfectomobile.com/display/TT/Mobile+Device+Management+%28MDM%29+and+Device+Locking" target="_blank">this KnowledgeBase article</a>. Please open a case and we'll take care of this for you.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
-
-                            <input type="hidden" id="captcha_settings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
-                            <input type="hidden" name="orgid" value="00D200000001UUG">
-                            <input type="hidden" id="origin" name="origin" value="Web">
-                            <input type="hidden" id="recordType" name="recordType" value="01220000000HQCE">
-                            <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
-                            <input type="hidden" id="type" name="type" value="Device">
-                            <input type="hidden" id="topicActual" name="00ND0000006MZHc" value="">
-                            <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
-                            <input type="hidden" id="company" name="company">
-                            <input type="hidden" id="mcmVersion" name="00ND0000005cI9n">
-                            <input type="hidden" id="hssVersion" name="00ND0000005cI3B">
-                            <input type="hidden" id="location" name="00N20000002vZQW">
-                            <input type="hidden" id="cradleId" name="00N20000002EtP1">
-                            <input type="hidden" id="deviceId" name="00ND0000005cetY">
-                            <input type="hidden" id="model" name="00N20000001N4gL">
-                            <input type="hidden" id="os" name="00N20000002vZPs">
-                            <input type="hidden" id="version" name="00N20000002u9Uv">
-
-                            <div id="cloudStatusAlert" class="alert alert-danger alert-dismissible collapse" role="alert">
-                                <span id="message"></span>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+                                    <li>Device was reserved by someone else.</li>
+                                    <li>Device was disconnected from your cloud due to a requested swap. If so, please click <b>Swap</b> above (if you have the authority).</li>
+                                    <li>Device passcode lock engaged due to reboot or upgrade.</li>
+                                    <li>Device passcode lock engaged due to lack of interaction within the timeout period of a Mobile Device Management tool.</li>
+                                    <li>Device failed due to defective battery. Request a new device.</li>
+                                    <li>If device is a tablet, continuous use drained battery faster than it could recharge (tablet design issue).</li>
+                                </ul>
                             </div>
-                            <div class="form-group">
-                                <label for="priority" class="sr-only">Priority of this request</label>
-                                <select id="priority" name="priority" class="form-control">
-                                    <option selected value="" disabled>Select a priority...</option>
-                                    <option value="Low">Low</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="High">High</option>
-                                    <option value="Urgent">Urgent</option>
-                                </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deviceNetwork" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>How to fix your WiFi Connection</b><br/>
+                                <ol>
+                                    <li>Log into your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button.</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
+                                    <li>Connect the device to the WiFi network called <b>Perfecto</b>.
+                                    <li>For more information, see KnowledgeBase article: <a href="https://developers.perfectomobile.com/pages/viewpage.action?pageId=21432583" target="_blank">How to Fix Devices that have no Internet Connectivity</a>.</li>
+                                </ol>
+
+                                <b>Network Virtualization and HAR Capture</b><br/>
+                                <ol>
+                                    <li>Follow Steps <b>1-4</b> above.</li>
+                                    <li>Read the KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshooting%3A+Network+Virtualization+and+HAR+Captures" target="_blank">Troubleshooting: Network Virtualization and HAR Captures</a></li>
+                                </ol>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Priority of this Support Case</label><br/>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-success active" data-toggle="tooltip" data-placement="bottom" title="Minor problem that does not impact the service">
-                                        <input name="priority" value="Low" type="radio" checked autocomplete="off"><span class="far fa-meh"></span> Low
-                                    </label>
-                                    <label class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Need a solution but non-blocking">
-                                        <input name="priority" value="Normal" type="radio" autocomplete="off"><span class="far fa-meh"></span> Normal
-                                    </label>
-                                    <label class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Portion of cloud is unusable (such as a device or web license)">
-                                        <input name="priority" value="High" type="radio" autocomplete="off"><span class="far fa-frown"></span> High
-                                    </label>
-                                    <label class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable.">
-                                        <input name="priority" value="Urgent" type="radio" autocomplete="off"><span class="fas fa-ambulance"></span> Urgent
-                                    </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+                                    <li>User turned off or removed the WiFi connection in the device</li>
+                                    <li>User put device on a different non-Perfecto (public) WiFi network</li>
+                                    <li>The test website or app needs a VPN client or service</li>
+                                    <li>Network Virtualization: No traffic is captured</li>
+                                    <li>Network Virtualization: No HAR file is generated</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deviceApp" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>How to fix Application Related Issues</b><br/>
+                                <ol>
+                                    <li>Log into your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button.</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
+                                    <li>For iOS App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshoot+Application+Installation+on+iOS+devices" target="_blank">Troubleshooting iOS App Installs</a>.</li>
+									<li>For Android App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Android+Troubleshooting" target="_blank">Troubleshooting Android App Installs</a>/li>
+                                </ol>
+                                <b>Apps fail to Upload to the Repository</b><br/>
+                                <ol>
+                                    <li>Follow Steps <b>1-3</b> above.</li>
+									<li>Upload your app using the repository in the <b>Perfecto Lab View</b></li>
+                                    <li>If you receive an error that the app exceeds the allowed size to upload, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshooting%3A+Media+is+too+large+to+Upload" target="_blank">Troubleshooting Media Uploads</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+                                    <li>Application is not signed with the device ID or developer certificate</li>
+                                    <li>The application does not support the device or OS version</li>
+                                    <li>The application size exceeds the current maximum upload size for applications</li>
+                                    <li>The application will not start</li>
+									<li>There is a failed install error due to size warning and/or an invalid UDID</li>
+									<li>The application exceeds the allowable size for app installs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deviceUpgrade" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div class="card-body">
+                                Please open a case to request a device upgrade. Having Perfecto perform the upgrade for you is a best practice.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deviceSwap" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Device: Swap</div>
+                            <div class="card-body">
+                                Please open a case to request a device swap. To speed up the process, please be sure to tell us which device you'd like to remove. If you need swaps often, it's an indication you need more licenses so devices can be left online.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="devicePerformance" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div id="articles" class="card-body">
+                                <b>How to address Performance Related Issues</b><br/>
+								<ol>
+									<li>Review the KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Perfecto%27s+Network+Connectivity+Test" target="_blank">Perfecto's Bandwidth Requirements</a>.</li>
+									<li>Make sure that the minimum requirements for bandwidth are met by running the related test for your location</li>
+									<li>If the bandwidth is too low for cloud use, please contact your local IT support for assistance to increase bandwidth</li>
+								</ol>
+                                <b>How to address Slow Manual Device Interaction</b><br/>
+								<ol>
+                                    <li>Log into your Perfecto Cloud.</li>
+                                    <li>Click the <b>Launch Mobile</b> button.</li>
+                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
+                                    <li>Perform the test in KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Perfecto%27s+Network+Connectivity+Test" target="_blank">Perfecto's Connectivity Test</a>.</li>
+									<li>If the results exceed the minimum bandwidth requirements, open a case with Perfecto Support for further assistance</li>
+								</ol>
+								<b>How to address Image Mode on Devices</b><br/>
+								<ol>
+									<li>Follow Steps <b>1-4</b> above.</li>
+									<li>Ensure your bandwidth meets the minimum requirements for cloud use</li>
+									<li>Contact your IT team to allow cloud access as per the KnowledgeBase article: <a href="https://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526" target="_blank">Image Mode</a></li>
+								</ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">Common reasons</div>
+                            <div id="articles" class="card-body">
+                                <ul>
+									<li>Manual actions on devices are taking upwards of 8 seconds per command</li>
+                                    <li>Testers do not have enough bandwidth to use the cloud</li>
+                                    <li>Security options are slowing down the connection to the cloud</li>
+                                    <li>Testers are using virtual desktops that are slowing the connection to the cloud</li>
+                                    <li>End users are in <a href="https://developers.perfectomobile.com/pages/viewpage.action?pageId=21432526" target="_blank">Image Mode</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deviceOther" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Device: Other</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserLaunch" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Launch Failed</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a> especially <a href="https://developers.perfectomobile.com/display/PD/Desktop+Web+Devices" target="_blank">Supported Browsers</a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserSlow" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Pages Load Slowly</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a> especially <a href="https://developers.perfectomobile.com/display/PD/Desktop+Web+Devices" target="_blank">Supported Browsers</a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserInteraction" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Page Interaction</div>
+                            <div class="card-body">
+                                    Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a> especially <a href="https://developers.perfectomobile.com/display/PD/Desktop+Web+Devices" target="_blank">Supported Browsers</a>.<br/>
+                                    Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserNetwork" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Network</div>
+                            <div class="card-body">
+                                    Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a> especially <a href="https://developers.perfectomobile.com/display/PD/Desktop+Web+Devices" target="_blank">Supported Browsers</a>.<br/>
+                                    Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserDisplay" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Page Display Distorted</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="browserOther" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Browser: Other</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="automationExecution" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Execution Error</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="automationObject" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Object Identification</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="automationReporting" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Reporting</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="automationAPI" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Plug-in or API</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="automationPerformance" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Performance/Execution Slow</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="automationOther" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Automation: Other</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloudUser" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div class="card-body">
+                                If you have a Cloud Administrator, please request an account from them; otherwise, please open a Support Case below.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloudConfig" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Cloud: Configuration</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloudInfo" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloudLogin" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Cloud: Login</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>KnowledgeBase Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cloudOutage" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions</div>
+                            <div class="card-body">
+                                Please open a case to report the outage.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="cloudOther" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Solutions for Cloud: Other</div>
+                            <div class="card-body">
+                                Check out our <a href="https://developers.perfectomobile.com/display/PD/Documentation" target="_blank"><b>Product Documentation</b></a>.<br/>
+                                Try a <a href="https://developers.perfectomobile.com/" target="_blank"><b>Knowledge Base Search</b></a> for an answer.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="contactSupport" class="collapse">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 style="margin-top:20px;margin-bottom:10px;">Contact Support</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" style="display: none;" class="btn btn-success nav-pills" title="Start a chat session"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>
+                    <a class="btn btn-light nav-pills disabled" style="display: none;" id="liveagent_button_offline_573D0000000028q"><span class="far fa-comment-alt"></span><br/>Chat Offline</a>&nbsp;&nbsp;
+                    <a id="openSupportCase" href="#supportCase" data-toggle="collapse" class="btn btn-success nav-pills" title="Open a Support Case"><span class="fas fa-briefcase"></span><br/>Open Support Case</a>&nbsp;&nbsp;
+                    <!-- <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills" title="Schedule a Webex"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a> -->
+                </div>
+                <div id="supportCase" class="col-md-6 collapse with-tooltips">
+                    <div class="card">
+                        <div class="card-header">Open a Case</div>
+                        <div id="articles" class="card-body">
+                            <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
+
+                                <input type="hidden" id="captchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
+                                <input type="hidden" name="orgid" value="00D200000001UUG">
+                                <input type="hidden" id="origin" name="origin" value="Web">
+                                <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
+                                <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
+                                <input type="hidden" id="type" name="type">
+                                <input type="hidden" id="topic" name="00ND0000006MZHc">
+                                <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
+                                <input type="hidden" id="company" name="company">
+                                <input type="hidden" id="mcmVersion" name="00ND0000005cI9n">
+                                <input type="hidden" id="hssVersion" name="00ND0000005cI3B">
+                                <input type="hidden" id="location" name="00N20000002vZQW">
+                                <input type="hidden" id="cradleId" name="00N20000002EtP1">
+                                <input type="hidden" id="deviceId" name="00ND0000005cetY">
+                                <input type="hidden" id="model" name="00N20000001N4gL">
+                                <input type="hidden" id="os" name="00N20000002vZPs">
+                                <input type="hidden" id="version" name="00N20000002u9Uv">
+
+                                <div id="cloudStatusAlert" class="alert alert-danger alert-dismissible collapse" role="alert">
+                                    <span id="message"></span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            </div> -->
-                            <div class="form-group">
-                                <label for="fqdn" class="sr-only">Your cloud's FQDN</label>
-                                <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud FQDN like name.perfectomobile.com" maxlength="255" />
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="sr-only">Your name</label>
-                                <input type="text" class="form-control" placeholder="First and last name" id="name" name="name" autocomplete="name" maxlength="80" />
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="sr-only">Your work email address</label>
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Work email address" autocomplete="email" maxlength="80" />
-                            </div>
-                            <div class="form-group">
-                                <label for="phone" class="sr-only">Best phone number to reach you</label>
-                                <input class="form-control" type="phone" id="phone" name="phone" placeholder="Phone number with country code" autocomplete="tel-national" maxlength="40" />
-                            </div>
-                            <div class="form-group">
-                                <label for="topic" class="sr-only">Subtopic</label>
-                                <select id="topic" name="topic" class="form-control">
-                                    <option selected value="" disabled>Select a subtopic...</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject" class="sr-only">Subject</label>
-                                <input class="form-control" type="text" id="subject" name="subject" placeholder="Subject of your request" maxlength="80" />
-                            </div>
-                            <div class="form-group">
-                                <label for="description" class="sr-only">Description of your issue</label>
-                                <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster."></textarea>
-                                <input type="hidden" id="parameters">
-                                <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
-                            </div>
-                            <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
-                            <input type="hidden" id="external" name="external" value="1" />
-                            <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
-                            <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha"><br/>
-                            <input type="submit" class="btn btn-success" id="submit">
-                        </form>
+                                
+                                <div class="form-group">
+                                    <label for="priorityLow">Priority of this Support Case</label><br/>
+                                    <div id="radioPriority" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-success active selected" data-toggle="tooltip" data-placement="bottom" title="I can still work but this needs to be solved">
+                                            <input type="radio" name="priority" id="priorityLow" value="Low" autocomplete="off" checked><span class="far fa-meh"></span> Low
+                                        </label>
+                                        <label class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Some functionality is not working and it's slowing me down">
+                                            <input type="radio" name="priority" id="priorityMedium" value="Normal" autocomplete="off"><span class="far fa-meh"></span> Normal
+                                        </label>
+                                        <label class="btn btn-danger currently-last" data-toggle="tooltip" data-placement="bottom" title="Significant portion of cloud is unusable (such as a device or web license)">
+                                            <input type="radio" name="priority" id="priorityHigh" value="High" autocomplete="off"><span class="far fa-frown"></span> High
+                                        </label>
+                                        <label class="btn btn-danger collapse" data-toggle="tooltip" data-placement="bottom" title="Entire cloud (or majority) is unusable.">
+                                            <input type="radio" name="priority" id="priorityUrgent" value="Urgent" autocomplete="off"><span class="fas fa-ambulance"></span> Urgent
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fqdn" class="sr-only">Your cloud's hostname</label>
+                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud (eg. yourcloud.perfectomobile.com)" maxlength="255" data-toggle="tooltip" data-placement="bottom" autofocus title="Please provide the fully-qualified domain name of your cloud without (https://)." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="sr-only">Your name</label>
+                                    <input type="text" class="form-control" placeholder="First and last name" id="name" name="name" autocomplete="name" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your first and last name." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Your work email address</label>
+                                    <input class="form-control" type="email" id="email" name="email" placeholder="Work email address" autocomplete="email" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="Please provide your work email address (ie not gmail.com)." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="sr-only">Best phone number to reach you</label>
+                                    <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel-national" maxlength="40"  data-toggle="tooltip" data-placement="bottom" placeholder="Phone" title="Please provide your phone number with + and the country code." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject" class="sr-only">Subject</label>
+                                    <input class="form-control" type="text" id="subject" name="subject" placeholder="Subject of your request" maxlength="80" data-toggle="tooltip" data-placement="bottom" title="This helps identify the case in a list without reading the full description." />
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="sr-only">Description of your issue</label>
+                                    <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster." data-toggle="tooltip" data-placement="bottom" title="The more info you provide, the less likely we'll need to get back to you with more questions." ></textarea>
+                                    <input type="hidden" id="parameters">
+                                    <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
+                                </div>
+                                <p>Need to attach a screenshot or file? Reply to our email confirmation or <a href="https://perfectomobile.force.com/customers/" target="_blank">login to the Support Portal</a> and open your case there.</p>
+                                <input type="hidden" id="external" name="external" value="1" />
+                                <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
+                                <input id="hiddenRecaptcha" name="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required"><br/>
+                                <input type="submit" class="btn btn-success" id="submit">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
     <footer class="site-tree">
         <div class="container">
             <div class="row">
@@ -267,7 +836,7 @@
                         <a class="nav-link active" href="#">SUPPORT</a>
                         <a class="nav-link" href="https://developers.perfectomobile.com/display/PD/Documentation">Documentation</a>
                         <a class="nav-link" href="https://developers.perfectomobile.com/questions">Community/Forum</a>
-                        <a class="nav-link" href="#">Get Support</a>
+                        <a class="nav-link" href="https://support.perfecto.io">Get Support</a>
                         <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/pluginsextensions/">Plugins/Extensions</a>
                         <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/supported-devices/">Available Devices in the Perfecto Cloud Lab</a>
                     </nav>
@@ -312,14 +881,14 @@
                     <a class="nav-link active" href="https://www.perfecto.io/privacy-statement/">Privacy Statement</a>
                 </nav>
             </div>
-        </div>     
+        </div>      
     </footer>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha256-LOnFraxKlOhESwdU/dX+K0GArwymUDups0czPWLEg4E=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.1.11/libphonenumber-js.min.js" integrity="sha256-WpMe4MJBE9YQsdLF6GgaKw881rFAOqKEH3Hy+0xj3As=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/intlTelInput.min.js" integrity="sha256-dLpfqfcISNx23y++rQZ+s+FrULgeG7AmNXeH1J9DN38=" crossorigin="anonymous"></script>
     <script src="body.js"></script>
 </body>
 
