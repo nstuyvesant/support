@@ -62,10 +62,8 @@ $('#fqdn').on('change', function(e) {
 });
 
 // Handle change to phone
-$('#phone').on('change', function(e) {
-    var phoneEntered = $(e.target).val();
-    var phoneFormatted = phoneEntered.intlTelInput('getNumber');
-    alert(phoneEntered);
+$('#phone').on('change', function() {
+    var phoneFormatted = $('#phone').intlTelInput('getNumber', intlTelInputUtils.numberFormat.INTERNATIONAL);
     $('#phone').val(phoneFormatted);
     $('#phone').val(phoneFormatted); // Overcome Safari bug by doing it twice
 });
@@ -177,9 +175,8 @@ $(document).ready(function() {
     if(phone && phone.length > 10) { // Discard if it's too short to be real
         $('#phone').val(phone);
     }
-    $("#phone").intlTelInput({
+    $('#phone').intlTelInput({
         nationalMode: false,
-        separateDialCode: true,
         utilsScript : 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
     });
 
