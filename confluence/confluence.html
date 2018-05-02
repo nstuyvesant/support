@@ -1,0 +1,19 @@
+<div class="row justify-content-around">
+    <div class="col-lg-8 col-md-10" style="padding-top:10px;">
+        <form id="searchForm" name="searchForm" action="https://developers.perfectomobile.com/dosearchsite.action" method="GET">
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-secondary" id="submitButton" type="submit"><span class="fas fa-search"></span></button>
+                    </div>
+                    <input class="form-control typeahead" name="queryString" id="queryString" type="text" required autofocus placeholder="Search Support" aria-label="Search Support" autocomplete="off">
+                </div>
+            </div>
+        </form>
+        <div id="searchStatus" class="alert alert-success collapse" role="alert">
+            <img src="loading.gif" style="height:25px; width: 25px;" title="Loading..." /> Searching the Knowledge Base. Please wait...
+        </div>
+    </div>
+</div>
+
+<div id="searchResults"></div>
