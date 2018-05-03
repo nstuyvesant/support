@@ -133,11 +133,13 @@ $(document).ready(function() {
     setHiddenParametersField();
 
     // Make radio buttons in button-groups work
-    $('input[name=priority]:radio').on("change", function(e) {
+    $('input[name=priority]:radio').on('change', function(e) {
         var target = $(e.target);
-        $('label.btn').removeClass("selected");
-        target.parent().addClass("selected");
+        $('label.btn').removeClass('selected');
+        target.parent().addClass('selected');
     });
+
+    // Load required fields from querystring (if provided)
 
     // Show confirmation if submitted
     if(qs('submitted')) {
@@ -149,7 +151,6 @@ $(document).ready(function() {
         $('#name').val(name);
     }
 
-    // Load required fields from querystring (if provided)
     var email = qs('username'); // or could use email parameter sent (not sure why both are sent by MCM)
     if(!email) {
         email = qs('email');
