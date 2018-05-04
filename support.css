@@ -153,3 +153,6 @@ label.currently-last {
 a.ambulance {
     color: red!important;
 }
+.note {
+    font-size: .8rem;
+}
