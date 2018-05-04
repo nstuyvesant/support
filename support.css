@@ -150,6 +150,6 @@ label.currently-last {
 .intl-tel-input {
     width: 100%;
 }
-.ambulance {
+a#outage {
     color: red;
 }
