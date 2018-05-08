@@ -45,14 +45,14 @@
 </head>
 
 <body>
-    <h1>Perfecto Connectivity Test</h1>
-    <button id="startButton" onClick="start();">Start</button>
-    <button id="stopButton" onClick="stopAll();">Stop</button>
-    <p id="status">Click Start to begin</p>
+    <div class="container">
+        <h1>Perfecto Connectivity Test</h1>
+        <button class="btn btn-success" id="startButton" onClick="start();">Start</button>
+        <button class="btn btn-danger" id="stopButton" onClick="stopAll();">Stop</button>
+        <p id="status">Click Start to begin</p>
 
-    <div class="container" style="width: 100%;">
         <div class="results" style="width: 60%; float: left;">
-            <table class="tg">
+            <table class="table">
                 <tr>
                     <th class="tg-yw4l">Site</th>
                     <th class="tg-yw4l">Latency (ms)</th>
@@ -214,12 +214,12 @@
         <div class="media" id="mediaspace" style="margin-left: 61%;">
             Click "Start" to update information
         </div>
+        <h4>IP Address &amp; Proxy Information</h4>
+        <p id="ip"></p>
+        <p id="ipInfo"></p>
+        <p id="proxy"></p>
     </div>
 
-    <h4>IP Address &amp; Proxy Information</h4>
-    <p id="ip"></p>
-    <p id="ipInfo"></p>
-    <p id="proxy"></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
