@@ -129,7 +129,7 @@ var trigger;
 		    status = "Stream";
 		    updateStatusText("streaming test for " + locations[locIndex] + " using " + stsType + "and going to:" + sts[locIndex] + " now " + streamTesting);
 		    player.setup({
-		        flashplayer: "jwv7/jwplayer.flash.swf",
+		        flashplayer: "jwplayer.flash.swf",
 		        autostart: true,
 		        file: stsType + "://" + sts[locIndex] + ".perfectomobile.com/live/conTest",
 		        width: "320",
@@ -208,7 +208,7 @@ var trigger;
 
 		    var oReq = new XMLHttpRequest();
 		    oReq.addEventListener("load", streamStarted);
-		    oReq.open("GET", "streamStart.php?type=start&sts=" + sts[locIndex]);
+		    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=" + sts[locIndex]);
 		    oReq.send();
 		    status = "Init Stream";
 		    updateStatusText("Starting stream testing");
