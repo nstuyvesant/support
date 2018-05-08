@@ -252,7 +252,7 @@ var trigger;
 		function proxyInfo() {
 		    var oReq = new XMLHttpRequest();
 		    oReq.addEventListener("load", proxyInfoAnswer);
-		    oReq.open("GET", "proxyDetect.php");
+		    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/proxyDetect.php");
 		    oReq.send();
 		}
 
