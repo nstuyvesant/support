@@ -117,7 +117,7 @@ var trigger;
 		            oReq.addEventListener("load", function() {
 		                console.log(this.responseText);
 		            });
-		            oReq.open("GET", "streamStart.php?type=stop&pid=" + streamPID);
+		            oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=stop&pid=" + streamPID);
 		            oReq.send();
 		            streamTesting = "none";
 		            if (!nextLocation())
