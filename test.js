@@ -222,7 +222,7 @@ var trigger;
 		}
 
 		function newHandler() {
-		    w = new Worker('speedtest_worker.min.js') // create new worker
+		    w = new Worker('speedtest-worker.js') // create new worker
 		    w.onmessage = eventHandler
 		    return w
 		} // newHandler
