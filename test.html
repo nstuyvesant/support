@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+
+<head>
+    <title>Perfecto Connectivity Test</title>
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-color: #999;
+        }
+        .tg td {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #999;
+            color: #444;
+            background-color: #F7FDFA;
+        }
+        .tg th {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #999;
+            color: #fff;
+            background-color: #26ADE4;
+        }
+        .tg .tg-yw4l {
+            vertical-align: top
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Perfecto Connectivity Test</h1>
+    <button id="startButton" onClick="start();">Start</button>
+    <button id="stopButton" onClick="stopAll();">Stop</button>
+    <p id="status">Click Start to begin</p>
+
+    <div class="container" style="width: 100%;">
+        <div class="results" style="width: 60%; float: left;">
+            <table class="tg">
+                <tr>
+                    <th class="tg-yw4l">Site</th>
+                    <th class="tg-yw4l">Latency (ms)</th>
+                    <th class="tg-yw4l">Download (Mbit/s)</th>
+                    <th class="tg-yw4l">Jitter (ms)</th>
+                    <th class="tg-yw4l">RTMP</th>
+                    <th class="tg-yw4l">RTMPT</th>
+                    <th class="tg-yw4l">RTMPS</th>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">US - East Coast</td>
+                    <td class="tg-yw4l">
+                        <p id="bos-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="bos-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="bos-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="bos-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="bos-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="bos-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">US - West cost</td>
+                    <td class="tg-yw4l">
+                        <p id="phx-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="phx-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="phx-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="phx-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="phx-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="phx-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">EU - London</td>
+                    <td class="tg-yw4l">
+                        <p id="lon-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="lon-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="lon-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="lon-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="lon-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="lon-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">EU - Frankfurt</td>
+                    <td class="tg-yw4l">
+                        <p id="fra-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="fra-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="fra-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="fra-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="fra-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="fra-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">Australia - Sydney</td>
+                    <td class="tg-yw4l">
+                        <p id="syd-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="syd-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="syd-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="syd-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="syd-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="syd-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">Canada - Toronto</td>
+                    <td class="tg-yw4l">
+                        <p id="can-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="can-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="can-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="can-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="can-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="can-rtmps"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-yw4l">Mexico</td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-ping"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-download"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-jitter"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-rtmp"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-rtmpt"></p>
+                    </td>
+                    <td class="tg-yw4l">
+                        <p id="gdl-rtmps"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="media" id="mediaspace" style="margin-left: 61%;">
+            Click "Start" to update information
+        </div>
+    </div>
+
+    <h4>IP Address & Proxy Information</h4>
+    <p id="ip"></p>
+    <p id="ipInfo"></p>
+    <p id="proxy"></p>
+    <script src='http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/jwv7/jwplayer.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src='test.js'></script>
+</body>
+
+</html>
