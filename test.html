@@ -74,16 +74,16 @@
         <p id="status">Click Start to begin</p>
         <div class="row">
             <div class="col-md-6">
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th class="tg-yw4l">Site</th>
                             <th class="tg-yw4l">Latency (ms)</th>
-                            <th class="tg-yw4l">Download (Mbit/s)</th>
+                            <th class="tg-yw4l">Download (Mbps)</th>
                             <th class="tg-yw4l">Jitter (ms)</th>
                             <th class="tg-yw4l">RTMP</th>
-                            <th class="tg-yw4l">RTMPT</th>
-                            <th class="tg-yw4l">RTMPS</th>
+                            <th class="tg-yw4l">RTMP/T</th>
+                            <th class="tg-yw4l">RTMP/S</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -237,17 +237,33 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">IP Address &amp; Proxy Information</div>
-                <div class="card-body">
-                    <p id="ip"></p>
-                    <p id="ipInfo"></p>
-                    <p id="proxy"></p>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Detected Network Information</div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label for="ip">Detected IP Address</label>
+                                <input class="form-control" type="text" id="ip" placeholder="Detected IP address" maxlength="14" readonly  />
+                            </div>
+                            <div class="form-group">
+                                <label for="proxy">Proxy Status</label>
+                                <input class="form-control" type="text" id="proxy" placeholder="Proxy Status" maxlength="80" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="location">User's Location</label>
+                                <input class="form-control" type="text" id="location" placeholder="Location" maxlength="80" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="network">User's Organization Network</label>
+                                <input class="form-control" type="text" id="network" placeholder="Network" maxlength="80" readonly />
+                            </div>
+                        <p id="ipx"></p>
+                        <p id="ipInfo"></p>
+                        <p id="proxy"></p>
+                    </div>
                 </div>
+                <div class="media" id="mediaspace"></div>
             </div>
-            <div class="media" id="mediaspace"></div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
