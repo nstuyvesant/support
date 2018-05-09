@@ -73,25 +73,25 @@
         <button class="btn btn-danger" id="stopButton" onClick="stopAll();">Stop</button>
         <p id="status">Click Start to begin</p>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                         <div class="card-header">Network Measurements</div>
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="tg-yw4l">Site</th>
-                                        <th class="tg-yw4l">Latency (ms)</th>
-                                        <th class="tg-yw4l">Download (Mbps)</th>
-                                        <th class="tg-yw4l">Jitter (ms)</th>
-                                        <th class="tg-yw4l">RTMP</th>
-                                        <th class="tg-yw4l">RTMP/T</th>
-                                        <th class="tg-yw4l">RTMP/S</th>
+                                        <th scope="col">Site</th>
+                                        <th scope="col">Latency (ms)</th>
+                                        <th scope="col">Download (Mbps)</th>
+                                        <th scope="col">Jitter (ms)</th>
+                                        <th scope="col">RTMP</th>
+                                        <th scope="col">RTMP/T</th>
+                                        <th scope="col">RTMP/S</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="tg-yw4l">US/Boston</td>
+                                        <th scope="row">Boston</td>
                                         <td class="tg-yw4l">
                                             <p id="bos-ping"></p>
                                         </td>
@@ -112,7 +112,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">US/Phoenix</td>
+                                        <th scope="row">Phoenix</td>
                                         <td class="tg-yw4l">
                                             <p id="phx-ping"></p>
                                         </td>
@@ -133,7 +133,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">UK/London</td>
+                                        <th scope="row">London</td>
                                         <td class="tg-yw4l">
                                             <p id="lon-ping"></p>
                                         </td>
@@ -154,7 +154,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">DE/Frankfurt</td>
+                                        <th scope="row">Frankfurt</td>
                                         <td class="tg-yw4l">
                                             <p id="fra-ping"></p>
                                         </td>
@@ -175,7 +175,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">AU/Sydney</td>
+                                        <th scope="row">Sydney</td>
                                         <td class="tg-yw4l">
                                             <p id="syd-ping"></p>
                                         </td>
@@ -196,7 +196,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">CA/Toronto</td>
+                                        <th scope="row">Toronto</td>
                                         <td class="tg-yw4l">
                                             <p id="can-ping"></p>
                                         </td>
@@ -217,7 +217,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-yw4l">MX/Mexico City</td>
+                                        <th scope="row">Mexico City</td>
                                         <td class="tg-yw4l">
                                             <p id="gdl-ping"></p>
                                         </td>
