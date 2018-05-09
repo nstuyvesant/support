@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8" />
+<!doctype html>
+<html lang="en-US">
 
 <head>
     <title>Perfecto Connectivity Test</title>
-    <style type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Perfecto Suppport Portal - KnowledgeBase, Online University, Chat, Case Submission, and more." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Get Support - Perfecto.io"/ >
+    <meta name="twitter:site" content="@perfectomobile" />
+    <meta name="twitter:creator" content="@perfectomobile" />
+    <meta property="og:url" content="https://support.perfecto.io" />
+    <meta property="og:site_name" content="Perfecto.io" />
+    <meta property="og:title" content="Get Support" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="Perfecto Suppport Portal - KnowledgeBase, Online University, Chat, Case Submission, and more." />
+    <meta property="og:image" content="https://www.perfecto.io/wp-content/uploads/2018/01/perfecto-logo.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254" />
+    <link rel="canonical" href="https://support.perfecto.io" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="perfecto-p.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#82d55b">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <style type="text/css">
         .tg {
             border-collapse: collapse;
             border-spacing: 0;
@@ -38,10 +61,9 @@
         .tg .tg-yw4l {
             vertical-align: top
         }
-    </style>
+    </style> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
-   
 </head>
 
 <body>
@@ -50,176 +72,184 @@
         <button class="btn btn-success" id="startButton" onClick="start();">Start</button>
         <button class="btn btn-danger" id="stopButton" onClick="stopAll();">Stop</button>
         <p id="status">Click Start to begin</p>
-
-        <div class="results" style="width: 60%; float: left;">
-            <table class="table">
-                <tr>
-                    <th class="tg-yw4l">Site</th>
-                    <th class="tg-yw4l">Latency (ms)</th>
-                    <th class="tg-yw4l">Download (Mbit/s)</th>
-                    <th class="tg-yw4l">Jitter (ms)</th>
-                    <th class="tg-yw4l">RTMP</th>
-                    <th class="tg-yw4l">RTMPT</th>
-                    <th class="tg-yw4l">RTMPS</th>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">US - East Coast</td>
-                    <td class="tg-yw4l">
-                        <p id="bos-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="bos-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="bos-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="bos-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="bos-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="bos-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">US - West Coast</td>
-                    <td class="tg-yw4l">
-                        <p id="phx-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="phx-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="phx-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="phx-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="phx-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="phx-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">EU - London</td>
-                    <td class="tg-yw4l">
-                        <p id="lon-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="lon-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="lon-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="lon-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="lon-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="lon-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">EU - Frankfurt</td>
-                    <td class="tg-yw4l">
-                        <p id="fra-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="fra-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="fra-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="fra-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="fra-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="fra-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">Australia - Sydney</td>
-                    <td class="tg-yw4l">
-                        <p id="syd-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="syd-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="syd-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="syd-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="syd-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="syd-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">Canada - Toronto</td>
-                    <td class="tg-yw4l">
-                        <p id="can-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="can-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="can-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="can-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="can-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="can-rtmps"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l">Mexico</td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-ping"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-download"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-jitter"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-rtmp"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-rtmpt"></p>
-                    </td>
-                    <td class="tg-yw4l">
-                        <p id="gdl-rtmps"></p>
-                    </td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="tg-yw4l">Site</th>
+                            <th class="tg-yw4l">Latency (ms)</th>
+                            <th class="tg-yw4l">Download (Mbit/s)</th>
+                            <th class="tg-yw4l">Jitter (ms)</th>
+                            <th class="tg-yw4l">RTMP</th>
+                            <th class="tg-yw4l">RTMPT</th>
+                            <th class="tg-yw4l">RTMPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tg-yw4l">US - East Coast</td>
+                            <td class="tg-yw4l">
+                                <p id="bos-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="bos-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="bos-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="bos-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="bos-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="bos-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">US - West Coast</td>
+                            <td class="tg-yw4l">
+                                <p id="phx-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="phx-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="phx-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="phx-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="phx-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="phx-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">EU - London</td>
+                            <td class="tg-yw4l">
+                                <p id="lon-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="lon-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="lon-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="lon-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="lon-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="lon-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">EU - Frankfurt</td>
+                            <td class="tg-yw4l">
+                                <p id="fra-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="fra-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="fra-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="fra-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="fra-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="fra-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">Australia - Sydney</td>
+                            <td class="tg-yw4l">
+                                <p id="syd-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="syd-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="syd-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="syd-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="syd-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="syd-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">Canada - Toronto</td>
+                            <td class="tg-yw4l">
+                                <p id="can-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="can-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="can-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="can-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="can-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="can-rtmps"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l">Mexico</td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-ping"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-download"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-jitter"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-rtmp"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-rtmpt"></p>
+                            </td>
+                            <td class="tg-yw4l">
+                                <p id="gdl-rtmps"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="media" id="mediaspace" style="margin-left: 61%;">
-            Click "Start" to update information
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">IP Address &amp; Proxy Information</div>
+                <div class="card-body">
+                    <p id="ip"></p>
+                    <p id="ipInfo"></p>
+                    <p id="proxy"></p>
+                </div>
+            </div>
+            <div class="media" id="mediaspace"></div>
         </div>
-        <h4>IP Address &amp; Proxy Information</h4>
-        <p id="ip"></p>
-        <p id="ipInfo"></p>
-        <p id="proxy"></p>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
