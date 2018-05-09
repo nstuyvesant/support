@@ -1,3 +1,21 @@
+const running = false;
+
+$('#startStop').on('click', function() {
+    running = !running; // toggle
+    if(running) {
+        $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
+    } else {
+        $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-start-circle');
+    }
+    alert('Clicked button');
+});
+
+// DOM ready
+$(document).ready(function() {
+
+});
+
+//--------------Nate's stuff above this line-----------------
 var trigger;
 var w = null;
 var ipReq = false;
