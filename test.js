@@ -1,14 +1,14 @@
 // Globals
 var running = false;
 
+// Visually toggle the start/stop button and begin the test
 $('#startStop').on('click', function() {
     running = !running; // toggle
     if(running) {
         $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
     } else {
-        $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-start-circle');
+        $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
     }
-    alert('Clicked button');
 });
 
 // DOM ready
