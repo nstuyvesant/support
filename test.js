@@ -231,9 +231,10 @@ function newHandler() {
 
 function IPInfoAnswer() {
     s = JSON.parse(this.responseText);
-    text = "Client location: " + s.city + ", " + s.country + "(" + s.lat + "," + s.lon + "); Organization: " + s.org;
-    document.getElementById("ipInfo").textContent = text
-    // console.log(this.responseText);
+    console.log('s',s);
+    var location = s.city + ', ' + s.country + '(' + s.lat + ',' + s.lon + ')';
+    $('#location').val(location);
+    $('#network').val(s.org);
 }
 
 function IPInfo(ip) {
@@ -246,7 +247,7 @@ function IPInfo(ip) {
 }
 
 function proxyInfoAnswer() {
-    document.getElementById("proxy").textContent = this.responseText;
+    $('#proxy').val(this.responseText);
 }
 
 function proxyInfo() {
