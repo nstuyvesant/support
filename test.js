@@ -49,15 +49,13 @@ function eventHandler(event) { // when status is received, split the string and 
         document.getElementById(locations[locIndex] + '-download').textContent = data[1]
         document.getElementById(locations[locIndex] + '-ping').textContent = data[3]
         document.getElementById(locations[locIndex] + '-jitter').textContent = data[5]
-        document.getElementById('ip').textContent = data[4]
+        //document.getElementById('ip').textContent = data[4]
         if (!ipReq)
             IPInfo(data[4]);
     } else {
         //console.log("got event: " + event.data);
     }
 } // eventHandler
-
-
 
 
 function streamTestActive() {
@@ -73,19 +71,19 @@ function updateStatus(id, bad, fair, greater, suffix) {
         document.getElementById(id).innerHTML = "<img src=\"error.png\"/>Error"
     } else if (greater) {
         if (value > bad) {
-            document.getElementById(id).innerHTML = "<img src=\"sad.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
         } else if (value > fair) {
             document.getElementById(id).innerHTML = "<img src=\"confused.png\"/>" + value + suffix
         } else {
-            document.getElementById(id).innerHTML = "<img src=\"happy.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
         }
     } else {
         if (value < bad) {
-            document.getElementById(id).innerHTML = "<img src=\"sad.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
         } else if (value < fair) {
             document.getElementById(id).innerHTML = "<img src=\"confused.png\"/>" + value + suffix
         } else {
-            document.getElementById(id).innerHTML = "<img src=\"happy.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
         }
     }
 } // updateStatus
@@ -190,7 +188,6 @@ function stopAll() {
 
 
 function streamStarted() {
-
     streamPID = this.responseText;
     // jwplayer.key = "k/WD83HHK6xlWeRUuyRM+5fHBxfSCgwUUC7e++bhF5Urqx59"; // V8
     jwplayer.key = "pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp"; // V7
@@ -215,10 +212,9 @@ function streamTest() {
 } // streamTest
 
 function comments() {
-    updateStatus(locations[locIndex] + '-download', 0.5, 0.75, false, "")
-    updateStatus(locations[locIndex] + '-ping', 300, 150, true, "")
-    updateStatus(locations[locIndex] + '-jitter', 100, 50, true, "")
-
+    updateStatus(locations[locIndex] + '-download', 0.5, 0.75, false, "");
+    updateStatus(locations[locIndex] + '-ping', 300, 150, true, "");
+    updateStatus(locations[locIndex] + '-jitter', 100, 50, true, "");
 }
 
 function newHandler() {
@@ -227,14 +223,13 @@ function newHandler() {
     return w
 } // newHandler
 
-
-
 function IPInfoAnswer() {
-    s = JSON.parse(this.responseText);
-    console.log('s',s);
-    var location = s.city + ', ' + s.country + '(' + s.lat + ',' + s.lon + ')';
+    var s = JSON.parse(this.responseText);
+    var location = s.city + ', ' + s.region + ', ' + s.countryCode + ' (' + s.lat + ',' + s.lon + ')';
+    $('#ip').val(s.query);
     $('#location').val(location);
-    $('#network').val(s.org);
+    $('#isp').val(s.isp);
+    $('#tz').val(s.timezone);
 }
 
 function IPInfo(ip) {
