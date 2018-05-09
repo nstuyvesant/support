@@ -89,7 +89,6 @@ function updateStatus(id, bad, fair, greater, suffix) {
 } // updateStatus
 
 function nextSts() {
-
     state['idle'] = 0;
     state['buffering'] = 0;
     state['playing'] = 0;
