@@ -6,14 +6,16 @@ $('#startStop').on('click', function() {
     running = !running; // toggle
     if(running) {
         $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
+        stopAll();
     } else {
         $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
+        start();
     }
 });
 
 // DOM ready
 $(document).ready(function() {
-
+    // Get the initial IP info
 });
 
 //--------------Nate's stuff above this line-----------------
