@@ -68,12 +68,12 @@ function updateStatus(id, bad, fair, greater, suffix) {
 
     value = parseFloat(document.getElementById(id).textContent);
     if (value == -1) {
-        document.getElementById(id).innerHTML = "<img src=\"error.png\"/>Error"
+        document.getElementById(id).innerHTML = '<i class="fas fa-exclamation-triangle"></i>'
     } else if (greater) {
         if (value > bad) {
             document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
         } else if (value > fair) {
-            document.getElementById(id).innerHTML = "<img src=\"confused.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-meh"></i>' + value + suffix
         } else {
             document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
         }
@@ -81,7 +81,7 @@ function updateStatus(id, bad, fair, greater, suffix) {
         if (value < bad) {
             document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
         } else if (value < fair) {
-            document.getElementById(id).innerHTML = "<img src=\"confused.png\"/>" + value + suffix
+            document.getElementById(id).innerHTML = '<i class="far fa-meh"></i>' + value + suffix
         } else {
             document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
         }
@@ -224,7 +224,7 @@ function newHandler() {
 
 function IPInfoAnswer() {
     var s = JSON.parse(this.responseText);
-    var location = s.city + ', ' + s.region + ', ' + s.countryCode + ' (' + s.lat + ',' + s.lon + ')';
+    var location = s.city + ', ' + s.region + ' (' + s.countryCode + ')';
     $('#ip').val(s.query);
     $('#location').val(location);
     $('#isp').val(s.isp);
