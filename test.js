@@ -1,4 +1,5 @@
-const running = false;
+// Globals
+var running = false;
 
 $('#startStop').on('click', function() {
     running = !running; // toggle
