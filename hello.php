@@ -91,14 +91,15 @@ function get_isp() {
 }
 
 $ip = get_client_ip();
-$netInfo->ip = $ip;
-$netInfo->proxy = get_proxy_info();
+// $netInfo->ip = $ip;
+// $netInfo->proxy = get_proxy_info();
 $json = file_get_contents("https://freegeoip.net/json/$ip");
-$json = json_decode($json ,true);
-$netInfo->country = $json['country_name'];
-$netInfo->region = $json['region_name'];
-$netInfo->city = $json['city'];
+//$json = json_decode($json ,true);
+echo $json;
+// $netInfo->city = $json['city'];
+// $netInfo->region = $json['region_code'];
+// $netInfo->country = $json['country_code'];
 
-$netInfo->isp = get_isp();
-echo json_encode($netInfo);
+// $netInfo->isp = $json['connection']->isp; //get_isp();
+//echo json_encode($netInfo);
 ?>
