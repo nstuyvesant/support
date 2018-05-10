@@ -93,12 +93,14 @@ function get_isp() {
 $ip = get_client_ip();
 // $netInfo->ip = $ip;
 // $netInfo->proxy = get_proxy_info();
-$json = file_get_contents("https://freegeoip.net/json/$ip");
+$json = file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af");
+$netInfo->city = $json['city'];
+$netInfo->region = $json['region_code'];
+$netInfo->country = $json['country_code'];
+
+//7c21bd608096d60dbe33bcd139a3e0af
 //$json = json_decode($json ,true);
 echo $json;
-// $netInfo->city = $json['city'];
-// $netInfo->region = $json['region_code'];
-// $netInfo->country = $json['country_code'];
 
 // $netInfo->isp = $json['connection']->isp; //get_isp();
 //echo json_encode($netInfo);
