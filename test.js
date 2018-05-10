@@ -16,9 +16,9 @@ const getNetworkInfo = function() {
 
 // Use proxycheck.io to determine whether there is a proxy
 const getProxyInfo = function(ip) {
-    $.getJSON('https://proxycheck.io/v2/'+ ip +'?callback=false', function(data) {
-        $('#proxy').val(data[ip].proxy == 'no' ? 'No proxy detected' : data[ip].type + ' proxy detected');
-    });
+  $.getJSON('https://proxycheck.io/v2/'+ ip +'?callback=false', function(data) {
+    $('#proxy').val(data[ip].proxy === 'no' ? 'No proxy detected' : data[ip].type + ' proxy detected');
+  });
 };
 
 // Visually toggle the start/stop button and begin the test
@@ -60,17 +60,17 @@ var nextProtocolTrigger = null;
 // Write status near Start/Stop button
 function updateStatus(message) {
     $('#status').html(message);
-    console.log(status + ": " + message);
+    console.log(status + ': ' + message);
 }
 
 // When Start is clicked, this is run every 100 ms to write results to page so user sees progress
 function speedTestUpdate() {
-    if (status == 'Network') // speedtest is active
+    if (status === 'Network') // speedtest is active
         speedTestWorker.postMessage('status');
     else if (streamTesting == 'active') {
         state[player.getState()]++;
-        var tableCell = '#' + dataCenters[currentDataCenterIndex] + "-" + stsType;
-        if (player.getState() == 'error') {
+        var tableCell = '#' + dataCenters[currentDataCenterIndex] + '-' + stsType;
+        if (player.getState() === 'error') {
             streamTesting = 'abort';
             $(tableCell).html('-1');
             status = 'Error';
@@ -87,8 +87,8 @@ function speedTestUpdate() {
 function speedTestMessage(event) { 
     // Format for returned event.data:
     // status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
-    let data = event.data.split(';') 
-    if (data[0] == 4) {
+    let data = event.data.split(';');
+    if (data[0] === 4) {
         speedTestWorker = null;
         qualifySpeedTestResults();
         //updateStatus('Network tests done.');
@@ -245,7 +245,7 @@ function nextSts() {
             oReq.addEventListener('load', function() {
                 console.log(this.responseText);
             });
-            oReq.open('GET', 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=stop&pid=' + streamPID);
+            oReq.open('GET', 'stream-start.php?type=stop&pid=' + streamPID);
             oReq.send();
             streamTesting = 'none';
             if (!nextLocation())
@@ -290,16 +290,16 @@ function streamTest() {
     $(tableCellPrefix + '-rtmpt').html('100');
     $(tableCellPrefix + '-rtmps').html('100');
 
-    // $.get('http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
-    //     console.log('streamStart.php', response);
-    //     streamStarted();
-    // });
+    $.get('stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
+        console.log('stream-start.php', response);
+        streamStarted();
+    });
 
 
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", streamStarted);
-    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=" + sts[currentDataCenterIndex]);
-    oReq.send();
+    // var oReq = new XMLHttpRequest();
+    // oReq.addEventListener("load", streamStarted);
+    // oReq.open("GET", "stream-start.php?type=start&sts=" + sts[currentDataCenterIndex]);
+    // oReq.send();
     status = 'Init Stream';
     updateStatus('Starting stream testing...');
 }
