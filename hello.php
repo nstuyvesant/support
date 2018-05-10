@@ -90,11 +90,15 @@ function get_isp() {
   return $result->net->orgRef->{'@name'};
 }
 
-$geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
-$netInfo->ip = get_client_ip();
+$ip = get_client_ip();
+$netInfo->ip = $ip;
 $netInfo->proxy = get_proxy_info();
-$netInfo->city = $geo["geoplugin_city"];
-$netInfo->country = $geo["geoplugin_countryName"];
+$json = file_get_contents("https://freegeoip.net/json/$ip");
+$json = json_decode($json ,true);
+$netInfo->country = $json['country_name'];
+$netInfo->region = $json['region_name'];
+$netInfo->city = $json['city'];
+
 $netInfo->isp = get_isp();
 echo json_encode($netInfo);
 ?>
