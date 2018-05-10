@@ -115,12 +115,12 @@ function newSpeedTestWorker() {
 function nextLocation() {
     if(currentDataCenterIndex + 1 < dataCenters.length) {
         currentDataCenterIndex++;
+        let dataCenterCode = dataCenters[currentDataCenterIndex];
         let dataCenterName = $('#' + dataCenterCode).val();
         updateStatus('Starting network test for ' + dataCenterName + '...');
         status = 'New';
         speedTestWorker = newSpeedTestWorker();
         status = 'Network';
-        let dataCenterCode = dataCenters[currentDataCenterIndex];
         speedTestWorker.postMessage('start {"test_order":"I_P_D",	"url_dl": "http://' + dataCenterCode + '-lqt.perfectomobile.com/garbage.php", "url_ul": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_ping": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "http://' + dataCenterCode + '-lqt.perfectomobile.com/telemetry.php"} ');
         return true;
     } else // no more data centers to test
