@@ -51,7 +51,7 @@ function get_proxy_info() {
   foreach($proxy_headers as $x) {
     if (isset($_SERVER[$x])) {
       if ($text == "")
-        $text = "Proxy traffic detected. Headers: ";
+        $text = "Proxy detected";
       else
         $text .= ", ";
         $text .= $x;
@@ -64,8 +64,27 @@ function get_proxy_info() {
   return $text;
 }
 
+// User ARIN's REST API to get client location info
+function get_client_location() {
+  // Create a new cURL resource
+  $ch = curl_init();
+  // Set URL and other appropriate options
+  curl_setopt($ch, CURLOPT_URL, "http://whois.arin.net/rest/ip/" . get_client_ip());
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/json"));
+  // Execute curl
+  $returnValue = curl_exec($ch);
+  // Close cURL resource, and free up system resources
+  curl_close($ch);
+  $result = json_decode($returnValue);
+  echo json_encode($result);
+  $netInfo->arin = $result;
+}
+
 $netInfo->country = $_SERVER['HTTP_CF_IPCOUNTRY'];
 $netInfo->ip = get_client_ip();
 $netInfo->proxy = get_proxy_info();
+get_client_location();
 echo json_encode($netInfo);
 ?>
