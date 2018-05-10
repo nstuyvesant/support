@@ -19,12 +19,12 @@
     <meta property="og:image" content="https://www.perfecto.io/wp-content/uploads/2018/01/perfecto-logo.png" />
     <meta property="article:publisher" content="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254" />
     <link rel="canonical" href="https://support.perfecto.io" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/svg+xml" href="perfecto-p.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#82d55b">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#82d55b">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
@@ -47,13 +47,41 @@
     <div class="container">
         <h1>Perfecto Connectivity Test</h1>
         <a id="startStop" class="btn" href="#"><span id="startStopIcon" class="far fa-play-circle"></span></a> 
-        <p id="status">Click Start to begin</p>
+        <p id="status">Click to Start</p>
         <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Detected Information</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="ip">IP Address</label>
+                            <input class="form-control form-control-sm" type="text" id="ip" placeholder="Detected IP address" maxlength="14" readonly  />
+                        </div>
+                        <div class="form-group">
+                            <label for="proxy">Proxy Status</label>
+                            <input class="form-control form-control-sm" type="text" id="proxy" placeholder="Proxy Status" maxlength="80" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input class="form-control form-control-sm" type="text" id="location" placeholder="Location" maxlength="80" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="isp">Internet Service Provider</label>
+                            <input class="form-control form-control-sm" type="text" id="isp" placeholder="ISP" maxlength="80" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="tz">User's Time Zone</label>
+                            <input class="form-control form-control-sm" type="text" id="tz" placeholder="Time Zone" maxlength="80" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="media" id="mediaspace"></div>
+            </div>
             <div class="col-md-8">
                 <div class="card">
                         <div class="card-header">Network Measurements</div>
                         <div class="card-body">
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped table-responsive table-borderless">
                                 <thead>
                                     <tr>
                                         <th scope="col">Site</th>
@@ -67,149 +95,149 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Boston</td>
-                                        <td class="tg-yw4l">
+                                        <th id="bos" scope="row">Boston</td>
+                                        <td>
                                             <p id="bos-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="bos-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="bos-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="bos-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="bos-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="bos-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Phoenix</td>
-                                        <td class="tg-yw4l">
+                                        <th id="phx" scope="row">Phoenix</td>
+                                        <td>
                                             <p id="phx-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="phx-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="phx-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="phx-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="phx-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="phx-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">London</td>
-                                        <td class="tg-yw4l">
+                                        <th id="lon" scope="row">London</td>
+                                        <td>
                                             <p id="lon-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="lon-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="lon-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="lon-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="lon-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="lon-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Frankfurt</td>
-                                        <td class="tg-yw4l">
+                                        <th id="fra" scope="row">Frankfurt</td>
+                                        <td>
                                             <p id="fra-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="fra-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="fra-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="fra-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="fra-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="fra-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Sydney</td>
-                                        <td class="tg-yw4l">
+                                        <th id="syd" scope="row">Sydney</td>
+                                        <td>
                                             <p id="syd-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="syd-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="syd-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="syd-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="syd-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="syd-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Toronto</td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-ping"></p>
+                                        <th id="yyz" scope="row">Toronto</td>
+                                        <td>
+                                            <p id="yyz-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-download"></p>
+                                        <td>
+                                            <p id="yyz-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-jitter"></p>
+                                        <td>
+                                            <p id="yyz-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-rtmp"></p>
+                                        <td>
+                                            <p id="yyz-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-rtmpt"></p>
+                                        <td>
+                                            <p id="yyz-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
-                                            <p id="can-rtmps"></p>
+                                        <td>
+                                            <p id="yyz-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Mexico City</td>
-                                        <td class="tg-yw4l">
+                                        <th id="gdl" scope="row">Guadalajara</td>
+                                        <td>
                                             <p id="gdl-ping"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="gdl-download"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="gdl-jitter"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="gdl-rtmp"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="gdl-rtmpt"></p>
                                         </td>
-                                        <td class="tg-yw4l">
+                                        <td>
                                             <p id="gdl-rtmps"></p>
                                         </td>
                                     </tr>
@@ -218,34 +246,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Detected Information</div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="ip">IP Address</label>
-                            <input class="form-control" type="text" id="ip" placeholder="Detected IP address" maxlength="14" readonly  />
-                        </div>
-                        <div class="form-group">
-                            <label for="proxy">Proxy Status</label>
-                            <input class="form-control" type="text" id="proxy" placeholder="Proxy Status" maxlength="80" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input class="form-control" type="text" id="location" placeholder="Location" maxlength="80" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label for="isp">Internet Service Provider</label>
-                            <input class="form-control" type="text" id="isp" placeholder="ISP" maxlength="80" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label for="tz">User's Time Zone</label>
-                            <input class="form-control" type="text" id="tz" placeholder="Time Zone" maxlength="80" readonly />
-                        </div>
-                    </div>
-                </div>
-                <div class="media" id="mediaspace"></div>
             </div>
         </div>
     </div>

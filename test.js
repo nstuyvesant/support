@@ -1,110 +1,133 @@
 // Globals
 var running = false;
+var dataCenters = ['bos', 'phx', 'lon', 'fra', 'syd', 'yyz', 'gdl'];
+
+// Use IP API to get user's network info
+const getNetworkInfo = function() {
+    $.getJSON('http://ip-api.com/json', function(data) {
+        var location = data.city + ', ' + data.region + ' (' + data.countryCode + ')';
+        $('#ip').val(data.query);
+        $('#location').val(location);
+        $('#isp').val(data.isp);
+        $('#tz').val(data.timezone);
+        //getProxyInfo(data.query); // limited to 100/day unless I register (then 1000/day)
+    });
+};
+
+// Use proxycheck.io to determine whether there is a proxy
+const getProxyInfo = function(ip) {
+    $.getJSON('https://proxycheck.io/v2/'+ ip +'?callback=false', function(data) {
+        $('#proxy').val(data[ip].proxy == 'no' ? 'No proxy detected' : data[ip].type + ' proxy detected');
+    });
+};
+
+// const pingTests = function() {
+//     for(var dataCenter in dataCenters) {
+
+//     }
+// };
 
 // Visually toggle the start/stop button and begin the test
 $('#startStop').on('click', function() {
     running = !running; // toggle
     if(running) {
         $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
-        stopAll();
+        console.log('Clicked Start');
+        start();
     } else {
         $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
-        start();
+        console.log('Clicked Stop');
+        stopAll();
     }
 });
 
 // DOM ready
 $(document).ready(function() {
-    // Get the initial IP info
+    getNetworkInfo(); // Detect client's networking and populate fields
 });
 
 //--------------Nate's stuff above this line-----------------
+const STREAMINGTIME = 30000;
 var trigger;
 var w = null;
 var ipReq = false;
-var stsType = "none";
+var stsType = 'none';
 var player;
 var streamPID;
-var streamTesting = "none";
+var streamTesting = 'none';
 var state = [];
-var streamingTime = 30000;
 var nextProtocolTrigger = null;
-var locations = ["bos", "phx", "lon", "fra", "yyz"];
-//var locations = ["bos","phx","lon","fra","syd","can","gdl"];
-var sts = ["wakefield-streaming2", "phx-sts-2", "UK-streaming2", "fra-sts", "YYZ-STS"]
-// var sts = ["wakefield-streaming2","phx-sts-2","UK-streaming2","fra-sts","syd","can","mex"]
-//var locations = ["bos"];
-//var sts = ["wakefield-streaming2"]
+var locations = ['bos', 'phx', 'lon', 'fra', 'syd', 'yyz', 'gdl'];
+var sts = ['wakefield-streaming2', 'phx-sts-2', 'uk-streaming2', 'fra-sts', 'yyz-sts']
 var locIndex = -1;
-var status = "Idle";
+var status = 'Idle';
 
 function update() {
-    if (status == "Network") // speedtest is active
+    if (status == 'Network') // speedtest is active
         w.postMessage('status')
-    else if (streamTesting == "active") {
+    else if (streamTesting == 'active') {
         state[player.getState()]++;
-        if (player.getState() == "error") {
-            streamTesting = "abort";
-            document.getElementById(locations[locIndex] + "-" + stsType).textContent = "-1";
-            status = "Error";
-            updateStatusText("Streaming tests for " + stsType + " Failed!");
+        var tableCell = '#' + locations[locIndex] + "-" + stsType;
+        if (player.getState() == 'error') {
+            streamTesting = 'abort';
+            $(tableCell).html('-1');
+            status = 'Error';
+            updateStatusText('Streaming tests for ' + stsType + 'Failed!');
             clearTimeout(nextProtocolTrigger);
             nextSts();
         } else {
-            x = document.getElementById(locations[locIndex] + "-" + stsType).textContent;
-            x = Math.round(100 - (100 / (streamingTime / 100) * state["buffering"]));
-            document.getElementById(locations[locIndex] + "-" + stsType).textContent = x;
+            x = $(tableCell).html();
+            x = Math.round(100 - (100 / (STREAMINGTIME / 100) * state['buffering']));
+            $(tableCell).html(x);
         }
     }
-} // update
+}
 
-function eventHandler(event) { // when status is received, split the string and put the values in the appropriate fields
-    var data = event.data.split(';') // string format: status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
-    //console.log("got event: " + event.data);
+// When status received, split string and put values in appropriate fields
+function eventHandler(event) { 
+    // event.data format: status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
+    var data = event.data.split(';') 
     if (data[0] == 4) {
         w = null;
-        status = "Streaming";
-        updateStatusText("Network test done, starting streaming tests");
+        status = 'Streaming';
+        updateStatusText('Network tests done. Starting streaming tests.');
         streamTest();
-    } else if ((data[0] >= 1) && (data[0] <= 3)) {
-        document.getElementById(locations[locIndex] + '-download').textContent = data[1]
-        document.getElementById(locations[locIndex] + '-ping').textContent = data[3]
-        document.getElementById(locations[locIndex] + '-jitter').textContent = data[5]
-        //document.getElementById('ip').textContent = data[4]
-        if (!ipReq)
-            IPInfo(data[4]);
-    } else {
-        //console.log("got event: " + event.data);
+    } else if((data[0] >= 1) && (data[0] <= 3)) {
+        var tableCellPrefix = '#' + locations[locIndex];
+        $(tableCellPrefix + '-download').html(data[1]);
+        $(tableCellPrefix + '-ping').html(data[3]);
+        $(tableCellPrefix + '-jitter').html(data[5]);
     }
-} // eventHandler
+}
 
-
+// Begin running streaming tests
 function streamTestActive() {
-    streamTesting = "active";
-    updateStatusText("streaming test for " + locations[locIndex] + " using " + stsType + " now " + streamTesting);
-    nextProtocolTrigger = setTimeout(nextSts, streamingTime);
-} // streamTestActive
+    streamTesting = 'active';
+    updateStatusText('Streaming test for ' + locations[locIndex] + ' using ' + stsType + ' now ' + streamTesting);
+    nextProtocolTrigger = setTimeout(nextSts, STREAMINGTIME);
+}
 
-function updateStatus(id, bad, fair, greater, suffix) {
-
-    value = parseFloat(document.getElementById(id).textContent);
+// Qualify whether the data is good, bad, or meh
+function qualifyStatus(id, bad, fair, greater, suffix) {
+    var tableCell = $('#' + id);
+    var value = parseFloat(tableCell.html());
     if (value == -1) {
-        document.getElementById(id).innerHTML = '<i class="fas fa-exclamation-triangle"></i>'
+        tableCell.html('<i class="fas fa-exclamation-triangle"></i>');
     } else if (greater) {
         if (value > bad) {
-            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
+            tableCell.html('<i class="far fa-thumbs-down"></i>' + value + suffix);
         } else if (value > fair) {
-            document.getElementById(id).innerHTML = '<i class="far fa-meh"></i>' + value + suffix
+            tableCell.html('<i class="far fa-meh"></i>' + value + suffix);
         } else {
-            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
+            tableCell.html('<i class="far fa-thumbs-up"></i>' + value + suffix);
         }
     } else {
         if (value < bad) {
-            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-down"></i>' + value + suffix
+            tableCell.html('<i class="far fa-thumbs-down"></i>' + value + suffix);
         } else if (value < fair) {
-            document.getElementById(id).innerHTML = '<i class="far fa-meh"></i>' + value + suffix
+            tableCell.html('<i class="far fa-meh"></i>' + value + suffix);
         } else {
-            document.getElementById(id).innerHTML = '<i class="far fa-thumbs-up"></i>' + value + suffix
+            tableCell.html('<i class="far fa-thumbs-up"></i>' + value + suffix);
         }
     }
 } // updateStatus
@@ -114,20 +137,20 @@ function nextSts() {
     state['buffering'] = 0;
     state['playing'] = 0;
     state['paused'] = 0;
-    streamTesting = "init";
+    streamTesting = 'init';
 
-    if (stsType == "none") {
+    if(stsType == "none") {
         stsType = "rtmp"
     } else {
         player.stop();
         player.remove();
-        updateStatusText("Finalizing stream testing for type: " + stsType);
-        updateStatus(locations[locIndex] + '-' + stsType, 85, 95, false, "%");
+        updateStatusText('Finalizing stream testing for type: ' + stsType);
+        qualifyStatus(locations[locIndex] + '-' + stsType, 85, 95, false, '%');
         comments();
 
-        if (stsType == "rtmp")
+        if(stsType == "rtmp")
             stsType = "rtmpt";
-        else if (stsType == "rtmpt")
+        else if(stsType == "rtmpt")
             stsType = "rtmps";
         else { // done all types, next location
             updateStatusText("Stopping stream testing");
@@ -144,7 +167,7 @@ function nextSts() {
         }
     }
 
-    status = "Stream";
+    status = 'Stream';
     updateStatusText("streaming test for " + locations[locIndex] + " using " + stsType + "and going to:" + sts[locIndex] + " now " + streamTesting);
     player.setup({
         flashplayer: "jwplayer.flash.swf",
@@ -164,13 +187,14 @@ function nextSts() {
 
 } // nextSts
 
+// Write status near Start/Stop button
 function updateStatusText(msg) {
-    document.getElementById("status").textContent = status + " - " + msg;
+    $('#status').html(status + ' - ' + msg);
     console.log(status + " - " + msg);
-} // updateStatusText
+}
 
 function stopAll() {
-    console.log("stopping all tests");
+    console.log('Stopping all tests');
     if (w)
         w.postMessage("abort");
     clearInterval(trigger);
@@ -179,9 +203,11 @@ function stopAll() {
     var out = {
         id: document.getElementById("ip").textContent + "-" + Date.now(),
         ip: {
-            ip: document.getElementById("ip").textContent,
-            ipInfo: document.getElementById("ipInfo").textContent,
-            proxy: document.getElementById("proxy").textContent
+            ip: $('#ip').val(),
+            proxy: $('#proxy').val(),
+            location: $('#location').val(),
+            location: $('#isp').val(),
+            tz: $('#tz').val()
         },
         locations: []
     }
@@ -197,15 +223,27 @@ function stopAll() {
         }
     }
 
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", function() {
-        console.log(this.responseText);
+    // Post to the locations
+    $.ajax({
+        type: 'POST',
+        url: 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/result.php',
+        data: JSON.stringify(out),
+        contentType: 'application/json; charset=utf-8',
+        crossDomain: true,
+        dataType: 'jsonp',
+        success: function(data) {
+            console.log(data);
+        }
     });
-    oReq.open("POST", "result.php");
-    oReq.send(JSON.stringify(out));
-    console.log(JSON.stringify(out));
-} // stopAll
 
+    // var oReq = new XMLHttpRequest();
+    // oReq.addEventListener("load", function() {
+    //     console.log(this.responseText);
+    // });
+    // oReq.open("POST", "result.php");
+    // oReq.send(JSON.stringify(out));
+    // console.log(JSON.stringify(out));
+} // stopAll
 
 function streamStarted() {
     streamPID = this.responseText;
@@ -232,45 +270,17 @@ function streamTest() {
 } // streamTest
 
 function comments() {
-    updateStatus(locations[locIndex] + '-download', 0.5, 0.75, false, "");
-    updateStatus(locations[locIndex] + '-ping', 300, 150, true, "");
-    updateStatus(locations[locIndex] + '-jitter', 100, 50, true, "");
+    qualifyStatus(locations[locIndex] + '-download', 0.5, 0.75, false, "");
+    qualifyStatus(locations[locIndex] + '-ping', 300, 150, true, "");
+    qualifyStatus(locations[locIndex] + '-jitter', 100, 50, true, "");
 }
 
 function newHandler() {
-    w = new Worker('speedtest-worker.js') // create new worker
-    w.onmessage = eventHandler
-    return w
+    w = new Worker('speedtest-worker.js'); // create new worker
+    w.onmessage = eventHandler;
+    return w;
 } // newHandler
 
-function IPInfoAnswer() {
-    var s = JSON.parse(this.responseText);
-    var location = s.city + ', ' + s.region + ' (' + s.countryCode + ')';
-    $('#ip').val(s.query);
-    $('#location').val(location);
-    $('#isp').val(s.isp);
-    $('#tz').val(s.timezone);
-}
-
-function IPInfo(ip) {
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", IPInfoAnswer);
-    oReq.open("GET", "http://ip-api.com/json/" + ip);
-    oReq.send();
-    proxyInfo();
-    ipReq = true;
-}
-
-function proxyInfoAnswer() {
-    $('#proxy').val(this.responseText);
-}
-
-function proxyInfo() {
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", proxyInfoAnswer);
-    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/proxyDetect.php");
-    oReq.send();
-}
 
 function nextLocation() {
     if (locIndex + 1 < locations.length) {
@@ -288,7 +298,7 @@ function nextLocation() {
 
 
 function start() {
-    updateStatusText("Starting all tests");
+    updateStatusText("Starting Tests");
     trigger = setInterval(update, 100) // ask for status every 100ms
     nextLocation();
 } // start
