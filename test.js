@@ -58,9 +58,9 @@ var state = [];
 var nextProtocolTrigger = null;
 
 // Write status near Start/Stop button
-function updateStatus(msg) {
-    $('#status').html(status + ' - ' + msg);
-    console.log(status + " - " + msg);
+function updateStatus(message) {
+    $('#status').html(message);
+    console.log(status + ": " + message);
 }
 
 // When Start is clicked, this is run every 100 ms to write results to page so user sees progress
@@ -74,7 +74,7 @@ function speedTestUpdate() {
             streamTesting = 'abort';
             $(tableCell).html('-1');
             status = 'Error';
-            updateStatus('Streaming tests for ' + stsType + 'Failed!');
+            updateStatus('Streaming tests for ' + stsType + ' failed!');
             clearTimeout(nextProtocolTrigger);
             nextSts();
         } else {
@@ -91,11 +91,10 @@ function speedTestMessage(event) {
     if (data[0] == 4) {
         speedTestWorker = null;
         qualifySpeedTestResults();
-        updateStatus('Network tests done.');
-//TODO: re-enable streaming tests
-        // updateStatus('Starting streaming tests...')
-        // status = 'Streaming';
-        // streamTest();
+        //updateStatus('Network tests done.');
+        updateStatus('Starting streaming tests...')
+        status = 'Streaming';
+        streamTest();
     } else if((data[0] >= 1) && (data[0] <= 3)) {
         let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
         $(tableCellPrefix + '-download').html(data[1]);
@@ -116,7 +115,7 @@ function nextLocation() {
     if(currentDataCenterIndex + 1 < dataCenters.length) {
         currentDataCenterIndex++;
         let dataCenterCode = dataCenters[currentDataCenterIndex];
-        let dataCenterName = $('#' + dataCenterCode).val();
+        let dataCenterName = $('#' + dataCenterCode).html().trim();
         updateStatus('Starting network test for ' + dataCenterName + '...');
         status = 'New';
         speedTestWorker = newSpeedTestWorker();
@@ -188,19 +187,19 @@ function qualifyResult(id, bad, fair, greater, suffix) {
         tableCell.html('<i class="fas fa-exclamation-triangle"></i>');
     } else if (greater) {
         if (value > bad) {
-            tableCell.html('<i class="far fa-thumbs-down"></i>' + value + suffix);
+            tableCell.html(value + suffix + ' <i class="far fa-thumbs-down"></i>');
         } else if (value > fair) {
-            tableCell.html('<i class="far fa-meh"></i>' + value + suffix);
+            tableCell.html(value + suffix +' <i class="far fa-meh"></i>');
         } else {
-            tableCell.html('<i class="far fa-thumbs-up"></i>' + value + suffix);
+            tableCell.html(value + suffix + ' <i class="far fa-thumbs-up"></i>');
         }
     } else {
         if (value < bad) {
-            tableCell.html('<i class="far fa-thumbs-down"></i>' + value + suffix);
+            tableCell.html(value + suffix + ' <i class="far fa-thumbs-down"></i>');
         } else if (value < fair) {
-            tableCell.html('<i class="far fa-meh"></i>' + value + suffix);
+            tableCell.html(value + suffix + ' <i class="far fa-meh"></i>');
         } else {
-            tableCell.html('<i class="far fa-thumbs-up"></i>' + value + suffix);
+            tableCell.html(value + suffix + ' <i class="far fa-thumbs-up"></i>');
         }
     }
 }
@@ -241,7 +240,7 @@ function nextSts() {
         else if(stsType == 'rtmpt')
             stsType = 'rtmps';
         else { // done all types, next location
-            updateStatus('Stopping stream testing.');
+            updateStatus('Stopping stream testing...');
             var oReq = new XMLHttpRequest();
             oReq.addEventListener('load', function() {
                 console.log(this.responseText);
@@ -291,10 +290,16 @@ function streamTest() {
     $(tableCellPrefix + '-rtmpt').html('100');
     $(tableCellPrefix + '-rtmps').html('100');
 
+    // $.get('http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
+    //     console.log('streamStart.php', response);
+    //     streamStarted();
+    // });
+
+
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", streamStarted);
     oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=" + sts[currentDataCenterIndex]);
     oReq.send();
-    status = "Init Stream";
-    updateStatus("Starting stream testing");
+    status = 'Init Stream';
+    updateStatus('Starting stream testing...');
 }

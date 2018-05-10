@@ -30,13 +30,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
     <style>
-        .far {
-            font-size: 4rem;
-        }
         .fa-play-circle {
+            font-size: 4rem;
             color: green;
         }
         .fa-stop-circle {
+            font-size: 4rem;
+            color: red;
+        }
+        .fa-thumbs-up {
+            color: green;
+        }
+        .fa-thumbs-down {
             color: red;
         }
     </style>
@@ -45,9 +50,12 @@
 
 <body>
     <div class="container">
-        <h1>Perfecto Connectivity Test</h1>
-        <a id="startStop" class="btn" href="#"><span id="startStopIcon" class="far fa-play-circle"></span></a> 
-        <p id="status">Click to Start</p>
+        <div class="row">
+            <div class="col-md-4 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
+            <div class="col-md-6 align-middle">
+                <a id="startStop" class="btn" href="#" title="Start/Stop Button"><span id="startStopIcon" class="far fa-play-circle"></span></a> <span id="status">Click to start network connectivity tests.</span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -86,8 +94,8 @@
                                     <tr>
                                         <th scope="col">Site</th>
                                         <th scope="col">Latency (ms)</th>
-                                        <th scope="col">Download (Mbps)</th>
                                         <th scope="col">Jitter (ms)</th>
+                                        <th scope="col">Download (Mbps)</th>
                                         <th scope="col">RTMP</th>
                                         <th scope="col">RTMP/T</th>
                                         <th scope="col">RTMP/S</th>
@@ -100,10 +108,10 @@
                                             <p id="bos-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="bos-download"></p>
+                                            <p id="bos-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="bos-jitter"></p>
+                                            <p id="bos-download"></p>
                                         </td>
                                         <td>
                                             <p id="bos-rtmp"></p>
@@ -121,10 +129,10 @@
                                             <p id="fra-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-download"></p>
+                                            <p id="fra-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-jitter"></p>
+                                            <p id="fra-download"></p>
                                         </td>
                                         <td>
                                             <p id="fra-rtmp"></p>
@@ -142,10 +150,10 @@
                                             <p id="gdl-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="gdl-download"></p>
+                                            <p id="gdl-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="gdl-jitter"></p>
+                                            <p id="gdl-download"></p>
                                         </td>
                                         <td>
                                             <p id="gdl-rtmp"></p>
@@ -163,10 +171,10 @@
                                             <p id="lon-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="lon-download"></p>
+                                            <p id="lon-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="lon-jitter"></p>
+                                            <p id="lon-download"></p>
                                         </td>
                                         <td>
                                             <p id="lon-rtmp"></p>
@@ -184,10 +192,10 @@
                                             <p id="phx-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-download"></p>
+                                            <p id="phx-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-jitter"></p>
+                                            <p id="phx-download"></p>
                                         </td>
                                         <td>
                                             <p id="phx-rtmp"></p>
@@ -205,10 +213,10 @@
                                             <p id="syd-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="syd-download"></p>
+                                            <p id="syd-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="syd-jitter"></p>
+                                            <p id="syd-download"></p>
                                         </td>
                                         <td>
                                             <p id="syd-rtmp"></p>
@@ -226,10 +234,10 @@
                                             <p id="yyz-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="yyz-download"></p>
+                                            <p id="yyz-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="yyz-jitter"></p>
+                                            <p id="yyz-download"></p>
                                         </td>
                                         <td>
                                             <p id="yyz-rtmp"></p>
