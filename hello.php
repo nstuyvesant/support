@@ -3,7 +3,7 @@
   //72.95.128.78
 
   // Function to get the client ip address
-  function get_client_ip_env() {
+  function get_client_ip() {
     $ipaddress = '';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
@@ -23,14 +23,35 @@
     return $ipaddress;
   }
 
+  function get_proxy_info() {
+    $proxy_headers = array(
+      'HTTP_VIA',
+      'HTTP_X_FORWARDED_FOR',
+      'HTTP_FORWARDED_FOR',
+      'HTTP_X_FORWARDED',
+      'HTTP_FORWARDED',
+      'HTTP_CLIENT_IP',
+      'HTTP_FORWARDED_FOR_IP',
+      'VIA',
+      'X_FORWARDED_FOR',
+      'FORWARDED_FOR',
+      'X_FORWARDED',
+      'FORWARDED',
+      'CLIENT_IP',
+      'FORWARDED_FOR_IP',
+      'HTTP_PROXY_CONNECTION'
+    );
+    foreach($proxy_headers as $x){
+      if (isset($_SERVER[$x])) {
+        return "Proxy detected";
+      }
+    }
+    return "No proxy detected";
+  }
+
   header("Access-Control-Allow-Origin: *");
   $netInfo->country = $_SERVER['HTTP_CF_IPCOUNTRY'];
-  $netInfo->ip = get_client_ip_env();//$_SERVER['HTTP_CF_CONNECTING_IP'];
+  $netInfo->ip = get_client_ip();
+  $netInfo->proxy = get_proxy_info();
   echo json_encode($netInfo);
-/*
-  echo "Your IP address is: " . $_SERVER['REMOTE_ADDR'];
-  echo "Seems like your real IP is: " . $_SERVER['HTTP_CF_CONNECTING_IP'];
-  echo "Forwarding address is:" . $_SERVER['HTTP_X_FORWARDED_FOR'];
-  echo "Country is: " . $_SERVER['HTTP_CF_IPCOUNTRY'];
-*/
 ?>
