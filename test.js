@@ -1,6 +1,5 @@
 // Globals
-var running = false;
-var dataCenters = ['bos', 'phx', 'lon', 'fra', 'syd', 'yyz', 'gdl'];
+let running = false;
 
 // Use IP API to get user's network info
 const getNetworkInfo = function() {
@@ -10,6 +9,7 @@ const getNetworkInfo = function() {
         $('#location').val(location);
         $('#isp').val(data.isp);
         $('#tz').val(data.timezone);
+//TODO: Uncomment for production
         //getProxyInfo(data.query); // limited to 100/day unless I register (then 1000/day)
     });
 };
@@ -20,12 +20,6 @@ const getProxyInfo = function(ip) {
         $('#proxy').val(data[ip].proxy == 'no' ? 'No proxy detected' : data[ip].type + ' proxy detected');
     });
 };
-
-// const pingTests = function() {
-//     for(var dataCenter in dataCenters) {
-
-//     }
-// };
 
 // Visually toggle the start/stop button and begin the test
 $('#startStop').on('click', function() {
@@ -48,69 +42,148 @@ $(document).ready(function() {
 
 //--------------Nate's stuff above this line-----------------
 const STREAMINGTIME = 30000;
+const dataCenters = ['bos', 'fra', 'gdl', 'lon', 'phx', 'syd', 'yyz', ];
+//TODO: Get missing streamer hostnames
+const sts = ['wakefield-streaming2', 'fra-sts', ''/* missing Mexico */, 'uk-streaming2', 'phx-sts-2', ''/* missing Sydney */, 'yyz-sts'];
+
 var trigger;
-var w = null;
-var ipReq = false;
+var currentDataCenterIndex = -1;
+var status = 'Idle';
+var speedTestWorker = null;
 var stsType = 'none';
 var player;
 var streamPID;
 var streamTesting = 'none';
 var state = [];
 var nextProtocolTrigger = null;
-var locations = ['bos', 'phx', 'lon', 'fra', 'syd', 'yyz', 'gdl'];
-var sts = ['wakefield-streaming2', 'phx-sts-2', 'uk-streaming2', 'fra-sts', 'yyz-sts']
-var locIndex = -1;
-var status = 'Idle';
 
-function update() {
+// Write status near Start/Stop button
+function updateStatus(msg) {
+    $('#status').html(status + ' - ' + msg);
+    console.log(status + " - " + msg);
+}
+
+// When Start is clicked, this is run every 100 ms to write results to page so user sees progress
+function speedTestUpdate() {
     if (status == 'Network') // speedtest is active
-        w.postMessage('status')
+        speedTestWorker.postMessage('status');
     else if (streamTesting == 'active') {
         state[player.getState()]++;
-        var tableCell = '#' + locations[locIndex] + "-" + stsType;
+        var tableCell = '#' + dataCenters[currentDataCenterIndex] + "-" + stsType;
         if (player.getState() == 'error') {
             streamTesting = 'abort';
             $(tableCell).html('-1');
             status = 'Error';
-            updateStatusText('Streaming tests for ' + stsType + 'Failed!');
+            updateStatus('Streaming tests for ' + stsType + 'Failed!');
             clearTimeout(nextProtocolTrigger);
             nextSts();
         } else {
-            x = $(tableCell).html();
-            x = Math.round(100 - (100 / (STREAMINGTIME / 100) * state['buffering']));
-            $(tableCell).html(x);
+            $(tableCell).html(Math.round(100 - (100 / (STREAMINGTIME / 100) * state['buffering'])));
         }
     }
 }
 
-// When status received, split string and put values in appropriate fields
-function eventHandler(event) { 
-    // event.data format: status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
-    var data = event.data.split(';') 
+// Invoked by newSpeedTestWorker() when message received. Split string and put values in appropriate fields.
+function speedTestMessage(event) { 
+    // Format for returned event.data:
+    // status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
+    let data = event.data.split(';') 
     if (data[0] == 4) {
-        w = null;
-        status = 'Streaming';
-        updateStatusText('Network tests done. Starting streaming tests.');
-        streamTest();
+        speedTestWorker = null;
+        qualifySpeedTestResults();
+        updateStatus('Network tests done.');
+//TODO: re-enable streaming tests
+        // updateStatus('Starting streaming tests...')
+        // status = 'Streaming';
+        // streamTest();
     } else if((data[0] >= 1) && (data[0] <= 3)) {
-        var tableCellPrefix = '#' + locations[locIndex];
+        let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
         $(tableCellPrefix + '-download').html(data[1]);
         $(tableCellPrefix + '-ping').html(data[3]);
         $(tableCellPrefix + '-jitter').html(data[5]);
     }
 }
 
-// Begin running streaming tests
-function streamTestActive() {
-    streamTesting = 'active';
-    updateStatusText('Streaming test for ' + locations[locIndex] + ' using ' + stsType + ' now ' + streamTesting);
-    nextProtocolTrigger = setTimeout(nextSts, STREAMINGTIME);
+// Create a worker to handle speed tests and call speedTestMessage() whenever there's a message
+function newSpeedTestWorker() {
+    speedTestWorker = new Worker('speedtest-worker.js');
+    speedTestWorker.onmessage = speedTestMessage;
+    return speedTestWorker;
 }
 
-// Qualify whether the data is good, bad, or meh
-function qualifyStatus(id, bad, fair, greater, suffix) {
-    var tableCell = $('#' + id);
-    var value = parseFloat(tableCell.html());
+// Use globals to keep track of data centers we tested. Pick up from where we left off.
+function nextLocation() {
+    if(currentDataCenterIndex + 1 < dataCenters.length) {
+        currentDataCenterIndex++;
+        updateStatus('Starting network test for ' + dataCenterName + '...');
+        status = 'New';
+        let dataCenterCode = dataCenters[currentDataCenterIndex];
+        let dataCenterName = $('#' + dataCenterCode).val();
+        speedTestWorker = newSpeedTestWorker();
+        status = 'Network';
+        speedTestWorker.postMessage('start {"test_order":"I_P_D",	"url_dl": "http://' + dataCenterCode + '-lqt.perfectomobile.com/garbage.php", "url_ul": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_ping": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "http://' + dataCenterCode + '-lqt.perfectomobile.com/telemetry.php"} ');
+        return true;
+    } else // no more data centers to test
+        return false;
+}
+
+// Start testing and invoke update() every 100ms to get status
+function start() {
+    updateStatus('Starting Tests');
+    trigger = setInterval(speedTestUpdate, 100);
+    nextLocation();
+}
+
+// Stop running tests but keep track of where we left off
+function stopAll() {
+    console.log('Stopping all tests...');
+    if(speedTestWorker) speedTestWorker.postMessage('abort');
+    clearInterval(trigger);
+    status = 'stopped';
+    updateStatus('Stopped.');
+    let results = {
+        id: $('#ip').val() + '-' + Date.now(),
+        ip: {
+            ip: $('#ip').val(),
+            proxy: $('#proxy').val(),
+            location: $('#location').val(),
+            isp: $('#isp').val(),
+            tz: $('#tz').val()
+        },
+        dataCenters: []
+    }
+    let tableCellPrefix;
+    for(var dataCenter in dataCenters) {
+        tableCellPrefix = '#' + dataCenter;
+        results.dataCenters.push({
+            dataCenter: dataCenter,
+            latency: $(tableCellPrefix  + '-ping').html(),
+            download: $(tableCellPrefix  + '-download').html(),
+            jitter: $(tableCellPrefix  + '-jitter').html(),
+            rtmp: $(tableCellPrefix  + '-rtmp').html(),
+            rtmpt: $(tableCellPrefix  + '-rtmpt').html(),
+            rtmps: $(tableCellPrefix  + '-rtmps').html()
+        });
+    }
+
+    // Post to the PHP (need to modify it as it may expect location rather than dataCenter property)
+    $.ajax({
+        type: 'POST',
+        url: 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/result.php',
+        data: JSON.stringify(results),
+        contentType: 'application/json; charset=utf-8',
+        crossDomain: true,
+        dataType: 'jsonp',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+}
+
+// Qualify whether the results are good, bad, meh, or error
+function qualifyResult(id, bad, fair, greater, suffix) {
+    let tableCell = $('#' + id);
+    let value = parseFloat(tableCell.html());
     if (value == -1) {
         tableCell.html('<i class="fas fa-exclamation-triangle"></i>');
     } else if (greater) {
@@ -130,7 +203,22 @@ function qualifyStatus(id, bad, fair, greater, suffix) {
             tableCell.html('<i class="far fa-thumbs-up"></i>' + value + suffix);
         }
     }
-} // updateStatus
+}
+
+// Rate quality for completed network tests
+function qualifySpeedTestResults() {
+    let dataCenter = dataCenters[currentDataCenterIndex];
+    qualifyResult(dataCenter + '-download', 0.5, 0.75, false, '');
+    qualifyResult(dataCenter + '-ping', 300, 150, true, '');
+    qualifyResult(dataCenter + '-jitter', 100, 50, true, '');
+}
+
+// Begin running streaming tests
+function streamTestActive() {
+    streamTesting = 'active';
+    updateStatus('Streaming test for ' + dataCenters[currentDataCenterIndex] + ' using ' + stsType + ' now ' + streamTesting);
+    nextProtocolTrigger = setTimeout(nextSts, STREAMINGTIME);
+}
 
 function nextSts() {
     state['idle'] = 0;
@@ -139,28 +227,28 @@ function nextSts() {
     state['paused'] = 0;
     streamTesting = 'init';
 
-    if(stsType == "none") {
-        stsType = "rtmp"
+    if(stsType == 'none') {
+        stsType = 'rtmp'
     } else {
         player.stop();
         player.remove();
-        updateStatusText('Finalizing stream testing for type: ' + stsType);
-        qualifyStatus(locations[locIndex] + '-' + stsType, 85, 95, false, '%');
-        comments();
+        updateStatus('Finalizing stream testing for type: ' + stsType);
+        qualifyResult(dataCenters[currentDataCenterIndex] + '-' + stsType, 85, 95, false, '%');
+        qualifySpeedTestResults();
 
-        if(stsType == "rtmp")
-            stsType = "rtmpt";
-        else if(stsType == "rtmpt")
-            stsType = "rtmps";
+        if(stsType == 'rtmp')
+            stsType = 'rtmpt';
+        else if(stsType == 'rtmpt')
+            stsType = 'rtmps';
         else { // done all types, next location
-            updateStatusText("Stopping stream testing");
+            updateStatus('Stopping stream testing.');
             var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", function() {
+            oReq.addEventListener('load', function() {
                 console.log(this.responseText);
             });
-            oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=stop&pid=" + streamPID);
+            oReq.open('GET', 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=stop&pid=' + streamPID);
             oReq.send();
-            streamTesting = "none";
+            streamTesting = 'none';
             if (!nextLocation())
                 stopAll();
             return;
@@ -168,13 +256,13 @@ function nextSts() {
     }
 
     status = 'Stream';
-    updateStatusText("streaming test for " + locations[locIndex] + " using " + stsType + "and going to:" + sts[locIndex] + " now " + streamTesting);
+    updateStatus('Streaming test for ' + dataCenters[currentDataCenterIndex] + ' using ' + stsType + 'and going to: ' + sts[currentDataCenterIndex] + ' now ' + streamTesting);
     player.setup({
-        flashplayer: "jwplayer.flash.swf",
+        flashplayer: 'jwplayer.flash.swf',
         autostart: true,
-        file: stsType + "://" + sts[locIndex] + ".perfectomobile.com/live/conTest",
-        width: "320",
-        height: "240",
+        file: stsType + '://' + sts[currentDataCenterIndex] + '.perfectomobile.com/live/conTest',
+        width: '320',
+        height: '240',
         rtmp: {
             bufferLength: 0,
         },
@@ -185,65 +273,7 @@ function nextSts() {
     });
     setTimeout(streamTestActive, 4000);
 
-} // nextSts
-
-// Write status near Start/Stop button
-function updateStatusText(msg) {
-    $('#status').html(status + ' - ' + msg);
-    console.log(status + " - " + msg);
 }
-
-function stopAll() {
-    console.log('Stopping all tests');
-    if (w)
-        w.postMessage("abort");
-    clearInterval(trigger);
-    status = "stopped";
-    updateStatusText("All stopped");
-    var out = {
-        id: document.getElementById("ip").textContent + "-" + Date.now(),
-        ip: {
-            ip: $('#ip').val(),
-            proxy: $('#proxy').val(),
-            location: $('#location').val(),
-            location: $('#isp').val(),
-            tz: $('#tz').val()
-        },
-        locations: []
-    }
-    for (var i = 0, len = locations.length; i < len; i++) {
-        out.locations[i] = {
-            location: locations[i],
-            latency: document.getElementById(locations[i] + '-ping').textContent,
-            download: document.getElementById(locations[i] + '-download').textContent,
-            jitter: document.getElementById(locations[i] + '-jitter').textContent,
-            rtmp: document.getElementById(locations[i] + '-rtmp').textContent,
-            rtmpt: document.getElementById(locations[i] + '-rtmpt').textContent,
-            rtmps: document.getElementById(locations[i] + '-rtmps').textContent
-        }
-    }
-
-    // Post to the locations
-    $.ajax({
-        type: 'POST',
-        url: 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/result.php',
-        data: JSON.stringify(out),
-        contentType: 'application/json; charset=utf-8',
-        crossDomain: true,
-        dataType: 'jsonp',
-        success: function(data) {
-            console.log(data);
-        }
-    });
-
-    // var oReq = new XMLHttpRequest();
-    // oReq.addEventListener("load", function() {
-    //     console.log(this.responseText);
-    // });
-    // oReq.open("POST", "result.php");
-    // oReq.send(JSON.stringify(out));
-    // console.log(JSON.stringify(out));
-} // stopAll
 
 function streamStarted() {
     streamPID = this.responseText;
@@ -252,53 +282,19 @@ function streamStarted() {
     player = jwplayer("mediaspace");
     stsType = "none";
     setTimeout(nextSts, 3000);
-    updateStatusText("Stream initialized for location: " + locations[locIndex]);
-} // streamStarted
+    updateStatus("Stream initialized for location: " + dataCenters[currentDataCenterIndex]);
+}
 
 function streamTest() {
-
-    document.getElementById(locations[locIndex] + '-rtmp').textContent = 100;
-    document.getElementById(locations[locIndex] + '-rtmpt').textContent = 100;
-    document.getElementById(locations[locIndex] + '-rtmps').textContent = 100;
+    let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
+    $(tableCellPrefix + '-rtmp').html('100');
+    $(tableCellPrefix + '-rtmpt').html('100');
+    $(tableCellPrefix + '-rtmps').html('100');
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", streamStarted);
-    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=" + sts[locIndex]);
+    oReq.open("GET", "http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/streamStart.php?type=start&sts=" + sts[currentDataCenterIndex]);
     oReq.send();
     status = "Init Stream";
-    updateStatusText("Starting stream testing");
-} // streamTest
-
-function comments() {
-    qualifyStatus(locations[locIndex] + '-download', 0.5, 0.75, false, "");
-    qualifyStatus(locations[locIndex] + '-ping', 300, 150, true, "");
-    qualifyStatus(locations[locIndex] + '-jitter', 100, 50, true, "");
+    updateStatus("Starting stream testing");
 }
-
-function newHandler() {
-    w = new Worker('speedtest-worker.js'); // create new worker
-    w.onmessage = eventHandler;
-    return w;
-} // newHandler
-
-
-function nextLocation() {
-    if (locIndex + 1 < locations.length) {
-        locIndex = locIndex + 1;
-        status = "New";
-        updateStatusText("Starting DC #" + locIndex + "(" + locations[locIndex] + ")");
-        w = newHandler()
-        status = "Network";
-        updateStatusText("starting network test for " + locations[locIndex])
-        w.postMessage('start {"test_order":"I_P_D",	"url_dl": "http://' + locations[locIndex] + '-lqt.perfectomobile.com/garbage.php", "url_ul": "http://' + locations[locIndex] + '-lqt.perfectomobile.com/empty.php", "url_ping": "http://' + locations[locIndex] + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "http://' + locations[locIndex] + '-lqt.perfectomobile.com/telemetry.php"} ')
-        return true;
-    } else
-        return false;
-} // nextLocation
-
-
-function start() {
-    updateStatusText("Starting Tests");
-    trigger = setInterval(update, 100) // ask for status every 100ms
-    nextLocation();
-} // start

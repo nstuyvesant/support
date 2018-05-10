@@ -55,23 +55,23 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="ip">IP Address</label>
-                            <input class="form-control form-control-sm" type="text" id="ip" placeholder="Detected IP address" maxlength="14" readonly  />
+                            <input class="form-control form-control-sm" type="text" id="ip" readonly  />
                         </div>
                         <div class="form-group">
                             <label for="proxy">Proxy Status</label>
-                            <input class="form-control form-control-sm" type="text" id="proxy" placeholder="Proxy Status" maxlength="80" readonly />
+                            <input class="form-control form-control-sm" type="text" id="proxy" placeholder="No proxy detected" readonly />
                         </div>
                         <div class="form-group">
                             <label for="location">Location</label>
-                            <input class="form-control form-control-sm" type="text" id="location" placeholder="Location" maxlength="80" readonly />
+                            <input class="form-control form-control-sm" type="text" id="location" readonly />
                         </div>
                         <div class="form-group">
                             <label for="isp">Internet Service Provider</label>
-                            <input class="form-control form-control-sm" type="text" id="isp" placeholder="ISP" maxlength="80" readonly />
+                            <input class="form-control form-control-sm" type="text" id="isp" readonly />
                         </div>
                         <div class="form-group">
                             <label for="tz">User's Time Zone</label>
-                            <input class="form-control form-control-sm" type="text" id="tz" placeholder="Time Zone" maxlength="80" readonly />
+                            <input class="form-control form-control-sm" type="text" id="tz" readonly />
                         </div>
                     </div>
                 </div>
@@ -116,24 +116,45 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th id="phx" scope="row">Phoenix</td>
+                                        <th id="fra" scope="row">Frankfurt</td>
                                         <td>
-                                            <p id="phx-ping"></p>
+                                            <p id="fra-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-download"></p>
+                                            <p id="fra-download"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-jitter"></p>
+                                            <p id="fra-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmp"></p>
+                                            <p id="fra-rtmp"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmpt"></p>
+                                            <p id="fra-rtmpt"></p>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmps"></p>
+                                            <p id="fra-rtmps"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th id="gdl" scope="row">Guadalajara</td>
+                                        <td>
+                                            <p id="gdl-ping"></p>
+                                        </td>
+                                        <td>
+                                            <p id="gdl-download"></p>
+                                        </td>
+                                        <td>
+                                            <p id="gdl-jitter"></p>
+                                        </td>
+                                        <td>
+                                            <p id="gdl-rtmp"></p>
+                                        </td>
+                                        <td>
+                                            <p id="gdl-rtmpt"></p>
+                                        </td>
+                                        <td>
+                                            <p id="gdl-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -158,24 +179,24 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th id="fra" scope="row">Frankfurt</td>
+                                        <th id="phx" scope="row">Phoenix</td>
                                         <td>
-                                            <p id="fra-ping"></p>
+                                            <p id="phx-ping"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-download"></p>
+                                            <p id="phx-download"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-jitter"></p>
+                                            <p id="phx-jitter"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmp"></p>
+                                            <p id="phx-rtmp"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmpt"></p>
+                                            <p id="phx-rtmpt"></p>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmps"></p>
+                                            <p id="phx-rtmps"></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -218,27 +239,6 @@
                                         </td>
                                         <td>
                                             <p id="yyz-rtmps"></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th id="gdl" scope="row">Guadalajara</td>
-                                        <td>
-                                            <p id="gdl-ping"></p>
-                                        </td>
-                                        <td>
-                                            <p id="gdl-download"></p>
-                                        </td>
-                                        <td>
-                                            <p id="gdl-jitter"></p>
-                                        </td>
-                                        <td>
-                                            <p id="gdl-rtmp"></p>
-                                        </td>
-                                        <td>
-                                            <p id="gdl-rtmpt"></p>
-                                        </td>
-                                        <td>
-                                            <p id="gdl-rtmps"></p>
                                         </td>
                                     </tr>
                                 </tbody>
