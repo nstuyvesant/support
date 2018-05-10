@@ -1,4 +1,5 @@
 <?php
+include("/php/geoip.inc");
 header( "HTTP/1.1 200 OK" );
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -65,7 +66,7 @@ function get_proxy_info() {
 }
 
 // User ARIN's REST API to get client location info
-function get_client_location() {
+function get_isp() {
   // Create a new cURL resource
   $ch = curl_init();
   // Set URL and other appropriate options
@@ -78,13 +79,13 @@ function get_client_location() {
   // Close cURL resource, and free up system resources
   curl_close($ch);
   $result = json_decode($returnValue);
-  echo json_encode($result);
-  $netInfo->arin = $result;
+  return $result->net->orgRef->{'@name'};
 }
+
 
 $netInfo->country = $_SERVER['HTTP_CF_IPCOUNTRY'];
 $netInfo->ip = get_client_ip();
 $netInfo->proxy = get_proxy_info();
-get_client_location();
+$netInfo->isp = get_isp();
 echo json_encode($netInfo);
 ?>
