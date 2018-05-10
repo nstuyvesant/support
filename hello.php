@@ -29,39 +29,48 @@ function get_client_ip() {
 
 // Function to get proxy info
 function get_proxy_info() {
-  $proxy_headers = array(
-    'HTTP_VIA',
-    'HTTP_X_FORWARDED_FOR',
-    'HTTP_FORWARDED_FOR',
-    'HTTP_X_FORWARDED',
-    'HTTP_FORWARDED',
-    'HTTP_CLIENT_IP',
-    'HTTP_FORWARDED_FOR_IP',
-    'VIA',
-    'X_FORWARDED_FOR',
-    'FORWARDED_FOR',
-    'X_FORWARDED',
-    'FORWARDED',
-    'CLIENT_IP',
-    'FORWARDED_FOR_IP',
-    'HTTP_PROXY_CONNECTION'
-  );
+  $ip = get_client_ip();
+  $proxyDetect = file_get_contents("https://www.ip-check.net/api/proxy-detect.php?ip=$ip");
+  if ($proxyDetect == "TRUE") {
+    return "Proxy Detected";
+  } else if ($proxyDetect == "FALSE") {
+    return "Proxy Not Detected";
+  } else {
+    return "Invalid IP Address";
+}
+  // $proxy_headers = array(
+  //   'HTTP_VIA',
+  //   'HTTP_X_FORWARDED_FOR',
+  //   'HTTP_FORWARDED_FOR',
+  //   'HTTP_X_FORWARDED',
+  //   'HTTP_FORWARDED',
+  //   'HTTP_CLIENT_IP',
+  //   'HTTP_FORWARDED_FOR_IP',
+  //   'VIA',
+  //   'X_FORWARDED_FOR',
+  //   'FORWARDED_FOR',
+  //   'X_FORWARDED',
+  //   'FORWARDED',
+  //   'CLIENT_IP',
+  //   'FORWARDED_FOR_IP',
+  //   'HTTP_PROXY_CONNECTION'
+  // );
 
-  $text = "";
-  foreach($proxy_headers as $x) {
-    if (isset($_SERVER[$x])) {
-      if ($text == "")
-        $text = "Proxy detected";
-      else
-        $text .= ", ";
-        $text .= $x;
-      }
-  }
+  // $text = "";
+  // foreach($proxy_headers as $x) {
+  //   if (isset($_SERVER[$x])) {
+  //     if ($text == "")
+  //       $text = "Proxy detected";
+  //     else
+  //       $text .= ", ";
+  //       $text .= $x;
+  //     }
+  // }
 
-  if ($text == "") {
-    $text = "No proxy detected";
-  }
-  return $text;
+  // if ($text == "") {
+  //   $text = "No proxy detected";
+  // }
+  // return $text;
 }
 
 // User ARIN's REST API to get client location info
