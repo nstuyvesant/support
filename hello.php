@@ -50,12 +50,12 @@ function get_proxy_info($ipAddress) {
   foreach($proxy_headers as $x) {
     if (isset($_SERVER[$x])) $message = "Proxy detected";
   }
-  $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
-  foreach($ports as $port) {
-    if (@fsockopen($ipAddress, $port, $errno, $errstr, 30)) {
-      $message = "Proxy detected";
-    }
-  }
+  // $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
+  // foreach($ports as $port) {
+  //   if (@fsockopen($ipAddress, $port, $errno, $errstr, 30)) {
+  //     $message = "Proxy detected";
+  //   }
+  // }
   return $message;
 }
 
