@@ -89,6 +89,7 @@ function get_proxy_info($ipAddress) {
 
 $ip = get_client_ip(); //72.95.128.78
 $netInfo->ip = $ip;
+$netInfo->remoteAddr = $_SERVER['REMOTE_ADDR'];
 $netInfo->trueIp = get_true_ip();
 $netInfo->proxy = get_proxy_info($ip);
 
@@ -98,5 +99,5 @@ $netInfo->region = $arr["region"];
 $netInfo->country = $arr["countryCode"];
 $netInfo->isp = $arr["isp"];
 $netInfo->timezone = $arr["timezone"];
-echo json_encode($netInfo);
+echo json_encode($netInfo, JSON_UNESCAPED_SLASHES);
 ?>
