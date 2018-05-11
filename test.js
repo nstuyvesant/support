@@ -160,7 +160,7 @@ function stopAll() {
     // Post to the PHP (need to modify it as it may expect location rather than dataCenter property)
     $.ajax({
         type: 'POST',
-        url: 'http://ec2-52-90-97-231.compute-1.amazonaws.com/speedtest-master/result.php',
+        url: 'https://support.perfecto.io/php/result.php',
         data: JSON.stringify(results),
         contentType: 'application/json; charset=utf-8',
         crossDomain: true,
