@@ -34,8 +34,7 @@ $(document).ready(function() {
 
 const STREAMINGTIME = 30000;
 const dataCenters = ['bos', 'fra', 'gdl', 'lon', 'phx', 'syd', 'yyz'];
-//TODO: Get missing streamer hostnames
-const sts = ['wakefield-streaming2', 'fra-sts', ''/* missing Mexico */, 'uk-streaming2', 'phx-sts-2', ''/* missing Sydney */, 'yyz-sts'];
+const sts = ['wakefield-streaming2', 'fra-sts', 'gdl-sts', 'uk-streaming2', 'phx-sts-2', 'syd-sts', 'yyz-sts'];
 
 var trigger;
 var currentDataCenterIndex = -1;
