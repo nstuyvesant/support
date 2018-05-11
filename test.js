@@ -3,22 +3,14 @@ let running = false;
 
 // Use IP API to get user's network info
 const getNetworkInfo = function() {
-    $.getJSON('http://ip-api.com/json', function(data) {
-        var location = data.city + ', ' + data.region + ' (' + data.countryCode + ')';
-        $('#ip').val(data.query);
+    $.getJSON('https://support.perfecto.io/php/ip-info.php', function(response) {
+        var location = response.city + ', ' + response.region + ' (' + response.country + ')';
+        $('#ip').val(response.ip);
+        $('#proxy').val(response.proxy);
         $('#location').val(location);
-        $('#isp').val(data.isp);
-        $('#tz').val(data.timezone);
-//TODO: Uncomment for production
-        //getProxyInfo(data.query); // limited to 100/day unless I register (then 1000/day)
+        $('#isp').val(response.isp);
+        $('#tz').val(response.timezone);
     });
-};
-
-// Use proxycheck.io to determine whether there is a proxy
-const getProxyInfo = function(ip) {
-  $.getJSON('https://proxycheck.io/v2/'+ ip +'?callback=false', function(data) {
-    $('#proxy').val(data[ip].proxy === 'no' ? 'No proxy detected' : data[ip].type + ' proxy detected');
-  });
 };
 
 // Visually toggle the start/stop button and begin the test
