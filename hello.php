@@ -48,7 +48,7 @@ function get_proxy_info($ipAddress) {
     'HTTP_PROXY_CONNECTION'   
   );
   foreach($proxy_headers as $x) {
-    if (isset($_SERVER[$x])) $message = "Proxy detected";
+    if (isset($_SERVER[$x])) $message = "Proxy detected ($x)";
   }
   // $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
   // foreach($ports as $port) {
@@ -59,30 +59,15 @@ function get_proxy_info($ipAddress) {
   return $message;
 }
 
-// User ARIN's REST API to get client location info
-function get_isp() {
-  // Create a new cURL resource
-  $ch = curl_init();
-  // Set URL and other appropriate options
-  curl_setopt($ch, CURLOPT_URL, "http://whois.arin.net/rest/ip/" . get_client_ip());
-  curl_setopt($ch, CURLOPT_HEADER, 0);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/json"));
-  // Execute curl
-  $returnValue = curl_exec($ch);
-  // Close cURL resource, and free up system resources
-  curl_close($ch);
-  $result = json_decode($returnValue);
-  return $result->net->orgRef->{'@name'};
-}
-
 $ip = get_client_ip();
 $netInfo->ip = $ip;
 $netInfo->proxy = get_proxy_info($ip);
-$arr = json_decode(file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af"), true);
+
+$arr = json_decode(file_get_contents("http://ip-api.com/json//$ip"), true);
 $netInfo->city = $arr['city'];
-$netInfo->region = $arr['region_code'];
-$netInfo->country = $arr['country_code'];
-$netInfo->isp = get_isp();
+$netInfo->region = $arr['region'];
+$netInfo->country = $arr['countryCode'];
+$netInfo->isp = $arr['isp'];
+$netInfo->timezone = $arr['timezone'];
 echo json_encode($netInfo);
 ?>
