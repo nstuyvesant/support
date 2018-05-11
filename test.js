@@ -108,8 +108,7 @@ function nextLocation() {
         currentDataCenterIndex++;
         let dataCenterCode = dataCenters[currentDataCenterIndex];
         let dataCenterName = $('#' + dataCenterCode).html().trim();
-        updateStatus('Running network tests for ' + dataCenterName + '...');
-        console.log('Running network tests for ' + dataCenterName + '.');
+        updateStatus('Running network tests to ' + dataCenterName + ' data center...');
         status = 'New';
         speedTestWorker = newSpeedTestWorker();
         status = 'Network';
@@ -121,7 +120,7 @@ function nextLocation() {
 
 // Start testing and invoke update() every 100ms to get status
 function start() {
-    console.log('Running network tests...')
+    console.log('Running network tests to each data center.')
     trigger = setInterval(speedTestUpdate, 100);
     nextLocation();
 }
@@ -256,5 +255,7 @@ function streamTest() {
         streamStarted();
     });
     status = 'Init Stream';
-    updateStatus('Starting stream testing...');
+    let dataCenterCode = dataCenters[currentDataCenterIndex];
+    let dataCenterName = $('#' + dataCenterCode).html().trim();
+    updateStatus('Running stream test to ' + dataCenterName + ' data center...');
 }
