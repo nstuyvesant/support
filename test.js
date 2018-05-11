@@ -30,6 +30,18 @@ $('#startStop').on('click', function() {
 // DOM ready
 $(document).ready(function() {
     getNetworkInfo(); // Detect client's networking and populate fields
+
+    // Initialize the media player
+    jwplayer('mediaspace').setup({
+        //autostart: true,
+        image: 'perfecto-p.svg',
+        height: 270, // 9
+        width: 480, // 16
+        file: 'https://content.jwplatform.com/videos/ld5esXSv-5lUteR9r.mp4',
+        rtmp: {
+            bufferLength: 0
+        }
+      });
 });
 
 const STREAMINGTIME = 30000;
@@ -171,7 +183,7 @@ function streamTestActive() {
     streamTesting = 'active';
     let dataCenterCode = dataCenters[currentDataCenterIndex];
     let dataCenterName = $('#' + dataCenterCode).html().trim();
-    updateStatus(stsTyp.toUpperCase() + ' streaming test to ' + dataCenterName + ' data center...');
+    updateStatus(stsType.toUpperCase() + ' streaming test to ' + dataCenterName + ' data center...');
     nextProtocolTrigger = setTimeout(nextSts, STREAMINGTIME);
 }
 
@@ -214,14 +226,14 @@ function nextSts() {
     let dataCenterName = $('#' + dataCenterCode).html().trim();
     updateStatus(stsType.toUpperCase() + ' test to ' + dataCenterName + ' (' + sts[currentDataCenterIndex] + ')...');
     player.setup({
-        flashplayer: 'jwv7/jwplayer.flash.swf',
-        autostart: true,
+        //flashplayer: 'jwv7/jwplayer.flash.swf',
+        //autostart: true,
         file: stsType + '://' + sts[currentDataCenterIndex] + '.perfectomobile.com/live/conTest',
-        width: '320',
-        height: '240',
-        rtmp: {
-            bufferLength: 0,
-        },
+        //width: '320',
+        //height: '240',
+        //rtmp: {
+        //    bufferLength: 0,
+        //},
         events: {
             onBufferChange: function(obj) {},
             onFirstFrame: function(obj) {}
@@ -244,35 +256,12 @@ function streamStarted() {
 }
 
 function streamTest() {
-    let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
-    // Set spinner options
-    let opts = {
-        lines: 13, // The number of lines to draw
-        length: 38, // The length of each line
-        width: 17, // The line thickness
-        radius: 45, // The radius of the inner circle
-        scale: 0.3, // Scales overall size of the spinner
-        corners: 1, // Corner roundness (0..1)
-        color: '#ffffff', // CSS color or array of colors
-        fadeColor: 'transparent', // CSS color or array of colors
-        speed: 1, // Rounds per second
-        rotate: 0, // The rotation offset
-        animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        className: 'spinner', // The CSS class to assign to the spinner
-        top: '50%', // Top position relative to parent
-        left: '50%', // Left position relative to parent
-        shadow: '0 0 1px transparent', // Box-shadow for the lines
-        position: 'absolute' // Element positioning
-    };
-    let spinnerRTMP = new Spinner(opts).spin($(tableCellPrefix + '-rtmp'));
-    let spinnerRTMPT = new Spinner(opts).spin($(tableCellPrefix + '-rtmpt'));
-    let spinnerRTMPS = new Spinner(opts).spin($(tableCellPrefix + '-rtmps'));
-// Why populate these at the beginning?
-    // $(tableCellPrefix + '-rtmp').html('100%');
-    // $(tableCellPrefix + '-rtmpt').html('100%');
-    // $(tableCellPrefix + '-rtmps').html('100%');
+    const tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
+    // Show progress while we start streaming tests
+    const rotatingPlane = '<div class="sk-rotating-plane"></div>';
+    $(tableCellPrefix + '-rtmp').html(rotatingPlane);
+    $(tableCellPrefix + '-rtmpt').html(rotatingPlane);
+    $(tableCellPrefix + '-rtmps').html(rotatingPlane);
 
     $.get('https://support.perfecto.io/php/stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
         console.log('stream-start.php?type=start', response);

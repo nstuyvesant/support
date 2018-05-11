@@ -40,45 +40,49 @@
             color: red;
         }
         /* For spinner */
-        @keyframes spinner-line-fade-more {
-            0%, 100% {
-                opacity: 0; /* minimum opacity */
-            }
-            1% {
-                opacity: 1;
-            }
-        }
-        @keyframes spinner-line-fade-quick {
-            0%, 39%, 100% {
-                opacity: 0.25; /* minimum opacity */
-            }
-            40% {
-                opacity: 1;
-            }
-        }
-        @keyframes spinner-line-fade-default {
-            0%, 100% {
-                opacity: 0.22; /* minimum opacity */
-            }
-            1% {
-                opacity: 1;
-            }
+        .sk-rotating-plane {
+            width: 16px;
+            height: 16px;
+            background-color: green;
+            margin: 3px ;
+            -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+                    animation: sk-rotatePlane 1.2s infinite ease-in-out; }
+            @-webkit-keyframes sk-rotatePlane {
+            0% {
+                -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+            50% {
+                -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+            100% {
+                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+            @keyframes sk-rotatePlane {
+            0% {
+                -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+            50% {
+                -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+            100% {
+                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                }
         }
     </style>
-    <script defer async src='spin.js'></script>
     <script src='https://content.jwplatform.com/libraries/8s0kYA5n.js'></script>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
-            <div class="col-md-6 align-middle">
+            <div class="col-md-3 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
+            <div class="col-md-9 align-middle">
                 <a id="startStop" class="btn" href="#" title="Start/Stop Button"><span id="startStopIcon" class="far fa-play-circle"></span></a> <span id="status">Click to start network connectivity tests.</span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">Detected Information</div>
                     <div class="card-body">
@@ -104,9 +108,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="media" id="mediaspace"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                         <div class="card-header">Network Measurements</div>
                         <div class="card-body">
@@ -126,154 +129,159 @@
                                     <tr>
                                         <th id="bos" scope="row">Boston</td>
                                         <td>
-                                            <p id="bos-ping"></p>
+                                            <span id="bos-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="bos-jitter"></p>
+                                            <span id="bos-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="bos-download"></p>
+                                            <span id="bos-download"></span>
                                         </td>
                                         <td>
-                                            <p id="bos-rtmp"></p>
+                                            <span id="bos-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="bos-rtmpt"></p>
+                                            <span id="bos-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="bos-rtmps"></p>
+                                            <span id="bos-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="fra" scope="row">Frankfurt</td>
                                         <td>
-                                            <p id="fra-ping"></p>
+                                            <span id="fra-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="fra-jitter"></p>
+                                            <span id="fra-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="fra-download"></p>
+                                            <span id="fra-download"></span>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmp"></p>
+                                            <span id="fra-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmpt"></p>
+                                            <span id="fra-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="fra-rtmps"></p>
+                                            <span id="fra-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="gdl" scope="row">Guadalajara</td>
                                         <td>
-                                            <p id="gdl-ping"></p>
+                                            <span id="gdl-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="gdl-jitter"></p>
+                                            <span id="gdl-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="gdl-download"></p>
+                                            <span id="gdl-download"></span>
                                         </td>
                                         <td>
-                                            <p id="gdl-rtmp"></p>
+                                            <span id="gdl-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="gdl-rtmpt"></p>
+                                            <span id="gdl-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="gdl-rtmps"></p>
+                                            <span id="gdl-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="lon" scope="row">London</td>
                                         <td>
-                                            <p id="lon-ping"></p>
+                                            <span id="lon-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="lon-jitter"></p>
+                                            <span id="lon-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="lon-download"></p>
+                                            <span id="lon-download"></span>
                                         </td>
                                         <td>
-                                            <p id="lon-rtmp"></p>
+                                            <span id="lon-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="lon-rtmpt"></p>
+                                            <span id="lon-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="lon-rtmps"></p>
+                                            <span id="lon-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="phx" scope="row">Phoenix</td>
                                         <td>
-                                            <p id="phx-ping"></p>
+                                            <span id="phx-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="phx-jitter"></p>
+                                            <span id="phx-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="phx-download"></p>
+                                            <span id="phx-download"></span>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmp"></p>
+                                            <span id="phx-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmpt"></p>
+                                            <span id="phx-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="phx-rtmps"></p>
+                                            <span id="phx-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="syd" scope="row">Sydney</td>
                                         <td>
-                                            <p id="syd-ping"></p>
+                                            <span id="syd-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="syd-jitter"></p>
+                                            <span id="syd-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="syd-download"></p>
+                                            <span id="syd-download"></span>
                                         </td>
                                         <td>
-                                            <p id="syd-rtmp"></p>
+                                            <span id="syd-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="syd-rtmpt"></p>
+                                            <span id="syd-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="syd-rtmps"></p>
+                                            <span id="syd-rtmps"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th id="yyz" scope="row">Toronto</td>
                                         <td>
-                                            <p id="yyz-ping"></p>
+                                            <span id="yyz-ping"></span>
                                         </td>
                                         <td>
-                                            <p id="yyz-jitter"></p>
+                                            <span id="yyz-jitter"></span>
                                         </td>
                                         <td>
-                                            <p id="yyz-download"></p>
+                                            <span id="yyz-download"></span>
                                         </td>
                                         <td>
-                                            <p id="yyz-rtmp"></p>
+                                            <span id="yyz-rtmp"></span>
                                         </td>
                                         <td>
-                                            <p id="yyz-rtmpt"></p>
+                                            <span id="yyz-rtmpt"></span>
                                         </td>
                                         <td>
-                                            <p id="yyz-rtmps"></p>
+                                            <span id="yyz-rtmps"></span>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6 offset-md-3">
+                    <div id="mediaspace" class="player">Loading the player...</div>
                 </div>
             </div>
         </div>
