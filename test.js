@@ -169,7 +169,9 @@ function qualifySpeedTestResults() {
 // Begin running streaming tests
 function streamTestActive() {
     streamTesting = 'active';
-    updateStatus('Streaming test for ' + dataCenters[currentDataCenterIndex] + ' using ' + stsType + ' now ' + streamTesting);
+    let dataCenterCode = dataCenters[currentDataCenterIndex];
+    let dataCenterName = $('#' + dataCenterCode).html().trim();
+    updateStatus(stsTyp.toUpperCase() + ' streaming test to ' + dataCenterName + ' data center...');
     nextProtocolTrigger = setTimeout(nextSts, STREAMINGTIME);
 }
 
@@ -185,7 +187,7 @@ function nextSts() {
     } else {
         player.stop();
         player.remove();
-        updateStatus('Finalizing stream testing for type: ' + stsType);
+        updateStatus('Finalizing ' + stsType.toUpperCase() + ' stream testing...');
         qualifyResult(dataCenters[currentDataCenterIndex] + '-' + stsType, 85, 95, false, '%');
         qualifySpeedTestResults();
 
@@ -195,12 +197,6 @@ function nextSts() {
             stsType = 'rtmps';
         else { // done all types, next location
             updateStatus('Stopping stream testing...');
-            // var oReq = new XMLHttpRequest();
-            // oReq.addEventListener('load', function() {
-            //     console.log(this.responseText);
-            // });
-            // oReq.open('GET', 'https://support.perfecto.io/php/stream-start.php?type=stop&pid=' + streamPID);
-            // oReq.send();
 
             $.get('https://support.perfecto.io/php/stream-start.php?type=stop&pid=' + streamPID).done(function(response) {
                 console.log('stream-start.php?type=stop', response);
@@ -214,9 +210,11 @@ function nextSts() {
     }
 
     status = 'Stream';
-    updateStatus('Streaming test for ' + dataCenters[currentDataCenterIndex] + ' using ' + stsType + 'and going to: ' + sts[currentDataCenterIndex] + ' now ' + streamTesting);
+    let dataCenterCode = dataCenters[currentDataCenterIndex];
+    let dataCenterName = $('#' + dataCenterCode).html().trim();
+    updateStatus(stsType.toUpperCase() + ' test to ' + dataCenterName + ' (' + sts[currentDataCenterIndex] + ')...');
     player.setup({
-        flashplayer: 'jwplayer.flash.swf',
+        flashplayer: 'jwv7/jwplayer.flash.swf',
         autostart: true,
         file: stsType + '://' + sts[currentDataCenterIndex] + '.perfectomobile.com/live/conTest',
         width: '320',
@@ -236,11 +234,13 @@ function nextSts() {
 function streamStarted() {
     streamPID = this.responseText;
     // jwplayer.key = "k/WD83HHK6xlWeRUuyRM+5fHBxfSCgwUUC7e++bhF5Urqx59"; // V8
-    jwplayer.key = "pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp"; // V7
-    player = jwplayer("mediaspace");
-    stsType = "none";
+    jwplayer.key = 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp'; // V7
+    player = jwplayer('mediaspace');
+    stsType = 'none';
     setTimeout(nextSts, 3000);
-    updateStatus("Stream initialized for location: " + dataCenters[currentDataCenterIndex]);
+    let dataCenterCode = dataCenters[currentDataCenterIndex];
+    let dataCenterName = $('#' + dataCenterCode).html().trim();
+    updateStatus('Opening stream to ' + dataCenterName + ' data center...');
 }
 
 function streamTest() {
@@ -257,5 +257,5 @@ function streamTest() {
     status = 'Init Stream';
     let dataCenterCode = dataCenters[currentDataCenterIndex];
     let dataCenterName = $('#' + dataCenterCode).html().trim();
-    updateStatus('Running stream test to ' + dataCenterName + ' data center...');
+    updateStatus('Running streaming test to ' + dataCenterName + ' data center...');
 }
