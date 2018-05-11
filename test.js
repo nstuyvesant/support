@@ -246,9 +246,10 @@ function streamStarted() {
 
 function streamTest() {
     let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
-    $(tableCellPrefix + '-rtmp').html('100');
-    $(tableCellPrefix + '-rtmpt').html('100');
-    $(tableCellPrefix + '-rtmps').html('100');
+// Why populate these at the beginning?
+    $(tableCellPrefix + '-rtmp').html('100%');
+    $(tableCellPrefix + '-rtmpt').html('100%');
+    $(tableCellPrefix + '-rtmps').html('100%');
 
     $.get('https://support.perfecto.io/php/stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
         console.log('stream-start.php?type=start', response);
