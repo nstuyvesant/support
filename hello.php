@@ -47,7 +47,7 @@ function get_proxy_info($ipAddress) {
     'FORWARDED_FOR_IP',   
     'HTTP_PROXY_CONNECTION'   
   );
-  foreach($proxy_headers as $x){
+  foreach($proxy_headers as $x) {
     if (isset($_SERVER[$x])) $message = "Proxy detected";
   }
   $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
@@ -78,7 +78,7 @@ function get_isp() {
 
 $ip = get_client_ip();
 $netInfo->ip = $ip;
-//$netInfo->proxy = get_proxy_info($ip);
+$netInfo->proxy = get_proxy_info($ip);
 $arr = json_decode(file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af"), true);
 $netInfo->city = $arr['city'];
 $netInfo->region = $arr['region_code'];
