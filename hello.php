@@ -28,49 +28,35 @@ function get_client_ip() {
 }
 
 // Function to get proxy info
-function get_proxy_info() {
-  $ip = get_client_ip();
-  $proxyDetect = file_get_contents("https://www.ip-check.net/api/proxy-detect.php?ip=$ip");
-  if ($proxyDetect == "TRUE") {
-    return "Proxy Detected";
-  } else if ($proxyDetect == "FALSE") {
-    return "Proxy Not Detected";
-  } else {
-    return "Invalid IP Address";
-}
-  // $proxy_headers = array(
-  //   'HTTP_VIA',
-  //   'HTTP_X_FORWARDED_FOR',
-  //   'HTTP_FORWARDED_FOR',
-  //   'HTTP_X_FORWARDED',
-  //   'HTTP_FORWARDED',
-  //   'HTTP_CLIENT_IP',
-  //   'HTTP_FORWARDED_FOR_IP',
-  //   'VIA',
-  //   'X_FORWARDED_FOR',
-  //   'FORWARDED_FOR',
-  //   'X_FORWARDED',
-  //   'FORWARDED',
-  //   'CLIENT_IP',
-  //   'FORWARDED_FOR_IP',
-  //   'HTTP_PROXY_CONNECTION'
-  // );
-
-  // $text = "";
-  // foreach($proxy_headers as $x) {
-  //   if (isset($_SERVER[$x])) {
-  //     if ($text == "")
-  //       $text = "Proxy detected";
-  //     else
-  //       $text .= ", ";
-  //       $text .= $x;
-  //     }
-  // }
-
-  // if ($text == "") {
-  //   $text = "No proxy detected";
-  // }
-  // return $text;
+function get_proxy_info($ipAddress) {
+  $message = "No proxy detected";
+  $proxy_headers = array(   
+    'HTTP_VIA',   
+    'HTTP_X_FORWARDED_FOR',   
+    'HTTP_FORWARDED_FOR',   
+    'HTTP_X_FORWARDED',   
+    'HTTP_FORWARDED',   
+    'HTTP_CLIENT_IP',   
+    'HTTP_FORWARDED_FOR_IP',   
+    'VIA',   
+    'X_FORWARDED_FOR',   
+    'FORWARDED_FOR',   
+    'X_FORWARDED',   
+    'FORWARDED',   
+    'CLIENT_IP',   
+    'FORWARDED_FOR_IP',   
+    'HTTP_PROXY_CONNECTION'   
+  );
+  foreach($proxy_headers as $x){
+    if (isset($_SERVER[$x])) $message = "Proxy detected";
+  }
+  $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
+  foreach($ports as $port) {
+    if (@fsockopen($ipAddress, $port, $errno, $errstr, 30)) {
+      $message = "Proxy detected";
+    }
+  }
+  return $message;
 }
 
 // User ARIN's REST API to get client location info
@@ -91,17 +77,12 @@ function get_isp() {
 }
 
 $ip = get_client_ip();
-// $netInfo->ip = $ip;
-// $netInfo->proxy = get_proxy_info();
+$netInfo->ip = $ip;
+$netInfo->proxy = get_proxy_info($ip);
 $json = file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af");
 $netInfo->city = $json['city'];
 $netInfo->region = $json['region_code'];
 $netInfo->country = $json['country_code'];
-
-//7c21bd608096d60dbe33bcd139a3e0af
-//$json = json_decode($json ,true);
-echo $json;
-
-// $netInfo->isp = $json['connection']->isp; //get_isp();
-//echo json_encode($netInfo);
+$netInfo->isp = get_isp();
+echo json_encode($netInfo);
 ?>
