@@ -1,7 +1,7 @@
 // Globals
 let running = false;
 
-// Use IP API to get user's network info
+// Get user's network info from PHP
 const getNetworkInfo = function() {
     $.getJSON('https://support.perfecto.io/php/ip-info.php', function(response) {
         var location = response.city + ', ' + response.region + ' (' + response.country + ')';
@@ -32,7 +32,6 @@ $(document).ready(function() {
     getNetworkInfo(); // Detect client's networking and populate fields
 });
 
-//--------------Nate's stuff above this line-----------------
 const STREAMINGTIME = 30000;
 const dataCenters = ['bos', 'fra', 'gdl', 'lon', 'phx', 'syd', 'yyz'];
 //TODO: Get missing streamer hostnames
@@ -196,12 +195,17 @@ function nextSts() {
             stsType = 'rtmps';
         else { // done all types, next location
             updateStatus('Stopping stream testing...');
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener('load', function() {
-                console.log(this.responseText);
+            // var oReq = new XMLHttpRequest();
+            // oReq.addEventListener('load', function() {
+            //     console.log(this.responseText);
+            // });
+            // oReq.open('GET', 'https://support.perfecto.io/php/stream-start.php?type=stop&pid=' + streamPID);
+            // oReq.send();
+
+            $.get('https://support.perfecto.io/php/stream-start.php?type=stop&pid=' + streamPID).done(function(response) {
+                console.log('stream-start.php?type=stop', response);
             });
-            oReq.open('GET', 'stream-start.php?type=stop&pid=' + streamPID);
-            oReq.send();
+
             streamTesting = 'none';
             if (!nextLocation())
                 stopAll();
@@ -245,16 +249,10 @@ function streamTest() {
     $(tableCellPrefix + '-rtmpt').html('100');
     $(tableCellPrefix + '-rtmps').html('100');
 
-    $.get('stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
-        console.log('stream-start.php', response);
+    $.get('https://support.perfecto.io/php/stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
+        console.log('stream-start.php?type=start', response);
         streamStarted();
     });
-
-
-    // var oReq = new XMLHttpRequest();
-    // oReq.addEventListener("load", streamStarted);
-    // oReq.open("GET", "stream-start.php?type=start&sts=" + sts[currentDataCenterIndex]);
-    // oReq.send();
     status = 'Init Stream';
     updateStatus('Starting stream testing...');
 }
