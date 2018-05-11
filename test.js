@@ -112,7 +112,7 @@ function nextLocation() {
         status = 'New';
         speedTestWorker = newSpeedTestWorker();
         status = 'Network';
-        speedTestWorker.postMessage('start {"test_order":"I_P_D",	"url_dl": "http://' + dataCenterCode + '-lqt.perfectomobile.com/garbage.php", "url_ul": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_ping": "http://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "http://' + dataCenterCode + '-lqt.perfectomobile.com/telemetry.php"} ');
+        speedTestWorker.postMessage('start {"test_order":"I_P_D", "url_dl": "https://' + dataCenterCode + '-lqt.perfectomobile.com/garbage.php", "url_ul": "https://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_ping": "https://' + dataCenterCode + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "https://' + dataCenterCode + '-lqt.perfectomobile.com/telemetry.php"} ');
         return true;
     } else // no more data centers to test
         return false;
