@@ -79,10 +79,10 @@ function get_isp() {
 $ip = get_client_ip();
 $netInfo->ip = $ip;
 //$netInfo->proxy = get_proxy_info($ip);
-$json = file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af");
-$netInfo->city = $json['city'];
-$netInfo->region = $json['region_code'];
-$netInfo->country = $json['country_code'];
+$arr = json_decode(file_get_contents("http://api.ipstack.com/$ip?access_key=7c21bd608096d60dbe33bcd139a3e0af"), true);
+$netInfo->city = $arr['city'];
+$netInfo->region = $arr['region_code'];
+$netInfo->country = $arr['country_code'];
 $netInfo->isp = get_isp();
 echo json_encode($netInfo);
 ?>
