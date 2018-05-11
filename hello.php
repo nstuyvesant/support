@@ -89,7 +89,8 @@ function get_proxy_info($ipAddress) {
 
 $ip = get_client_ip(); //72.95.128.78
 $netInfo->ip = $ip;
-$netInfo->remoteAddr = $_SERVER['REMOTE_ADDR'];
+$netInfo->remoteAddr = $_SERVER["REMOTE_ADDR"];
+$netInfo->forwardedFor = $_SERVER["HTTP_X_FORWARDED_FOR"];
 $netInfo->trueIp = get_true_ip();
 $netInfo->proxy = get_proxy_info($ip);
 
