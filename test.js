@@ -233,8 +233,8 @@ function nextSts() {
 
 function streamStarted() {
     streamPID = this.responseText;
-    // jwplayer.key = "k/WD83HHK6xlWeRUuyRM+5fHBxfSCgwUUC7e++bhF5Urqx59"; // V8
-    jwplayer.key = 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp'; // V7
+    jwplayer.key = "k/WD83HHK6xlWeRUuyRM+5fHBxfSCgwUUC7e++bhF5Urqx59"; // V8
+    //jwplayer.key = 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp'; // V7
     player = jwplayer('mediaspace');
     stsType = 'none';
     setTimeout(nextSts, 3000);
@@ -245,10 +245,34 @@ function streamStarted() {
 
 function streamTest() {
     let tableCellPrefix = '#' + dataCenters[currentDataCenterIndex];
+    // Set spinner options
+    let opts = {
+        lines: 13, // The number of lines to draw
+        length: 38, // The length of each line
+        width: 17, // The line thickness
+        radius: 45, // The radius of the inner circle
+        scale: 0.3, // Scales overall size of the spinner
+        corners: 1, // Corner roundness (0..1)
+        color: '#ffffff', // CSS color or array of colors
+        fadeColor: 'transparent', // CSS color or array of colors
+        speed: 1, // Rounds per second
+        rotate: 0, // The rotation offset
+        animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        className: 'spinner', // The CSS class to assign to the spinner
+        top: '50%', // Top position relative to parent
+        left: '50%', // Left position relative to parent
+        shadow: '0 0 1px transparent', // Box-shadow for the lines
+        position: 'absolute' // Element positioning
+    };
+    let spinnerRTMP = new Spinner(opts).spin($(tableCellPrefix + '-rtmp'));
+    let spinnerRTMPT = new Spinner(opts).spin($(tableCellPrefix + '-rtmpt'));
+    let spinnerRTMPS = new Spinner(opts).spin($(tableCellPrefix + '-rtmps'));
 // Why populate these at the beginning?
-    $(tableCellPrefix + '-rtmp').html('100%');
-    $(tableCellPrefix + '-rtmpt').html('100%');
-    $(tableCellPrefix + '-rtmps').html('100%');
+    // $(tableCellPrefix + '-rtmp').html('100%');
+    // $(tableCellPrefix + '-rtmpt').html('100%');
+    // $(tableCellPrefix + '-rtmps').html('100%');
 
     $.get('https://support.perfecto.io/php/stream-start.php?type=start&sts=' + sts[currentDataCenterIndex]).done(function(response) {
         console.log('stream-start.php?type=start', response);
