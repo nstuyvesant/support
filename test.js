@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 //--------------Nate's stuff above this line-----------------
 const STREAMINGTIME = 30000;
-const dataCenters = ['bos', 'fra', 'gdl', 'lon', 'phx', 'syd', 'yyz', ];
+const dataCenters = ['bos', 'fra', 'gdl', 'lon', 'phx', 'syd', 'yyz'];
 //TODO: Get missing streamer hostnames
 const sts = ['wakefield-streaming2', 'fra-sts', ''/* missing Mexico */, 'uk-streaming2', 'phx-sts-2', ''/* missing Sydney */, 'yyz-sts'];
 
@@ -132,43 +132,6 @@ function stopAll() {
     clearInterval(trigger);
     status = 'stopped';
     updateStatus('Stopped.');
-    let results = {
-        id: $('#ip').val() + '-' + Date.now(),
-        ip: {
-            ip: $('#ip').val(),
-            proxy: $('#proxy').val(),
-            location: $('#location').val(),
-            isp: $('#isp').val(),
-            tz: $('#tz').val()
-        },
-        dataCenters: []
-    }
-    let tableCellPrefix;
-    for(let dataCenter in dataCenters) {
-        tableCellPrefix = '#' + dataCenter;
-        results.dataCenters.push({
-            dataCenter: dataCenter,
-            latency: $(tableCellPrefix  + '-ping').html(),
-            download: $(tableCellPrefix  + '-download').html(),
-            jitter: $(tableCellPrefix  + '-jitter').html(),
-            rtmp: $(tableCellPrefix  + '-rtmp').html(),
-            rtmpt: $(tableCellPrefix  + '-rtmpt').html(),
-            rtmps: $(tableCellPrefix  + '-rtmps').html()
-        });
-    }
-
-    // Post to the PHP (need to modify it as it may expect location rather than dataCenter property)
-    $.ajax({
-        type: 'POST',
-        url: 'https://support.perfecto.io/php/result.php',
-        data: JSON.stringify(results),
-        contentType: 'application/json; charset=utf-8',
-        crossDomain: true,
-        dataType: 'jsonp',
-        success: function(data) {
-            console.log(data);
-        }
-    });
 }
 
 // Qualify whether the results are good, bad, meh, or error
