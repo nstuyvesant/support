@@ -18,11 +18,11 @@ $('#startStop').on('click', function() {
     running = !running; // toggle
     if(running) {
         $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
-        console.log('Clicked Start');
+        console.log('Clicked Start.');
         start();
     } else {
         $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
-        console.log('Clicked Stop');
+        console.log('Clicked Stop.');
         stopAll();
     }
 });
@@ -51,7 +51,7 @@ var nextProtocolTrigger = null;
 // Write status near Start/Stop button
 function updateStatus(message) {
     $('#status').html(message);
-    console.log(status + ': ' + message);
+    console.log(message);
 }
 
 // When Start is clicked, this is run every 100 ms to write results to page so user sees progress
@@ -79,11 +79,12 @@ function speedTestMessage(event) {
     // Format for returned event.data:
     // status;download;upload;ping (speeds are in mbit/s) (status: 0=not started, 1=downloading, 2=uploading, 3=ping, 4=done, 5=aborted)
     let data = event.data.split(';');
-    if (data[0] === 4) {
+    if (data[0] === '4') {
+        console.log('Finished network tests.');
         speedTestWorker = null;
         qualifySpeedTestResults();
         //updateStatus('Network tests done.');
-        updateStatus('Starting streaming tests...')
+        updateStatus('Running streaming tests...')
         status = 'Streaming';
         streamTest();
     } else if((data[0] >= 1) && (data[0] <= 3)) {
@@ -107,7 +108,8 @@ function nextLocation() {
         currentDataCenterIndex++;
         let dataCenterCode = dataCenters[currentDataCenterIndex];
         let dataCenterName = $('#' + dataCenterCode).html().trim();
-        updateStatus('Starting network test for ' + dataCenterName + '...');
+        updateStatus('Running network tests for ' + dataCenterName + '...');
+        console.log('Running network tests for ' + dataCenterName + '.');
         status = 'New';
         speedTestWorker = newSpeedTestWorker();
         status = 'Network';
@@ -119,7 +121,7 @@ function nextLocation() {
 
 // Start testing and invoke update() every 100ms to get status
 function start() {
-    updateStatus('Starting Tests');
+    console.log('Running network tests...')
     trigger = setInterval(speedTestUpdate, 100);
     nextLocation();
 }
