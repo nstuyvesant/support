@@ -34,53 +34,26 @@ function validate_ip($ip) {
     return true;
 }
 
-// Function to get proxy info
-function get_proxy_info($ipAddress) {
-  $message = "No proxy detected";
-  $proxy_headers = array(   
-    "HTTP_VIA",   
-    "HTTP_X_FORWARDED_FOR", // mine
-    "HTTP_FORWARDED_FOR",
-    "HTTP_X_FORWARDED",
-    "HTTP_FORWARDED",
-    "HTTP_CLIENT_IP",
-    "HTTP_FORWARDED_FOR_IP",
-    "VIA",
-    "X_FORWARDED_FOR",
-    "FORWARDED_FOR",
-    "X_FORWARDED",
-    "FORWARDED",
-    "CLIENT_IP",
-    "FORWARDED_FOR_IP",
-    "HTTP_PROXY_CONNECTION"
-  );
-  foreach($proxy_headers as $header) {
-    if (isset($_SERVER[$header])) $message = "Proxy detected ($header)";
-  }
-  // $ports = array(8080,80,81,1080,6588,8000,3128,553,554,4480);
-  // foreach($ports as $port) {
-  //   if (@fsockopen($ipAddress, $port, $errno, $errstr, 30)) {
-  //     $message = "Proxy detected";
-  //   }
-  // }
-  return $message;
-}
-
-$ip = get_client_ip(); //72.95.128.78
+// Get the user's public IP address
+$ip = get_client_ip(); // Use 72.95.128.78 for testing
 $netInfo->ip = $ip;
-$netInfo->remoteAddr = $_SERVER["REMOTE_ADDR"];
-$netInfo->forwardedFor = $_SERVER["HTTP_X_FORWARDED_FOR"];
-$netInfo->proxy = get_proxy_info($ip);
 
-$arr = json_decode(file_get_contents("http://ip-api.com/json//$ip"), true);
-$netInfo->city = $arr["city"];
-$netInfo->region = $arr["region"];
-$netInfo->country = $arr["countryCode"];
-$netInfo->isp = $arr["isp"];
-$netInfo->timezone = $arr["timezone"];
+// Determine whether there's a proxy and what type
+$proxyCheckIo = json_decode(file_get_contents("http://proxycheck.io/v2/$ip?key=u188a3-680b4p-38550a-06w364&vpn=1"), true);
+$proxyResult = "No proxy detected";
+if ($proxyCheckIo[$ip]["proxy"] === "yes") {
+    $proxyResult = $proxyCheckIo[$ip]["type"] . " detected";
+}
+$netInfo->proxy = $proxyResult;
 
-$arr = json_decode(file_get_contents("http://proxycheck.io/v2/$ip?key=u188a3-680b4p-38550a-06w364&vpn=1"), true);
-echo json_encode($arr[$ip], JSON_UNESCAPED_SLASHES);
+// Get location, ISP and time zone
+$ipApiCom = json_decode(file_get_contents("http://ip-api.com/json//$ip"), true);
+$netInfo->city = $ipApiCom["city"];
+$netInfo->region = $ipApiCom["region"];
+$netInfo->country = $ipApiCom["countryCode"];
+$netInfo->isp = $ipApiCom["isp"];
+$netInfo->timezone = $ipApiCom["timezone"];
 
-//echo json_encode($netInfo, JSON_UNESCAPED_SLASHES);
+// Write JSON to response stream
+echo json_encode($netInfo, JSON_UNESCAPED_SLASHES);
 ?>
