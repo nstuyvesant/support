@@ -39,6 +39,9 @@
         .fa-stop-circle, .fa-thumbs-down, .fa-exclamation-triangle {
             color: red;
         }
+        .download, .jwplayer {
+            margin-top: 30px!important;
+        }
         /* For spinner */
         .sk-rotating-plane {
             width: 16px;
@@ -79,6 +82,7 @@
             <div class="col-md-3 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
             <div class="col-md-9 align-middle">
                 <a id="startStop" class="btn" href="#" title="Start/Stop Button"><span id="startStopIcon" class="far fa-play-circle"></span></a> <span id="status">Click to start network connectivity tests.</span>
+                
             </div>
         </div>
         <div class="row">
@@ -103,11 +107,12 @@
                             <input class="form-control form-control-sm" type="text" id="isp" readonly />
                         </div>
                         <div class="form-group">
-                            <label for="tz">User's Time Zone</label>
-                            <input class="form-control form-control-sm" type="text" id="tz" readonly />
+                            <label for="timezone">User's Time Zone</label>
+                            <input class="form-control form-control-sm" type="text" id="timezone" readonly />
                         </div>
                     </div>
                 </div>
+                <a id="download" class="btn btn-success download" href="#" title="Download"><span class="fas fa-cloud-download-alt"></span> Download Results</a>
             </div>
             <div class="col-md-9">
                 <div class="card">
@@ -277,11 +282,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 30px;">
-                <div class="col-md-6 offset-md-3">
-                    <div id="mediaspace" class="player">Loading the player...</div>
+                    <div id="mediaspace">Loading the player...</div>
                 </div>
             </div>
         </div>
