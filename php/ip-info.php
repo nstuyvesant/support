@@ -48,12 +48,9 @@ $netInfo->proxy = $proxyResult;
 
 // Get location, ISP and time zone
 $ipApiCom = json_decode(file_get_contents("http://ip-api.com/json//$ip"), true);
-$netInfo->city = $ipApiCom["city"];
-$netInfo->region = $ipApiCom["region"];
-$netInfo->country = $ipApiCom["countryCode"];
+$netInfo->location = $ipApiCom["city"] . ", " . $ipApiCom["region"] . " (" . $ipApiCom["countryCode"] . ")";
 $netInfo->isp = $ipApiCom["isp"];
 $netInfo->timezone = $ipApiCom["timezone"];
-
 // Write JSON to response stream
 echo json_encode($netInfo, JSON_UNESCAPED_SLASHES);
 ?>
