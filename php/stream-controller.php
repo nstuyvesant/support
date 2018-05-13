@@ -183,9 +183,16 @@
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {//'This is a server using Windows!';
 				//$cmd = "c:\\ffmpeg\\bin\\ffmpeg.exe -re -y -i 320240.mp4 -vcodec libx264 -f flv rtmp://{$sts}.perfectomobile.com/live/conTest ";
 				$cmd = "cmd /C c:\\ffmpeg\\startStream {$sts}";
-			}else{
-				#$cmd = "ffmpeg -re -y -i \"../320240.mp4\" -vcodec libx264 -f flv \"rtmp://{$sts}.perfectomobile.com/live/conTest\" ";
-				$cmd= "../startStream.sh {$sts}";
+			} else {
+				//ffmpeg -re -y -i /home/support/support.perfecto.io/simpsons-movie-trailer.mp4 -vcodec libx264 -f flv rtmp://$1.perfectomobile.com/live/conTest
+				// -re read input at native framerate
+				// -y overwrite output files without asking
+				// -i input file
+				// -vcodec libx264 set video codec to H.264
+				// -f flv force output (optional since we're sending an FLV)
+				$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -vcodec libx264 -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
+				// this might work
+				#$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv rtmp://{$sts}.perfectomobile.com/live/conTest";
 			}
 		   echo run_process($cmd);
 			break;
