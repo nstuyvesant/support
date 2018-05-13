@@ -141,8 +141,8 @@ $(document).ready(function() {
     player = jwplayer('mediaspace').setup({ // Use JSON format because jwplayer docs recommend it
         'key': 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp',
         'primary': 'flash',
-        'width': 480, // 16
-        'height': 270, // 9
+        'width': 383, // native: 1126
+        'height': 829, // native: 2436
         'controls': false,
         'preload': 'none',
         'file': 'rtmp://wakefield-streaming2.perfectomobile.com/live/conTest',
