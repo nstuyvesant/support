@@ -366,6 +366,7 @@ function streamTest() {
 
     $.get('https://support.perfecto.io/php/stream-controller.php?type=start&sts=' + streamer).done(function(response) {
         updateStatus('Starting stream from ' + dataCenterName + '...');
+        player.autostart = true;
         streamPID = response;
         console.log('Started stream ' + streamPID);
         streamStarted();
