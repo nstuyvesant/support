@@ -143,7 +143,8 @@ $(document).ready(function() {
         'primary': 'flash',
         'width': 383, // native: 1126
         'height': 829, // native: 2436
-        'controls': false,
+//TODO: change to false for production
+        'controls': true,
         'preload': 'none',
         'file': 'rtmp://wakefield-streaming2.perfectomobile.com/live/conTest',
         'image': 'phone.jpg',
@@ -349,6 +350,7 @@ function testNextStreamer() {
 
 function streamStarted() {
     streamType = undefined;
+    player.autostart = true; // Initially false to avoid error
     setTimeout(testNextStreamer, 3000);
     let dataCenterName = dataCenters[selectedDataCenter].name;
 }
@@ -366,7 +368,6 @@ function streamTest() {
 
     $.get('https://support.perfecto.io/php/stream-controller.php?type=start&sts=' + streamer).done(function(response) {
         updateStatus('Starting stream from ' + dataCenterName + '...');
-        player.autostart = true;
         streamPID = response;
         console.log('Started stream ' + streamPID);
         streamStarted();
