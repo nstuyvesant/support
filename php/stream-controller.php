@@ -2,7 +2,7 @@
    header("Access-Control-Allow-Origin: *");
    error_reporting(E_ALL);
 		
-	class BackgroundProcess{
+	class BackgroundProcess {
 		const OS_WINDOWS = 1;
 		const OS_NIX     = 2;
 		const OS_OTHER   = 3;
@@ -10,17 +10,21 @@
 		private $pid;
 		protected $serverOS;
 		private $CurrentDirectory;
-		public function __construct($command = null,$dir=''){
+
+		public function __construct($command = null,$dir='') {
 			$this->command  = $command;
 			$this->serverOS = $this->getOS();
 			$this->CurrentDirectory  =$dir ;
 		}
+
 		public function set_command($command){
 			$this->command = $command;
 		}
+
 		public function set_CurrentDirectory($dir){
 			$this->CurrentDirectory = $dir;
 		}
+
 		/**
 		 * @param string $outputFile File to write the output of the process to; defaults to /dev/null
 		 *                           currently $outputFile has no effect when used in conjunction with a Windows server
@@ -55,7 +59,8 @@
 					));
 			}
 		}
-		public function isRunning(){
+
+		public function isRunning() {
 			try {
 				switch ($this->getOS()) {
 					case self::OS_WINDOWS:
@@ -77,7 +82,8 @@
 			}
 			return false;
 		}
-		public function stop(){
+
+		public function stop() {
 			try {
 				switch ($this->getOS()) {
 					case self::OS_WINDOWS:
@@ -98,15 +104,18 @@
 			}
 			return false;
 		}
+
 		public function getPid(){
 			return $this->pid;
 		}
+
 		//protected function setPid($pid){
 		public function setPid($pid){	
 			//$this->checkSupportingOS('Cocur\BackgroundProcess can only return the PID of a process on *nix-based systems, '.
 			//						 'such as Unix, Linux or Mac OS X. You are running "%s".');
 			$this->pid = $pid;
 		}
+
 		protected function getOS(){
 			$os = strtoupper(PHP_OS);
 			if (substr($os, 0, 3) === 'WIN') {
@@ -116,11 +125,13 @@
 			}
 			return self::OS_OTHER;
 		}
+
 		protected function checkSupportingOS($message){
 			if ($this->getOS() !== self::OS_NIX) {
 				throw new RuntimeException(sprintf($message, PHP_OS));
 			}
 		}
+
 		static public function createFromPID($pid) {
 			$process = new self();
 			$process->setPid($pid);
@@ -128,8 +139,7 @@
 		}
 	}
 		
-		
-	function run_process($cmd,$outputFile = '/dev/null', $append = false){
+	function run_process($cmd,$outputFile = '/dev/null', $append = false) {
 			$pid=0;
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {//'This is a server using Windows!';
 				$cmd = 'wmic process call create "'.$cmd.'" | find "ProcessId"';
@@ -139,13 +149,13 @@
 				$pid=substr($pid,0,strpos($pid,';') );
 				$pid = (int)$pid;
 				pclose($handle); //Close
-		}else{
+		} else {
 			#echo sprintf('%s %s %s 2>&1 & echo $!', $cmd, ($append) ? '>>' : '>', $outputFile);
 			$pid = (int)shell_exec(sprintf('%s %s %s 2>&1 & echo $!', $cmd, ($append) ? '>>' : '>', $outputFile));
 		}
 			return $pid;
 	}
-	function is_process_running($pid){
+	function is_process_running($pid) {
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {//'This is a server using Windows!';
 				//tasklist /FI "PID eq 6480"
 			$result = shell_exec('tasklist /FI "PID eq '.$pid.'"' );
@@ -160,7 +170,8 @@
 		}
 		return false;
 	}
-	function stop_process($pid){
+
+	function stop_process($pid) {
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {//'This is a server using Windows!';
 					$result = shell_exec('taskkill /PID '.$pid );
 				if (count(preg_split("/\n/", $result)) > 0 && !preg_match('/No tasks/', $result)) {
@@ -174,8 +185,7 @@
 			}
 	}
 	
-	
-   $type = $_GET["type"];
+	$type = $_GET["type"];
 
 	switch($type){
 		case 'start':
