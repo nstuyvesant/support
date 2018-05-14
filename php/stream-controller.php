@@ -204,7 +204,7 @@
 
 				//$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -vcodec libx264 -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
 				// this might work
-				$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv rtmp://{$sts}.perfectomobile.com/live/conTest";
+				$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
 			}
 		   echo run_process($cmd);
 			break;
