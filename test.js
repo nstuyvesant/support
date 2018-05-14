@@ -146,6 +146,7 @@ $(document).ready(function() {
         'controls': false,
         'preload': 'none',
         'file': 'rtmp://wakefield-streaming2.perfectomobile.com/live/conTest',
+        'image': 'phone.jpg',
         'logo': {
             'file': 'favicon-32x32.png'
         },
