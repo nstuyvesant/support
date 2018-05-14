@@ -200,11 +200,8 @@
 				// -y overwrite output files without asking
 				// -i input file
 				// -vcodec libx264 set video codec to H.264
-				// -f flv force output (optional since we're sending an FLV)
-
-				//$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -vcodec libx264 -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
-				// this might work
-				$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
+				// -f flv force output to FLV
+				$cmd = "ffmpeg -re -y -i /home/support/support.perfecto.io/php/phone.flv -vcodec libx264 -f flv rtmp://{$sts}.perfectomobile.com/live/conTest";
 			}
 		   echo run_process($cmd);
 			break;
