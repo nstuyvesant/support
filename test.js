@@ -180,7 +180,6 @@ function speedTestUpdate() {
                     clearTimeout(testNextStreamerTrigger);
                     testNextStreamer();
                 } else {
-                    console.log('buffering', playerState['buffering']);
                     let lastStreamingScore = Math.round(100 - (100 / (streamingTime / 100) * playerState['buffering']));
                     dataCenters[selectedDataCenter][streamType] = lastStreamingScore;
                 }
