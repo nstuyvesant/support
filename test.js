@@ -171,7 +171,7 @@ function speedTestUpdate() {
             break;
         case 'Streaming':
             if(streamActive) {
-                playerState[player.getState()]++; // populate array but we only care about buffering element
+                playerState[player.getState()]++; // count number of times we are buffering during playback
                 let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamType;
                 if(player.getState() === 'error') {
                     streamActive = false;
@@ -307,8 +307,8 @@ function streamTestActive() {
 
 function testNextStreamer() {
     streamActive = false;
+    // Initialize array that will count number of times we are buffering (as well as other unused states)
     playerState['buffering'] = 0;
-    // Why do we bother resetting these 3 to zero since we only use buffering?
     playerState['idle'] = 0;
     playerState['playing'] = 0;
     playerState['paused'] = 0;
@@ -346,7 +346,7 @@ function testNextStreamer() {
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
     //player.start();
     player.play();
-    setTimeout(streamTestActive, 4000);
+    setTimeout(streamTestActive, 0); // wait 0 seconds then call streamTestActive() to start another stream testing cycle
 }
 
 // Use PHP to invoke ffmpeg to start RTMP stream to target streamer to relay back to user
