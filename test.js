@@ -143,8 +143,7 @@ $(document).ready(function() {
         'primary': 'flash',
         'width': 383, // native: 1126
         'height': 829, // native: 2436
-//TODO: change to false for production
-        'controls': true,
+        'controls': false,
         'preload': 'none',
         'file': 'rtmp://wakefield-streaming2.perfectomobile.com/live/conTest',
         'image': 'phone.jpg',
@@ -175,7 +174,7 @@ function speedTestUpdate() {
             break;
         case 'Streaming':
             if(streamActive) {
-                playerState[player.getState()]++;
+                playerState[player.getState()]++; // populate array but we only care about buffering element
                 let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamType;
                 if (player.getState() === 'error') {
                     streamActive = false;
@@ -344,14 +343,14 @@ function testNextStreamer() {
     let dataCenterName = dataCenters[selectedDataCenter].name;
     let dataCenterStreamer = dataCenters[selectedDataCenter].streamer;
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
-    player.autostart = true;
+    player.start();
     setTimeout(streamTestActive, 4000);
 }
 
 function streamStarted() {
     streamType = undefined;
-    player.autostart = true; // Initially false to avoid error
-    setTimeout(testNextStreamer, 3000);
+    player.play(); //TODO: should it start here or elswhere?
+    setTimeout(testNextStreamer, 3000); // TODO: should this wait 3 seconds?
     let dataCenterName = dataCenters[selectedDataCenter].name;
 }
 
