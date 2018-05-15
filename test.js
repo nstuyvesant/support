@@ -1,9 +1,11 @@
 //BUG: If streaming test is stopped manually, stopAll() is called twice
-//BUG: Stream tests for second data center fail
+//BUG: Stream tests for second data center fail - stream is running ok with correct path
+//TODO: Implement Adobe's Netstream.info() call against the SWF object (videoLossRate, droppedFrames, videoBytesPerSecond)
+// or Netstream.currentFPS
 
 // Global constants
 const streamingTime = 30000; // how long to run each video stream (30 seconds)
-const streamDelay = 2000; // how between starting stream and showing in player + how long between stream type switches
+const streamDelay = 1000; // how between starting stream and showing in player + how long between stream type switches
 const rotatingPlane = '<div class="sk-rotating-plane"></div>'; // cool CSS effect
 const errorIcon = '<i class="fas fa-exclamation-triangle"></i>'; // triangle
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps']; //TODO: implement
@@ -139,7 +141,7 @@ $(document).ready(function() {
     });
 
     // Initialize the media player with sample video (required to initialize jwplayer)
-    player = jwplayer('mediaspace').setup({ // Use JSON format because jwplayer docs recommend it
+    player = jwplayer('player').setup({ // Use JSON format because jwplayer docs recommend it
         'key': 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp',
         'primary': 'flash',
         'width': 383, // native: 1126
@@ -151,18 +153,18 @@ $(document).ready(function() {
         'logo': {
             'file': 'favicon-32x32.png'
         },
+        'events': {
+            onBufferChange: function(obj) {},
+            onFirstFrame: function(obj) {}
+        },
         'rtmp': {
             'bufferLength': 0,
-         },
-         'events': {
-             onBufferChange: function(obj) {},
-             onFirstFrame: function(obj) {}
          }
     });
 
     // Load custom video file on error
     player.on('error', function() {
-        alert('Error occurred loading the Flash player.');
+        alert('Error occurred with JW Player.');
     });
 });
 
@@ -352,6 +354,7 @@ function testNextStreamer() {
 
     let dataCenterName = dataCenters[selectedDataCenter].name;
     let dataCenterStreamer = dataCenters[selectedDataCenter].streamer;
+//BUG: Might have to do a second setup on the player here
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
     setTimeout(streamTestActive, streamDelay); // wait then call streamTestActive() to start another stream testing cycle
 }
