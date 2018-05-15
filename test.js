@@ -1,5 +1,9 @@
+//BUG: If streaming test is stopped manually, stopAll() is called twice
+//BUG: Stream tests for second data center fail
+
 // Global constants
 const streamingTime = 30000; // how long to run each video stream (30 seconds)
+const streamDelay = 2000; // how between starting stream and showing in player + how long between stream type switches
 const rotatingPlane = '<div class="sk-rotating-plane"></div>'; // cool CSS effect
 const errorIcon = '<i class="fas fa-exclamation-triangle"></i>'; // triangle
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps']; //TODO: implement
@@ -154,6 +158,11 @@ $(document).ready(function() {
              onBufferChange: function(obj) {},
              onFirstFrame: function(obj) {}
          }
+    });
+
+    // Load custom video file on error
+    player.on('error', function() {
+        alert('Error occurred loading the Flash player.');
     });
 });
 
@@ -344,8 +353,7 @@ function testNextStreamer() {
     let dataCenterName = dataCenters[selectedDataCenter].name;
     let dataCenterStreamer = dataCenters[selectedDataCenter].streamer;
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
-    //player.start();
-    setTimeout(streamTestActive, 2000); // wait 4 seconds then call streamTestActive() to start another stream testing cycle
+    setTimeout(streamTestActive, streamDelay); // wait then call streamTestActive() to start another stream testing cycle
 }
 
 // Use PHP to invoke ffmpeg to start RTMP stream to target streamer to relay back to user
@@ -366,6 +374,6 @@ function setupStreaming() {
         console.log('Started stream ' + streamPID);
         streamType = undefined; // tells testNextStreamer we're running the first test (rtmp)
         // Wait 3 seconds for the stream to start then begin streaming tests
-        setTimeout(testNextStreamer, 2000);
+        setTimeout(testNextStreamer, streamDelay);
     });
 }
