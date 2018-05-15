@@ -300,6 +300,7 @@ function qualifySpeedTestResults() {
 // Begin running streaming tests
 function streamTestActive() {
     streamActive = true;
+    player.play();
     let dataCenterName = dataCenters[selectedDataCenter].name;
     updateStatus('Running ' + streamType.toUpperCase() + ' streaming test from ' + dataCenterName + '...');
     testNextStreamerTrigger = setTimeout(testNextStreamer, streamingTime);
@@ -345,8 +346,7 @@ function testNextStreamer() {
     let dataCenterStreamer = dataCenters[selectedDataCenter].streamer;
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
     //player.start();
-    player.play();
-    setTimeout(streamTestActive, 0); // wait 0 seconds then call streamTestActive() to start another stream testing cycle
+    setTimeout(streamTestActive, 2000); // wait 4 seconds then call streamTestActive() to start another stream testing cycle
 }
 
 // Use PHP to invoke ffmpeg to start RTMP stream to target streamer to relay back to user
@@ -367,6 +367,6 @@ function setupStreaming() {
         console.log('Started stream ' + streamPID);
         streamType = undefined; // tells testNextStreamer we're running the first test (rtmp)
         // Wait 3 seconds for the stream to start then begin streaming tests
-        setTimeout(testNextStreamer, 3000);
+        setTimeout(testNextStreamer, 2000);
     });
 }
