@@ -2,6 +2,7 @@
 const streamingTime = 30000; // how long to run each video stream (30 seconds)
 const rotatingPlane = '<div class="sk-rotating-plane"></div>'; // cool CSS effect
 const errorIcon = '<i class="fas fa-exclamation-triangle"></i>'; // triangle
+const streamTypes = ['rtmp', 'rtmpt', 'rtmps']; //TODO: implement
 
 // Global variables
 let testResults = { // Retains results for easy download, uses -1 as unknown value
@@ -108,12 +109,8 @@ $('#startStop').on('click', function() {
     running = !running; // toggle
     // Visually alter start/stop button with FontAwesome classes, begin the test and log
     if(running) {
-        $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
-        console.log('Clicked Start.');
         start();
     } else {
-        $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
-        console.log('Clicked Stop.');
         stopAll();
     }
 });
@@ -168,7 +165,7 @@ function updateStatus(message) {
 
 // When Start is clicked, this is run every 100 ms to write results to page so user sees progress
 function speedTestUpdate() {
-    switch (testTypeRunning) {
+    switch(testTypeRunning) {
         case 'Network':
             speedTestWorker.postMessage('status');
             break;
@@ -176,13 +173,14 @@ function speedTestUpdate() {
             if(streamActive) {
                 playerState[player.getState()]++; // populate array but we only care about buffering element
                 let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamType;
-                if (player.getState() === 'error') {
+                if(player.getState() === 'error') {
                     streamActive = false;
                     $(tableCell).html(errorIcon);
                     updateStatus('Streaming test from ' + streamType.toUpperCase() + ' failed!');
                     clearTimeout(testNextStreamerTrigger);
                     testNextStreamer();
                 } else {
+                    console.log('buffering', playerState['buffering']);
                     let lastStreamingScore = Math.round(100 - (100 / (streamingTime / 100) * playerState['buffering']));
                     dataCenters[selectedDataCenter][streamType] = lastStreamingScore;
                 }
@@ -200,8 +198,7 @@ function speedTestMessage(event) {
         console.log('Finished ' + dataCenters[selectedDataCenter].name  + ' network tests.');
         speedTestWorker = null;
         qualifySpeedTestResults();
-        // Move on to streaming tests
-        streamTest();
+        setupStreaming(); // start streaming movie to streamers then begin testing
     } else if((data[0] >= 1) && (data[0] <= 3)) {
         let tableCellPrefix = '#' + dataCenters[selectedDataCenter].code;
         $(tableCellPrefix + '-download').html(data[1]);
@@ -237,6 +234,8 @@ function nextDataCenter() {
 
 // Start testing and invoke update() every 100ms to get status
 function start() {
+    console.log('Clicked Start.');
+    $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
     speedTestWorkerTrigger = setInterval(speedTestUpdate, 100);
     nextDataCenter();
 }
@@ -261,6 +260,7 @@ function stopAll() {
             updateStatus('No tests were running.');
     }
     testTypeRunning = 'None';
+    $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
 }
 
 // Qualify whether the results are good, bad, meh, or error
@@ -306,23 +306,24 @@ function streamTestActive() {
 }
 
 function testNextStreamer() {
-    playerState['idle'] = 0;
+    streamActive = false;
     playerState['buffering'] = 0;
+    // Why do we bother resetting these 3 to zero since we only use buffering?
+    playerState['idle'] = 0;
     playerState['playing'] = 0;
     playerState['paused'] = 0;
-    streamActive = false;
 
     if(!streamType) {
         streamType = 'rtmp'
-    } else { // done testing this type of stream
+    } else { // just finished one of the 3 streaming tests
         player.stop();
         updateStatus('Analyzing ' + dataCenters[selectedDataCenter].name + ' ' + streamType.toUpperCase() + ' streaming results...');
         let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamType;
         console.log('lastStreamingScore', lastStreamingScore);
         $(tableCell).html(lastStreamingScore);
         qualifyResult(tableCell, 85, 95, false, '%');
-        qualifySpeedTestResults();
 
+        //TODO: switch out to const array streamTypes with for/in loop instead of if/else
         if(streamType == 'rtmp')
             streamType = 'rtmpt';
         else if(streamType == 'rtmpt')
@@ -343,18 +344,13 @@ function testNextStreamer() {
     let dataCenterName = dataCenters[selectedDataCenter].name;
     let dataCenterStreamer = dataCenters[selectedDataCenter].streamer;
     player.file = streamType + '://' + dataCenterStreamer + '.perfectomobile.com/live/conTest';
-    player.start();
+    //player.start();
+    player.play();
     setTimeout(streamTestActive, 4000);
 }
 
-function streamStarted() {
-    streamType = undefined;
-    player.play(); //TODO: should it start here or elswhere?
-    setTimeout(testNextStreamer, 3000); // TODO: should this wait 3 seconds?
-    let dataCenterName = dataCenters[selectedDataCenter].name;
-}
-
-function streamTest() {
+// Use PHP to invoke ffmpeg to start RTMP stream to target streamer to relay back to user
+function setupStreaming() {
     testTypeRunning = 'Streaming';
     // Show rotating squares while we start streaming tests
     const tableCellPrefix = '#' + dataCenters[selectedDataCenter].code;
@@ -369,6 +365,8 @@ function streamTest() {
         updateStatus('Starting stream from ' + dataCenterName + '...');
         streamPID = response;
         console.log('Started stream ' + streamPID);
-        streamStarted();
+        streamType = undefined; // tells testNextStreamer we're running the first test (rtmp)
+        // Wait 3 seconds for the stream to start then begin streaming tests
+        setTimeout(testNextStreamer, 3000);
     });
 }
