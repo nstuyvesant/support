@@ -1,7 +1,8 @@
 //TODO: Can JavaScript get Netstream.info() properties like videoLossRate, droppedFrames, videoBytesPerSecond or Netstream.currentFPS?
 //TODO: Verify web worker is being shutdown properly.
 
-//BUG: Once last streaming test for last data center is run, it leaves the message "Stopping tests..." insted of "Finished all tests."
+//BUG: Chrome displays play button for player initially and doesn't autoplay
+//BUG: Once last streaming test for last data center is run, it leaves the message "Stopping tests..." insted of "Finished all tests." (lines 224 and 225 have bad data) - might not have chaining tight
 //BUG: Intermittently getting 404 or 503 errors in Google console from speed test sites:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
 //      http://fra-sts.perfectomobile.com/fcs/ident2 404
