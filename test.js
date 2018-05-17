@@ -1,4 +1,17 @@
-// TODO: Can JavaScript get Netstream.info() properties like videoLossRate, droppedFrames, videoBytesPerSecond or Netstream.currentFPS?
+//TODO: Can JavaScript get Netstream.info() properties like videoLossRate, droppedFrames, videoBytesPerSecond or Netstream.currentFPS?
+//TODO: Verify web worker is being shutdown properly.
+
+//BUG: Once last streaming test for last data center is run, it leaves the message "Stopping tests..." insted of "Finished all tests."
+//BUG: Intermittently getting 404 or 503 errors in Google console from speed test sites:
+//      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
+//      http://fra-sts.perfectomobile.com/fcs/ident2 404
+//      http://gdl-sts.perfectomobile.com/fcs/ident2 404
+//      http://uk-streaming2.perfectomobile.com/fcs/ident2 404
+//      http://phx-sts-2.perfectomobile.com/fcs/ident2 404
+//      https://syd-sts.perfectomobile.com/idle/1331459816/47 - 504
+//      http://yyz-sts.perfectomobile.com/fcs/ident2 404
+//      * They do not occur in Safari
+//BUG: Streaming tests sometimes fail for sites leaving NaN in a cell or leaving no update - fires JW Error (can't find the playlist item)
 
 // Global constants
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps']; // types of streams we'll be testing
