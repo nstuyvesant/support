@@ -2,9 +2,9 @@
 //TODO: Verify web worker is being shutdown properly.
 
 //BUG: Chrome displays play button for player initially and doesn't autoplay
-//BUG: Once last streaming test for last data center is run, it leaves the message "Stopping tests..." insted of "Finished all tests." (lines 224 and 225 have bad data) - might not have chaining tight
 //BUG: Intermittently getting 404 or 503 errors in Google console from speed test sites:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
+//      https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24 503
 //      http://fra-sts.perfectomobile.com/fcs/ident2 404
 //      http://gdl-sts.perfectomobile.com/fcs/ident2 404
 //      http://uk-streaming2.perfectomobile.com/fcs/ident2 404
@@ -12,7 +12,8 @@
 //      https://syd-sts.perfectomobile.com/idle/1331459816/47 - 504
 //      http://yyz-sts.perfectomobile.com/fcs/ident2 404
 //      * They do not occur in Safari
-//BUG: Streaming tests sometimes fail for sites leaving NaN in a cell or leaving no update - fires JW Error (can't find the playlist item)
+//BUG: Streaming tests sometimes fail because video is still buffering. Should wait until it's playing (event?).
+//BUG: Clicking Stop during a streaming test stops streaming but starts speed test over
 
 // Global constants
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps']; // types of streams we'll be testing
@@ -133,8 +134,9 @@ $('#startStop').on('click', function() {
         // Log, change icon,
         $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle');
         testNextDataCenter();
+        //testNextStreamerTrigger = setTimeout(testNextStreamer, 10);
     } else {
-        stopAll();
+        stopAll(false);
     }
 });
 
@@ -159,44 +161,27 @@ function testNextDataCenter() {
 }
 
 // Stop running tests but keep track of data center where we left off
-function stopAll() {
-    updateStatus('Stopping tests...');
+function stopAll(done) {
+    clearInterval(testNextStreamerTrigger);
     switch (testTypeRunning) {
         case 'Network':
             if(speedTestWorker) speedTestWorker.postMessage('abort');
-            updateStatus('Stopped active network test.');
+            clearInterval(getTestUpdatesTrigger);
+            speedTestWorker = null;
             break;
         case 'Streaming':
-            stopStream(); // TODO: Hook this up
+            stopStream();
             break;
-        default: // should never happen unless invoked from console
-            updateStatus('No tests were running.');
     }
-    clearInterval(getTestUpdatesTrigger);
-    speedTestWorker = null;
+    updateStatus(done ? 'All tests completed.':'All tests stopped.');
     testTypeRunning = 'None';
     running = false;
-    selectedStreamType = -1; // reset so all stream types are tested
     $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle');
 }
 
-// Every 100ms... for speed tests, tell web worker we want status, for streaming, calculate buffering percentage
+// Every 100ms... for speed tests, tell web worker we want status
 function getTestUpdates() {
-    switch(testTypeRunning) {
-        case 'Network':
-            if(speedTestWorker) speedTestWorker.postMessage('status');
-            break;
-        case 'Streaming':
-            if(streamPlaying && player.getState() === 'error') {
-                streamPlaying = false;
-                let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamTypes[selectedStreamType];
-                $(tableCell).html(errorIcon);
-                updateStatus('Streaming test from ' + streamTypes[selectedStreamType].toUpperCase() + ' failed!');
-                clearTimeout(testNextStreamerTrigger);
-                testNextStreamer();
-            }
-            break;
-    }
+    if(speedTestWorker) speedTestWorker.postMessage('status');
 }
 
 // Handle when speedTestMessageHandler() triggers custom jQuery event saying we're done with the speed test
@@ -204,7 +189,7 @@ $('body').on('speedTestComplete', function() {
     // console.log('Finished ' + dataCenters[selectedDataCenter].name  + ' network tests.');
     speedTestWorker = null;
     testTypeRunning = 'None';
-
+    clearInterval(getTestUpdatesTrigger);
     qualifySpeedTestResults();
     startTestStream(); // next task in chain of asynchronous events
 });
@@ -234,6 +219,7 @@ function testNextStreamer() {
     if(selectedStreamType > 0) {
         // Calculate the percentage of the stream where buffering did not occur using qoe
         let qoe = player.qoe().item.sums;
+        if(player.getState() == 'buffering') console.log('Still buffering - trying to play too early.');
         let quality = Math.round((1 - qoe.buffering / qoe.playing) * 100);
         console.log('getItemMeta', player.getItemMeta()); // getItemMeta() event returns bandwidth of the stream to user's computer (maybe use that?)
         console.log('qoe', qoe);
@@ -250,7 +236,7 @@ function testNextStreamer() {
         if(selectedStreamType === streamTypes.length) { // no more stream types to test
             selectedDataCenter++;
             if(selectedDataCenter === dataCenters.length) {
-                stopAll();
+                stopAll(true);
                 return;
             }
 
@@ -263,6 +249,8 @@ function testNextStreamer() {
     // Advance to the next playlist item (preloaded array) for the current data center and play
     let selectedPlayListItem = selectedDataCenter * streamTypes.length + selectedStreamType;
     player.playlistItem(selectedPlayListItem); // requires player.setConfig({autostart: true})
+    console.log('Just called playlistItem(), about to call play()');
+    player.play(true); // Chrome isn't doing anything
     streamPlaying = true;
     updateStatus('Running ' + streamTypes[selectedStreamType].toUpperCase() + ' streaming test from ' + dataCenters[selectedDataCenter].name + '...');
     testNextStreamerTrigger = setTimeout(testNextStreamer, playbackDuration); // Call function again after video has played for playbackDuration
@@ -272,6 +260,7 @@ function testNextStreamer() {
 function stopStream() {
     $.get('https://support.perfecto.io/php/stream-controller.php?type=stop&pid=' + streamPID).done(function(response) {
         // console.log('Stopped stream ' + streamPID);
+        player.stop();
         streamPlaying = false;
         selectedStreamType = -1; // reset to first stream type
         testTypeRunning = 'None';
@@ -353,6 +342,7 @@ $(document).ready(function() {
     // Initialize the media player with sample video (required to initialize jwplayer)
     player = jwplayer('player').setup({ // Use JSON format because jwplayer docs recommend it
         'key': 'pAFx+xZh2QbZIfGG2QUSVdDSasRktc53eglFxQ854CpEKdIp',
+        //'autostart': true, // can't enable this yet because the stream isn't live
         'primary': 'flash',
         'width': 383, // native: 1126
         'height': 829, // native: 2436
@@ -375,10 +365,15 @@ $(document).ready(function() {
 
     if(!player.utils.isFlashSupported()) alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io.');
 
-    // Load custom video file on error
+    // Handle streaming error
     player.on('error', function(e) {
-        alert('Error occurred with JW Player.');
         console.log('JW Player Error', e);
+        streamPlaying = false;
+        let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamTypes[selectedStreamType];
+        $(tableCell).html(errorIcon);
+        updateStatus(streamTypes[selectedStreamType].toUpperCase() + ' test from ' + dataCenters[selectedDataCenter].name + ' failed!');
+        clearTimeout(testNextStreamerTrigger);
+        testNextStreamer();
     });
 
     player.on('firstFrame', function() {
