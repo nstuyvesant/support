@@ -39,7 +39,7 @@
         .fa-stop-circle, .fa-thumbs-down, .fa-exclamation-triangle {
             color: red;
         }
-        .download, .spacer {
+        .download, .spacer, .alert {
             margin-top: 30px!important;
         }
         /* For spinner */
@@ -73,7 +73,7 @@
                 }
         }
     </style>
-    <script src='https://content.jwplatform.com/libraries/M9EZXRrR.js'></script>
+    <script src='https://content.jwplatform.com/libraries/hQUs7NrH.js'></script>
 </head>
 
 <body>
@@ -82,7 +82,6 @@
             <div class="col-md-3 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
             <div class="col-md-9 align-middle">
                 <a id="startStop" class="btn" href="#" title="Start/Stop Button"><span id="startStopIcon" class="far fa-play-circle"></span></a> <span id="status">Click to start network connectivity tests.</span>
-                
             </div>
         </div>
         <div class="row">
@@ -281,6 +280,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                        Note: Your browser may prevent video playback unless you click the Play button (does not affect streaming tests).
                     </div>
                     <div class="spacer"><div id="player">Loading the player...</div></div>
                 </div>
