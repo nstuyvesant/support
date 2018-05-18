@@ -165,7 +165,7 @@ function stopAll (done) {
   clearInterval(testNextStreamerTrigger)
   switch (testTypeRunning) {
     case 'Network':
-      if(speedTestWorker) speedTestWorker.postMessage('abort')
+      if (speedTestWorker) speedTestWorker.postMessage('abort')
       clearInterval(getTestUpdatesTrigger)
       speedTestWorker = null
       break
@@ -322,7 +322,7 @@ function qualifySpeedTestResults () {
 
 $('#download').on('click', function () {
   let dataToDownload = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(testResults))
-  downloadButton = $('#download')
+  let downloadButton = $('#download')
   downloadButton.attr('href', dataToDownload)
   downloadButton.attr('download', 'Perfecto Connectivity Test Results.json')
 })
@@ -363,7 +363,9 @@ $(document).ready(function () {
   })
   player.load(generatePlayList())
 
-  if (!player.utils.isFlashSupported()) alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io.')
+  if (!player.utils.isFlashSupported()) {
+    window.alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io.')
+  }
 
   // Handle streaming error
   player.on('error', function (e) {
