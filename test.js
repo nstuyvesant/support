@@ -1,5 +1,6 @@
 // TODO: Can JavaScript get Netstream.info() properties like videoLossRate, droppedFrames, videoBytesPerSecond or Netstream.currentFPS?
 // TODO: Wait 2 seconds after starting stream before playing
+// BUG: First test should not be RTMPT to Boston (advanced over first item in Safari but not Chrome)
 // BUG: Intermittently getting 404 or 503 errors in Google console from speed test sites:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
 //      https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24 503
@@ -122,10 +123,8 @@ $('#startStop').on('click', function () {
   running = !running // toggle
   // Visually alter start/stop button with FontAwesome classes, begin the test and log
   if (running) {
-    // Log, change icon,
-    $('#startStopIcon').removeClass('far fa-play-circle').addClass('far fa-stop-circle')
+    $('#startStop').removeClass('btn-success').addClass('btn-danger').html('<span id="startStopIcon" class="far fa-stop-circle"></span> Stop Test')
     testNextDataCenter()
-    // testNextStreamerTrigger = setTimeout(testNextStreamer, 10);
   } else {
     stopAll(false)
   }
@@ -165,7 +164,7 @@ function stopAll (done) {
   updateStatus(done ? 'All tests completed.' : 'All tests stopped.')
   testTypeRunning = 'None'
   running = false
-  $('#startStopIcon').removeClass('far fa-stop-circle').addClass('far fa-play-circle')
+  $('#startStop').removeClass('btn-danger').addClass('btn-success').html('<span id="startStopIcon" class="far fa-play-circle"></span> Start Test')
 }
 
 // Every 100ms... for speed tests, tell web worker we want status
