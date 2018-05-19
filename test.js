@@ -1,7 +1,5 @@
-// TODO: Can JavaScript get Netstream.info() properties like videoLossRate, droppedFrames, videoBytesPerSecond or Netstream.currentFPS?
-// TODO: Wait 2 seconds after starting stream before playing
 // BUG: First test should not be RTMPT to Boston (advanced over first item in Safari but not Chrome)
-// BUG: Intermittently getting 404 or 503 errors in Google console from speed test sites:
+// BUG: Intermittently getting 404 or 503 errors in Chrome console from streamers:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
 //      https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24 503
 //      http://fra-sts.perfectomobile.com/fcs/ident2 404
@@ -25,6 +23,7 @@ const thumbsDown = ' <i class="far fa-thumbs-down"></i>'
 const meh = ' <i class="far fa-meh"></i>' // face with blank expression
 
 // Global variables
+let playerEnabled = true
 let testResults = { // Retains results for easy download, uses -1 as unknown value
   connectionInfo: {},
   dataCenters: [
@@ -174,12 +173,16 @@ function getTestUpdates () {
 
 // Handle when speedTestMessageHandler() triggers custom jQuery event indicating speed test is done
 $('body').on('speedTestComplete', function () {
-  // console.log('Finished ' + dataCenters[selectedDataCenter].name  + ' network tests.');
   clearInterval(getTestUpdatesTrigger) // stop monitoring for status changes
   speedTestWorker.terminate() // kill the web worker
   testTypeRunning = 'None'
   qualifySpeedTestResults()
-  startTestStream() // next task in chain of asynchronous events
+  if (playerEnabled) {
+    startTestStream() // next task in chain of asynchronous events
+  } else {
+    selectedDataCenter++;
+    testNextDataCenter()
+  }
 })
 
 // Call PHP to start ffmpeg sending FLV to streamer and set state appropriately
@@ -225,11 +228,11 @@ function testNextStreamer () {
       $(tableCell).html(quality)
       qualifyResult(tableCell, 39, 45, false, '%')
     } else {
-      console.log('STREAMING ISSUE')
+      console.log('STREAMING NEVER STARTED')
+      console.log('player state = ', player.getState()) // Comment later to improve performance
       console.log('playlistItem', player.getPlaylistItem())
       console.log('played', played)
       console.log('notPlayed', notPlayed)
-      console.log(player.getState()) // Comment later to improve performance
       $(tableCell).html(errorIcon)
     }
 
@@ -272,12 +275,12 @@ function speedTestMessageHandler (event) {
     $('body').trigger('speedTestComplete') // trigger custom event handler
   } else if ((data[0] >= 1) && (data[0] <= 3)) { // update the cell
     let tableCellPrefix = '#' + dataCenters[selectedDataCenter].code
-    $(tableCellPrefix + '-download').html(data[1])
-    dataCenters[selectedDataCenter].download = parseFloat(data[1])
-    $(tableCellPrefix + '-latency').html(data[3])
-    dataCenters[selectedDataCenter].latency = parseFloat(data[3])
-    $(tableCellPrefix + '-jitter').html(data[5])
-    dataCenters[selectedDataCenter].jitter = parseFloat(data[5])
+    dataCenters[selectedDataCenter].latency = parseFloat(data[3] === '' ? 0 : data[3]).toFixed(0)
+    dataCenters[selectedDataCenter].jitter = parseFloat(data[5] === '' ? 0 : data[5]).toFixed(1)
+    dataCenters[selectedDataCenter].download = parseFloat(data[1] === '' ? 0 : data[1]).toFixed(0)
+    $(tableCellPrefix + '-latency').html(dataCenters[selectedDataCenter].latency)
+    $(tableCellPrefix + '-jitter').html(dataCenters[selectedDataCenter].jitter)
+    $(tableCellPrefix + '-download').html(dataCenters[selectedDataCenter].download)
   };
 }
 
@@ -342,30 +345,44 @@ $(document).ready(function () {
         'bufferLength': 0
     },
     // defaults set on the hosted player (but add just in case)
+    'autostart': false,
     'primary': 'flash',
     'preload': 'none',
     'mute': true
   })
 
-  if (!player.utils.isFlashSupported()) {
+  player.on('setupError', function() {
+    console.log('SETUP ERROR')
+    console.log('There was a setup error with JW Player')
+    playerEnabled = false
     window.alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io.')
-  }
+    $('#flashWarning').removeClass('collapse')
+    $('#player').hide()
+  });
 
-  if (player.utils.isChrome()){
-    $('.alert').removeClass('collapse')
-  }
+  player.on('ready', function() {
+    console.log('READY')
+    if (player.utils.isChrome()){
+      $('#chromeWarning').removeClass('collapse')
+    }
 
-  // Handle streaming error
-  player.on('error', function (e) {
-    console.log('ERROR: JW Player: ' + e.message, player.getPlaylistItem())
-    console.log('qoe', player.qoe())
-    let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamTypes[selectedStreamType]
-    $(tableCell).html(errorIcon)
-    updateStatus('ERROR: ' + streamTypes[selectedStreamType].toUpperCase() + ' test from ' + dataCenters[selectedDataCenter].name)
-    // Try to recover
-    clearTimeout(testNextStreamerTrigger)
-    testNextStreamer()
-  })
+
+    console.log('DONE WITH READY')
+  });
+
+  // // Handle streaming error
+  // player.on('error', function (e) {
+  //   console.log('ERROR')
+  //   console.log(player.utils.isFlashSupported())
+  //   console.log('ERROR: JW Player: ' + e.message, player.getPlaylistItem())
+  //   console.log('qoe', player.qoe())
+  //   let tableCell = '#' + dataCenters[selectedDataCenter].code + '-' + streamTypes[selectedStreamType]
+  //   $(tableCell).html(errorIcon)
+  //   updateStatus('ERROR: ' + streamTypes[selectedStreamType].toUpperCase() + ' test from ' + dataCenters[selectedDataCenter].name)
+  //   // Try to recover
+  //   clearTimeout(testNextStreamerTrigger)
+  //   testNextStreamer()
+  // })
 
   player.on('firstFrame', function () {
     let qoe = player.qoe()

@@ -35,13 +35,14 @@
             color: green;
         }
         .download {
-            margin-left: 10px;
+            margin-left: 30px;
         }
         .fa-thumbs-down, .fa-exclamation-triangle {
             color: red;
         }
         .btn-lg {
-            margin-bottom: 15px!important;
+            margin-top: 20px!important;
+            margin-bottom: 30px!important;
             width: 220px;
         }
         .spacer, .alert {
@@ -311,8 +312,11 @@
                             </table>
                         </div>
                     </div>
-                    <div class="alert alert-warning collapse" role="alert">
+                    <div id="chromeWarning" class="alert alert-warning collapse" role="alert">
                         Note: Newer Chrome versions prevent video playback unless you click the Play button (does not affect streaming tests). Override this behavior by going to URL <b>chrome://flags/#autoplay-policy</b> (sorry, settings hyperlinks will not work) and set <b>Autoplay policy</b> to <b>No user gesture is required.</b>
+                    </div>
+                    <div id="flashWarning" class="alert alert-danger collapse" role="alert">
+                        Note: Streaming tests will not run unless you enable Flash for this website (https://support.perfecto.io).
                     </div>
                     <div class="spacer"><div id="player">Loading the player...</div></div>
                 </div>
