@@ -47,7 +47,7 @@ if ($proxyCheckIo[$ip]["proxy"] === "yes") {
 $netInfo->proxy = $proxyResult;
 
 // Get location, ISP and time zone
-$ipApiCom = json_decode(file_get_contents("http://ip-api.com/json//$ip"), true);
+$ipApiCom = json_decode(file_get_contents("http://ip-api.com/json/$ip"), true);
 $netInfo->location = $ipApiCom["city"] . ", " . $ipApiCom["region"] . " (" . $ipApiCom["countryCode"] . ")";
 $netInfo->isp = $ipApiCom["isp"];
 $netInfo->timezone = $ipApiCom["timezone"];
