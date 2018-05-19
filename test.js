@@ -352,8 +352,7 @@ $(document).ready(function () {
   })
 
   player.on('setupError', function() {
-    console.log('SETUP ERROR')
-    console.log('There was a setup error with JW Player')
+    console.log('SETUP ERROR: JW Player')
     playerEnabled = false
     window.alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io.')
     $('#flashWarning').removeClass('collapse')
@@ -361,13 +360,9 @@ $(document).ready(function () {
   });
 
   player.on('ready', function() {
-    console.log('READY')
     if (player.utils.isChrome()){
       $('#chromeWarning').removeClass('collapse')
     }
-
-
-    console.log('DONE WITH READY')
   });
 
   // // Handle streaming error
