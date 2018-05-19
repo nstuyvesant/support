@@ -29,6 +29,7 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
+    <link rel="stylesheet" href="support.css" />
     <style>
         .fa-play-circle, .fa-stop-circle {
             font-size: 4rem;
@@ -77,10 +78,36 @@
 </head>
 
 <body>
+    <!--[if lt IE 10]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <section class="cover text-center">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-1" aria-controls="navbarToggler-1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <span class="navbar-brand"><a href="https://www.perfecto.io"><img src="perfecto-logo.svg" style="height:70px; width:220px" /></a></span>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-1">
+                    <ul class="navbar-nav mt-2 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://perfecto.litmos.com" target="_blank">Online Training</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://developers.perfectomobile.com" target="_blank"><span class="fas fa-search"></span> Search Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://perfectomobile.force.com/customers/" target="_blank"><span class="fa fa-user"></span> Customer Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 align-middle"><img src="https://support.perfecto.io/perfecto-logo.svg" style="height: 80%; width: 80%;"></div>
-            <div class="col-md-9 align-middle">
+            <div class="col-md-9 offset-md-3 align-middle">
                 <a id="startStop" class="btn" href="#" title="Start/Stop Button"><span id="startStopIcon" class="far fa-play-circle"></span></a> <span id="status">Click to start network connectivity tests.</span>
             </div>
         </div>
@@ -289,6 +316,90 @@
             </div>
         </div>
     </div>
+    <footer class="site-tree">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="https://www.perfecto.io/platform/overview/">PLATFORM OVERVIEW</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/the-cloud-based-testing-lab/">The Cloud-Based Testing Lab</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/test-automation/">Test Automation</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/test-automation-reporting-analytics-digitalzoom/">Test Automation Analytics with Digitalzoom™</a>
+                    </nav>
+                </div>
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="https://www.perfecto.io/platform/capabilities/continuous-testing-for-devops/">BUILD AND...</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/capabilities/continuous-testing-for-devops/">Continuous Testing for DevOps</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/the-cloud-based-testing-lab/cross-browser-testing/">Test across browsers for Web &amp; Mobile</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/debug-with-devtunnel/">Debug with DevTunnel</a>
+                        <a class="nav-link" href="https://www.perfecto.io/platform/test-automation-reporting-analytics-digitalzoom/">Visualize Analytics using DigitalZoom™</a>
+                        <a class="nav-link" href="http://www.perfecto.io/platform/capabilities/real-user-simulation-with-windtunnel/">Real User Simulation with WindTunnel™</a>
+                        <a class="nav-link" href="http://www.perfecto.io/plan-with-the-blueprint-for-continuous-testing-success/">Blueprint for Continuous Testing Success</a>
+                    </nav>
+                </div>
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="">INTEGRATIONS</a>
+                        <a class="nav-link" href="https://www.perfecto.io/perfecto-integrations/">See all 30+ Integrations</a>
+                        <a class="nav-link" href="https://www.perfecto.io/ides/">IDE Integrations</a>
+                        <a class="nav-link" href="https://www.perfecto.io/continuous-integration-ci/">Continuous Integration (CI) With Perfecto</a>
+                        <a class="nav-link" href="https://www.perfecto.io/testing-frameworks/">Testing Frameworks Integrations</a>
+                        <a class="nav-link" href="https://www.perfecto.io/api-and-other-integrations/">APIs &amp; Other Integrations</a>
+                    </nav>
+                </div>
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#">SUPPORT</a>
+                        <a class="nav-link" href="https://developers.perfectomobile.com/display/PD/Documentation">Documentation</a>
+                        <a class="nav-link" href="https://developers.perfectomobile.com/questions">Community/Forum</a>
+                        <a class="nav-link" href="https://support.perfecto.io">Get Support</a>
+                        <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/pluginsextensions/">Plugins/Extensions</a>
+                        <a class="nav-link" href="https://www.perfecto.io/support-resources/resources/supported-devices/">Available Devices in the Perfecto Cloud Lab</a>
+                    </nav>
+                </div>
+                <div class="col-md-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#">COMPANY</a>
+                        <a class="nav-link" href="https://www.perfecto.io/careers/">Careers</a>
+                        <a class="nav-link" href="https://www.perfecto.io/upcoming-events/">Upcoming Events</a>
+                        <a class="nav-link" href="https://www.perfecto.io/company/management-team/">Management Team</a>
+                        <a class="nav-link" href="https://www.perfecto.io/company/about-us/">About Us</a>
+                        <a class="nav-link" href="https://www.perfecto.io/our-customers/">Our Customers</a>
+                        <a class="nav-link" href="https://www.perfecto.io/perfecto-press-releases/">Press Releases</a>
+                    </nav>
+                </div>
+                <div class="col-md-2">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254">SOCIAL</a>
+                        </li>
+                    </ul>
+                    <nav class="nav">
+                        <a class="nav-link active social" href="https://www.facebook.com/pages/Perfecto-Mobile-Inc/230120033794254" title="Facebook" target="_blank"><i class="fab fa-facebook fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.twitter.com/perfectomobile" title="Twitter" target="_blank"><i class="fab fa-twitter-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://vimeo.com/user28035758" title="Vimeo" target="_blank"><i class="fab fa-vimeo-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.youtube.com/user/PerfectoMobile" title="YouTube" target="_blank"><i class="fab fa-youtube-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://plus.google.com/100849287473108318524" title="Google+" target="_blank"><i class="fab fa-google-plus-square fa-3x"></i></a>&nbsp;
+                        <a class="nav-link active social" href="https://www.linkedin.com/company/perfecto-mobile" title="LinkedIn" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+                    </nav>
+                    <br/><br/>
+                    <a title="Norton Secured" class="nav-link" target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.perfectomobile.com&lang=en"><img src="https://www.perfecto.io/wp-content/uploads/2018/02/logo-norton.png"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="copyright">
+        <div class="container">
+            <div class="row">
+                <nav class="nav">
+                    <a class="nav-link">Copyright 2018 Perfecto Mobile, Inc. All Rights Reserved.</a>
+                    <a class="nav-link active" href="https://www.perfecto.io/terms-conditions/">Terms &amp; Conditions</a>
+                    <a class="nav-link active" href="https://www.perfecto.io/privacy-statement/">Privacy Statement</a>
+                </nav>
+            </div>
+        </div>      
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>

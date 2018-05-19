@@ -227,6 +227,7 @@ function testNextStreamer () {
       qualifyResult(tableCell, 39, 45, false, '%')
     } else {
       console.log('STREAMING ISSUE')
+      console.log('playlistItem', player.getPlaylistItem())
       console.log('played', played)
       console.log('notPlayed', notPlayed)
       console.log(player.getState()) // Comment later to improve performance
@@ -248,9 +249,7 @@ function testNextStreamer () {
 
   // Advance to the next playlist item (preloaded array) for the current data center and play
   let selectedPlayListItem = selectedDataCenter * streamTypes.length + selectedStreamType
-  console.log('Before playlistItem')
   player.playlistItem(selectedPlayListItem) // requires player.setConfig({autostart: true})
-  console.log('After playlistItem')
   updateStatus('Running ' + streamTypes[selectedStreamType].toUpperCase() + ' streaming test from ' + dataCenters[selectedDataCenter].name + '...')
   testNextStreamerTrigger = setTimeout(testNextStreamer, playbackDuration) // Call function again after video has played for playbackDuration
 }
@@ -370,8 +369,9 @@ $(document).ready(function () {
   })
 
   player.on('firstFrame', function () {
-    let qoe = this.qoe()
-    console.log('First frame received after ' + JSON.stringify(qoe.firstFrame) + 'ms.')
+    let qoe = player.qoe()
+    firstFrame = (qoe.firstFrame / 1000).toFixed(2);
+    console.log('Seconds to first frame: ' + firstFrame)
   })
 })
 
