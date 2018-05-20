@@ -1,5 +1,5 @@
 /* global $, jwplayer, Worker */
-// TODO: Get my sample.mp4 distributed to all streamers /vod directory to replace the existing sample.mp4 bunny animation
+// TODO: Get my sample.mp4 distributed to all streamers /vod directory to replace the existing sample.mp4 bunny animation then comment line 344 and uncomment 345
 // BUG: [Major] Streaming tests intermittently fail after getting a 503/504 error from streamer (eg https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24)
 // BUG: [Minor] For each request to stream, 404 error logged in Chrome (not Safari) console (redirect from streamer?)
 //  Examples:
@@ -341,8 +341,8 @@ function generatePlayList () {
   for (let dataCenter in dataCenters) {
     for (let streamType in streamTypes) {
       playList.push({
-        // file: streamTypes[streamType] + '://' + dataCenters[dataCenter].streamer + '.perfectomobile.com/live/conTest',
-        //file: streamTypes[streamType] + '://' + dataCenters[dataCenter].streamer + '.perfectomobile.com/vod/sample.mp4',
+        file: streamTypes[streamType] + '://' + dataCenters[dataCenter].streamer + '.perfectomobile.com/live/conTest',
+        // file: streamTypes[streamType] + '://' + dataCenters[dataCenter].streamer + '.perfectomobile.com/vod/sample.mp4',
         image: 'phone.jpg',
         title: dataCenters[dataCenter].name + ' (' + streamTypes[streamType].toUpperCase() + ')'
       })
