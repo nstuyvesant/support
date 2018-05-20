@@ -32,51 +32,54 @@
     <link rel="stylesheet" href="support.css" />
     <style>
         .fa-thumbs-up {
-            color: green;
+          color: green;
         }
         .download {
-            margin-left: 30px;
+          margin-left: 30px;
         }
         .fa-thumbs-down, .fa-exclamation-triangle {
-            color: red;
+          color: red;
+        }
+        .fa-meh {
+          color: orange;
         }
         .btn-lg {
-            margin-top: 20px!important;
-            margin-bottom: 30px!important;
-            width: 220px;
+          margin-top: 20px!important;
+          margin-bottom: 30px!important;
+          width: 220px;
         }
         .spacer, .alert {
-            margin-top: 30px!important;
+          margin-top: 30px!important;
         }
         /* For spinner */
         .sk-rotating-plane {
-            width: 16px;
-            height: 16px;
-            background-color: green;
-            margin: 3px ;
-            -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
-                    animation: sk-rotatePlane 1.2s infinite ease-in-out; }
-            @-webkit-keyframes sk-rotatePlane {
-            0% {
-                -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-                        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
-            50% {
-                -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-                        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
-            100% {
-                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-                        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
-            @keyframes sk-rotatePlane {
-            0% {
-                -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-                        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
-            50% {
-                -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-                        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
-            100% {
-                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-                        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-                }
+          width: 16px;
+          height: 16px;
+          background-color: green;
+          margin: 3px ;
+          -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+                  animation: sk-rotatePlane 1.2s infinite ease-in-out; }
+          @-webkit-keyframes sk-rotatePlane {
+          0% {
+              -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                      transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+          50% {
+              -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+          100% {
+              -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+          @keyframes sk-rotatePlane {
+          0% {
+              -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                      transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+          50% {
+              -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+          100% {
+              -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+              }
         }
     </style>
     <script src='https://content.jwplatform.com/libraries/hQUs7NrH.js'></script>
@@ -223,6 +226,27 @@
                                         <td>
                                             <span id="gdl-rtmps"></span>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                      <th id="can" scope="row">Guangzhou</td>
+                                      <td>
+                                          <span id="can-latency"></span>
+                                      </td>
+                                      <td>
+                                          <span id="can-jitter"></span>
+                                      </td>
+                                      <td>
+                                          <span id="can-download"></span>
+                                      </td>
+                                      <td>
+                                          <span id="can-rtmp"></span>
+                                      </td>
+                                      <td>
+                                          <span id="can-rtmpt"></span>
+                                      </td>
+                                      <td>
+                                          <span id="can-rtmps"></span>
+                                      </td>
                                     </tr>
                                     <tr>
                                         <th id="lon" scope="row">London</td>

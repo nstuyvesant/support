@@ -41,6 +41,11 @@ let testResults = { // what to test plus results as they come in
       streamer: 'gdl-sts'
     },
     {
+      name: 'Guangzhou',
+      code: 'can',
+      streamer: 'can-sts'
+    },
+    {
       name: 'London',
       code: 'lon',
       streamer: 'uk-streaming2'
