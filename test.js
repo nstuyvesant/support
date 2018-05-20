@@ -1,17 +1,15 @@
 /* global $, jwplayer, Worker */
-// BUG: First test should not be RTMPT to Boston (advanced over first item in Safari but not Chrome)
-// BUG: Intermittently getting 404 or 503 errors in Chrome console from streamers:
+// BUG: [Major] Streaming tests intermittently fail after getting a 503/504 error from streamer (eg https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24)
+// BUG: [Major] Clicking Stop during a streaming test stops streaming but starts speed test over
+// BUG: [Major] First test should not be RTMPT to Boston (advanced over first item in Safari but not Chrome)
+// BUG: [Minor] For each request to stream, 404 error logged in Chrome (not Safari) console (redirect from streamer?)
+//  Examples:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
-//      https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24 503
 //      http://fra-sts.perfectomobile.com/fcs/ident2 404
 //      http://gdl-sts.perfectomobile.com/fcs/ident2 404
 //      http://uk-streaming2.perfectomobile.com/fcs/ident2 404
 //      http://phx-sts-2.perfectomobile.com/fcs/ident2 404
-//      https://syd-sts.perfectomobile.com/idle/1331459816/47 - 504
 //      http://yyz-sts.perfectomobile.com/fcs/ident2 404
-//      * They do not occur in Safari
-// BUG: Streaming tests sometimes fail because video is still buffering. Should wait until it's playing (event?).
-// BUG: Clicking Stop during a streaming test stops streaming but starts speed test over
 
 // Global constants
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps'] // types of streams we'll be testing
@@ -298,7 +296,7 @@ $(document).ready(function () {
     }
     // Save to test results
     testResults.connectionInfo = response
-    // testResults.connectionInfo.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone // IE11 doesn't support it
+    // testResults.connectionInfo.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone // curse you IE11 (worst browser ever)
   })
 
   // Initialize the media player with sample video (required to initialize jwplayer)
