@@ -1,7 +1,5 @@
 /* global $, jwplayer, Worker */
 // BUG: [Major] Streaming tests intermittently fail after getting a 503/504 error from streamer (eg https://wakefield-streaming2.perfectomobile.com/idle/1662909371/24)
-// BUG: [Major] Clicking Stop during a streaming test stops streaming but starts speed test over
-// BUG: [Major] First test should not be RTMPT to Boston (advanced over first item in Safari but not Chrome)
 // BUG: [Minor] For each request to stream, 404 error logged in Chrome (not Safari) console (redirect from streamer?)
 //  Examples:
 //      http://wakefield-streaming2.perfectomobile.com/fcs/ident2 404
@@ -77,8 +75,8 @@ let testTypeRunning = 'None' // possible values: None | Network | Streaming
 // Start/Stop button handler
 $('#startStop').on('click', function () {
   running = !running // toggle
-  // Visually alter start/stop button with FontAwesome classes, begin the test and log
-  if (running) {
+
+  if (running) { // Visually alter start/stop button with FontAwesome classes, begin testing
     $('#startStop').removeClass('btn-success').addClass('btn-danger').html('<span id="startStopIcon" class="far fa-stop-circle"></span> Stop Test')
     testNextDataCenter()
   } else {
@@ -114,7 +112,7 @@ function stopAll (done) {
       speedTestWorker.terminate()
       break
     case 'Streaming':
-      stopStream()
+      stopStream(true) // boolean to indicate we want to stop everything and not advance to next data center
       break
   }
   updateStatus(done ? 'All tests completed.' : 'All tests stopped.')
@@ -213,12 +211,15 @@ function testNextStreamer () {
 }
 
 // GET PHP to stop ffmpeg sending FLV to streamer
-function stopStream () {
+function stopStream (stopAll) {
   player.stop()
   $.get('https://support.perfecto.io/php/stream-controller.php?type=stop&pid=' + streamPID).done(function (response) {
     testTypeRunning = 'None'
     clearTimeout(testNextStreamerTrigger)
-    if (selectedDataCenter < dataCenters.length) testNextDataCenter() // Perhaps use setTimeout()
+    if (!stopAll && selectedDataCenter < dataCenters.length) {
+      // If they are stopping, why call this?
+      testNextDataCenter()
+    }
   })
 }
 
@@ -229,7 +230,7 @@ function cleanupResult (value, precision) {
 
 // Handle messages sent by speedTestWorker
 function speedTestMessageHandler (event) {
-  // TODO: web worker to return JSON rather than semi-colon delimited data
+  // TODO: web worker to return JSON rather than semicolon delimited data
   // Format for returned event.data:
   // status;download;upload;latency (speeds are in Mbps) (status: 0=not started, 1=downloading, 2=uploading, 3=latency, 4=done, 5=aborted)
   let data = event.data.split(';')
