@@ -10,6 +10,7 @@
 //      http://uk-streaming2.perfectomobile.com/fcs/ident2 404
 //      http://phx-sts-2.perfectomobile.com/fcs/ident2 404
 //      http://yyz-sts.perfectomobile.com/fcs/ident2 404
+// TODO: Someday, drop IE11 support and use ES6 formatted strings, arrow functions, Intl.DateTimeFormat().resolvedOptions().timeZone, etc.
 
 // Global constants
 const streamTypes = ['rtmp', 'rtmpt', 'rtmps'] // types of streams we'll be testing
@@ -300,7 +301,9 @@ $(document).ready(function () {
   })
 
   // Initialize the media player with sample video (required to initialize jwplayer)
-  player = jwplayer('player').setup({ // Use JSON format because jwplayer docs recommend it
+  player = jwplayer('player').setup({ // Use JSON format because jwplayer docs recommend it (although works OK as regular object)
+    'height': 868,
+    'width': 401, // Must be > 400 or Chrome suppresses playback
     'displaytitle': true,
     'playlist': generatePlayList(),
     'rtmp': {
@@ -320,13 +323,6 @@ $(document).ready(function () {
     window.alert('Flash is required for the streaming tests (though the speed test will still run). Please enable Flash for https://support.perfecto.io. If Flash is enabled, please make sure https://content.jwplatform.com is whitelisted by your IT team.')
     $('#flashWarning').removeClass('collapse')
     $('#player').hide()
-  })
-
-  // Warn about peculiarity of new Chrome versions (does not affect test - only visual aspects of video playing)
-  player.on('ready', function () {
-    if (player.utils.isChrome()) {
-      $('#chromeWarning').removeClass('collapse')
-    }
   })
 
   // For debugging video playback only - unnecessary for production
