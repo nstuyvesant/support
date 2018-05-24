@@ -93,12 +93,16 @@ $('#startStop').on('click', function () {
 
 // Test where we left off (redo current data center if results are incomplete)
 function testNextDataCenter () {
-  let dataCenterChecked = $('#' + dataCenters[selectedDataCenter].code).is(':checked')
-  if (!dataCenterChecked) {
-    selectedDataCenter++
-    return testNextDataCenter()
+  // Stop testing if there are no more data centers to test
+  if (selectedDataCenter >= dataCenters.length) {
+    selectedDataCenter = 0 // reset to beginning because we tested them all
+    stopAll(true)
+    return false // we're done
   }
-  if (selectedDataCenter < dataCenters.length) {
+
+  let dataCenterChecked = $('#' + dataCenters[selectedDataCenter].code).is(':checked')
+
+  if (dataCenterChecked && selectedDataCenter < dataCenters.length) {
     // Run speed tests between user and data center (completion is indicated by a triggered event)
     updateStatus('Running ' + dataCenters[selectedDataCenter].name + ' network tests...')
     testTypeRunning = 'Network'
@@ -107,11 +111,11 @@ function testNextDataCenter () {
     speedTestWorker.onmessage = speedTestMessageHandler // Writes speed test results to table cells
     speedTestWorker.postMessage('start {"test_order":"I_P_D", "url_dl": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/garbage.php", "url_ul": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/empty.php", "url_ping": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/telemetry.php"} ')
     return true // still have more to test
-  } else {
-    selectedDataCenter = 0 // reset to beginning because we tested them all
-    stopAll(true)
-    return false // we're done
   }
+
+  selectedDataCenter++
+  testNextDataCenter()
+  return true
 }
 
 // Stop running tests but keep track of data center where we left off
