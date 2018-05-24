@@ -1,4 +1,6 @@
 /* global $, jwplayer, Worker */
+// TODO: Add checkbox support for data centers
+// TODO: Change export format to CSV
 // TODO: Get my sample.mp4 distributed to all streamers /vod directory to replace the existing sample.mp4 bunny animation then comment line 344 and uncomment 345
 // TODO: Someday, drop IE11 support and use ES6 formatted strings, arrow functions, Intl.DateTimeFormat().resolvedOptions().timeZone, etc.
 
