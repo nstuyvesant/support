@@ -1,6 +1,6 @@
 /* global $, jwplayer, Worker */
-// BUG: If subset of data centers (not including Toronto) are checked, the test doesn't appear to finish
 // TODO: Change export format to CSV
+// TODO: Allow check all / uncheck all
 // TODO: Get my sample.mp4 distributed to all streamers /vod directory to replace the existing sample.mp4 bunny animation then comment line 344 and uncomment 345
 // TODO: Someday, drop IE11 support and use ES6 formatted strings, arrow functions, Intl.DateTimeFormat().resolvedOptions().timeZone, etc.
 
@@ -286,6 +286,11 @@ $('#download').on('click', function () {
   let downloadButton = $('#download')
   downloadButton.attr('href', dataToDownload)
   downloadButton.attr('download', 'Perfecto Connectivity Test Results.json')
+})
+
+// Handle sites checkbox
+$('#sites').change(function () {
+  $('input:checkbox').not(this).prop('checked', this.checked)
 })
 
 // DOM ready handler
