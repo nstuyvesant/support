@@ -1,4 +1,5 @@
 /* global $, jwplayer, Worker */
+// BUG: If subset of data centers (not including Toronto) are checked, the test doesn't appear to finish
 // TODO: Change export format to CSV
 // TODO: Get my sample.mp4 distributed to all streamers /vod directory to replace the existing sample.mp4 bunny animation then comment line 344 and uncomment 345
 // TODO: Someday, drop IE11 support and use ES6 formatted strings, arrow functions, Intl.DateTimeFormat().resolvedOptions().timeZone, etc.
@@ -16,10 +17,20 @@ const meh = ' <i class="far fa-meh"></i>' // face with blank expression
 let playerEnabled = true
 let testResults = { // what to test plus results as they come in
   dataCenters: [
+    // {
+    //   name: 'Boston-Y',
+    //   code: 'bos',
+    //   streamer: 'wakefield-streaming6'
+    // },
+    // {
+    //   name: 'Boston-Z',
+    //   code: 'bos',
+    //   streamer: 'wakefield-streaming6-teridions'
+    // }
     {
       name: 'Boston',
       code: 'bos',
-      streamer: 'wakefield-streaming2'
+      streamer: 'wakefield-streaming6'
     },
     {
       name: 'Frankfurt',
