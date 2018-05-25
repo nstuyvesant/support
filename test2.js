@@ -18,44 +18,14 @@ let playerEnabled = true
 let testResults = { // what to test plus results as they come in
   dataCenters: [
     {
-      name: 'Boston',
-      code: 'bos',
-      streamer: 'wakefield-streaming2'
+      name: 'Boston-Y',
+      code: 'bosy',
+      streamer: 'wakefield-streaming6'
     },
     {
-      name: 'Frankfurt',
-      code: 'fra',
-      streamer: 'fra-sts'
-    },
-    {
-      name: 'Guadalajara',
-      code: 'gdl',
-      streamer: 'gdl-sts'
-    },
-    {
-      name: 'Guangzhou',
-      code: 'can',
-      streamer: 'can-sts'
-    },
-    {
-      name: 'London',
-      code: 'lon',
-      streamer: 'uk-streaming2'
-    },
-    {
-      name: 'Phoenix',
-      code: 'phx',
-      streamer: 'phx-sts-2'
-    },
-    {
-      name: 'Sydney',
-      code: 'syd',
-      streamer: 'syd-sts'
-    },
-    {
-      name: 'Toronto',
-      code: 'yyz',
-      streamer: 'yyz-sts'
+      name: 'Boston-Z',
+      code: 'bosz',
+      streamer: 'wakefield-streaming6-teridions'
     }
   ]
 }
@@ -145,9 +115,9 @@ $('body').on('speedTestComplete', function () {
     selectedStreamType = -1
     // Show rotating squares while we start streaming tests
     const tableCellPrefix = '#' + dataCenters[selectedDataCenter].code
-    $(tableCellPrefix + '-rtmp').html(rotatingPlane)
-    $(tableCellPrefix + '-rtmpt').html(rotatingPlane)
-    $(tableCellPrefix + '-rtmps').html(rotatingPlane)
+    $(tableCellPrefix + 'y-rtmp').html(rotatingPlane)
+    $(tableCellPrefix + 'y-rtmpt').html(rotatingPlane)
+    $(tableCellPrefix + 'y-rtmps').html(rotatingPlane)
     testNextStreamer() // next task in chain of asynchronous events
   } else {
     selectedDataCenter++
