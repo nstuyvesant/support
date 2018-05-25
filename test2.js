@@ -69,7 +69,7 @@ function testNextDataCenter () {
     speedTestWorker = new Worker('speedtest-worker.js')
     getTestUpdatesTrigger = setInterval(getTestUpdates, 100) // Invoke every 100ms - asks web worker for speed test status and tracks streaming buffering
     speedTestWorker.onmessage = speedTestMessageHandler // Writes speed test results to table cells
-    speedTestWorker.postMessage('start {"test_order":"I_P_D", "url_dl": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/garbage.php", "url_ul": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/empty.php", "url_ping": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/empty.php", "url_telemetry": "https://' + dataCenters[selectedDataCenter].code + '-lqt.perfectomobile.com/telemetry.php"} ')
+    speedTestWorker.postMessage('start {"test_order":"I_P_D", "url_dl": "https://bos-lqt.perfectomobile.com/garbage.php", "url_ul": "https://bos-lqt.perfectomobile.com/empty.php", "url_ping": "https://bos-lqt.perfectomobile.com/empty.php", "url_telemetry": "https://bos-lqt.perfectomobile.com/telemetry.php"} ')
     return true // still have more to test
   }
 
@@ -115,9 +115,9 @@ $('body').on('speedTestComplete', function () {
     selectedStreamType = -1
     // Show rotating squares while we start streaming tests
     const tableCellPrefix = '#' + dataCenters[selectedDataCenter].code
-    $(tableCellPrefix + 'y-rtmp').html(rotatingPlane)
-    $(tableCellPrefix + 'y-rtmpt').html(rotatingPlane)
-    $(tableCellPrefix + 'y-rtmps').html(rotatingPlane)
+    $(tableCellPrefix + '-rtmp').html(rotatingPlane)
+    $(tableCellPrefix + '-rtmpt').html(rotatingPlane)
+    $(tableCellPrefix + '-rtmps').html(rotatingPlane)
     testNextStreamer() // next task in chain of asynchronous events
   } else {
     selectedDataCenter++
