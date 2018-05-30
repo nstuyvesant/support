@@ -2,7 +2,7 @@
 
 <?php
 
-function upload_attachement($filename,$path,$parent) {
+function upload_attachment($filename,$path,$parent) {
   $SfConfig = parse_ini_file("conf.ini");
   define(SECURITY_TOKEN, $SfConfig['token']);
   define(USERNAME, $SfConfig['user']);
@@ -27,4 +27,4 @@ $path='ATTACHMENT.txt';
 $filename='file.txt';
 $parent='500D000001jUEOKIA4';
 
-upload_attachement($filename,$path,$parent);
+upload_attachment($filename,$path,$parent);
