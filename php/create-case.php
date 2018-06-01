@@ -32,7 +32,7 @@ require_once('soapclient/SforceEnterpriseClient.php');
 
 # Instantiate the Salesforce connection
 $connection = new SforceEnterpriseClient();
-$client = $connection->createConnection('soapclient/perfectomobile.xml');
+$client = $connection->createConnection('soapclient/perfectomobile.wsdl.xml');
 $login = $connection->login(USERNAME, PASSWORD.SECURITY_TOKEN);
 
 # Set properties of Salesforce Case object
@@ -62,7 +62,7 @@ $case->Version__c = $version;
 # Create one case and return case number (though setup for mass creates via array)
 try {
   $caseResponse = $connection->create(array($case), 'Case');
-  foreach ($caseResponse as $record) $parent = $record->id; # There's only one
+  $newCase = $caseResponse[0];
 
   # Upload attachment if one exists and case was created
   if (file_exists($path)) {
@@ -71,7 +71,7 @@ try {
       $attachment = new stdClass();
       $attachment->Body = base64_encode($data);
       $attachment->Name = $filename;
-      $attachment->ParentId = $parent;
+      $attachment->ParentId = $newCase->id;
       $attachmentResponse = $connection->create(array($attachment), 'Attachment');
     } catch (Exception $attachmentError) {
       # Failed to attach file
@@ -79,7 +79,7 @@ try {
     }
   }
   # Respond with a JSON object representing the case (though we only need the Case Number)
-  echo json_encode($caseResponse);
+  echo json_encode($newCase);
   # print_r($caseResponse); # for debugging
 } catch (Exception $caseError) {
   # Create case failed 
