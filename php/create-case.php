@@ -39,7 +39,7 @@ $mylogin = $mySforceConnection->login(USERNAME, PASSWORD.SECURITY_TOKEN);
 
 # Set properties of Salesforce Case object
 $sObject = new stdclass();
-$sObject->RecordType = $recordType;
+#$sObject->RecordType = $recordType;
 $sObject->Status = $status;
 $sObject->Origin = $origin;
 $sObject->Type = $type;
