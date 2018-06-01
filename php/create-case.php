@@ -1,9 +1,8 @@
 <?php
 # TODO: Replace hard-coded values with array of name/value pairs from POST - $('#requestForm').serializeArray()
 $type = 'Non-issue';
-$topic = 'Non-issue: Testing';
+$topic = 'Non-issue: Test';
 $origin = 'Web';
-$recordType = '01220000000HQCE';
 $timezone = -5;
 $company = 'Acme, Inc.';
 $mcmVersion = '18.6';
@@ -39,8 +38,7 @@ $mylogin = $mySforceConnection->login(USERNAME, PASSWORD.SECURITY_TOKEN);
 
 # Set properties of Salesforce Case object
 $sObject = new stdclass();
-#$sObject->RecordType = $recordType;
-$sObject->Status = $status;
+$sObject->CaseStatus = $status; # PROBLEM
 $sObject->Origin = $origin;
 $sObject->Type = $type;
 $sObject->Case_Reason__c = $topic;
@@ -63,11 +61,11 @@ $sObject->Model__c = $model;
 $sObject->OS__c = $os;
 $sObject->Version__c = $version;
 
-# Create case
+# Create case (though it's setup for mass creates via array)
 try {
-  $response = $mySforceConnection->create(array($sObject), 'Case');
-  foreach ($response as $record) $parent = $record->id;
-  $json['case'] = $response;
+  $caseResponse = $mySforceConnection->create(array($sObject), 'Case');
+  foreach ($caseResponse as $record) $parent = $record->id;
+  $json['case'] = $caseResponse;
 
   # Upload attachment if one exists and case was created
   if (file_exists($path)) {
@@ -78,15 +76,16 @@ try {
       $sfObj->Name = $filename;
       $sfObj->ParentId = $parent;
       
-      $response = $mySforceConnection->create(array($sfObj), 'Attachment');
-      $json['attachment'] = $response;
+      $attachmentResponse = $mySforceConnection->create(array($sfObj), 'Attachment');
+      $json['attachment'] = $attachmentResponse;
     } catch (Exception $e) {
       # Failed to attach file
       # $json['attachment'] = NULL;
     }
   }
-  $myJSON = json_encode($json);
-  print_r($json);
+  # Respond with a JSON object representing the case (though we only need the Case Number)
+  echo json_encode($caseResponse);
+  #print_r($json);
 } catch (Exception $e) {
   # Create case failed 
   # $json['case'] = NULL;
