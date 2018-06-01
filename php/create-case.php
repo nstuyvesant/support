@@ -38,7 +38,7 @@ $mylogin = $mySforceConnection->login(USERNAME, PASSWORD.SECURITY_TOKEN);
 
 # Set properties of Salesforce Case object
 $sObject = new stdclass();
-$sObject->CaseStatus = $status; # PROBLEM
+$sObject->Status = $status; # PROBLEM
 $sObject->Origin = $origin;
 $sObject->Type = $type;
 $sObject->Case_Reason__c = $topic;
@@ -85,8 +85,8 @@ try {
     }
   }
   # Respond with a JSON object representing the case (though we only need the Case Number)
-  #echo json_encode($caseResponse);
-  print_r($json);
+  echo json_encode($caseResponse);
+  #print_r($json);
 } catch (Exception $caseError) {
   # Create case failed 
   # $json['case'] = NULL;
