@@ -3,14 +3,14 @@
 $type = 'Non-issue';
 $topic = 'Non-issue: Testing';
 $origin = 'Web';
-$recordType = 'Support';
+$recordType = '01220000000HQCE';
 $timezone = -5;
 $company = 'Acme, Inc.';
 $mcmVersion = '18.6';
 $hssVersion = '18.6';
 $location = 'NA-US-BOS';
-$cradleId = 'AKFOKEF303';
-$deviceId = 'DAKD39399958855';
+$cradleId = 'BOS-E8-4-1/VIRTUAL/02';
+$deviceId = '2A56E99775698D2F1BABD7C1F9D57CA06AF0C7F6';
 $status = 'Closed - Canceled';
 $model = 'iPhone-8';
 $os = 'iOS';
