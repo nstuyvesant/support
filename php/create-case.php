@@ -78,16 +78,18 @@ try {
       
       $attachmentResponse = $mySforceConnection->create(array($sfObj), 'Attachment');
       $json['attachment'] = $attachmentResponse;
-    } catch (Exception $e) {
+    } catch (Exception $attachmentError) {
       # Failed to attach file
       # $json['attachment'] = NULL;
+      echo json_encode($attachmentError);
     }
   }
   # Respond with a JSON object representing the case (though we only need the Case Number)
-  echo json_encode($caseResponse);
-  #print_r($json);
-} catch (Exception $e) {
+  #echo json_encode($caseResponse);
+  print_r($json);
+} catch (Exception $caseError) {
   # Create case failed 
   # $json['case'] = NULL;
+  echo json_encode($caseError);
 }
  ?>
