@@ -1,6 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *'); # Temporary - for testing only (disable to prevent spam)
-
 if($_POST) {
 
   # Retrieve Salesforce connection info
