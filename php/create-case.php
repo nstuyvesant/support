@@ -49,8 +49,8 @@ if($_POST) {
     # Upload attachments if there are some and case was created
     # $_FILES - array of objects with name, type, tmp_name, error, size properties
     $numAttachments = count($_FILES);
+    $newCase->attachments = numAttachments;
     if ($numAttachments > 0) {
-      $newCase->attachments = numAttachments;
       try {
         $attachments = array();
         foreach($_FILES as $uploadedAttachment) {
