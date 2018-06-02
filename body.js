@@ -1,4 +1,4 @@
-/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin */
+/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin, FormData */
 // Variables with global scope
 let selectedType
 let selectedTopic
@@ -125,25 +125,32 @@ $('#requestForm').on('submit', function (e) {
   if ($('#requestForm').valid) {
     // Append execution URL to description
     $('#description').val($('#description').val() + $('#parameters').val())
-    // Submit the form via AJAX (TODO: shorten URL later)
-    $.post('https://support.perfecto.io/php/create-case.php', $('#requestForm').serialize(), function (response) {
-      console.log(response)
-      const newCase = JSON.parse(response)
-      // Clear the subject and description, reset priority to Low
-      $('#subject').val('')
-      $('#description').val('')
-      $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
-      $('#supportCase').removeClass('show') // hide form
-      $('#contactSupport').removeAttr('style')
-      // Reset the page state
-      $('.active.show').removeClass('active show')
-      // Provide case number and URL in alert to show case was successfully created
-      $('#caseNumber').text('Case ' + newCase.number).attr('href', newCase.url).attr('target', '_blank')
-      $('#submitStatus').show()
-
-      // Tell Google Analytics we submitted
-      gtag('event', 'Case Submitted') // general
-      gtag('event', 'Case: ' + selectedTopic) // specific
+    // Submit the form via AJAX
+    $.ajax({
+      url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
+      type: 'POST',
+      data: new FormData(this),
+      dataType: 'json',
+      enctype: 'multipart/form-data',
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (response) {
+        // Clear the subject and description, reset priority to Low
+        $('#subject').val('')
+        $('#description').val('')
+        $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
+        $('#supportCase').removeClass('show') // hide form
+        $('#contactSupport').removeAttr('style')
+        // Reset the page state
+        $('.active.show').removeClass('active show')
+        // Provide case number and URL in alert to show case was successfully created
+        $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
+        $('#submitStatus').show()
+        // Tell Google Analytics we submitted
+        gtag('event', 'Case Submitted') // general
+        gtag('event', 'Case: ' + selectedTopic) // specific
+      }
     })
       .fail(function () {
         console.log('Form submission not successful')

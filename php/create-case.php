@@ -46,13 +46,11 @@ if($_POST) {
     $newCaseResponse = $connection->retrieve('CaseNumber', 'Case', array($newCase->id));
     $newCase->number = $newCaseResponse[0]->CaseNumber;
 
-    # Upload attachments and link to case
-    # $_FILES - object with arrays of name, type, tmp_name, error, size properties for each upload (bad structure)
+    # Upload attachments and link to case (odd that $_FILES['attachments'] is an object with array properties rather than an array of objects)
     if (isset($_FILES['attachments'])) {
       $uploadedAttachments = $_FILES['attachments'];
       $file_count = count($uploadedAttachments['name']);
       if ($file_count > 0) {
-        $newCase->attachments = $uploadedAttachments;
         try {
           $salesforceAttachments = array();
           for ($i = 0; $i < $file_count; $i++) {
