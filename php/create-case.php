@@ -2,9 +2,9 @@
 header('Access-Control-Allow-Origin: *'); # Temporary - for testing only (disable to prevent spam)
 
 # Reject non-AJAX posts and exit
-if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-  die('Sorry Request must be AJAX POST');
-}
+// if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+//   die('Sorry Request must be AJAX POST');
+// }
 
 if($_POST) {
 
