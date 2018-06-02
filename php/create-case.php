@@ -46,26 +46,29 @@ if($_POST) {
     $newCaseResponse = $connection->retrieve('CaseNumber', 'Case', array($newCase->id));
     $newCase->number = $newCaseResponse[0]->CaseNumber;
 
-    # Upload attachments if there are some and case was created
+    # Upload attachments and link to case
     # $_FILES - array of objects with name, type, tmp_name, error, size properties
-    $numAttachments = count($_FILES);
-    $newCase->attachments = $numAttachments;
-    if ($numAttachments > 0) {
-      try {
-        $attachments = array();
-        foreach($_FILES as $uploadedAttachment) {
-          $file = $uploadedAttachment->tmp_name;
-          $data = file_get_contents($file);
-          $attachment = new stdClass();
-          $attachment->Body = base64_encode($data);
-          $attachment->Name = $uploadedAttachment->name;
-          $attachment->ParentId = $newCase->id;
-          array_push($attachments, $attachment);
+    if (isset($_FILES['attachments'])) {
+      $attachments = $_FILES['attachments'];
+      $file_count = count($attachments['name']);
+      $newCase->attachments = $file_count;
+      if ($file_count > 0) {
+        try {
+          $salesforceAttachments = array();
+          foreach($_FILES['attachments'] as $uploadedAttachment) {
+            $file = $uploadedAttachment->tmp_name;
+            $data = file_get_contents($file);
+            $attachment = new stdClass();
+            $attachment->Body = base64_encode($data);
+            $attachment->Name = $uploadedAttachment->name;
+            $attachment->ParentId = $newCase->id;
+            array_push($salesforceAttachments, $attachment);
+          }
+          $attachmentResponse = $connection->create($salesforceAttachments, 'Attachment');
+        } catch (Exception $attachmentError) {
+          # Failed to attach file
+          echo json_encode($attachmentError);
         }
-        $attachmentResponse = $connection->create($attachments, 'Attachment');
-      } catch (Exception $attachmentError) {
-        # Failed to attach file
-        echo json_encode($attachmentError);
       }
     }
     # Respond with a JSON object representing the case
