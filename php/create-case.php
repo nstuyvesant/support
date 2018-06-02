@@ -45,24 +45,24 @@ if($_POST) {
     $newCase->url = 'https://perfectomobile.force.com/customers/' . $newCase->id;
     $newCaseResponse = $connection->retrieve('CaseNumber', 'Case', array($newCase->id));
     $newCase->number = $newCaseResponse[0]->CaseNumber;
+    $newCase->phpVersion = phpversion();
 
     # Upload attachments and link to case
     # $_FILES - array of objects with name, type, tmp_name, error, size properties
     if (isset($_FILES['attachments'])) {
-      $attachments = $_FILES['attachments'];
-      $file_count = count($attachments['name']);
-      $newCase->attachments = $file_count;
+      $uploadedAttachments = $_FILES['attachments'];
+      $file_count = count($uploadedAttachments['name']);
       if ($file_count > 0) {
         try {
           $salesforceAttachments = array();
-          foreach($_FILES['attachments'] as $uploadedAttachment) {
-            $file = $uploadedAttachment->tmp_name;
+          foreach($uploadedAttachments as $uploadedAttachment) {
+            $file = $uploadedAttachment['tmp_name'];
             $data = file_get_contents($file);
-            $attachment = new stdClass();
-            $attachment->Body = base64_encode($data);
-            $attachment->Name = $uploadedAttachment->name;
-            $attachment->ParentId = $newCase->id;
-            array_push($salesforceAttachments, $attachment);
+            $salesforceAttachment = new stdClass();
+            $salesforceAttachment->Body = base64_encode($data);
+            $salesforceAttachment->Name = $uploadedAttachment['name'];
+            $salesforceAttachment->ParentId = $newCase->id;
+            array_push($salesforceAttachments, $salesforceAttachment);
           }
           $attachmentResponse = $connection->create($salesforceAttachments, 'Attachment');
         } catch (Exception $attachmentError) {
