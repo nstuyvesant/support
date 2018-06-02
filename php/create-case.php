@@ -23,7 +23,7 @@ if($_POST) {
   $case->Priority = filter_var($_POST['priority'], FILTER_SANITIZE_STRING);
   $case->Subject = filter_var($_POST['subject'], FILTER_SANITIZE_STRING);
   $case->Description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-  $case->AppURL__c = filter_var($_POST['fqdn'], FILTER_SANITIZE_STRING); // PHP 7 has FILTER_FLAG_HOSTNAME
+  $case->AppURL__c = filter_var($_POST['fqdn'], FILTER_SANITIZE_STRING); // TODO: switch to FILTER_FLAG_HOSTNAME
   $case->SuppliedName = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
   $case->SuppliedEmail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
   $case->SuppliedPhone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
@@ -45,7 +45,6 @@ if($_POST) {
     $newCase->url = 'https://perfectomobile.force.com/customers/' . $newCase->id;
     $newCaseResponse = $connection->retrieve('CaseNumber', 'Case', array($newCase->id));
     $newCase->number = $newCaseResponse[0]->CaseNumber;
-    $newCase->phpVersion = phpversion();
 
     # Upload attachments and link to case
     # $_FILES - array of objects with name, type, tmp_name, error, size properties
@@ -53,6 +52,7 @@ if($_POST) {
       $uploadedAttachments = $_FILES['attachments'];
       $file_count = count($uploadedAttachments['name']);
       if ($file_count > 0) {
+        $newCase->attachments = $uploadedAttachments;
         try {
           $salesforceAttachments = array();
           foreach($uploadedAttachments as $uploadedAttachment) {
