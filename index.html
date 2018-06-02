@@ -75,7 +75,7 @@
         </nav>
         <div class="container">
             <div id="submitStatus" class="alert alert-success alert-dismissible collapse" role="alert">
-                Your case was received by Support. An email confirmation is on the way.
+                <a id="caseNumber" class="font-weight-bold"></a> was succesfully submitted. An email confirmation is on the way.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -904,25 +904,22 @@
                     <div class="card">
                         <div class="card-header">Open a Case</div>
                         <div class="card-body">
-                            <form id="requestForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" target="_self" method="post">
+                            <form id="requestForm" action="https://support.perfecto.io/php/create-case.php" method="post">
 
                                 <input type="hidden" id="captchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
-                                <input type="hidden" name="orgid" value="00D200000001UUG">
-                                <input type="hidden" id="origin" name="origin" value="Web">
-                                <input type="hidden" name="recordType" id="recordType" value="01220000000HQCE">
-                                <input type="hidden" id="retURL" name="retURL" value="https://support.perfecto.io/?submitted=true">
+                                <input type="hidden" id="origin" name="origin">
                                 <input type="hidden" id="type" name="type">
-                                <input type="hidden" id="topic" name="00ND0000006MZHc">
-                                <input type="hidden" id="timezone" name="00ND00000069sci"><!--Not going to match picklist values-->
+                                <input type="hidden" id="topic" name="topic">
+                                <input type="hidden" id="timezone" name="timezone"><!--Not going to match picklist values-->
                                 <input type="hidden" id="company" name="company">
-                                <input type="hidden" id="mcmVersion" name="00ND0000005cI9n">
-                                <input type="hidden" id="hssVersion" name="00ND0000005cI3B">
-                                <input type="hidden" id="location" name="00N20000002vZQW">
-                                <input type="hidden" id="cradleId" name="00N20000002EtP1">
-                                <input type="hidden" id="deviceId" name="00ND0000005cetY">
-                                <input type="hidden" id="model" name="00N20000001N4gL">
-                                <input type="hidden" id="os" name="00N20000002vZPs">
-                                <input type="hidden" id="version" name="00N20000002u9Uv">
+                                <input type="hidden" id="mcmVersion" name="mcmVersion">
+                                <input type="hidden" id="hssVersion" name="hssVersion">
+                                <input type="hidden" id="location" name="location">
+                                <input type="hidden" id="cradleId" name="cradleId">
+                                <input type="hidden" id="deviceId" name="deviceId">
+                                <input type="hidden" id="model" name="model">
+                                <input type="hidden" id="os" name="os">
+                                <input type="hidden" id="version" name="version">
 
                                 <div id="cloudStatusAlert" class="alert alert-danger alert-dismissible collapse" role="alert">
                                     <span id="message"></span>
@@ -951,7 +948,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="fqdn" class="sr-only">Your cloud's hostname</label>
-                                    <input class="form-control" type="text" id="fqdn" name="00ND0000002w9Lj" placeholder="Cloud (eg. yourcloud.perfectomobile.com)" maxlength="255" data-toggle="tooltip" data-placement="bottom" autofocus title="Please provide the fully-qualified domain name of your cloud without (https://)." />
+                                    <input class="form-control" type="text" id="fqdn" name="fqdn" placeholder="Cloud (eg. yourcloud.perfectomobile.com)" maxlength="255" data-toggle="tooltip" data-placement="bottom" autofocus title="Please provide the fully-qualified domain name of your cloud without (https://)." />
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="sr-only">Your name</label>
@@ -976,7 +973,6 @@
                                     <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                                 </div>
                                 <p>Need to attach a screenshot or file? Reply to our email confirmation with your attachment.</p>
-                                <input type="hidden" id="external" name="external" value="1" />
                                 <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
                                 <input id="hiddenRecaptcha" name="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required"><br/>
                                 <input type="submit" class="btn btn-success" id="submit">

@@ -1,15 +1,15 @@
 /* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin */
 // Variables with global scope
-var selectedType
-var selectedTopic
-var cloudStatus = {}
+let selectedType
+let selectedTopic
+let cloudStatus = {}
 
 // Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
-var refreshCaptchaTimestamps = function () {
+function refreshCaptchaTimestamps () {
   // Only save updated captcha settings if form's captcha response is null or empty (for each form)
-  var response = $('#g-recaptcha-response')
+  let response = $('#g-recaptcha-response')
   if (response == null || response.val().trim() === '') {
-    var captchaSettings = JSON.parse($('#captchaSettings').val())
+    let captchaSettings = JSON.parse($('#captchaSettings').val())
     captchaSettings.ts = JSON.stringify(new Date().getTime())
     $('#captchaSettings').val(JSON.stringify(captchaSettings))
   }
@@ -23,13 +23,13 @@ function recaptchaCallback () {
 // Extract querystring values
 function qs (key) {
   key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, '\\$&') // escape RegEx meta chars
-  var match = location.search.match(new RegExp('[?&]' + key + '=([^&]+)(&|$)'))
+  let match = location.search.match(new RegExp('[?&]' + key + '=([^&]+)(&|$)'))
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
 }
 
 // If execution report is provided, put in hidden field for later append to description
 function setHiddenParametersField () {
-  var executionReport = qs('desc')
+  let executionReport = qs('desc')
   if (executionReport) $('#parameters').val('\n==== Auto-attached by Perfecto =====\n' + executionReport)
 }
 
@@ -43,15 +43,22 @@ function displayOutageAlerts (cloudFQDN) {
   }
 }
 
+// Change cursor to busy on any AJAX operation
+$(document).ajaxStart(function () {
+  $(document.body).css({'cursor': 'wait'})
+}).ajaxStop(function () {
+  $(document.body).css({'cursor': 'default'})
+})
+
 // Handle change to FQDN
 $('#fqdn').on('change', function (e) {
-  var newFQDN = $(e.target).val()
+  let newFQDN = $(e.target).val()
   displayOutageAlerts(newFQDN)
 })
 
 // Handle change to phone
 $('#phone').on('change', function () {
-  var phoneFormatted = $('#phone').intlTelInput('getNumber', intlTelInputUtils.numberFormat.INTERNATIONAL)
+  let phoneFormatted = $('#phone').intlTelInput('getNumber', intlTelInputUtils.numberFormat.INTERNATIONAL)
   $('#phone').val(phoneFormatted)
   $('#phone').val(phoneFormatted) // Overcome Safari bug by doing it twice
 })
@@ -75,16 +82,17 @@ $('#typeTabs').on('shown.bs.tab', function (e) {
 
 // Topic chosen and tab displayed. Set global variable.
 $('ul.nav-pills').on('shown.bs.tab', function (e) {
-  var target = $(e.target)
+  let target = $(e.target)
   selectedTopic = target.attr('aria-controls')
-  var description = target.attr('data-description')
+  let description = target.attr('data-description')
+  let selectedTopicHref = target.attr('href')
   // Set the form fields (not currently visible)
   $('#topic').val(selectedTopic)
   $('#description').val(description)
 
   if (selectedTopic === 'Cloud: Outage') { // Make Urgent visible
     $('#priorityLow').parent().removeClass('selected')
-    var priorityUrgent = $('#priorityUrgent')
+    let priorityUrgent = $('#priorityUrgent')
     priorityUrgent.prop('checked', true)
     priorityUrgent.parent().removeClass('collapse')
     priorityUrgent.parent().addClass('selected')
@@ -96,10 +104,11 @@ $('ul.nav-pills').on('shown.bs.tab', function (e) {
     $('#priorityLow').parent().addClass('selected')
     $('#priorityHigh').parent().addClass('currently-last')
   }
-
-  // Log Google Analytics event
-  gtag('event', 'Topic: ' + selectedTopic)
+  // Show Contact Support area (Chat and Open Case)
   $('#contactSupport').show()
+
+  // Treat topics as virtual pages with Google Analytics
+  gtag('config', 'UA-2078617-29', {'page_path': '/' + selectedType.toLowerCase() + selectedTopicHref})
 })
 
 // Enable tooltips for previously hidden objects
@@ -110,19 +119,43 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
 })
 
 // Handle submit on request form
-$('#requestForm').on('submit', function () {
+$('#requestForm').on('submit', function (e) {
+  $('#submit').prop('disabled', true) // prevent double submissions
+  e.preventDefault()
   if ($('#requestForm').valid) {
     // Append execution URL to description
     $('#description').val($('#description').val() + $('#parameters').val())
-    // Report submit event to Google Analytics
-    gtag('event', 'Case: ' + selectedTopic)
+    // Submit the form via AJAX
+    $.post('https://support.perfecto.io/php/create-case.php', $('#requestForm').serialize(), function (response) {
+      const newCase = JSON.parse(response)
+      // Clear the subject and description, reset priority to Low
+      $('#subject').val('')
+      $('#description').val('')
+      $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
+      $('#supportCase').removeClass('show') // hide form
+      $('#contactSupport').removeAttr('style')
+      // Reset the page state
+      $('.active.show').removeClass('active show')
+      // Provide case number and URL in alert to show case was successfully created
+      $('#caseNumber').text('Case ' + newCase.number).attr('href', newCase.url).attr('target', '_blank')
+      $('#submitStatus').show()
+
+      // Tell Google Analytics we submitted
+      gtag('event', 'Case Submitted') // general
+      gtag('event', 'Case: ' + selectedTopic) // specific
+    })
+      .fail(function () {
+        console.log('Form submission not successful')
+      })
+      .always(function () {
+        $('#submit').prop('disabled', false) // re-enable the Submit button
+      })
   }
 })
 
 // DOM ready
 $(document).ready(function () {
   // Load status of clouds to display alert if one or more clouds are having an outage
-  // Uncomment for production
   $.getJSON('health.json', function (data) {
     cloudStatus = data
     displayOutageAlerts($('#fqdn').val())
@@ -134,30 +167,25 @@ $(document).ready(function () {
 
   // Make radio buttons in button-groups work
   $('input[name=priority]:radio').on('change', function (e) {
-    var target = $(e.target)
+    let target = $(e.target)
     $('label.btn').removeClass('selected')
     target.parent().addClass('selected')
   })
 
   // Load required fields from querystring (if provided)
 
-  // Show confirmation if submitted
-  if (qs('submitted')) {
-    $('#submitStatus').show()
-  }
-
-  var name = qs('name')
+  let name = qs('name')
   if (name) {
     $('#name').val(name)
   }
 
-  var email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
+  let email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
   if (!email) {
     email = qs('email')
   }
   $('#email').val(email)
 
-  var phone = qs('phone')
+  let phone = qs('phone')
   if (phone && phone.length > 10) { // Discard if it's too short to be real
     $('#phone').val(phone)
   }
@@ -166,11 +194,11 @@ $(document).ready(function () {
     utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
   })
 
-  var fqdn = qs('appUrl')
+  let fqdn = qs('appUrl')
   $('#fqdn').val(fqdn)
 
   // Report source to Google Analytics
-  var origin = qs('origin')
+  let origin = qs('origin') || 'Web'
   if (fqdn) {
     gtag('event', 'Visit: MCM/Digitalzoom')
   } else if (origin === 'Customer Portal') {
@@ -180,7 +208,7 @@ $(document).ready(function () {
   }
 
   // Digitalzoom sends the FQDN as cname instead of appUrl
-  var cname = qs('cname')
+  let cname = qs('cname')
   if (!fqdn && cname) {
     $('#fqdn').val(cname + '.perfectomobile.com')
   }
@@ -188,10 +216,10 @@ $(document).ready(function () {
   // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
   $('#origin').val(origin)
   $('#company').val(qs('company'))
-  var timezone = qs('timezone')
+  let timezone = qs('timezone')
   if (!timezone) {
-    var d = new Date()
-    var n = d.getTimezoneOffset()
+    let d = new Date()
+    let n = d.getTimezoneOffset()
     timezone = -n / 60
   }
   $('#timezone').val(timezone)
@@ -225,7 +253,7 @@ $(document).ready(function () {
           }
         }
       },
-      '00ND0000002w9Lj': { // fqdn
+      fqdn: {
         required: true,
         minlength: 13
       },
