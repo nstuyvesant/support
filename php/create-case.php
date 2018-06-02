@@ -65,7 +65,7 @@ try {
   $newCase = $caseResponse[0];
   $newCase->url = 'https://perfectomobile.force.com/customers/' . $newCase->id;
   $newCaseResponse = $connection->retrieve('CaseNumber', 'Case', array($newCase->id));
-  $newCase->number = $retrievedCases[0]->CaseNumber;
+  $newCase->number = $newCaseResponse[0]->CaseNumber;
 
   # Upload attachment if one exists and case was created
   if (file_exists($path)) {
