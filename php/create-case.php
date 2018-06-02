@@ -47,7 +47,7 @@ if($_POST) {
     $newCase->number = $newCaseResponse[0]->CaseNumber;
 
     # Upload attachments and link to case
-    # $_FILES - array of objects with name, type, tmp_name, error, size properties
+    # $_FILES - object with arrays of name, type, tmp_name, error, size properties for each upload (bad structure)
     if (isset($_FILES['attachments'])) {
       $uploadedAttachments = $_FILES['attachments'];
       $file_count = count($uploadedAttachments['name']);
@@ -55,12 +55,12 @@ if($_POST) {
         $newCase->attachments = $uploadedAttachments;
         try {
           $salesforceAttachments = array();
-          foreach($uploadedAttachments as $uploadedAttachment) {
-            $file = $uploadedAttachment['tmp_name'];
+          for ($i = 0; $i < $file_count; $i++) {
+            $file = $uploadedAttachments['tmp_name'][$i];
             $data = file_get_contents($file);
             $salesforceAttachment = new stdClass();
             $salesforceAttachment->Body = base64_encode($data);
-            $salesforceAttachment->Name = $uploadedAttachment['name'];
+            $salesforceAttachment->Name = $uploadedAttachments['name'][$i];
             $salesforceAttachment->ParentId = $newCase->id;
             array_push($salesforceAttachments, $salesforceAttachment);
           }
@@ -79,48 +79,4 @@ if($_POST) {
   }
 
 }
-// define("SOAP_CLIENT_BASEDIR", "../soapclient");
-// require_once (SOAP_CLIENT_BASEDIR.'/SforceEnterpriseClient.php');
-// require_once (SOAP_CLIENT_BASEDIR.'/SforceHeaderOptions.php');
-
-// $login = 'your Salesforce Id';
-// $password = 'your Salesforce pwd';
-// try {
-//   // login
-//   $mySforceConnection = new SforceEnterpriseClient();
-//   $mySoapClient = $mySforceConnection->createConnection(SOAP_CLIENT_BASEDIR.'/enterprise.wsdl.xml');
-//   $mylogin = $mySforceConnection->login($login, $password);
-  
-//   // Search
-//   $searchKey = $_POST["parentId"];
-//   $tableKey = $_POST["select"];
-//   $query = 'SELECT Id from ' . $tableKey . ' where Name = \'' . $searchKey . '\'';
-//   print_r($query);
-//   $response = $mySforceConnection->query(($query));
-
-//   // helpful method
-//   $file = $_FILES["attachment"]["tmp_name"];
-//   $fileName = $_FILES["attachment"]["name"];
-//   $parentID = $response->records[0]->Id;
-  
-//   $handle = fopen($file,'rb');
-//   $file_content = fread($handle,filesize($file));
-//   fclose($handle);
-
-//   // encode
-//   $encoded = chunk_split(base64_encode($file_content));
-  
-//   // the target Sobject
-//   $sObject = new stdclass();
-//   $sObject->Name = $fileName;
-//   $sObject->ParentId = $parentID;
-//   $sObject->body = $encoded;
-//   // do upload
-//   $createResponse = $mySforceConnection->create(array($sObject), 'Attachment');
-//   var_dump($createResponse);
-//   // print_r($createResponse->Id);
-// } catch (Exception $e) {
-//   echo $mySforceConnection->getLastRequest();
-//   echo $e->faultstring;
-//   }
 ?>
