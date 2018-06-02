@@ -35,9 +35,9 @@
     <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/support.perfecto.io\/","sameAs":["https:\/\/www.facebook.com\/pages\/Perfecto-Mobile-Inc\/230120033794254","https:\/\/www.linkedin.com\/company\/perfecto-mobile","https:\/\/www.youtube.com\/user\/PerfectoMobile","https:\/\/twitter.com\/perfectomobile"],"@id":"https:\/\/www.perfecto.io","name":"Perfecto","logo":"https:\/\/www.perfecto.io\/wp-content\/uploads\/2018\/01\/perfecto-logo-sticky.png"}</script>
     <script>
         // If website isn't https://support.perfecto.io, redirect
-        if (location.protocol != 'https:' || window.location.hostname != 'support.perfecto.io') {
-            window.location.replace('https://support.perfecto.io/' + location.search);
-        }
+        // if (location.protocol != 'https:' || window.location.hostname != 'support.perfecto.io') {
+        //     window.location.replace('https://support.perfecto.io/' + location.search);
+        // }
     </script>
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-29" async></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -904,7 +904,7 @@
                     <div class="card">
                         <div class="card-header">Open a Case</div>
                         <div class="card-body">
-                            <form id="requestForm" action="https://support.perfecto.io/php/create-case.php" method="post">
+                            <form id="requestForm" action="https://support.perfecto.io/php/create-case.php" enctype="multipart/form-data" method="post">
 
                                 <input type="hidden" id="captchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                                 <input type="hidden" id="origin" name="origin">
@@ -968,11 +968,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="sr-only">Description of your issue</label>
-                                    <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster." data-toggle="tooltip" data-placement="bottom" title="The more info you provide, the less likely we'll need to get back to you with more questions." ></textarea>
+                                    <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster." data-toggle="tooltip" data-placement="bottom" title="The more info you provide, the less likely we'll need to get back to you with more questions."></textarea>
                                     <input type="hidden" id="parameters">
                                     <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                                 </div>
-                                <p>Need to attach a screenshot or file? Reply to our email confirmation with your attachment.</p>
+                                <div class="form-group">
+                                    <label for="description">Attach screenshot, app, or script (if needed)</label>
+                                    <input type="file" class="form-control" id="attachments" name="attachments[]" multiple />
+                                </div>
                                 <div class="g-recaptcha" data-sitekey="6Lc90EsUAAAAAKEBIwXp-jWbTY1GElbWNiW4cg1E" data-callback="recaptchaCallback"></div>
                                 <input id="hiddenRecaptcha" name="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required"><br/>
                                 <input type="submit" class="btn btn-success" id="submit">

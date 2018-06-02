@@ -127,6 +127,7 @@ $('#requestForm').on('submit', function (e) {
     $('#description').val($('#description').val() + $('#parameters').val())
     // Submit the form via AJAX (TODO: shorten URL later)
     $.post('https://support.perfecto.io/php/create-case.php', $('#requestForm').serialize(), function (response) {
+      console.log(response)
       const newCase = JSON.parse(response)
       // Clear the subject and description, reset priority to Low
       $('#subject').val('')
