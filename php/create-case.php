@@ -1,11 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *'); # Temporary - for testing only (disable to prevent spam)
 
-# Reject non-AJAX posts and exit
-// if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-//   die('Sorry Request must be AJAX POST');
-// }
-
 if($_POST) {
 
   # Retrieve Salesforce connection info
@@ -53,7 +48,9 @@ if($_POST) {
 
     # Upload attachments if there are some and case was created
     # $_FILES - array of objects with name, type, tmp_name, error, size properties
-    if (count($_FILES) > 0) {
+    $numAttachments = count($_FILES);
+    if ($numAttachments > 0) {
+      $newCase->attachments = numAttachments;
       try {
         $attachments = array();
         foreach($_FILES as $uploadedAttachment) {
