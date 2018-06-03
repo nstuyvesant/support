@@ -21,7 +21,7 @@ if($_POST) {
   $case->Priority = filter_var($_POST['priority'], FILTER_SANITIZE_STRING);
   $case->Subject = filter_var($_POST['subject'], FILTER_SANITIZE_STRING);
   $case->Description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-  $case->AppURL__c = filter_var($_POST['fqdn'], FILTER_SANITIZE_STRING); // TODO: switch to FILTER_FLAG_HOSTNAME
+  $case->AppURL__c = filter_var($_POST['fqdn'], FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
   $case->SuppliedName = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
   $case->SuppliedEmail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
   $case->SuppliedPhone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
