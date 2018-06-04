@@ -15,4 +15,4 @@ function gtag () {
   dataLayer.push(arguments)
 }
 gtag('js', new Date())
-gtag('config', 'UA-2078617-29')
+gtag('config', 'UA-2078617-29', {'page_path': '/'})
