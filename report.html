@@ -40,7 +40,7 @@
         .red {
             color: red;
         }
-        .orange{
+        .orange {
             color: orange;
         }
         h1 {
@@ -76,21 +76,21 @@
             <div class="col-md-2 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <span class="metric red font-weight-bold"><span id="last24h"></span>%</span><br/>Last 24h
+                        <span class="metric font-weight-bold"><span id="last24h"></span>%</span><br/>Last 24h
                     </div>
                 </div>
             </div>
             <div class="col-md-2 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <span class="metric green font-weight-bold"><span id="last7d"></span>%</span><br/>Last 7d
+                        <span class="metric font-weight-bold"><span id="last7d"></span>%</span><br/>Last 7d
                     </div>
                 </div>
             </div>
             <div class="col-md-2 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <span class="metric orange font-weight-bold"><span id="last30d"></span>%</span><br/>Last 30d
+                        <span class="metric font-weight-bold"><span id="last30d"></span>%</span><br/>Last 30d
                     </div>
                 </div>
             </div>
@@ -311,10 +311,10 @@
                 duration: 500,
                 easing: 'easeOutQuart',
                 onComplete: function () {
-                var ctx = this.chart.ctx;
-                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
+                var ctx = this.chart.ctx
+                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily)
+                ctx.textAlign = 'center'
+                ctx.textBaseline = 'bottom'
 
                 this.data.datasets.forEach(function (dataset) {
 
@@ -324,17 +324,17 @@
                             mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
                             start_angle = model.startAngle,
                             end_angle = model.endAngle,
-                            mid_angle = start_angle + (end_angle - start_angle)/2;
+                            mid_angle = start_angle + (end_angle - start_angle)/2
 
-                        let x = mid_radius * Math.cos(mid_angle);
-                        let y = mid_radius * Math.sin(mid_angle);
+                        let x = mid_radius * Math.cos(mid_angle)
+                        let y = mid_radius * Math.sin(mid_angle)
 
-                        ctx.fillStyle = '#000';
+                        ctx.fillStyle = '#000'
 
-                        let percent = String(Math.round(dataset.data[i]/total*100)) + "%";
-                        ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                        let percent = String(Math.round(dataset.data[i]/total*100)) + '%'
+                        ctx.fillText(dataset.data[i], model.x + x, model.y + y)
                         // Display percent in another line, line break doesn't work for fillText
-                        ctx.fillText(percent, model.x + x, model.y + y + 15);
+                        ctx.fillText(percent, model.x + x, model.y + y + 15)
                     }
                 })
                 }
@@ -347,20 +347,32 @@
             options: chartOptions
         })
 
-        function colorCode(value) {
-            switch (value) {
-
+        jQuery.fn.extend({
+            colorCode: function () {
+                return this.each(function() {
+                    let element = $('#' + this.id)
+                    let value = parseInt(element.text(), 10)
+                    let color
+                    if (value > 70) {
+                        color = 'green'
+                    } else if (value > 50) {
+                        color = 'orange'
+                    } else {
+                        color = 'red'
+                    }
+                    element.parent().addClass(color)
+                })
             }
-        }
+        })
 
         // DOM ready
         $(document).ready(function () {
-            // TODO: use property name to generate jQuery doc reference then do a for/in loop
             $('#fqdn').text(reportData.fqdn)
             $('#snapshotDate').text(reportData.snapshotDate)
             $('#last24h').text(reportData.last24h)
-            $('#last7d').text(reportData.last7d)
-            $('#last30d').text(reportData.last30d)
+            $('#last24h').colorCode()
+            $('#last7d').text(reportData.last7d).colorCode()
+            $('#last30d').text(reportData.last30d).colorCode()
             let totalImpact = 0
             let tableRow = ''
             let impactText = ''
