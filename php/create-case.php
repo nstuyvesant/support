@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 if($_POST) {
 
   # Retrieve Salesforce connection info
@@ -15,26 +17,26 @@ if($_POST) {
 
   # Set properties of Salesforce Case object
   $case = new stdClass();
-  $case->Origin = filter_var($_POST['origin'], FILTER_SANITIZE_STRING);
-  $case->Type =  filter_var($_POST['type'], FILTER_SANITIZE_STRING);
-  $case->Case_Reason__c = filter_var($_POST['topic'], FILTER_SANITIZE_STRING);
-  $case->Priority = filter_var($_POST['priority'], FILTER_SANITIZE_STRING);
-  $case->Subject = filter_var(htmlspecialchars_decode($_POST['subject'], ENT_QUOTES), FILTER_SANITIZE_STRING);
-  $case->Description = filter_var(htmlspecialchars_decode($_POST['description'], ENT_QUOTES), FILTER_SANITIZE_STRING);
-  $case->AppURL__c = filter_var($_POST['fqdn'], FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
-  $case->SuppliedName = filter_var(htmlspecialchars_decode($_POST['name'], ENT_QUOTES), FILTER_SANITIZE_STRING);
-  $case->SuppliedEmail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-  $case->SuppliedPhone = filter_var(htmlspecialchars_decode($_POST['phone'], ENT_QUOTES), FILTER_SANITIZE_STRING);
-  $case->SuppliedCompany = filter_var(htmlspecialchars_decode($_POST['company'], ENT_QUOTES), FILTER_SANITIZE_STRING);
-  $case->Customer_Time_Zone__c = filter_var($_POST['timezone'], FILTER_VALIDATE_FLOAT);
-  $case->MCM_Version__c = filter_var($_POST['mcmVersion'], FILTER_SANITIZE_STRING);
-  $case->HSS_Version__c = filter_var($_POST['hssVersion'], FILTER_SANITIZE_STRING);
-  $case->Location__c = filter_var($_POST['location'], FILTER_SANITIZE_STRING);
-  $case->Cradle__c = filter_var($_POST['cradleId'], FILTER_SANITIZE_STRING);
-  $case->Device_ID__c = filter_var($_POST['deviceId'], FILTER_SANITIZE_STRING);
-  $case->Model__c = filter_var($_POST['model'], FILTER_SANITIZE_STRING);
-  $case->OS__c = filter_var($_POST['os'], FILTER_SANITIZE_STRING);
-  $case->Version__c = filter_var($_POST['version'], FILTER_SANITIZE_STRING);
+  $case->Origin = $_POST['origin'];
+  $case->Type =  $_POST['type'];
+  $case->Case_Reason__c = $_POST['topic'];
+  $case->Priority = $_POST['priority'];
+  $case->Subject = htmlspecialchars_decode($_POST['subject'], ENT_QUOTES);
+  $case->Description = htmlspecialchars_decode($_POST['description'], ENT_QUOTES);
+  $case->AppURL__c = $_POST['fqdn'];
+  $case->SuppliedName = htmlspecialchars_decode($_POST['name'], ENT_QUOTES);
+  $case->SuppliedEmail = $_POST['email'];
+  $case->SuppliedPhone = htmlspecialchars_decode($_POST['phone'], ENT_QUOTES);
+  $case->SuppliedCompany = htmlspecialchars_decode($_POST['company'], ENT_QUOTES);
+  $case->Customer_Time_Zone__c = $_POST['timezone'];
+  $case->MCM_Version__c = $_POST['mcmVersion'];
+  $case->HSS_Version__c = $_POST['hssVersion'];
+  $case->Location__c = $_POST['location'];
+  $case->Cradle__c = $_POST['cradleId'];
+  $case->Device_ID__c = $_POST['deviceId'];
+  $case->Model__c = $_POST['model'];
+  $case->OS__c = $_POST['os'];
+  $case->Version__c = $_POST['version'];
 
   # Create one case and return case number (though setup for mass creates via array)
   try {
