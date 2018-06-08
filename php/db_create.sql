@@ -127,47 +127,56 @@ BEGIN
     INSERT INTO clouds(fqdn, email_recipients) VALUES (cloud_fqdn, emails)
         ON CONFLICT (fqdn) DO UPDATE SET email_recipients = emails
         RETURNING id INTO cloud_id;
-        
 END;
 $$ LANGUAGE plpgsql;
 
--- Used to get the id or create a cloud record if one doesn't exist (called by the other functions below)
+-- Get the id or create a cloud record if one doesn't exist (called by the other functions below)
 CREATE OR REPLACE FUNCTION cloud_get_id(cloud_fqdn character varying(255), OUT cloud_id uuid) AS $$
 BEGIN
     INSERT INTO clouds(fqdn) VALUES (cloud_fqdn)
         ON CONFLICT (fqdn) DO NOTHING
         RETURNING id INTO cloud_id;
-        
 END;
 $$ LANGUAGE plpgsql;
 
--- TODO: Create functions for the following (just pseudo-SQL below)
+-- Create snapshot or update if one exists
+CREATE OR REPLACE FUNCTION snapshot_upsert(cloud_fqdn character varying(255), snapshot_date date, success_last24h smallint, success_last7d smallint, success_last30d smallint, OUT cloud_id uuid) AS $$
+BEGIN
+    INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d)
+        VALUES (cloud_get_id(cloud_fqdn), snapshot_date, success_last24h, success_last7d, success_last30d)
+            ON CONFLICT (cloud_id, snapshot_date)
+                DO UPDATE SET success_last24h = success_last24h, success_last7d = success_last7d, success_last30d = success_last30d
+            RETURNING id INTO cloud_id;
+END;
+$$ LANGUAGE plpgsql;
 
--- CREATE FUNCTION cloud_get_id(fqdn character varying(255))
--- RETURNS uuid AS
--- INSERT INTO clouds(fqdn) VALUES ($1)
--- ON CONFLICT (fqdn) DO SELECT id FROM clouds WHERE fqdn = $1;
+CREATE OR REPLACE FUNCTION snapshot_get_id(cloud_fqdn character varying(255), snapshot_date date, OUT snapshot_id uuid) AS $$
+BEGIN
+    INSERT INTO snapshots(cloud_id, snapshot_date) VALUES (cloud_get_id(cloud_fqdn), snapshot_date)
+        ON CONFLICT (cloud_id, snapshot_date) DO NOTHING
+        RETURNING id INTO snapshot_id;
+    -- Query to get id but might not need it as long as RETURNING will get the right uuid
+    -- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id
+        -- WHERE clouds.fqdn = cloud_fqdn AND snapshots.snapshot_date = snapshot_date
+END;
+$$ LANGUAGE plpgsql;
 
--- CREATE FUNCTION snapshot_upsert(fqdn character varying(255), snapshot_date date, success_last24h smallint, success_last7d smallint, success_last30d smallint)
--- RETURNS uuid AS
--- SET $6 = cloud_get_id(fqdn)
--- INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d) VALUES ($6, $2, $3, $4, $5)
--- ON CONFLICT (cloud_id, snapshot_date) DO UPDATE SET success_last24h = $3, success_last7d = $4, success_last30d = $4;
+CREATE OR REPLACE FUNCTION device_add(cloud_fqdn character varying(255), snapshot_date date, rank smallint, model character varying(255), os character varying(255), device_id character varying(255), errors_last7d bigint, OUT devices_id uuid) AS $$
+BEGIN
+    INSERT INTO devices(snapshot_id, rank, model, os, device_id, errors_last7d) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, model, os, device_id, errors_last7d)
+        RETURNING id INTO devices_id;
+END;
+$$ LANGUAGE plpgsql;
 
--- CREATE FUNCTION device_add(fqdn character varying(255), snapshot_date date, rank smallint, model character varying(255), os character varying(255), device_id character varying(255), errors_last7d bigint)
--- RETURNS uuid AS
--- SET $6 = cloud_get_id(fqdn)
--- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
--- INSERT INTO devices(snapshot_id, rank, model, os, device_id, errors_last7d) VALUES ($8, $3, $4, $5, $6, $7);
+CREATE OR REPLACE FUNCTION test_add(cloud_fqdn character varying(255), snapshot_date date, rank smallint, test_name character varying(4000), age bigint, failures_last7d bigint, passes_last7d bigint, OUT test_id uuid) AS $$
+BEGIN
+    INSERT INTO tests(snapshot_id, rank, test_name, age, failures_last7d, passes_last7d) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, test_name, age, failures_last7d, passes_last7d)
+        RETURNING id INTO test_id;
+END;
+$$ LANGUAGE plpgsql;
 
--- CREATE FUNCTION test_add(fqdn character varying(255), snapshot_date date, rank small int, test_name character varying(4000), age bigint, failures_last7d bigint, passes_last7d bigint)
--- RETURNS uuid AS
--- SET $6 = cloud_get_id(fqdn)
--- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
--- INSERT INTO tests(snapshot_id, rank, test_name, age, failures_last7d, passes_last7d) VALUES ($7, $3, $4, $5, $6, $7);
-
--- CREATE FUNCTION recommendation_add(fqdn character varying(255), snapshot_date date, rank smallint, recommendation character varying(2000), impact_percentage smallint, impact_message character varying(2000))
--- RETURNS uuid AS
--- SET $6 = cloud_get_id(fqdn)
--- snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
--- INSERT INTO recommendations(snapshot_id, rank, recommendation, impact_percentage, impact_message) VALUES ($7, $3, $4, $5, $6);
+CREATE OR REPLACE FUNCTION recommendation_add(fqdn character varying(255), snapshot_date date, rank smallint, recommendation character varying(2000), impact_percentage smallint, impact_message character varying(2000), OUT recommendation_id uuid) AS $$
+BEGIN
+    INSERT INTO recommendations(snapshot_id, rank, recommendation, impact_percentage, impact_message) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, recommendation, impact_percentage, impact_message);
+END;
+$$ LANGUAGE plpgsql;
