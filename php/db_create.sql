@@ -1,3 +1,6 @@
+-- Meant to be run from PSQL:
+-- $ psql -d postgres -f db_create.sql
+
 -- Create database
 
 DROP DATABASE IF EXISTS vr;
