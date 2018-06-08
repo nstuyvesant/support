@@ -3,6 +3,11 @@
 
 -- Create database
 
+-- Forcefully disconnect anyone
+SELECT pid, pg_terminate_backend(pid) 
+FROM pg_stat_activity 
+WHERE datname = 'vr' AND pid <> pg_backend_pid();
+
 DROP DATABASE IF EXISTS vr;
 
 CREATE DATABASE vr
