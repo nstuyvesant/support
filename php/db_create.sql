@@ -108,4 +108,3 @@ CREATE INDEX fki_clouds_fkey ON public.snapshots USING btree (cloud_id);
 CREATE INDEX fki_devices_snapshots_fkey ON public.devices USING btree (snapshot_id);
 CREATE INDEX fki_recommendations_snapshots_fkey ON public.recommendations USING btree (snapshot_id);
 CREATE INDEX fki_tests_snapshots_fkey ON public.tests USING btree (snapshot_id);
-
