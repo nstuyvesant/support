@@ -121,10 +121,21 @@ CREATE INDEX fki_tests_snapshots_fkey ON public.tests USING btree (snapshot_id);
 
 -- Use stored procedures to interact with DB (never direct queries) - allows us to change schema without breaking things
 
+-- Insert cloud record or update email recipients if one exists
 CREATE OR REPLACE FUNCTION cloud_upsert(cloud_fqdn character varying(255), emails character varying(4000), OUT cloud_id uuid) AS $$
 BEGIN
     INSERT INTO clouds(fqdn, email_recipients) VALUES (cloud_fqdn, emails)
         ON CONFLICT (fqdn) DO UPDATE SET email_recipients = emails
+        RETURNING id INTO cloud_id;
+        
+END;
+$$ LANGUAGE plpgsql;
+
+-- Used to get the id or create a cloud record if one doesn't exist (called by the other functions below)
+CREATE OR REPLACE FUNCTION cloud_get_id(cloud_fqdn character varying(255), OUT cloud_id uuid) AS $$
+BEGIN
+    INSERT INTO clouds(fqdn) VALUES (cloud_fqdn)
+        ON CONFLICT (fqdn) DO NOTHING
         RETURNING id INTO cloud_id;
         
 END;
