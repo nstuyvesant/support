@@ -41,12 +41,14 @@ COMMENT ON COLUMN public.clouds.email_recipients IS 'Comma-separated list of ema
 CREATE TABLE public.snapshots (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     cloud_id uuid NOT NULL REFERENCES clouds(id),
+    snapshot_date date,
     success_last24h smallint,
     success_last7d smallint,
     success_last30d smallint,
     lab_issues bigint,
     orchestration_issues bigint,
-    scripting_issues bigint
+    scripting_issues bigint,
+    UNIQUE (cloud_id, snapshot_date)
 );
 
 COMMENT ON COLUMN public.snapshots.cloud_id IS 'Foreign key to cloud';
@@ -113,3 +115,13 @@ CREATE INDEX fki_clouds_fkey ON public.snapshots USING btree (cloud_id);
 CREATE INDEX fki_devices_snapshots_fkey ON public.devices USING btree (snapshot_id);
 CREATE INDEX fki_recommendations_snapshots_fkey ON public.recommendations USING btree (snapshot_id);
 CREATE INDEX fki_tests_snapshots_fkey ON public.tests USING btree (snapshot_id);
+
+-- Add stored procedures
+
+-- clouds_upsert(fqdn, email_recipients)
+-- INSERT INTO clouds(fqdn, email_recipients) VALUES ($1, $2)
+-- ON CONFLICT (fqdn) DO UPDATE SET fqdn = $1, email_recipients = $2);
+
+-- snapshots_upsert(fqdn, snapshot_date)
+-- INSERT INTO snapshots(cloud_id, date) VALUES ($1, $2)
+-- ON CONFLICT (fqdn) DO UPDATE SET fqdn = $1, email_recipients = $2);
