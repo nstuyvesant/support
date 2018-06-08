@@ -66,7 +66,8 @@ CREATE TABLE public.devices (
     model character varying(255) NOT NULL,
     os character varying(255) NOT NULL,
     device_id character varying(255) NOT NULL,
-    errors_last7d bigint NOT NULL
+    errors_last7d bigint NOT NULL,
+    UNIQUE (snapshot_id, rank)
 );
 
 COMMENT ON COLUMN public.devices.snapshot_id IS 'Foreign key to snapshot record';
@@ -82,7 +83,8 @@ CREATE TABLE public.recommendations (
     rank smallint DEFAULT 1 NOT NULL,
     recommendation character varying(2000) NOT NULL,
     impact_percentage smallint DEFAULT 0 NOT NULL,
-    impact_message character varying(2000)
+    impact_message character varying(2000),
+    UNIQUE (snapshot_id, rank)
 );
 
 COMMENT ON COLUMN public.recommendations.snapshot_id IS 'Foreign key to snapshot record';
@@ -96,15 +98,16 @@ CREATE TABLE public.tests (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     snapshot_id uuid NOT NULL REFERENCES snapshots(id),
     rank smallint DEFAULT 1 NOT NULL,
-    test character varying(4000) NOT NULL,
+    test_name character varying(4000) NOT NULL,
     age bigint NOT NULL,
     failures_last7d bigint NOT NULL,
-    passes_last7d bigint NOT NULL
+    passes_last7d bigint NOT NULL,
+    UNIQUE (snapshot_id, rank)
 );
 
 COMMENT ON COLUMN public.tests.snapshot_id IS 'Foreign key to snapshot record';
 COMMENT ON COLUMN public.tests.rank IS 'Report ranking of the importance of the problematic test';
-COMMENT ON COLUMN public.tests.test IS 'Name of the test having issues';
+COMMENT ON COLUMN public.tests.test_name IS 'Name of the test having issues';
 COMMENT ON COLUMN public.tests.age IS 'How many days Digitalzoom has known about this test (used to select out tests that are newly created)';
 COMMENT ON COLUMN public.tests.failures_last7d IS 'Number of failures of the test for the last 7 days';
 COMMENT ON COLUMN public.tests.passes_last7d IS 'The number of times the test has passed over the last 7 days';
@@ -116,12 +119,44 @@ CREATE INDEX fki_devices_snapshots_fkey ON public.devices USING btree (snapshot_
 CREATE INDEX fki_recommendations_snapshots_fkey ON public.recommendations USING btree (snapshot_id);
 CREATE INDEX fki_tests_snapshots_fkey ON public.tests USING btree (snapshot_id);
 
--- Add stored procedures
+-- Use stored procedures to interact with DB (never direct queries) - allows us to change schema without breaking things
 
--- clouds_upsert(fqdn, email_recipients)
--- INSERT INTO clouds(fqdn, email_recipients) VALUES ($1, $2)
--- ON CONFLICT (fqdn) DO UPDATE SET fqdn = $1, email_recipients = $2);
+CREATE OR REPLACE FUNCTION cloud_upsert(cloud_fqdn character varying(255), emails character varying(4000), OUT cloud_id uuid) AS $$
+BEGIN
+    INSERT INTO clouds(fqdn, email_recipients) VALUES (cloud_fqdn, emails)
+        ON CONFLICT (fqdn) DO UPDATE SET email_recipients = emails
+        RETURNING id INTO cloud_id;
+        
+END;
+$$ LANGUAGE plpgsql;
 
--- snapshots_upsert(fqdn, snapshot_date)
--- INSERT INTO snapshots(cloud_id, date) VALUES ($1, $2)
--- ON CONFLICT (fqdn) DO UPDATE SET fqdn = $1, email_recipients = $2);
+-- TODO: Create functions for the following (just pseudo-SQL below)
+
+-- CREATE FUNCTION cloud_get_id(fqdn character varying(255))
+-- RETURNS uuid AS
+-- INSERT INTO clouds(fqdn) VALUES ($1)
+-- ON CONFLICT (fqdn) DO SELECT id FROM clouds WHERE fqdn = $1;
+
+-- CREATE FUNCTION snapshot_upsert(fqdn character varying(255), snapshot_date date, success_last24h smallint, success_last7d smallint, success_last30d smallint)
+-- RETURNS uuid AS
+-- SET $6 = cloud_get_id(fqdn)
+-- INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d) VALUES ($6, $2, $3, $4, $5)
+-- ON CONFLICT (cloud_id, snapshot_date) DO UPDATE SET success_last24h = $3, success_last7d = $4, success_last30d = $4;
+
+-- CREATE FUNCTION device_add(fqdn character varying(255), snapshot_date date, rank smallint, model character varying(255), os character varying(255), device_id character varying(255), errors_last7d bigint)
+-- RETURNS uuid AS
+-- SET $6 = cloud_get_id(fqdn)
+-- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
+-- INSERT INTO devices(snapshot_id, rank, model, os, device_id, errors_last7d) VALUES ($8, $3, $4, $5, $6, $7);
+
+-- CREATE FUNCTION test_add(fqdn character varying(255), snapshot_date date, rank small int, test_name character varying(4000), age bigint, failures_last7d bigint, passes_last7d bigint)
+-- RETURNS uuid AS
+-- SET $6 = cloud_get_id(fqdn)
+-- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
+-- INSERT INTO tests(snapshot_id, rank, test_name, age, failures_last7d, passes_last7d) VALUES ($7, $3, $4, $5, $6, $7);
+
+-- CREATE FUNCTION recommendation_add(fqdn character varying(255), snapshot_date date, rank smallint, recommendation character varying(2000), impact_percentage smallint, impact_message character varying(2000))
+-- RETURNS uuid AS
+-- SET $6 = cloud_get_id(fqdn)
+-- snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id WHERE clouds.fqdn = $1 AND snapshots.snapshot_date = $2 -- assign to $8
+-- INSERT INTO recommendations(snapshot_id, rank, recommendation, impact_percentage, impact_message) VALUES ($7, $3, $4, $5, $6);
