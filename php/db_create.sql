@@ -26,7 +26,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE public.clouds (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    fqdn character varying(255) NOT NULL,
+    fqdn character varying(255) UNIQUE,
     email_recipients character varying(4000)
 );
 
