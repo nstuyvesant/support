@@ -130,53 +130,62 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Get the id or create a cloud record if one doesn't exist (called by the other functions below)
-CREATE OR REPLACE FUNCTION cloud_get_id(cloud_fqdn character varying(255), OUT cloud_id uuid) AS $$
-BEGIN
-    INSERT INTO clouds(fqdn) VALUES (cloud_fqdn)
-        ON CONFLICT (fqdn) DO NOTHING
-        RETURNING id INTO cloud_id;
-END;
-$$ LANGUAGE plpgsql;
-
 -- Create snapshot or update if one exists
-CREATE OR REPLACE FUNCTION snapshot_upsert(cloud_fqdn character varying(255), snapshot_date date, success_last24h smallint, success_last7d smallint, success_last30d smallint, OUT cloud_id uuid) AS $$
+CREATE OR REPLACE FUNCTION snapshot_add(uuid, date, integer, integer, integer, OUT snapshot_id uuid) AS $$
 BEGIN
     INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d)
-        VALUES (cloud_get_id(cloud_fqdn), snapshot_date, success_last24h, success_last7d, success_last30d)
+        VALUES ($1, $2, $3, $4, $5)
             ON CONFLICT (cloud_id, snapshot_date)
-                DO UPDATE SET success_last24h = success_last24h, success_last7d = success_last7d, success_last30d = success_last30d
-            RETURNING id INTO cloud_id;
+                DO UPDATE SET success_last24h = $3, success_last7d = $4, success_last30d = $5
+            RETURNING id INTO snapshot_id;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION snapshot_get_id(cloud_fqdn character varying(255), snapshot_date date, OUT snapshot_id uuid) AS $$
+-- Add a device to the snapshot
+CREATE OR REPLACE FUNCTION device_add(uuid, integer, character varying(255), character varying(255), character varying(255), integer, OUT devices_id uuid) AS $$
 BEGIN
-    INSERT INTO snapshots(cloud_id, snapshot_date) VALUES (cloud_get_id(cloud_fqdn), snapshot_date)
-        ON CONFLICT (cloud_id, snapshot_date) DO NOTHING
-        RETURNING id INTO snapshot_id;
-    -- Query to get id but might not need it as long as RETURNING will get the right uuid
-    -- SELECT snapshots.id FROM snapshots INNER JOIN clouds on snapshots.cloud_id = clouds.id
-        -- WHERE clouds.fqdn = cloud_fqdn AND snapshots.snapshot_date = snapshot_date
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION device_add(cloud_fqdn character varying(255), snapshot_date date, rank smallint, model character varying(255), os character varying(255), device_id character varying(255), errors_last7d bigint, OUT devices_id uuid) AS $$
-BEGIN
-    INSERT INTO devices(snapshot_id, rank, model, os, device_id, errors_last7d) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, model, os, device_id, errors_last7d)
+    INSERT INTO devices(snapshot_id, rank, model, os, device_id, errors_last7d) VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id INTO devices_id;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION test_add(cloud_fqdn character varying(255), snapshot_date date, rank smallint, test_name character varying(4000), age bigint, failures_last7d bigint, passes_last7d bigint, OUT test_id uuid) AS $$
+-- Add a test to the snapshot
+CREATE OR REPLACE FUNCTION test_add(uuid, integer, character varying(4000), integer, integer, integer, OUT test_id uuid) AS $$
 BEGIN
-    INSERT INTO tests(snapshot_id, rank, test_name, age, failures_last7d, passes_last7d) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, test_name, age, failures_last7d, passes_last7d)
+    INSERT INTO tests(snapshot_id, rank, test_name, age, failures_last7d, passes_last7d) VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id INTO test_id;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION recommendation_add(fqdn character varying(255), snapshot_date date, rank smallint, recommendation character varying(2000), impact_percentage smallint, impact_message character varying(2000), OUT recommendation_id uuid) AS $$
+-- Add a recommendation to the snapshot
+CREATE OR REPLACE FUNCTION recommendation_add(uuid, integer, character varying(2000), integer, character varying(2000), OUT recommendation_id uuid) AS $$
 BEGIN
-    INSERT INTO recommendations(snapshot_id, rank, recommendation, impact_percentage, impact_message) VALUES (snapshot_get_id(cloud_fqdn, snapshot_date), rank, recommendation, impact_percentage, impact_message);
+    INSERT INTO recommendations(snapshot_id, rank, recommendation, impact_percentage, impact_message) VALUES ($1, $2, $3, $4, $5);
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION populate_test_data(OUT done boolean) AS $$
+DECLARE
+    cloud_id uuid := cloud_upsert('acme.perfectomobile.com', 'nates@perfectomobile.com,ranb@perfectomobile.com');
+    snapshot_id uuid := snapshot_add(cloud_id, '2018-06-09'::DATE, 37, 72, 55);
+BEGIN
+    PERFORM device_add(snapshot_id, 1, 'iPhone-5S', 'iOS 9.2.1', '544cc6c6026af23c11f5ed6387df5d5f724f60fb', 494);
+    PERFORM device_add(snapshot_id, 2, 'Galaxy S5', 'Android 5.0', 'B5DED881', 397);
+    PERFORM device_add(snapshot_id, 3, 'Galaxy Note III', 'Android 4.4', '61F1BF00', 303);
+    PERFORM device_add(snapshot_id, 4, 'Nexus 5', 'Android 5.0', '06B25936007418BB', 298);
+    PERFORM device_add(snapshot_id, 5, 'iPhone-6', 'iOS 9.1', '8E1CBC7E90168A3A7CFDA2712A8C20DD15517F89', 147);
+    PERFORM test_add(snapshot_id, 1, 'TransferMoney', 230, 75, 0);
+    PERFORM test_add(snapshot_id, 2, 'FindBranch', 200, 71, 3);
+    PERFORM test_add(snapshot_id, 3, 'HonkHorn', 4, 68, 13);
+    PERFORM test_add(snapshot_id, 4, 'InsuranceSearch', 47, 7, 0);
+    PERFORM test_add(snapshot_id, 5, 'RemoteStart', 132, 41, 25);
+    PERFORM recommendation_add(snapshot_id, 1, 'Replace top 5 failing devices', 30, NULL);
+    PERFORM recommendation_add(snapshot_id, 2, 'Use smart check for busy devices', 15, NULL);
+    PERFORM recommendation_add(snapshot_id, 3, 'Remediate TransferMoney test', 12, NULL);
+    PERFORM recommendation_add(snapshot_id, 4, 'Remediate FindBranch test', 6, NULL);
+    PERFORM recommendation_add(snapshot_id, 5, 'Ensure tests use Digitalzoom API', 0, 'Eliminate 720 Unknowns');
+    done := true;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT populate_test_data();
