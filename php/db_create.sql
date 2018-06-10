@@ -131,12 +131,12 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Create snapshot or update if one exists
-CREATE OR REPLACE FUNCTION snapshot_add(uuid, date, integer, integer, integer, OUT snapshot_id uuid) AS $$
+CREATE OR REPLACE FUNCTION snapshot_add(uuid, date, integer, integer, integer, integer, integer, integer, OUT snapshot_id uuid) AS $$
 BEGIN
-    INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d)
-        VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO snapshots(cloud_id, snapshot_date, success_last24h, success_last7d, success_last30d, lab_issues, orchestration_issues, scripting_issues)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             ON CONFLICT (cloud_id, snapshot_date)
-                DO UPDATE SET success_last24h = $3, success_last7d = $4, success_last30d = $5
+                DO UPDATE SET success_last24h = $3, success_last7d = $4, success_last30d = $5, lab_issues = $6, orchestration_issues = $7, scripting_issues = $8
             RETURNING id INTO snapshot_id;
 END;
 $$ LANGUAGE plpgsql;
@@ -164,10 +164,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Load test data dependencies
 CREATE OR REPLACE FUNCTION populate_test_data(OUT done boolean) AS $$
 DECLARE
     cloud_id uuid := cloud_upsert('acme.perfectomobile.com', 'nates@perfectomobile.com,ranb@perfectomobile.com');
-    snapshot_id uuid := snapshot_add(cloud_id, '2018-06-09'::DATE, 37, 72, 55);
+    snapshot_id uuid := snapshot_add(cloud_id, '2018-06-09'::DATE, 37, 72, 55, 10, 20, 30);
 BEGIN
     PERFORM device_add(snapshot_id, 1, 'iPhone-5S', 'iOS 9.2.1', '544cc6c6026af23c11f5ed6387df5d5f724f60fb', 494);
     PERFORM device_add(snapshot_id, 2, 'Galaxy S5', 'Android 5.0', 'B5DED881', 397);
@@ -188,4 +189,63 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Nice view to simplify main inner join
+CREATE VIEW clouds_snapshots AS
+    SELECT
+        fqdn,
+        email_recipients,
+        snapshots.id AS snapshot_id,
+        snapshot_date,
+        success_last24h,
+        success_last7d,
+        success_last30d,
+        lab_issues,
+        orchestration_issues,
+        scripting_issues
+    FROM clouds
+    INNER JOIN
+        snapshots ON clouds.id = snapshots.cloud_id;
+
+-- Return a complete snapshot for a cloud on a particular date in JSON format
+CREATE OR REPLACE FUNCTION snapshot_as_json(character varying(255), date) RETURNS json AS $$
+    SELECT row_to_json(s) FROM (
+        SELECT
+            fqdn, email_recipients AS "emailRecipients", snapshot_date AS "snapshotDate", success_last24h AS last24h,
+            success_last7d AS last7d, success_last30d AS last30d, lab_issues AS lab, orchestration_issues AS orchestration,
+            scripting_issues AS scripting,
+            (
+                SELECT array_to_json(array_agg(row_to_json(r)))
+                FROM (
+                    SELECT rank, recommendation, impact_percentage AS impact, impact_message AS "impactMessage"
+                    FROM recommendations
+                    WHERE recommendations.snapshot_id = clouds_snapshots.snapshot_id
+                    ORDER BY rank ASC
+                ) r
+            ) AS recommendations,
+            (
+                SELECT array_to_json(array_agg(row_to_json(d)))
+                FROM (
+                    SELECT rank, model, os, device_id AS id, errors_last7d AS errors
+                    FROM devices
+                    WHERE devices.snapshot_id = clouds_snapshots.snapshot_id
+                    ORDER BY rank ASC
+                ) d
+            ) AS "topProblematicDevices",
+            (
+                SELECT array_to_json(array_agg(row_to_json(t)))
+                FROM (
+                    SELECT rank, test_name AS test, age, failures_last7d AS failures, passes_last7d as passes
+                    FROM tests
+                    WHERE tests.snapshot_id = clouds_snapshots.snapshot_id
+                    ORDER BY rank ASC
+                ) t
+            ) AS "topFailingTests"
+        FROM clouds_snapshots
+        WHERE fqdn = $1 AND snapshot_date = $2::DATE) s;
+$$ LANGUAGE sql;
+
+-- Run the function to populate the date
 SELECT populate_test_data();
+
+-- Show what the JSON looks like
+SELECT snapshot_as_json('acme.perfectomobile.com', '2018-06-09'::DATE);
