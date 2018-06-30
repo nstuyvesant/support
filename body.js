@@ -152,8 +152,8 @@ $('#requestForm').on('submit', function (e) {
         gtag('event', 'Case: ' + selectedTopic) // specific
       }
     })
-      .fail(function () {
-        console.log('Form submission not successful')
+      .fail(function (e) {
+        console.log('Form submission not successful', e)
       })
       .always(function () {
         $('#submit').prop('disabled', false) // re-enable the Submit button
