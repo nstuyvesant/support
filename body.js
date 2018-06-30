@@ -153,6 +153,7 @@ $('#requestForm').on('submit', function (e) {
       }
     })
       .fail(function (e) {
+        window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
         console.log('Error posting form', e)
         console.log('Form data sent', new FormData(this))
       })
