@@ -125,6 +125,12 @@ $('#requestForm').on('submit', function (e) {
   if ($('#requestForm').valid) {
     // Append execution URL to description
     $('#description').val($('#description').val() + $('#parameters').val())
+    // Remove empty file field to overcome Safari bug
+    $('#requestForm').find("input[type='file']").each(function () {
+      if ($(this).get(0).files.length === 0) {
+        $(this).remove()
+      }
+    })
     // Submit the form via AJAX
     $.ajax({
       url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
@@ -154,8 +160,6 @@ $('#requestForm').on('submit', function (e) {
     })
       .fail(function (e) {
         window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
-        console.log('Error posting form', e)
-        console.log('Form data sent', new FormData(this))
       })
       .always(function () {
         $('#submit').prop('disabled', false) // re-enable the Submit button
