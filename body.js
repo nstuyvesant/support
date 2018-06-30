@@ -153,7 +153,8 @@ $('#requestForm').on('submit', function (e) {
       }
     })
       .fail(function (e) {
-        console.log('Form submission not successful', e)
+        console.log('Error posting form', e)
+        console.log('Form data sent', new FormData(this))
       })
       .always(function () {
         $('#submit').prop('disabled', false) // re-enable the Submit button
