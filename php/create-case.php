@@ -18,7 +18,7 @@ if($_POST) {
   # Set properties of Salesforce Case object
   $case = new stdClass();
   $case->Origin = $_POST['origin'];
-  $case->Owner = '00520000000yUK2'; # Perfecto Mobile Support
+  #$case->Owner = '00520000000yUK2'; # Perfecto Mobile Support
   $case->Type =  $_POST['type'];
   $case->Case_Reason__c = $_POST['topic'];
   $case->Priority = $_POST['priority'];
