@@ -1200,87 +1200,11 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
   })
 })
 
-// DOM ready
-$(document).ready(function () {
-  // Load status of clouds to display alert if one or more clouds are having an outage
-  $.getJSON('health.json', function (data) {
-    cloudStatus = data
-    displayOutageAlerts($('#fqdn').val())
-  })
-
-  // reCAPTCHA requires a timestamp updated every half-second
-  setInterval(refreshCaptchaTimestamps, 500)
-  setHiddenParametersField()
-
-  // Make radio buttons in button-groups work
-  $('input[name=priority]:radio').on('change', function (e) {
-    let target = $(e.target)
-    $('label.btn').removeClass('selected')
-    target.parent().addClass('selected')
-  })
-
-  // Load required fields from querystring (if provided)
-
-  let name = qs('name')
-  if (name) {
-    $('#name').val(name)
-  }
-
-  let email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
-  if (!email) {
-    email = qs('email')
-  }
-  $('#email').val(email)
-
-  let phone = qs('phone')
-  if (phone && phone.length > 10) { // Discard if it's too short to be real
-    $('#phone').val(phone)
-  }
-  $('#phone').intlTelInput({
-    nationalMode: false,
-    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
-  })
-
-  let fqdn = qs('appUrl')
-  $('#fqdn').val(fqdn)
-
-  // Report source to Google Analytics
-  let origin = qs('origin') || 'Web'
-  if (fqdn) {
-    gtag('event', 'Visit: MCM/Digitalzoom')
-  } else if (origin === 'Customer Portal') {
-    gtag('event', 'Visit: Customer Portal')
-  } else {
-    gtag('event', 'Visit: Direct')
-  }
-
-  // Digitalzoom sends the FQDN as cname instead of appUrl
-  let cname = qs('cname')
-  if (!fqdn && cname) {
-    $('#fqdn').val(cname + '.perfectomobile.com')
-  }
-
-  // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
-  $('#origin').val(origin)
-  $('#company').val(qs('company'))
-  let timezone = qs('timezone')
-  if (!timezone) {
-    let d = new Date()
-    let n = d.getTimezoneOffset()
-    timezone = -n / 60
-  }
-  $('#timezone').val(timezone)
-  $('#mcmVersion').val(qs('mcmVersion'))
-  $('#hssVersion').val(qs('hssVersion'))
-  $('#location').val(qs('location'))
-  $('#cradleId').val(qs('cradleId'))
-  $('#deviceId').val(qs('deviceId'))
-  $('#model').val(qs('model'))
-  $('#os').val(qs('os'))
-  $('#version').val(qs('version'))
-
-  // Setup form validation for Cases. jQuery Validation bug for selects - must use name not ID.
-  $('#requestForm').validate({
+// Handle submit on request form
+$('#requestForm').on('submit', function (e) {
+  e.preventDefault()
+})
+  .validate({
     ignore: '.ignore',
     rules: {
       priority: {
@@ -1365,6 +1289,85 @@ $(document).ready(function () {
         })
     }
   })
+
+// DOM ready
+$(document).ready(function () {
+  // Load status of clouds to display alert if one or more clouds are having an outage
+  $.getJSON('health.json', function (data) {
+    cloudStatus = data
+    displayOutageAlerts($('#fqdn').val())
+  })
+
+  // reCAPTCHA requires a timestamp updated every half-second
+  setInterval(refreshCaptchaTimestamps, 500)
+  setHiddenParametersField()
+
+  // Make radio buttons in button-groups work
+  $('input[name=priority]:radio').on('change', function (e) {
+    let target = $(e.target)
+    $('label.btn').removeClass('selected')
+    target.parent().addClass('selected')
+  })
+
+  // Load required fields from querystring (if provided)
+
+  let name = qs('name')
+  if (name) {
+    $('#name').val(name)
+  }
+
+  let email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
+  if (!email) {
+    email = qs('email')
+  }
+  $('#email').val(email)
+
+  let phone = qs('phone')
+  if (phone && phone.length > 10) { // Discard if it's too short to be real
+    $('#phone').val(phone)
+  }
+  $('#phone').intlTelInput({
+    nationalMode: false,
+    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
+  })
+
+  let fqdn = qs('appUrl')
+  $('#fqdn').val(fqdn)
+
+  // Report source to Google Analytics
+  let origin = qs('origin') || 'Web'
+  if (fqdn) {
+    gtag('event', 'Visit: MCM/Digitalzoom')
+  } else if (origin === 'Customer Portal') {
+    gtag('event', 'Visit: Customer Portal')
+  } else {
+    gtag('event', 'Visit: Direct')
+  }
+
+  // Digitalzoom sends the FQDN as cname instead of appUrl
+  let cname = qs('cname')
+  if (!fqdn && cname) {
+    $('#fqdn').val(cname + '.perfectomobile.com')
+  }
+
+  // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
+  $('#origin').val(origin)
+  $('#company').val(qs('company'))
+  let timezone = qs('timezone')
+  if (!timezone) {
+    let d = new Date()
+    let n = d.getTimezoneOffset()
+    timezone = -n / 60
+  }
+  $('#timezone').val(timezone)
+  $('#mcmVersion').val(qs('mcmVersion'))
+  $('#hssVersion').val(qs('hssVersion'))
+  $('#location').val(qs('location'))
+  $('#cradleId').val(qs('cradleId'))
+  $('#deviceId').val(qs('deviceId'))
+  $('#model').val(qs('model'))
+  $('#os').val(qs('os'))
+  $('#version').val(qs('version'))
 
   // Marketo Munchkin
   $.ajax({
