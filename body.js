@@ -118,55 +118,6 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
   })
 })
 
-// Handle submit on request form
-$('#requestForm').on('submit', function (e) {
-  $('#submit').prop('disabled', true) // prevent double submissions
-  e.preventDefault()
-  if ($('#requestForm').valid) {
-    // Append execution URL to description
-    $('#description').val($('#description').val() + $('#parameters').val())
-    // Remove empty file field to overcome Safari bug
-    $('#requestForm').find("input[type='file']").each(function () {
-      if ($(this).get(0).files.length === 0) {
-        $(this).remove()
-      }
-    })
-    // Submit the form via AJAX
-    $.ajax({
-      url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
-      type: 'POST',
-      data: new FormData(this),
-      dataType: 'json',
-      enctype: 'multipart/form-data',
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function (response) {
-        // Clear the subject and description, reset priority to Low
-        $('#subject').val('')
-        $('#description').val('')
-        $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
-        $('#supportCase').removeClass('show') // hide form
-        $('#contactSupport').removeAttr('style')
-        // Reset the page state
-        $('.active.show').removeClass('active show')
-        // Provide case number and URL in alert to show case was successfully created
-        $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
-        $('#submitStatus').show()
-        // Tell Google Analytics we submitted
-        gtag('event', 'Case Submitted') // general
-        gtag('event', 'Case: ' + selectedTopic) // specific
-      }
-    })
-      .fail(function (e) {
-        window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
-      })
-      .always(function () {
-        $('#submit').prop('disabled', false) // re-enable the Submit button
-      })
-  }
-})
-
 // DOM ready
 $(document).ready(function () {
   // Load status of clouds to display alert if one or more clouds are having an outage
@@ -286,6 +237,50 @@ $(document).ready(function () {
           }
         }
       }
+    },
+    submitHandler: function (form) {
+      $('#submit').prop('disabled', true) // prevent double submissions
+      // Append execution URL to description
+      $('#description').val($('#description').val() + $('#parameters').val())
+      // Remove empty file field to overcome Safari bug
+      $('#requestForm').find("input[type='file']").each(function () {
+        if ($(this).get(0).files.length === 0) {
+          $(this).remove()
+        }
+      })
+      // Submit the form via AJAX
+      $.ajax({
+        url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
+        type: 'POST',
+        data: new FormData(this),
+        dataType: 'json',
+        enctype: 'multipart/form-data',
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+          // Clear the subject and description, reset priority to Low
+          $('#subject').val('')
+          $('#description').val('')
+          $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
+          $('#supportCase').removeClass('show') // hide form
+          $('#contactSupport').removeAttr('style')
+          // Reset the page state
+          $('.active.show').removeClass('active show')
+          // Provide case number and URL in alert to show case was successfully created
+          $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
+          $('#submitStatus').show()
+          // Tell Google Analytics we submitted
+          gtag('event', 'Case Submitted') // general
+          gtag('event', 'Case: ' + selectedTopic) // specific
+        }
+      })
+        .fail(function (e) {
+          window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
+        })
+        .always(function () {
+          $('#submit').prop('disabled', false) // re-enable the Submit button
+        })
     }
   })
 
