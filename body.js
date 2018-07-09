@@ -252,7 +252,7 @@ $(document).ready(function () {
       $.ajax({
         url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
         type: 'POST',
-        data: new FormData($(form)),
+        data: $(form).serialize(),
         dataType: 'json',
         enctype: 'multipart/form-data',
         contentType: false,
