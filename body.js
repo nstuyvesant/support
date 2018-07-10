@@ -27,12 +27,6 @@ function qs (key) {
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
 }
 
-// If execution report is provided, put in hidden field for later append to description
-function setHiddenParametersField () {
-  let executionReport = qs('desc')
-  if (executionReport) $('#parameters').val('\n==== Auto-attached by Perfecto =====\n' + executionReport)
-}
-
 // Conditionally display outage alerts based on cloudStatus object
 function displayOutageAlerts (cloudFQDN) {
   if (cloudStatus.outages.indexOf(cloudFQDN) !== -1 || cloudStatus.outages.indexOf('all') !== -1) {
@@ -164,8 +158,9 @@ $('#requestForm').on('submit', function (e) {
     },
     submitHandler: function (form) {
       $('#submit').prop('disabled', true) // prevent double submissions
-      // Append execution URL to description
-      $('#description').val($('#description').val() + $('#parameters').val())
+      // Append execution URL to description field (if provided)
+      const executionReport = qs('desc')
+      if (executionReport) $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
       // Remove empty file field to overcome Safari bug
       $('#requestForm').find("input[type='file']").each(function () {
         if ($(this).get(0).files.length === 0) {
@@ -219,7 +214,6 @@ $(document).ready(function () {
 
   // reCAPTCHA requires a timestamp updated every half-second
   setInterval(refreshCaptchaTimestamps, 500)
-  setHiddenParametersField()
 
   // Make radio buttons in button-groups work
   $('input[name=priority]:radio').on('change', function (e) {
