@@ -151,7 +151,8 @@ $('form').on('submit', function (e) {
       const executionReport = qs('desc')
       if (executionReport) {
         console.log('Execution Report: ', executionReport)
-        $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
+        $('#description').val($('#description').val() + '\n==== Auto-attached by Perfecto =====\n' + executionReport)
+        // $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
       }
       // Remove empty file field to overcome Safari bug
       $('form').find("input[type='file']").each(function () {
