@@ -118,6 +118,99 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
   })
 })
 
+// Handle submit on request form
+$('#requestForm').on('submit', function (e) {
+  e.preventDefault()
+})
+  .validate({
+    ignore: '.ignore',
+    rules: {
+      priority: {
+        required: true
+      },
+      name: {
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      phone: {
+        required: {
+          depends: function (element) {
+            return ($('#priority').val() === 'Urgent' || $('#priority').val() === 'High')
+          }
+        }
+      },
+      fqdn: {
+        required: true,
+        minlength: 13
+      },
+      subject: {
+        required: true
+      },
+      description: {
+        required: true
+      },
+      hiddenRecaptcha: {
+        required: function () {
+          if (grecaptcha.getResponse() === '') {
+            return true
+          } else {
+            return false
+          }
+        }
+      }
+    },
+    submitHandler: function (form) {
+      $('#submit').prop('disabled', true) // prevent double submissions
+      // Append execution URL to description
+      $('#description').val($('#description').val() + $('#parameters').val())
+      // Remove empty file field to overcome Safari bug
+      $('#requestForm').find("input[type='file']").each(function () {
+        if ($(this).get(0).files.length === 0) {
+          $(this).remove()
+        }
+      })
+      console.log('FORM', form)
+      console.log('$FORM', $(form))
+      // Submit the form via AJAX
+      $.ajax({
+        url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
+        type: 'POST',
+        data: new FormData(form), // $(form).serialize(),
+        dataType: 'json',
+        enctype: 'multipart/form-data',
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+          // Clear the subject and description, reset priority to Low
+          $('#subject').val('')
+          $('#description').val('')
+          $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
+          $('#supportCase').removeClass('show') // hide form
+          $('#contactSupport').removeAttr('style')
+          // Reset the page state
+          $('.active.show').removeClass('active show')
+          // Provide case number and URL in alert to show case was successfully created
+          $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
+          $('#submitStatus').show()
+          // Tell Google Analytics we submitted
+          gtag('event', 'Case Submitted') // general
+          gtag('event', 'Case: ' + selectedTopic) // specific
+        }
+      })
+        .fail(function (e) {
+          window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
+        })
+        .always(function () {
+          $('#submit').prop('disabled', false) // re-enable the Submit button
+        })
+      return false
+    }
+  })
+
 // DOM ready
 $(document).ready(function () {
   // Load status of clouds to display alert if one or more clouds are having an outage
@@ -196,93 +289,6 @@ $(document).ready(function () {
   $('#model').val(qs('model'))
   $('#os').val(qs('os'))
   $('#version').val(qs('version'))
-
-  // Setup form validation for Cases. jQuery Validation bug for selects - must use name not ID.
-  $('#requestForm').validate({
-    ignore: '.ignore',
-    rules: {
-      priority: {
-        required: true
-      },
-      name: {
-        required: true
-      },
-      email: {
-        required: true,
-        email: true
-      },
-      phone: {
-        required: {
-          depends: function (element) {
-            return ($('#priority').val() === 'Urgent' || $('#priority').val() === 'High')
-          }
-        }
-      },
-      fqdn: {
-        required: true,
-        minlength: 13
-      },
-      subject: {
-        required: true
-      },
-      description: {
-        required: true
-      },
-      hiddenRecaptcha: {
-        required: function () {
-          if (grecaptcha.getResponse() === '') {
-            return true
-          } else {
-            return false
-          }
-        }
-      }
-    },
-    submitHandler: function (form) {
-      $('#submit').prop('disabled', true) // prevent double submissions
-      // Append execution URL to description
-      $('#description').val($('#description').val() + $('#parameters').val())
-      // Remove empty file field to overcome Safari bug
-      $('#requestForm').find("input[type='file']").each(function () {
-        if ($(this).get(0).files.length === 0) {
-          $(this).remove()
-        }
-      })
-      // Submit the form via AJAX
-      $.ajax({
-        url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
-        type: 'POST',
-        data: $(form).serialize(),
-        dataType: 'json',
-        enctype: 'multipart/form-data',
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (response) {
-          // Clear the subject and description, reset priority to Low
-          $('#subject').val('')
-          $('#description').val('')
-          $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
-          $('#supportCase').removeClass('show') // hide form
-          $('#contactSupport').removeAttr('style')
-          // Reset the page state
-          $('.active.show').removeClass('active show')
-          // Provide case number and URL in alert to show case was successfully created
-          $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
-          $('#submitStatus').show()
-          // Tell Google Analytics we submitted
-          gtag('event', 'Case Submitted') // general
-          gtag('event', 'Case: ' + selectedTopic) // specific
-        }
-      })
-        .fail(function (e) {
-          window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
-        })
-        .always(function () {
-          $('#submit').prop('disabled', false) // re-enable the Submit button
-        })
-    }
-  })
 
   // Marketo Munchkin
   $.ajax({
