@@ -149,7 +149,10 @@ $('form').on('submit', function (e) {
       $('#submit').prop('disabled', true) // prevent double submissions
       // Append execution URL to description field (if provided)
       const executionReport = qs('desc')
-      if (executionReport) $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
+      if (executionReport) {
+        console.log('Execution Report: ', executionReport)
+        $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
+      }
       // Remove empty file field to overcome Safari bug
       $('form').find("input[type='file']").each(function () {
         if ($(this).get(0).files.length === 0) {
