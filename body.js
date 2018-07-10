@@ -172,8 +172,6 @@ $('#requestForm').on('submit', function (e) {
           $(this).remove()
         }
       })
-      console.log('FORM', form)
-      console.log('$FORM', $(form))
       // Submit the form via AJAX
       $.ajax({
         url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
