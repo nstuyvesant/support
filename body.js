@@ -4,17 +4,6 @@ let selectedType
 let selectedTopic
 let cloudStatus = {}
 
-// Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
-function refreshCaptchaTimestamps () {
-  // Only save updated captcha settings if form's captcha response is null or empty (for each form)
-  let response = $('#g-recaptcha-response')
-  if (response == null || response.val().trim() === '') {
-    let captchaSettings = JSON.parse($('#captchaSettings').val())
-    captchaSettings.ts = JSON.stringify(new Date().getTime())
-    $('#captchaSettings').val(JSON.stringify(captchaSettings))
-  }
-}
-
 // Remove error message on hidden field
 function recaptchaCallback () {
   $('#hiddenRecaptcha').valid()
@@ -113,7 +102,7 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
 })
 
 // Handle submit on request form
-$('#requestForm').on('submit', function (e) {
+$('form').on('submit', function (e) {
   e.preventDefault()
 })
   .validate({
@@ -162,7 +151,7 @@ $('#requestForm').on('submit', function (e) {
       const executionReport = qs('desc')
       if (executionReport) $('#description').append('\n==== Auto-attached by Perfecto =====\n' + executionReport)
       // Remove empty file field to overcome Safari bug
-      $('#requestForm').find("input[type='file']").each(function () {
+      $('form').find("input[type='file']").each(function () {
         if ($(this).get(0).files.length === 0) {
           $(this).remove()
         }
@@ -211,9 +200,6 @@ $(document).ready(function () {
     cloudStatus = data
     displayOutageAlerts($('#fqdn').val())
   })
-
-  // reCAPTCHA requires a timestamp updated every half-second
-  setInterval(refreshCaptchaTimestamps, 500)
 
   // Make radio buttons in button-groups work
   $('input[name=priority]:radio').on('change', function (e) {
