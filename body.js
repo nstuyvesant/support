@@ -209,7 +209,7 @@ $(document).ready(function () {
   })
 
   // Handle click on Chat button
-  $('#liveagent_button_online_573D0000000028q a').click(function () {
+  $('#liveagent_button_online_573D0000000028q').click(function () {
     liveagent.startChat('573D0000000028q')
     gtag('event', 'Chat Started')
   })
