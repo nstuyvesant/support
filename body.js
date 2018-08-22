@@ -1,4 +1,4 @@
-/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin, FormData */
+/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin, FormData, liveagent */
 // Variables with global scope
 let selectedType
 let selectedTopic
@@ -206,6 +206,12 @@ $(document).ready(function () {
     let target = $(e.target)
     $('label.btn').removeClass('selected')
     target.parent().addClass('selected')
+  })
+
+  // Handle click on Chat button
+  $('#liveagent_button_online_573D0000000028q a').click(function () {
+    liveagent.startChat('573D0000000028q')
+    gtag('event', 'Chat Started')
   })
 
   // Load required fields from querystring (if provided)
