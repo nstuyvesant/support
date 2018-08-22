@@ -22,7 +22,10 @@ function displayOutageAlerts (cloudFQDN) {
     $('#cloudStatusAlert').show()
     $('#message').text(cloudStatus.message)
     // Report outage alert to Google Analytics
-    gtag('event', 'Outage: ' + cloudFQDN)
+    gtag('event', 'Outage Notification', {
+      'event_category': 'Outage',
+      'event_label': cloudFQDN
+    })
   }
 }
 
@@ -179,8 +182,10 @@ $('form').on('submit', function (e) {
           $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
           $('#submitStatus').show()
           // Tell Google Analytics we submitted
-          gtag('event', 'Case Submitted') // general
-          gtag('event', 'Case: ' + selectedTopic) // specific
+          gtag('event', 'Case Created', {
+            'event_category': 'Cases',
+            'event_label': selectedTopic
+          })
         }
       })
         .fail(function (e) {
@@ -211,7 +216,10 @@ $(document).ready(function () {
   // Handle click on Chat button
   $('#liveagent_button_online_573D0000000028q').click(function () {
     liveagent.startChat('573D0000000028q')
-    gtag('event', 'Chat Started')
+    gtag('event', 'Start Chat', {
+      'event_category': 'Chat',
+      'event_label': fqdn
+    })
   })
 
   // Load required fields from querystring (if provided)
@@ -239,20 +247,30 @@ $(document).ready(function () {
   let fqdn = qs('appUrl')
   $('#fqdn').val(fqdn)
 
-  // Report source to Google Analytics
-  let origin = qs('origin') || 'Web'
-  if (fqdn) {
-    gtag('event', 'Visit: MCM/Digitalzoom')
-  } else if (origin === 'Customer Portal') {
-    gtag('event', 'Visit: Customer Portal')
-  } else {
-    gtag('event', 'Visit: Direct')
-  }
-
   // Digitalzoom sends the FQDN as cname instead of appUrl
   let cname = qs('cname')
   if (!fqdn && cname) {
     $('#fqdn').val(cname + '.perfectomobile.com')
+    fqdn = $('#fqdn').val()
+  }
+
+  // Report source to Google Analytics
+  let origin = qs('origin') || 'Web'
+  if (fqdn) {
+    gtag('event', 'Visit from Cloud', {
+      'event_category': 'Visit',
+      'event_label': fqdn
+    })
+  } else if (origin === 'Customer Portal') {
+    gtag('event', 'Visit from Customer Portal', {
+      'event_category': 'Visit',
+      'event_label': 'perfectomobile.force.com'
+    })
+  } else {
+    gtag('event', 'Visit (Direct)', {
+      'event_category': 'Visit',
+      'event_label': 'localhost'
+    })
   }
 
   // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
