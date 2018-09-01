@@ -5,6 +5,34 @@ if($_POST) {
 
   # Retrieve Salesforce connection info
   $SfConfig = parse_ini_file('conf.ini');
+
+  # For CloudFlare
+  if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+  }
+
+  # Verify reCaptcha
+  $post_data = http_build_query(
+    array(
+        'secret' => $SfConfig['recaptcha'],
+        'response' => $_POST['g-recaptcha-response'],
+        'remoteip' => $_SERVER['REMOTE_ADDR']
+    )
+  );
+  $opts = array('http' =>
+    array(
+        'method'  => 'POST',
+        'header'  => 'Content-type: application/x-www-form-urlencoded',
+        'content' => $post_data
+    )
+  );
+  $context  = stream_context_create($opts);
+  $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+  $result = json_decode($response);
+  if (!$result->success) {
+    throw new Exception('reCAPTCHA verification failed. You are a probably a robot.', 1);
+  }
+  
   define(SECURITY_TOKEN, $SfConfig['token']);
   define(USERNAME, $SfConfig['user']);
   define(PASSWORD, $SfConfig['password']);
@@ -18,6 +46,7 @@ if($_POST) {
   # Set properties of Salesforce Case object
   $case = new stdClass();
   $case->Origin = $_POST['origin'];
+  #$case->Owner = '00520000000yUK2'; # Perfecto Mobile Support
   $case->Type =  $_POST['type'];
   $case->Case_Reason__c = $_POST['topic'];
   $case->Priority = $_POST['priority'];

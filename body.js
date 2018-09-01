@@ -1,19 +1,8 @@
-/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin, FormData */
+/* global $, location, gtag, grecaptcha, intlTelInputUtils, Munchkin, FormData, liveagent */
 // Variables with global scope
 let selectedType
 let selectedTopic
 let cloudStatus = {}
-
-// Set timestamp for reCAPTCHA settings submitted to Salesforce (both forms)
-function refreshCaptchaTimestamps () {
-  // Only save updated captcha settings if form's captcha response is null or empty (for each form)
-  let response = $('#g-recaptcha-response')
-  if (response == null || response.val().trim() === '') {
-    let captchaSettings = JSON.parse($('#captchaSettings').val())
-    captchaSettings.ts = JSON.stringify(new Date().getTime())
-    $('#captchaSettings').val(JSON.stringify(captchaSettings))
-  }
-}
 
 // Remove error message on hidden field
 function recaptchaCallback () {
@@ -27,19 +16,16 @@ function qs (key) {
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
 }
 
-// If execution report is provided, put in hidden field for later append to description
-function setHiddenParametersField () {
-  let executionReport = qs('desc')
-  if (executionReport) $('#parameters').val('\n==== Auto-attached by Perfecto =====\n' + executionReport)
-}
-
 // Conditionally display outage alerts based on cloudStatus object
 function displayOutageAlerts (cloudFQDN) {
   if (cloudStatus.outages.indexOf(cloudFQDN) !== -1 || cloudStatus.outages.indexOf('all') !== -1) {
     $('#cloudStatusAlert').show()
     $('#message').text(cloudStatus.message)
     // Report outage alert to Google Analytics
-    gtag('event', 'Outage: ' + cloudFQDN)
+    gtag('event', 'Outage Notification', {
+      'event_category': 'Outage',
+      'event_label': cloudFQDN
+    })
   }
 }
 
@@ -119,129 +105,10 @@ $('.with-tooltips').on('shown.bs.collapse', function () {
 })
 
 // Handle submit on request form
-$('#requestForm').on('submit', function (e) {
-  $('#submit').prop('disabled', true) // prevent double submissions
+$('form').on('submit', function (e) {
   e.preventDefault()
-  if ($('#requestForm').valid) {
-    // Append execution URL to description
-    $('#description').val($('#description').val() + $('#parameters').val())
-    // Submit the form via AJAX
-    $.ajax({
-      url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
-      type: 'POST',
-      data: new FormData(this),
-      dataType: 'json',
-      enctype: 'multipart/form-data',
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function (response) {
-        // Clear the subject and description, reset priority to Low
-        $('#subject').val('')
-        $('#description').val('')
-        $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
-        $('#supportCase').removeClass('show') // hide form
-        $('#contactSupport').removeAttr('style')
-        // Reset the page state
-        $('.active.show').removeClass('active show')
-        // Provide case number and URL in alert to show case was successfully created
-        $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
-        $('#submitStatus').show()
-        // Tell Google Analytics we submitted
-        gtag('event', 'Case Submitted') // general
-        gtag('event', 'Case: ' + selectedTopic) // specific
-      }
-    })
-      .fail(function () {
-        console.log('Form submission not successful')
-      })
-      .always(function () {
-        $('#submit').prop('disabled', false) // re-enable the Submit button
-      })
-  }
 })
-
-// DOM ready
-$(document).ready(function () {
-  // Load status of clouds to display alert if one or more clouds are having an outage
-  $.getJSON('health.json', function (data) {
-    cloudStatus = data
-    displayOutageAlerts($('#fqdn').val())
-  })
-
-  // reCAPTCHA requires a timestamp updated every half-second
-  setInterval(refreshCaptchaTimestamps, 500)
-  setHiddenParametersField()
-
-  // Make radio buttons in button-groups work
-  $('input[name=priority]:radio').on('change', function (e) {
-    let target = $(e.target)
-    $('label.btn').removeClass('selected')
-    target.parent().addClass('selected')
-  })
-
-  // Load required fields from querystring (if provided)
-
-  let name = qs('name')
-  if (name) {
-    $('#name').val(name)
-  }
-
-  let email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
-  if (!email) {
-    email = qs('email')
-  }
-  $('#email').val(email)
-
-  let phone = qs('phone')
-  if (phone && phone.length > 10) { // Discard if it's too short to be real
-    $('#phone').val(phone)
-  }
-  $('#phone').intlTelInput({
-    nationalMode: false,
-    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
-  })
-
-  let fqdn = qs('appUrl')
-  $('#fqdn').val(fqdn)
-
-  // Report source to Google Analytics
-  let origin = qs('origin') || 'Web'
-  if (fqdn) {
-    gtag('event', 'Visit: MCM/Digitalzoom')
-  } else if (origin === 'Customer Portal') {
-    gtag('event', 'Visit: Customer Portal')
-  } else {
-    gtag('event', 'Visit: Direct')
-  }
-
-  // Digitalzoom sends the FQDN as cname instead of appUrl
-  let cname = qs('cname')
-  if (!fqdn && cname) {
-    $('#fqdn').val(cname + '.perfectomobile.com')
-  }
-
-  // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
-  $('#origin').val(origin)
-  $('#company').val(qs('company'))
-  let timezone = qs('timezone')
-  if (!timezone) {
-    let d = new Date()
-    let n = d.getTimezoneOffset()
-    timezone = -n / 60
-  }
-  $('#timezone').val(timezone)
-  $('#mcmVersion').val(qs('mcmVersion'))
-  $('#hssVersion').val(qs('hssVersion'))
-  $('#location').val(qs('location'))
-  $('#cradleId').val(qs('cradleId'))
-  $('#deviceId').val(qs('deviceId'))
-  $('#model').val(qs('model'))
-  $('#os').val(qs('os'))
-  $('#version').val(qs('version'))
-
-  // Setup form validation for Cases. jQuery Validation bug for selects - must use name not ID.
-  $('#requestForm').validate({
+  .validate({
     ignore: '.ignore',
     rules: {
       priority: {
@@ -280,8 +147,150 @@ $(document).ready(function () {
           }
         }
       }
+    },
+    submitHandler: function (form) {
+      $('#submit').prop('disabled', true) // prevent double submissions
+      // Append execution URL to description field (if provided)
+      const executionReport = qs('desc')
+      if (executionReport) $('#description').val($('#description').val() + '\n==== Auto-attached by Perfecto =====\n' + executionReport)
+      // Remove empty file field to overcome Safari bug
+      $('form').find("input[type='file']").each(function () {
+        if ($(this).get(0).files.length === 0) {
+          $(this).remove()
+        }
+      })
+      // Submit the form via AJAX
+      $.ajax({
+        url: 'https://support.perfecto.io/php/create-case.php', // full URL makes it easier to test locally
+        type: 'POST',
+        data: new FormData(form), // $(form).serialize(),
+        dataType: 'json',
+        enctype: 'multipart/form-data',
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+          // Clear the subject and description, reset priority to Low
+          $('#subject').val('')
+          $('#description').val('')
+          $('#priorityLow').prop('checked', true) // doesn't visually correct the radio buttons (TODO: function)
+          $('#supportCase').removeClass('show') // hide form
+          $('#contactSupport').removeAttr('style')
+          // Reset the page state
+          $('.active.show').removeClass('active show')
+          // Provide case number and URL in alert to show case was successfully created
+          $('#caseNumber').text('Case ' + response.number).attr('href', response.url).attr('target', '_blank')
+          $('#submitStatus').show()
+          // Tell Google Analytics we submitted
+          gtag('event', 'Case Created', {
+            'event_category': 'Cases',
+            'event_label': selectedTopic
+          })
+        }
+      })
+        .fail(function (e) {
+          window.alert(e.status + ' error when submitting form. We are looking into this problem. For now, please use Chat or call Support at +1 (781) 214-4497.')
+        })
+        .always(function () {
+          $('#submit').prop('disabled', false) // re-enable the Submit button
+        })
+      return false
     }
   })
+
+// DOM ready
+$(document).ready(function () {
+  // Load status of clouds to display alert if one or more clouds are having an outage
+  $.getJSON('health.json', function (data) {
+    cloudStatus = data
+    displayOutageAlerts($('#fqdn').val())
+  })
+
+  // Make radio buttons in button-groups work
+  $('input[name=priority]:radio').on('change', function (e) {
+    let target = $(e.target)
+    $('label.btn').removeClass('selected')
+    target.parent().addClass('selected')
+  })
+
+  // Handle click on Chat button
+  $('#liveagent_button_online_573D0000000028q').click(function () {
+    liveagent.startChat('573D0000000028q')
+    gtag('event', 'Start Chat', {
+      'event_category': 'Chat',
+      'event_label': fqdn
+    })
+  })
+
+  // Load required fields from querystring (if provided)
+
+  let name = qs('name')
+  if (name) {
+    $('#name').val(name)
+  }
+
+  let email = qs('username') // or could use email parameter sent (not sure why both are sent by MCM)
+  if (!email) {
+    email = qs('email')
+  }
+  $('#email').val(email)
+
+  let phone = qs('phone')
+  if (phone && phone.length > 10) { // Discard if it's too short to be real
+    $('#phone').val(phone)
+  }
+  $('#phone').intlTelInput({
+    nationalMode: false,
+    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/utils.js'
+  })
+
+  let fqdn = qs('appUrl')
+  $('#fqdn').val(fqdn)
+
+  // Digitalzoom sends the FQDN as cname instead of appUrl
+  let cname = qs('cname')
+  if (!fqdn && cname) {
+    $('#fqdn').val(cname + '.perfectomobile.com')
+    fqdn = $('#fqdn').val()
+  }
+
+  // Report source to Google Analytics
+  let origin = qs('origin') || 'Web'
+  if (fqdn) {
+    gtag('event', 'Visit from Cloud', {
+      'event_category': 'Visit',
+      'event_label': fqdn
+    })
+  } else if (origin === 'Customer Portal') {
+    gtag('event', 'Visit from Customer Portal', {
+      'event_category': 'Visit',
+      'event_label': 'perfectomobile.force.com'
+    })
+  } else {
+    gtag('event', 'Visit (Direct)', {
+      'event_category': 'Visit',
+      'event_label': 'localhost'
+    })
+  }
+
+  // Set hidden form fields. While iterating each parameter would be more compact, explicit assignments are easier to manage
+  $('#origin').val(origin)
+  $('#company').val(qs('company'))
+  let timezone = qs('timezone')
+  if (!timezone) {
+    let d = new Date()
+    let n = d.getTimezoneOffset()
+    timezone = -n / 60
+  }
+  $('#timezone').val(timezone)
+  $('#mcmVersion').val(qs('mcmVersion'))
+  $('#hssVersion').val(qs('hssVersion'))
+  $('#location').val(qs('location'))
+  $('#cradleId').val(qs('cradleId'))
+  $('#deviceId').val(qs('deviceId'))
+  $('#model').val(qs('model'))
+  $('#os').val(qs('os'))
+  $('#version').val(qs('version'))
 
   // Marketo Munchkin
   $.ajax({

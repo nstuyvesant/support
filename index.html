@@ -27,10 +27,10 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#82d55b">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha256-Md8eaeo67OiouuXAi8t/Xpd8t2+IaJezATVTWbZqSOw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/css/intlTelInput.css" integrity="sha256-Q35kn/SM+AW5mosKvh9cdofWZ2XZQECPFULVWv4LB6U=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.4.0/css/intlTelInput.css" integrity="sha256-Q35kn/SM+AW5mosKvh9cdofWZ2XZQECPFULVWv4LB6U=" crossorigin="anonymous" />
     <link rel="stylesheet" href="support.css" />
     <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/support.perfecto.io\/","sameAs":["https:\/\/www.facebook.com\/pages\/Perfecto-Mobile-Inc\/230120033794254","https:\/\/www.linkedin.com\/company\/perfecto-mobile","https:\/\/www.youtube.com\/user\/PerfectoMobile","https:\/\/twitter.com\/perfectomobile"],"@id":"https:\/\/www.perfecto.io","name":"Perfecto","logo":"https:\/\/www.perfecto.io\/wp-content\/uploads\/2018\/01\/perfecto-logo-sticky.png"}</script>
     <script>
@@ -41,7 +41,7 @@
     </script>
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-2078617-29" async></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://script.crazyegg.com/pages/scripts/0058/5510.js" async></script>
+    <!-- <script src="https://script.crazyegg.com/pages/scripts/0058/5510.js" async></script> -->
     <script src="https://c.la1-c1-lon.salesforceliveagent.com/content/g/js/41.0/deployment.js"></script>
     <script src="head.js"></script>
 </head>
@@ -331,7 +331,10 @@
                         <div class="card">
                             <div class="card-header">Solutions for Device: Upgrade</div>
                             <div class="card-body">
-                                Please click <b>Open Support Case</b> button below to request a device upgrade. Having Perfecto perform the upgrade for you will ensure it doesn't go offline.
+                              <ol>
+                                <li>Ensure the OS you want is on the <a href="https://developers.perfectomobile.com/display/PD/Release+Notes" target="_blank">list of supported operating systems</a>.</li>
+                                <li>Click <b>Open Support Case</b> button below to request a device upgrade. Having Perfecto perform the upgrade for you will ensure it doesn't go offline.</li>
+                              </ol>
                             </div>
                         </div>
                     </div>
@@ -895,18 +898,16 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" onclick="liveagent.startChat('573D0000000028q')" style="display: none;" class="btn btn-success nav-pills" title="Start a chat session"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>
+                    <a href="javascript://Chat" id="liveagent_button_online_573D0000000028q" style="display: none;" class="btn btn-success nav-pills" title="Start a chat session"><span class="far fa-comment-alt"></span><br/>Chat with Support</a>
                     <a class="btn btn-light nav-pills disabled" style="display: none;" id="liveagent_button_offline_573D0000000028q"><span class="far fa-comment-alt"></span><br/>Chat Offline</a>&nbsp;&nbsp;
                     <a id="openSupportCase" href="#supportCase" data-toggle="collapse" class="btn btn-success nav-pills" title="Open a Support Case"><span class="fas fa-briefcase"></span><br/>Open Support Case</a>&nbsp;&nbsp;
-                    <!-- <a href="#openTimeTrade" data-toggle="collapse" class="btn btn-success nav-pills" title="Schedule a Webex"><span class="far fa-calendar-plus"></span><br/>Schedule a Webex</a> -->
                 </div>
                 <div id="supportCase" class="col-md-6 collapse with-tooltips">
                     <div class="card">
                         <div class="card-header">Open a Case</div>
                         <div class="card-body">
-                            <form id="requestForm" action="https://support.perfecto.io/php/create-case.php" enctype="multipart/form-data" method="post">
+                            <form action="">
 
-                                <input type="hidden" id="captchaSettings" name="captcha_settings" value='{"keyname":"perfecto_io","fallback":"true","orgId":"00D200000001UUG","ts":""}'>
                                 <input type="hidden" id="origin" name="origin">
                                 <input type="hidden" id="type" name="type">
                                 <input type="hidden" id="topic" name="topic">
@@ -969,7 +970,6 @@
                                 <div class="form-group">
                                     <label for="description" class="sr-only">Description of your issue</label>
                                     <textarea class="form-control" rows="7" id="description" name="description" placeholder="More details will help us resolve your request faster." data-toggle="tooltip" data-placement="bottom" title="The more info you provide, the less likely we'll need to get back to you with more questions."></textarea>
-                                    <input type="hidden" id="parameters">
                                     <small id="fileUploadHelp" class="form-text text-muted">Include info like device ID, execution report URL, etc.</small>
                                 </div>
                                 <div class="form-group">
@@ -1077,9 +1077,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.13/js/intlTelInput.min.js" integrity="sha256-dLpfqfcISNx23y++rQZ+s+FrULgeG7AmNXeH1J9DN38=" crossorigin="anonymous"></script>
-    <script src="body.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.4.0/js/intlTelInput.min.js" integrity="sha256-xB9vR9fUKYPqbTPQPa1x8KWg+b03z0bf1lnQBctVIyA=" crossorigin="anonymous"></script>
+    <script src="body.js?version=7"></script>
 </body>
 
 </html>
