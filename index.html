@@ -107,17 +107,18 @@
                     <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Device: Offline" class="nav-link" href="#deviceOffline" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;Was it restarted or upgraded recently? &#xa;What is the passcode? &#xa;What's happening and what was expected? &#xa;"><span class="fas fa-exclamation-circle"></span><br/>Offline, Busy or Unresponsive</a>
                     </li>
+
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;If WiFi issue, is SSID Perfecto? &#xa;Did toggling Airplane Mode help? &#xa;What's happening and what was expected?  &#xa;"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
+                      <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade" data-description="Device ID (click Open Device and look for column): &#xa;To what version? &#xa;If in use, can we take control? &#xa;"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: App" class="nav-link" href="#deviceApp" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;Type of app-issue: Install|Crash|Performance &#xa;What's happening and what was expected? &#xa;Please reply to the email for this case and attach the APK or IPA."><span class="fab fa-app-store"></span><br/>App-related</a>
+                      <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap" data-description="Device you want to replace (model, ID, OS, version): &#xa;Device you want to add (model, ID): &#xa;Can we disconnect device if in use? "><span class="fas fa-exchange-alt"></span><br/>Swap</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Upgrade" class="nav-link" href="#deviceUpgrade" data-description="Device ID (click Open Device and look for column): &#xa;To what version? &#xa;If in use, can we take control? &#xa;"><span class="fas fa-arrow-circle-up"></span><br/>Upgrade</a>
+                      <a data-toggle="tab" role="tab" aria-controls="Device: Network" class="nav-link" href="#deviceNetwork" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;If WiFi issue, is SSID Perfecto? &#xa;Did toggling Airplane Mode help? &#xa;What's happening and what was expected?  &#xa;"><span class="fas fa-wifi"></span><br/>WiFi, Cellular or HAR</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Device: Swap" class="nav-link" href="#deviceSwap" data-description="Device you want to replace (model, ID, OS, version): &#xa;Device you want to add (model, ID): &#xa;Can we disconnect device if in use? "><span class="fas fa-exchange-alt"></span><br/>Swap</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Device: Request New" class="nav-link" href="#deviceRequest" data-description="Device ID to replace (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;Make and model requested: &#xa;Who is your org's approver for new devices? &#xa;"><span class="fas fa-mobile-alt"></span><br/>Device Request</a>
                     </li>
                     <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Device: Performance/Latency" class="nav-link" href="#devicePerformance" data-description="Device ID (click Open Device and look for column): &#xa;If in use, can we take control? &#xa;When you click on a button in the Calculator, does it take more than 2 seconds to see the number appear? &#xa;Is the slowness related to running a script? &#xa;Is the device responding well but the app is slow? Is it slow when you work from home? "><span class="fas fa-stopwatch"></span><br/>Performance</a>
@@ -180,16 +181,16 @@
                 <h2 class="text-center">What type of cloud or admin issue?</h2>
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Who approves logins for your cloud? &#xa;Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
-                    </li>
-                    <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Cloud: Configuration" class="nav-link" href="#cloudConfig" data-description="What kind of configuration change would you like?&#xa;"><span class="fas fa-cogs"></span><br/>Configuration</a>
                     </li>
                     <li class="nav-item">
-                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? &#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: New User" class="nav-link" href="#cloudUser" data-description="Who approves logins for your cloud? &#xa;Please provide for new user:&#xa;First name: &#xa;Last name: &#xa;Email: &#xa;Phone: &#xa;Company: "><span class="far fa-user"></span><br/>New User Request</a>
                     </li>
                     <li class="nav-item">
                         <a data-toggle="tab" role="tab" aria-controls="Cloud: Login" class="nav-link" href="#cloudLogin" data-description="Did you try a password reset? &#xa;Is your login a valid email address? &#xa;What's happening?&#xa;"><span class="fas fa-sign-in-alt"></span><br/>Login Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" role="tab" aria-controls="Cloud: Product Info" class="nav-link" href="#cloudInfo" data-description="Did you try Search Community above? &#xa;What information can we provide?&#xa;"><span class="fas fa-info"></span><br/>Product Info</a>
                     </li>
                     <li class="nav-item">
                         <a id="outage" data-toggle="tab" role="tab" aria-controls="Cloud: Outage" class="nav-link ambulance" href="#cloudOutage" data-description="Any difference when working at home? &#xa;Did you try without VPN? &#xa;When did you first observe the outage?&#xa;"><span class="fas fa-ambulance"></span><br/>Outage / Cloud Down</a>
@@ -284,26 +285,16 @@
                 </div>
             </div>
 
-            <div id="deviceApp" class="tab-pane fade" role="tabpanel">
+            <div id="deviceRequest" class="tab-pane fade" role="tabpanel">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header">Solutions for Device: App</div>
+                            <div class="card-header">Solutions for Device: Request New</div>
                             <div class="card-body">
-                                <b>How to fix App-related Issues</b><br/>
-                                <ol>
-                                    <li>Log into your Perfecto cloud.</li>
-                                    <li>Click the <b>Launch Mobile</b> button.</li>
-                                    <li>In the list of devices that appear in the <b>Launch Mobile</b> dialog, Open the device experiencing the issue.</li>
-                                    <li>For iOS App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshoot+Application+Installation+on+iOS+devices" target="_blank">Troubleshooting iOS App Installs.</a></li>
-                                    <li>For Android App issues, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Android+Troubleshooting" target="_blank">Troubleshooting Android App Installs</a>.</li>
-                                </ol>
-                                <b>Apps fail to Upload to the Repository</b><br/>
-                                <ol>
-                                    <li>Follow Steps <b>1 to 3</b> above.</li>
-                                    <li>Upload your app using the repository in the <b>Perfecto Lab View</b>.</li>
-                                    <li>If you receive an error that the app exceeds the allowed size to upload, please see KnowledgeBase article: <a href="https://developers.perfectomobile.com/display/TT/Troubleshooting%3A+Media+is+too+large+to+Upload" target="_blank">Troubleshooting Media Uploads</a>.</li>
-                                </ol>
+                              <ol>
+                                <li>Ensure the OS you want is on the <a href="https://developers.perfectomobile.com/display/PD/Release+Notes" target="_blank">list of supported operating systems</a>.</li>
+                                <li>Click <b>Open Support Case</b> button below to request a device upgrade. Having Perfecto perform the upgrade for you will ensure it doesn't go offline.</li>
+                              </ol>
                             </div>
                         </div>
                     </div>
